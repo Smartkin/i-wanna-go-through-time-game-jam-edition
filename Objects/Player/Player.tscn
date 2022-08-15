@@ -121,5 +121,15 @@ visible = false
 position = Vector2( 8, 6 )
 shape = SubResource( 17 )
 
+[node name="DashTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+process_mode = 0
+one_shot = true
+
+[node name="DashTween" type="Tween" parent="."]
+playback_process_mode = 0
+
 [connection signal="body_entered" from="GrabHitbox" to="." method="_on_Grab_body_entered"]
 [connection signal="body_exited" from="GrabHitbox" to="." method="_on_Grab_body_exited"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
+[connection signal="tween_completed" from="DashTween" to="." method="_on_DashTween_tween_completed"]

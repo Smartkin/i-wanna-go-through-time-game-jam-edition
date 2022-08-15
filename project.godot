@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Sprite",
+"class": "Ability",
+"language": "GDScript",
+"path": "res://Scripts/Items/Ability.gd"
+}, {
 "base": "Button",
 "class": "AgeButton",
 "language": "GDScript",
@@ -515,6 +520,7 @@ _global_script_classes=[ {
 "path": "res://Scripts/Water/Water.gd"
 } ]
 _global_script_class_icons={
+"Ability": "",
 "AgeButton": "",
 "Chip": "",
 "GrabbableBase": "",
@@ -739,6 +745,10 @@ pause={
 "events": [  ]
 }
 suicide={
+"deadzone": 0.5,
+"events": [  ]
+}
+dash={
 "deadzone": 0.5,
 "events": [  ]
 }

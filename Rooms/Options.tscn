@@ -319,7 +319,7 @@ script = ExtResource( 12 )
 
 [node name="Left" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
 margin_right = 1280.0
-margin_bottom = 48.0
+margin_bottom = 44.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -333,9 +333,9 @@ script = ExtResource( 9 )
 bind = "left"
 
 [node name="Right" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
-margin_top = 52.0
+margin_top = 48.0
 margin_right = 1280.0
-margin_bottom = 100.0
+margin_bottom = 92.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -349,9 +349,9 @@ script = ExtResource( 9 )
 bind = "right"
 
 [node name="Up" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
-margin_top = 104.0
+margin_top = 96.0
 margin_right = 1280.0
-margin_bottom = 152.0
+margin_bottom = 140.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -365,9 +365,9 @@ script = ExtResource( 9 )
 bind = "up"
 
 [node name="Down" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
-margin_top = 156.0
+margin_top = 144.0
 margin_right = 1280.0
-margin_bottom = 204.0
+margin_bottom = 188.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -381,9 +381,9 @@ script = ExtResource( 9 )
 bind = "down"
 
 [node name="Jump" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
-margin_top = 208.0
+margin_top = 192.0
 margin_right = 1280.0
-margin_bottom = 256.0
+margin_bottom = 236.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -396,10 +396,26 @@ align = 0
 script = ExtResource( 9 )
 bind = "jump"
 
-[node name="Shoot" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
-margin_top = 260.0
+[node name="Dash" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
+margin_top = 240.0
 margin_right = 1280.0
-margin_bottom = 308.0
+margin_bottom = 284.0
+size_flags_vertical = 3
+custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = SubResource( 10 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 2 )
+text = "Dash"
+align = 0
+script = ExtResource( 9 )
+bind = "dash"
+
+[node name="Shoot" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
+margin_top = 288.0
+margin_right = 1280.0
+margin_bottom = 332.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -413,9 +429,9 @@ script = ExtResource( 9 )
 bind = "shoot"
 
 [node name="Restart" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
-margin_top = 312.0
+margin_top = 336.0
 margin_right = 1280.0
-margin_bottom = 360.0
+margin_bottom = 380.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -429,9 +445,9 @@ script = ExtResource( 9 )
 bind = "restart"
 
 [node name="Skip" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
-margin_top = 364.0
+margin_top = 384.0
 margin_right = 1280.0
-margin_bottom = 412.0
+margin_bottom = 428.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -445,9 +461,9 @@ script = ExtResource( 9 )
 bind = "skip"
 
 [node name="Suicide" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
-margin_top = 416.0
+margin_top = 432.0
 margin_right = 1280.0
-margin_bottom = 464.0
+margin_bottom = 476.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -461,9 +477,9 @@ script = ExtResource( 9 )
 bind = "suicide"
 
 [node name="Pause" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
-margin_top = 468.0
+margin_top = 480.0
 margin_right = 1280.0
-margin_bottom = 516.0
+margin_bottom = 524.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -477,9 +493,9 @@ script = ExtResource( 9 )
 bind = "pause"
 
 [node name="ResetControls" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
-margin_top = 520.0
+margin_top = 528.0
 margin_right = 1280.0
-margin_bottom = 568.0
+margin_bottom = 572.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -491,7 +507,7 @@ text = "Reset controls"
 align = 0
 
 [node name="BackKeyboard" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
-margin_top = 572.0
+margin_top = 576.0
 margin_right = 1280.0
 margin_bottom = 620.0
 size_flags_vertical = 3
@@ -511,9 +527,8 @@ anchor_bottom = 1.0
 script = ExtResource( 14 )
 
 [node name="Left" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
-margin_top = 43.0
 margin_right = 1280.0
-margin_bottom = 87.0
+margin_bottom = 44.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -528,9 +543,9 @@ bind = "left"
 controller_bind = true
 
 [node name="Right" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
-margin_top = 91.0
+margin_top = 48.0
 margin_right = 1280.0
-margin_bottom = 135.0
+margin_bottom = 92.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -545,9 +560,9 @@ bind = "right"
 controller_bind = true
 
 [node name="Up" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
-margin_top = 139.0
+margin_top = 96.0
 margin_right = 1280.0
-margin_bottom = 183.0
+margin_bottom = 140.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -562,9 +577,9 @@ bind = "up"
 controller_bind = true
 
 [node name="Down" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
-margin_top = 187.0
+margin_top = 144.0
 margin_right = 1280.0
-margin_bottom = 231.0
+margin_bottom = 188.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -579,9 +594,9 @@ bind = "down"
 controller_bind = true
 
 [node name="Jump" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
-margin_top = 235.0
+margin_top = 192.0
 margin_right = 1280.0
-margin_bottom = 279.0
+margin_bottom = 236.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -595,10 +610,27 @@ script = ExtResource( 9 )
 bind = "jump"
 controller_bind = true
 
-[node name="Shoot" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
-margin_top = 283.0
+[node name="Dash" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
+margin_top = 240.0
 margin_right = 1280.0
-margin_bottom = 327.0
+margin_bottom = 284.0
+size_flags_vertical = 3
+custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = SubResource( 10 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 2 )
+text = "Dash"
+align = 0
+script = ExtResource( 9 )
+bind = "dash"
+controller_bind = true
+
+[node name="Shoot" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
+margin_top = 288.0
+margin_right = 1280.0
+margin_bottom = 332.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -613,9 +645,9 @@ bind = "shoot"
 controller_bind = true
 
 [node name="Restart" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
-margin_top = 331.0
+margin_top = 336.0
 margin_right = 1280.0
-margin_bottom = 375.0
+margin_bottom = 380.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -630,9 +662,9 @@ bind = "restart"
 controller_bind = true
 
 [node name="Skip" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
-margin_top = 379.0
+margin_top = 384.0
 margin_right = 1280.0
-margin_bottom = 423.0
+margin_bottom = 428.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -647,9 +679,9 @@ bind = "skip"
 controller_bind = true
 
 [node name="Suicide" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
-margin_top = 427.0
+margin_top = 432.0
 margin_right = 1280.0
-margin_bottom = 471.0
+margin_bottom = 476.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -664,9 +696,9 @@ bind = "suicide"
 controller_bind = true
 
 [node name="Pause" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
-margin_top = 475.0
+margin_top = 480.0
 margin_right = 1280.0
-margin_bottom = 519.0
+margin_bottom = 524.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -681,9 +713,9 @@ bind = "pause"
 controller_bind = true
 
 [node name="ResetControls" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
-margin_top = 523.0
+margin_top = 528.0
 margin_right = 1280.0
-margin_bottom = 567.0
+margin_bottom = 572.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -695,7 +727,7 @@ text = "Reset controls"
 align = 0
 
 [node name="BackKeyboard" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
-margin_top = 571.0
+margin_top = 576.0
 margin_right = 1280.0
 margin_bottom = 620.0
 size_flags_vertical = 3
@@ -758,6 +790,8 @@ fade = true
 [connection signal="key_bind_pressed" from="OptionsTabs/KeyboardOptionsTab/Down" to="." method="_on_ButtonBind_key_bind_pressed"]
 [connection signal="pressed" from="OptionsTabs/KeyboardOptionsTab/Down" to="OptionsTabs/KeyboardOptionsTab/Down" method="_on_KeyBind_pressed"]
 [connection signal="pressed" from="OptionsTabs/KeyboardOptionsTab/Jump" to="OptionsTabs/KeyboardOptionsTab/Jump" method="_on_KeyBind_pressed"]
+[connection signal="key_bind_pressed" from="OptionsTabs/KeyboardOptionsTab/Dash" to="." method="_on_ButtonBind_key_bind_pressed"]
+[connection signal="pressed" from="OptionsTabs/KeyboardOptionsTab/Dash" to="OptionsTabs/KeyboardOptionsTab/Dash" method="_on_KeyBind_pressed"]
 [connection signal="key_bind_pressed" from="OptionsTabs/KeyboardOptionsTab/Shoot" to="." method="_on_ButtonBind_key_bind_pressed"]
 [connection signal="pressed" from="OptionsTabs/KeyboardOptionsTab/Shoot" to="OptionsTabs/KeyboardOptionsTab/Shoot" method="_on_KeyBind_pressed"]
 [connection signal="pressed" from="OptionsTabs/KeyboardOptionsTab/Restart" to="OptionsTabs/KeyboardOptionsTab/Restart" method="_on_KeyBind_pressed"]
@@ -778,6 +812,8 @@ fade = true
 [connection signal="pressed" from="OptionsTabs/ControllerOptionsTab/Down" to="OptionsTabs/ControllerOptionsTab/Down" method="_on_KeyBind_pressed"]
 [connection signal="key_bind_pressed" from="OptionsTabs/ControllerOptionsTab/Jump" to="." method="_on_ButtonBind_key_bind_pressed"]
 [connection signal="pressed" from="OptionsTabs/ControllerOptionsTab/Jump" to="OptionsTabs/ControllerOptionsTab/Jump" method="_on_KeyBind_pressed"]
+[connection signal="key_bind_pressed" from="OptionsTabs/ControllerOptionsTab/Dash" to="." method="_on_ButtonBind_key_bind_pressed"]
+[connection signal="pressed" from="OptionsTabs/ControllerOptionsTab/Dash" to="OptionsTabs/ControllerOptionsTab/Dash" method="_on_KeyBind_pressed"]
 [connection signal="pressed" from="OptionsTabs/ControllerOptionsTab/Shoot" to="OptionsTabs/ControllerOptionsTab/Shoot" method="_on_KeyBind_pressed"]
 [connection signal="key_bind_pressed" from="OptionsTabs/ControllerOptionsTab/Restart" to="." method="_on_ButtonBind_key_bind_pressed"]
 [connection signal="pressed" from="OptionsTabs/ControllerOptionsTab/Restart" to="OptionsTabs/ControllerOptionsTab/Restart" method="_on_KeyBind_pressed"]

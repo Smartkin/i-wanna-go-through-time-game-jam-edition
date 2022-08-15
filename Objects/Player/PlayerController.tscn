@@ -103,6 +103,9 @@ margin_bottom = 439.0
 texture = ExtResource( 6 )
 stretch_mode = 4
 
+[node name="CameraTween" type="Tween" parent="."]
+
+[connection signal="dashed" from="Player" to="." method="_on_Player_dashed"]
 [connection signal="dead" from="Player" to="." method="_on_Player_dead"]
 [connection signal="shoot" from="Player" to="." method="_on_Player_shoot"]
 [connection signal="sound" from="Player" to="." method="_on_Player_sound"]
