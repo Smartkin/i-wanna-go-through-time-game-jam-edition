@@ -7,6 +7,10 @@ enum BUTTON_PROMPTS {
 	XBOX,
 	GENERIC_CONTROLLER,
 }
+enum FADE_MODE {
+	OUT,
+	IN
+}
 
 # Constants
 const SAVE_FILES := 3 # Amount of save slots
@@ -93,8 +97,14 @@ var _transition := preload("res://Objects/Transition.tscn") # Transition object
 var _cur_pause_menu: Node = null # Current pause menu object instance
 var _cur_transition: Node = null # Current transition object instance
 var _scene_tree: SceneTree = null # Game's scene tree
-var _is_fade_music := false # Whether we are currently fading the music
-var _fade_val := 1.0 # Current fade out value
+var _fade_engine := {
+	fading = false,
+	value = 1.0,
+	start_value = 1.0,
+	end_value = 0.0,
+	time = 1.0,
+	mode = FADE_MODE.OUT
+}
 
 func _ready() -> void:
 	print("World created")
@@ -153,7 +163,7 @@ func _process(delta):
 	if (win_cap != _prev_win_cap):
 		OS.set_window_title(win_cap)
 		_prev_win_cap = win_cap
-	if _is_fade_music:
+	if _fade_engine.fading:
 		_fade_music(delta)
 
 # Plays a UI sfx
@@ -170,7 +180,7 @@ func play_ui_sfx(fileName: String) -> void:
 # Plays a specified music track
 func play_music(fileName := "") -> void:
 	if (cur_config.music): # Check that music is currently turned on
-		_is_fade_music = false
+		_fade_engine.fading = false
 		Util.set_volume("Master", cur_config.volume_master)
 		var music_player := $MusicPlayer as AudioStreamPlayer
 		if (_cur_song != fileName && fileName != ""):
@@ -188,18 +198,32 @@ func pitch_music(pitch: float) -> void:
 	var music_player := $MusicPlayer as AudioStreamPlayer
 	music_player.pitch_scale = pitch
 
-func fade_music() -> void:
-	if not _is_fade_music:
-		_fade_val = 1.0
-	_is_fade_music = true
+func fade_music(fade_mode := FADE_MODE.OUT, fade_time: float = 1.0, fade_val_end: float = 0.0) -> void:
+	_fade_engine.start_value = _fade_engine.value
+	_fade_engine.end_value = fade_val_end
+	_fade_engine.fading = true
+	_fade_engine.mode = fade_mode
+	_fade_engine.time = fade_time
 
 func _fade_music(delta: float) -> void:
-	if _fade_val > 0:
-		Util.set_volume("Master", _fade_val * cur_config.volume_master)
-		_fade_val -= 1 * delta
-	else:
-		_fade_val = 1
-		_is_fade_music = false
+	match _fade_engine.mode:
+		FADE_MODE.OUT:
+			if _fade_engine.value > _fade_engine.end_value:
+				Util.set_volume("Master", _fade_engine.value * cur_config.volume_master)
+				_fade_engine.value += _calc_fade(delta)
+			else:
+				_fade_engine.value = _fade_engine.end_value
+				_fade_engine.fading = false
+		FADE_MODE.IN:
+			if _fade_engine.value < _fade_engine.end_value:
+				Util.set_volume("Master", _fade_engine.value * cur_config.volume_master)
+				_fade_engine.value += _calc_fade(delta)
+			else:
+				_fade_engine.value = _fade_engine.end_value
+				_fade_engine.fading = false
+
+func _calc_fade(delta: float):
+	return (_fade_engine.end_value - _fade_engine.start_value) / _fade_engine.time * delta
 
 func stop_music() -> void:
 	var music_player := $MusicPlayer as AudioStreamPlayer
@@ -501,6 +525,8 @@ func _on_game_ended() -> void:
 # Called when scene is finished building
 func _on_scene_finished() -> void:
 	print("Scene finished building")
+	_fade_engine.fading = false
+	_fade_engine.value = 1.0
 	play_music(music_to_play)
 	if (new_game_started):
 		cur_save_data = EMPTY_SAVE.duplicate(true)
