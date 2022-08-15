@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "",
-"class": "GitAPI",
-"language": "NativeScript",
-"path": "res://addons/godot-git-plugin/git_api.gdns"
-}, {
 "base": "KinematicBody2D",
 "class": "GrabbableBase",
 "language": "GDScript",
@@ -510,7 +505,6 @@ _global_script_classes=[ {
 "path": "res://Scripts/Water/Water.gd"
 } ]
 _global_script_class_icons={
-"GitAPI": "",
 "GrabbableBase": "",
 "KillerBase": "",
 "Player": "",
