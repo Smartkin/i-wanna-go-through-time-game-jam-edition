@@ -34,6 +34,7 @@ func _on_scene_built() -> void:
 	if (WorldController.loading_save):
 		position.x = WorldController.cur_save_data.playerPosX
 		position.y = WorldController.cur_save_data.playerPosY
+		$Player.health = WorldController.cur_save_data.health
 	$Camera.current = true
 
 # Callback when player shoots
@@ -73,3 +74,7 @@ func _on_Player_dashed():
 	$CameraTween.interpolate_property($Camera, "offset", Vector2(-20, -20), \
 		Vector2(0, 0), 0.1, Tween.TRANS_ELASTIC, Tween.EASE_OUT)
 	$CameraTween.start()
+
+
+func _on_Player_damaged():
+	$Sounds/Death.play()

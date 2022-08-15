@@ -105,6 +105,7 @@ stretch_mode = 4
 
 [node name="CameraTween" type="Tween" parent="."]
 
+[connection signal="damaged" from="Player" to="." method="_on_Player_damaged"]
 [connection signal="dashed" from="Player" to="." method="_on_Player_dashed"]
 [connection signal="dead" from="Player" to="." method="_on_Player_dead"]
 [connection signal="shoot" from="Player" to="." method="_on_Player_shoot"]
