@@ -423,7 +423,7 @@ func _handle_inputs() -> void:
 			action = _slide_on_grab(direction)
 	# Handle dotkid
 	if (can_jump || platform != null):
-		if (Input.is_action_just_pressed("down")):
+		if (Input.is_action_just_pressed("down") and WorldController.check_item(Ability.ABILITIES.DOT_KID)):
 			if (down_buffer <= 0):
 				down_buffer = MAX_DOWN_BUFFER
 			else:
