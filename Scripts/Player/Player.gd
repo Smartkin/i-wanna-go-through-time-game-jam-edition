@@ -5,6 +5,7 @@ extends KinematicBody2D
 signal dead
 signal shoot
 signal sound
+signal dashed
 
 # Enums
 enum STATE {
@@ -12,6 +13,7 @@ enum STATE {
 	GRAB,
 	CUTSCENE,
 	DEAD,
+	DASH,
 }
 enum DIRECTION_H {
 	LEFT = -1,
@@ -37,6 +39,7 @@ const DEFAULT_FALL := 420
 const DEFAULT_JUMP := 450
 const DEFAULT_DJUMP := 350
 const DEFAULT_GRAV := 20
+const DEFAULT_DASH_POWER := 1500
 const MAX_SLOP_ANGLE := deg2rad(50)
 const VINE_SLIDE_OFFSET := Vector2(9, 6)
 
@@ -45,6 +48,7 @@ var speed := Vector2.ZERO
 var snap := GROUND_SNAP
 var can_jump := true
 var can_djump := true
+var can_dash := true
 var set_run_sprite := false
 var lose_djump := false
 var can_save := false
@@ -89,6 +93,8 @@ func _physics_process(delta: float) -> void:
 		# Regain jumping
 		can_jump = true
 		can_djump = true
+		if $DashTimer.is_stopped() and not can_dash:
+			$DashTimer.start()
 		coyote_frames = MAX_COYOTE
 		snap = cur_snap
 	else: # When ground is left give some leeway before taking the single jump away
@@ -156,7 +162,7 @@ func jump(input_buffer: int) -> int:
 				speed.y = jump_height
 				jumped = true
 				emit_signal("sound", "Jump")
-			elif (can_djump):
+			elif (can_djump and WorldController.check_item(Ability.ABILITIES.DOUBLE_JUMP)):
 				had_djump = false
 				speed.y = djump_height
 				can_djump = false
@@ -196,6 +202,17 @@ func run(direction: int = DIRECTION_H.IDLE) -> void:
 			$Sprite.play("Run")
 		$Sprite.flip_h = (direction == DIRECTION_H.LEFT)
 		_mirror_hitbox_hor(direction)
+
+func dash(direction: int = DIRECTION_H.IDLE) -> void:
+	if direction == DIRECTION_H.IDLE:
+		direction = -1 if $Sprite.flip_h else 1
+	$DashTween.interpolate_property(self, "speed", Vector2(DEFAULT_DASH_POWER * direction, 0), \
+		Vector2(DEFAULT_DASH_POWER * direction, 0), 0.08, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	$DashTween.start()
+	can_dash = false
+	gravity = 0
+	emit_signal("dashed")
+
 
 # Player shooting logic
 func shoot() -> void:
@@ -358,6 +375,9 @@ func _handle_inputs() -> void:
 	match cur_state:
 		STATE.RUN:
 			run(direction)
+			if (can_dash and WorldController.check_item(Ability.ABILITIES.DASH) and Input.is_action_just_pressed("dash")):
+				dash(direction)
+				cur_state = STATE.DASH
 		STATE.GRAB:
 			run(direction)
 			action = _slide_on_grab(direction)
@@ -376,7 +396,8 @@ func _handle_inputs() -> void:
 		if (can_save): # Check if we are standing in a save point
 			WorldController.save_game()
 			save_point.save()
-		shoot()
+		if (WorldController.check_item(Ability.ABILITIES.SHOOT)):
+			shoot()
 	_debug_inputs()
 
 # Handle any specific needed collisions
@@ -399,3 +420,13 @@ func _on_Grab_body_exited(body: GrabbableBase) -> void:
 	print("Left grabbable surface")
 	_revert_state("_reset_sprite")
 	grabbables.erase(body) # We don't perform any checks since a body MUST be entered before it can be left
+
+
+func _on_DashTimer_timeout():
+	can_dash = true
+
+
+func _on_DashTween_tween_completed(object, key):
+	speed.x = 0
+	gravity = DEFAULT_GRAV if !WorldController.reverse_grav else -DEFAULT_GRAV
+	cur_state = STATE.RUN

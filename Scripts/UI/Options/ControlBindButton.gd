@@ -4,7 +4,7 @@ signal key_bind_pressed
 
 # Button bindings, should be named exactly like in InputMap
 export(String, "left", "right", "up", "down", "jump", \
-	"shoot", "restart", "skip", "suicide", "pause") var bind
+	"shoot", "restart", "skip", "suicide", "pause", "dash") var bind
 # Whether this button binds a controller input
 export(bool) var controller_bind = false
 

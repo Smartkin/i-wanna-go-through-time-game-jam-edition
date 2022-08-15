@@ -36,6 +36,7 @@ const EMPTY_SAVE := { # Default save data when no save is present
 		"milliseconds": 0
 	},
 	"chips": {},
+	"items": {},
 	"scene": "res://TestBed.tscn",
 	"sceneName": "TestBed",
 	"reverse_grav": false,
@@ -55,6 +56,7 @@ const DEFAULT_CONFIG := { # Default config when user starts the game
 		"up": KEY_UP,
 		"down": KEY_DOWN,
 		"jump": KEY_SHIFT,
+		"dash": ord("X"),
 		"shoot": ord("Z"),
 		"restart": ord("R"),
 		"skip": ord("S"),
@@ -67,6 +69,7 @@ const DEFAULT_CONFIG := { # Default config when user starts the game
 		"up": JOY_DPAD_UP,
 		"down": JOY_DPAD_DOWN,
 		"jump": JOY_SONY_X,
+		"dash": JOY_ANALOG_R2,
 		"shoot": JOY_SONY_SQUARE,
 		"restart": JOY_SONY_TRIANGLE,
 		"skip": JOY_SONY_CIRCLE,
@@ -330,6 +333,7 @@ func save_config() -> void:
 	config.set_value("keyboard", "up", cur_config.keyboard_controls.up)
 	config.set_value("keyboard", "down", cur_config.keyboard_controls.down)
 	config.set_value("keyboard", "jump", cur_config.keyboard_controls.jump)
+	config.set_value("keyboard", "dash", cur_config.keyboard_controls.dash)
 	config.set_value("keyboard", "shoot", cur_config.keyboard_controls.shoot)
 	config.set_value("keyboard", "restart", cur_config.keyboard_controls.restart)
 	config.set_value("keyboard", "skip", cur_config.keyboard_controls.skip)
@@ -340,6 +344,7 @@ func save_config() -> void:
 	config.set_value("controller", "up", cur_config.controller_controls.up)
 	config.set_value("controller", "down", cur_config.controller_controls.down)
 	config.set_value("controller", "jump", cur_config.controller_controls.jump)
+	config.set_value("controller", "dash", cur_config.controller_controls.dash)
 	config.set_value("controller", "shoot", cur_config.controller_controls.shoot)
 	config.set_value("controller", "restart", cur_config.controller_controls.restart)
 	config.set_value("controller", "skip", cur_config.controller_controls.skip)
@@ -347,11 +352,18 @@ func save_config() -> void:
 	config.set_value("controller", "pause", cur_config.controller_controls.pause)
 	config.save(_get_config_path())
 
-func save_item(id: int) -> void:
+func save_chip(id: int) -> void:
 	cur_save_data.chips[String(id)] = true
 
-func check_item(id: int) -> bool:
+func check_chip(id: int) -> bool:
 	return cur_save_data.chips.has(String(id))
+
+func save_item(id: int) -> void:
+	cur_save_data.items[String(id)] = true
+
+func check_item(id: int) -> bool:
+	return cur_save_data.items.has(String(id))
+
 
 func save_game() -> void:
 	var tree := _scene_tree
@@ -487,6 +499,7 @@ func _load_config() -> void:
 		cur_config.keyboard_controls.up = config.get_value("keyboard", "up", DEFAULT_CONFIG.keyboard_controls.up)
 		cur_config.keyboard_controls.down = config.get_value("keyboard", "down", DEFAULT_CONFIG.keyboard_controls.down)
 		cur_config.keyboard_controls.jump = config.get_value("keyboard", "jump", DEFAULT_CONFIG.keyboard_controls.jump)
+		cur_config.keyboard_controls.dash = config.get_value("keyboard", "dash", DEFAULT_CONFIG.keyboard_controls.dash)
 		cur_config.keyboard_controls.shoot = config.get_value("keyboard", "shoot", DEFAULT_CONFIG.keyboard_controls.shoot)
 		cur_config.keyboard_controls.restart = config.get_value("keyboard", "restart", DEFAULT_CONFIG.keyboard_controls.restart)
 		cur_config.keyboard_controls.skip = config.get_value("keyboard", "skip", DEFAULT_CONFIG.keyboard_controls.skip)
@@ -497,6 +510,7 @@ func _load_config() -> void:
 		cur_config.controller_controls.up = config.get_value("controller", "up", DEFAULT_CONFIG.controller_controls.up)
 		cur_config.controller_controls.down = config.get_value("controller", "down", DEFAULT_CONFIG.controller_controls.down)
 		cur_config.controller_controls.jump = config.get_value("controller", "jump", DEFAULT_CONFIG.controller_controls.jump)
+		cur_config.controller_controls.dash = config.get_value("controller", "dash", DEFAULT_CONFIG.controller_controls.dash)
 		cur_config.controller_controls.shoot = config.get_value("controller", "shoot", DEFAULT_CONFIG.controller_controls.shoot)
 		cur_config.controller_controls.restart = config.get_value("controller", "restart", DEFAULT_CONFIG.controller_controls.restart)
 		cur_config.controller_controls.skip = config.get_value("controller", "skip", DEFAULT_CONFIG.controller_controls.skip)
