@@ -1,5 +1,9 @@
 extends Node
 
+# Signals
+signal game_got_paused
+
+
 # Enums
 enum BUTTON_PROMPTS {
 	KEYBOARD,
@@ -251,6 +255,7 @@ func pause_game() -> void:
 	if not physics_paused:
 		_scene_tree.paused = !game_paused
 	game_paused = !game_paused
+	emit_signal("game_got_paused", game_paused)
 	if (game_paused): # If we are paused, spawn the pause menu object
 		_cur_pause_menu = _pause_menu.instance()
 		add_child(_cur_pause_menu)

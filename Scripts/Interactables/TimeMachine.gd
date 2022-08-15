@@ -7,6 +7,7 @@ var cur_selector: Node = null
 
 func _ready():
 	pause_mode = PAUSE_MODE_PROCESS
+	WorldController.connect("game_got_paused", self, "_on_game_got_paused")
 
 func _input(event: InputEvent):
 	if not can_interact:
@@ -19,6 +20,12 @@ func _input(event: InputEvent):
 		cur_selector.queue_free()
 		cur_selector = null
 		WorldController.pause_physics()
+
+
+func _on_game_got_paused(paused: bool):
+	pause_mode = PAUSE_MODE_PROCESS
+	if paused:
+		pause_mode = PAUSE_MODE_STOP
 
 func _on_Area2D_body_entered(body):
 	can_interact = true
