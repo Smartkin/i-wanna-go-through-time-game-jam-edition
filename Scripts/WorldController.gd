@@ -83,6 +83,7 @@ var loading_save := false setget , get_loading_save # Whether save load is in pr
 var cur_save_data := {} setget , get_cur_save_data # Currently stored global/save data, see _ready() for default value
 var cur_config := {} setget , get_cur_config # Current user configuration, see _ready() for default value
 var game_paused := false setget , get_game_paused # Whether game is currently paused
+var physics_paused := false setget, get_physics_paused # Whether the physics are paused
 
 # Private, while Godot still allows to access members freely from the outside
 # these should never be accessed anywhere outside of this script
@@ -242,11 +243,13 @@ func get_time_string_formatted(timeJson: Dictionary) -> String:
 	return TIME_FORMAT % [timeJson.hours, timeJson.minutes, timeJson.seconds, timeJson.milliseconds]
 
 func pause_physics() -> void:
-	_scene_tree.paused = !_scene_tree.paused
+	_scene_tree.paused = !physics_paused
+	physics_paused = !physics_paused
 
 func pause_game() -> void:
 	# Pause/unpause scene tree
-	_scene_tree.paused = !_scene_tree.paused
+	if not physics_paused:
+		_scene_tree.paused = !game_paused
 	game_paused = !game_paused
 	if (game_paused): # If we are paused, spawn the pause menu object
 		_cur_pause_menu = _pause_menu.instance()
@@ -268,6 +271,9 @@ func get_reverse_grav() -> bool:
 
 func get_game_paused() -> bool:
 	return game_paused
+
+func get_physics_paused() -> bool:
+	return physics_paused
 
 func set_reverse_grav(on: bool) -> void:
 	reverse_grav = on
