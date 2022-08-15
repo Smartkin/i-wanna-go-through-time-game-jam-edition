@@ -23,5 +23,6 @@ script = ExtResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( 16, 16 )
 shape = SubResource( 1 )
+
 [connection signal="body_entered" from="Hitbox" to="Hitbox" method="_on_Hitbox_body_entered"]
 [connection signal="body_exited" from="Hitbox" to="Hitbox" method="_on_Hitbox_body_exited"]

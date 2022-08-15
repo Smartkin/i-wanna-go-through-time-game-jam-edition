@@ -31,6 +31,7 @@ const EMPTY_SAVE := { # Default save data when no save is present
 		"seconds": 0,
 		"milliseconds": 0
 	},
+	"chips": {},
 	"scene": "res://TestBed.tscn",
 	"sceneName": "TestBed",
 	"reverse_grav": false,
@@ -240,6 +241,9 @@ func set_music(fileName: String) -> void:
 func get_time_string_formatted(timeJson: Dictionary) -> String:
 	return TIME_FORMAT % [timeJson.hours, timeJson.minutes, timeJson.seconds, timeJson.milliseconds]
 
+func pause_physics() -> void:
+	_scene_tree.paused = !_scene_tree.paused
+
 func pause_game() -> void:
 	# Pause/unpause scene tree
 	_scene_tree.paused = !_scene_tree.paused
@@ -332,6 +336,11 @@ func save_config() -> void:
 	config.set_value("controller", "pause", cur_config.controller_controls.pause)
 	config.save(_get_config_path())
 
+func save_item(id: int) -> void:
+	cur_save_data.chips[String(id)] = true
+
+func check_item(id: int) -> bool:
+	return cur_save_data.chips.has(String(id))
 
 func save_game() -> void:
 	var tree := _scene_tree

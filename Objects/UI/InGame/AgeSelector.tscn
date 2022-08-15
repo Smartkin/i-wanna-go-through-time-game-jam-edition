@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Objects/UI/MenuTheme.tres" type="Theme" id=1]
+[ext_resource path="res://Scripts/UI/InGame/AgeSelector.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/UI/InGame/AgeButton.gd" type="Script" id=3]
+
+[node name="AgeSelector" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="VFlowContainer" type="HFlowContainer" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -22.5
+margin_bottom = 22.5
+
+[node name="IceAge" type="Button" parent="VFlowContainer"]
+unique_name_in_owner = true
+margin_right = 598.0
+margin_bottom = 45.0
+size_flags_horizontal = 3
+theme = ExtResource( 1 )
+text = "Ice age"
+script = ExtResource( 3 )
+age_scene = "res://Rooms/Ages/IceAge.tscn"
+required_chip = 1
+
+[node name="AnotherAge" type="Button" parent="VFlowContainer"]
+margin_left = 602.0
+margin_right = 1280.0
+margin_bottom = 45.0
+size_flags_horizontal = 3
+theme = ExtResource( 1 )
+text = "Another age"
+script = ExtResource( 3 )
+
+[connection signal="pressed" from="VFlowContainer/IceAge" to="." method="_on_IceAge_pressed"]

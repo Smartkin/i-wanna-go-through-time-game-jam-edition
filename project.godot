@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Button",
+"class": "AgeButton",
+"language": "GDScript",
+"path": "res://Scripts/UI/InGame/AgeButton.gd"
+}, {
+"base": "Sprite",
+"class": "Chip",
+"language": "GDScript",
+"path": "res://Scripts/Items/Chip.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "GrabbableBase",
 "language": "GDScript",
@@ -505,6 +515,8 @@ _global_script_classes=[ {
 "path": "res://Scripts/Water/Water.gd"
 } ]
 _global_script_class_icons={
+"AgeButton": "",
+"Chip": "",
 "GrabbableBase": "",
 "KillerBase": "",
 "Player": "",
@@ -715,6 +727,7 @@ suicide={
 2d_physics/layer_4="Killers"
 2d_physics/layer_5="Grabbables"
 2d_physics/layer_6="PlayerBullets"
+2d_physics/layer_7="Items"
 
 [rendering]
 
