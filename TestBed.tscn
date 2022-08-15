@@ -28,9 +28,15 @@ __meta__ = {
 [node name="PlayerController" parent="." instance=ExtResource( 2 )]
 position = Vector2( 80, 656 )
 
-[node name="Ability" parent="PlayerController" instance=ExtResource( 18 )]
-position = Vector2( 181, -336 )
-id = 3
+[node name="Ability" parent="." instance=ExtResource( 18 )]
+position = Vector2( 144, 616 )
+scale = Vector2( 0.285714, 0.285714 )
+id = 0
+
+[node name="Ability2" parent="." instance=ExtResource( 18 )]
+position = Vector2( 232, 616 )
+scale = Vector2( 0.285714, 0.285714 )
+id = 4
 
 [node name="Tiles" parent="." instance=ExtResource( 1 )]
 cell_size = Vector2( 32, 32 )

@@ -6,6 +6,7 @@ signal dead
 signal shoot
 signal sound
 signal dashed
+signal damaged
 
 # Enums
 enum STATE {
@@ -41,9 +42,11 @@ const DEFAULT_JUMP := 450
 const DEFAULT_DJUMP := 350
 const DEFAULT_GRAV := 20
 const DEFAULT_DASH_POWER := 1500
+const DASH_IFRAMES := 20
 const MAX_SLOP_ANGLE := deg2rad(50)
 const VINE_SLIDE_OFFSET := Vector2(9, 6)
 const STUCK_TEST_BUFFER := 1
+const MAX_IFRAMES := 60
 
 # Public
 var speed := Vector2.ZERO
@@ -76,6 +79,8 @@ var jump_buffer := 0
 var cur_state: int = STATE.RUN
 var states_stack: Array = [STATE.RUN]
 var do_stuck_test := 0
+var health := 1
+var iframes := 0
 
 # Private
 var _debug_output_timer := 0
@@ -122,6 +127,8 @@ func _physics_process(delta: float) -> void:
 		_apply_gravity()
 	if (down_buffer > 0):
 		down_buffer -= 1
+	if (iframes > 0):
+		iframes -= 1
 	_handle_inputs() # Process player's current inputs
 	# Perform player movement but preserve only vertical momentum since we don't want any for horizontal
 	speed.y = move_and_slide_with_snap(speed, snap, grav_dir, !on_platform, 4, MAX_SLOP_ANGLE).y
@@ -225,6 +232,7 @@ func run(direction: int = DIRECTION_H.IDLE) -> void:
 func dash(direction: int = DIRECTION_H.IDLE) -> void:
 	if direction == DIRECTION_H.IDLE:
 		direction = -1 if $Sprite.flip_h else 1
+	iframes = DASH_IFRAMES
 	$DashTween.interpolate_property(self, "speed", Vector2(DEFAULT_DASH_POWER * direction, 0), \
 		Vector2(DEFAULT_DASH_POWER * direction, 0), 0.08, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	$DashTween.start()
@@ -245,6 +253,15 @@ func shoot() -> void:
 			GrabbableBase.TYPE.RIGHT:
 				direction = DIRECTION_H.LEFT
 	emit_signal("shoot", direction) # Tell player controller to create a bullet
+
+func damage(amount: int) -> void:
+	if (iframes > 0):
+		return
+	health -= amount
+	iframes = MAX_IFRAMES
+	emit_signal("damaged")
+	if (health <= 0):
+		kill()
 
 # Kill the player
 func kill() -> void:
@@ -406,7 +423,7 @@ func _handle_inputs() -> void:
 			action = _slide_on_grab(direction)
 	# Handle dotkid
 	if (can_jump || platform != null):
-		if (Input.is_action_just_pressed("down")):
+		if (Input.is_action_just_pressed("down") and WorldController.check_item(Ability.ABILITIES.DOT_KID)):
 			if (down_buffer <= 0):
 				down_buffer = MAX_DOWN_BUFFER
 			else:
@@ -439,7 +456,7 @@ func _handle_inputs() -> void:
 # Handle any specific needed collisions
 func _handle_collision(collision: KinematicCollision2D) -> void:
 	if (collision.collider.is_in_group("Killers")): # Check if we collided with a killer(spike, delfruit, etc.)
-		kill()
+		damage(1)
 	if (collision.collider.is_in_group("Platforms")):
 		on_platform = true
 		

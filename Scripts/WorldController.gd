@@ -28,6 +28,7 @@ const DEBUG_MODE := true # Whether debug mode is turned on
 const EMPTY_SAVE := { # Default save data when no save is present
 	"playerPosX": 0, # JSON doesn't support Vector2
 	"playerPosY": 0,
+	"health": 1,
 	"deaths": 0,
 	"time": {
 		"hours": 0,
