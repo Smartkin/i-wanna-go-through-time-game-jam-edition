@@ -385,6 +385,7 @@ func _handle_collision(collision: KinematicCollision2D) -> void:
 		kill()
 	if (collision.collider.is_in_group("Platforms")):
 		on_platform = true
+		
 
 # Grabbable surface was found
 func _on_Grab_body_entered(body: GrabbableBase) -> void:
