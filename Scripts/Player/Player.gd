@@ -34,6 +34,7 @@ const REVERSE_SNAP := Vector2.UP * 10
 const DEBUG_OUTPUT_RATE := 60
 const MAX_COYOTE := 2
 const MAX_JUMP_BUFFER := 2
+const MAX_DOWN_BUFFER := 10
 const DEFAULT_RUN := 190
 const DEFAULT_FALL := 420
 const DEFAULT_JUMP := 450
@@ -42,6 +43,7 @@ const DEFAULT_GRAV := 20
 const DEFAULT_DASH_POWER := 1500
 const MAX_SLOP_ANGLE := deg2rad(50)
 const VINE_SLIDE_OFFSET := Vector2(9, 6)
+const STUCK_TEST_BUFFER := 1
 
 # Public
 var speed := Vector2.ZERO
@@ -68,10 +70,12 @@ var fall_speed := DEFAULT_FALL
 var jump_height := -DEFAULT_JUMP
 var djump_height := -DEFAULT_DJUMP
 var gravity := DEFAULT_GRAV
+var down_buffer := 0
 var coyote_frames := 0
 var jump_buffer := 0
 var cur_state: int = STATE.RUN
 var states_stack: Array = [STATE.RUN]
+var do_stuck_test := 0
 
 # Private
 var _debug_output_timer := 0
@@ -116,9 +120,24 @@ func _physics_process(delta: float) -> void:
 				lose_djump = false
 	if (cur_state != STATE.GRAB): # If nothing is grabbed apply gravity
 		_apply_gravity()
+	if (down_buffer > 0):
+		down_buffer -= 1
 	_handle_inputs() # Process player's current inputs
 	# Perform player movement but preserve only vertical momentum since we don't want any for horizontal
 	speed.y = move_and_slide_with_snap(speed, snap, grav_dir, !on_platform, 4, MAX_SLOP_ANGLE).y
+	if (do_stuck_test > 0):
+		do_stuck_test -= 1
+		var dispos_val = 10
+		if ($UnstuckCheckTop.get_overlapping_bodies().empty()):
+			global_position.y -= dispos_val
+		if ($UnstuckCheckLeft.get_overlapping_bodies().empty()):
+			global_position.x -= dispos_val
+		if ($UnstuckCheckBottom.get_overlapping_bodies().empty()):
+			global_position.y += dispos_val
+		if ($UnstuckCheckRight.get_overlapping_bodies().empty()):
+			global_position.x += dispos_val
+		if (move_and_collide(Vector2.ZERO, true, true, true) != null):
+			kill()
 	on_platform = false
 	for i in range(get_slide_count()): # Handle all the collisions that occured if needed
 		_handle_collision(get_slide_collision(i))
@@ -310,11 +329,15 @@ func _mirror_against_pivot(direction: int, origin: float, distance: float) -> fl
 # Mirrors player's hitbox around X axis against a central pivot point
 func _mirror_hitbox_hor(direction: int) -> void:
 	$Hitbox.position.x = _mirror_against_pivot(direction, collision_start_pos.x, collision_pivot_distance.x)
+	$DotKid.position.x = _mirror_against_pivot(direction, collision_start_pos.x, collision_pivot_distance.x)
 	$GrabHitbox/CollisionShape2D.position.x = _mirror_against_pivot(direction, grab_start_pos.x, grab_pivot_distance.x)
 
 # Mirrors player's hitbox around Y axis against a central pivot point
 func _mirror_hitbox_ver(direction: int) -> void:
 	$Hitbox.position.y = _mirror_against_pivot(direction, collision_start_pos.y, collision_pivot_distance.y)
+	$DotKid.position.y = _mirror_against_pivot(direction, collision_start_pos.y, collision_pivot_distance.y)
+	$UnstuckCheckTop.position.y = _mirror_against_pivot(direction, collision_start_pos.y, collision_pivot_distance.y)
+	$UnstuckCheckBottom.position.y = _mirror_against_pivot(direction, collision_start_pos.y, collision_pivot_distance.y)
 	$GrabHitbox/CollisionShape2D.position.y = _mirror_against_pivot(direction, grab_start_pos.y, grab_pivot_distance.y)
 
 # Sliding logic
@@ -377,10 +400,23 @@ func _handle_inputs() -> void:
 			run(direction)
 			if (can_dash and WorldController.check_item(Ability.ABILITIES.DASH) and Input.is_action_just_pressed("dash")):
 				dash(direction)
-				cur_state = STATE.DASH
+				_switch_state(STATE.DASH)
 		STATE.GRAB:
 			run(direction)
 			action = _slide_on_grab(direction)
+	# Handle dotkid
+	if (can_jump || platform != null):
+		if (Input.is_action_just_pressed("down")):
+			if (down_buffer <= 0):
+				down_buffer = MAX_DOWN_BUFFER
+			else:
+				$Hitbox.disabled = true
+				$DotKid.disabled = false
+	if (not $DotKid.disabled and Input.is_action_just_pressed("up")):
+		$Hitbox.disabled = false
+		$DotKid.disabled = true
+		do_stuck_test = STUCK_TEST_BUFFER
+		down_buffer = 0
 	# Handle player jump
 	var jump_from_vine: bool = (Input.is_action_pressed("jump") && Input.is_action_just_pressed(action) && cur_state == STATE.GRAB)
 	if (Input.is_action_just_pressed("jump") || jump_from_vine):
@@ -429,4 +465,4 @@ func _on_DashTimer_timeout():
 func _on_DashTween_tween_completed(object, key):
 	speed.x = 0
 	gravity = DEFAULT_GRAV if !WorldController.reverse_grav else -DEFAULT_GRAV
-	cur_state = STATE.RUN
+	_revert_state()

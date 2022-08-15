@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Sprites/Player/sprPlayerIdle_strip4.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Player/Player.gd" type="Script" id=2]
@@ -97,6 +97,15 @@ extents = Vector2( 5.5, 10 )
 [sub_resource type="RectangleShape2D" id=17]
 extents = Vector2( 1, 10 )
 
+[sub_resource type="RectangleShape2D" id=18]
+extents = Vector2( 1, 1 )
+
+[sub_resource type="RectangleShape2D" id=19]
+extents = Vector2( 0.5, 0.5 )
+
+[sub_resource type="RectangleShape2D" id=20]
+extents = Vector2( 0.5, 0.5 )
+
 [node name="Player" type="KinematicBody2D" groups=["GravityAffected", "Player"]]
 collision_mask = 68
 moving_platform_apply_velocity_on_leave = 2
@@ -128,6 +137,37 @@ one_shot = true
 
 [node name="DashTween" type="Tween" parent="."]
 playback_process_mode = 0
+
+[node name="DotKid" type="CollisionShape2D" parent="."]
+position = Vector2( 1.5, 6 )
+shape = SubResource( 18 )
+disabled = true
+
+[node name="UnstuckCheckTop" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="Top" type="CollisionShape2D" parent="UnstuckCheckTop"]
+position = Vector2( 2, -4.5 )
+shape = SubResource( 19 )
+
+[node name="UnstuckCheckLeft" type="Area2D" parent="."]
+
+[node name="Left" type="CollisionShape2D" parent="UnstuckCheckLeft"]
+position = Vector2( -4.5, 5 )
+shape = SubResource( 20 )
+
+[node name="UnstuckCheckRight" type="Area2D" parent="."]
+
+[node name="Right" type="CollisionShape2D" parent="UnstuckCheckRight"]
+position = Vector2( 7.5, 5 )
+shape = SubResource( 20 )
+
+[node name="UnstuckCheckBottom" type="Area2D" parent="."]
+
+[node name="Bottom" type="CollisionShape2D" parent="UnstuckCheckBottom"]
+position = Vector2( 0, 16.5 )
+shape = SubResource( 20 )
 
 [connection signal="body_entered" from="GrabHitbox" to="." method="_on_Grab_body_entered"]
 [connection signal="body_exited" from="GrabHitbox" to="." method="_on_Grab_body_exited"]
