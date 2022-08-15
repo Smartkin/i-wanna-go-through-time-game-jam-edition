@@ -748,10 +748,6 @@ suicide={
 "deadzone": 0.5,
 "events": [  ]
 }
-dash={
-"deadzone": 0.5,
-"events": [  ]
-}
 
 [layer_names]
 
