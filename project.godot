@@ -751,7 +751,6 @@ suicide={
 2d_physics/layer_4="Killers"
 2d_physics/layer_5="Grabbables"
 2d_physics/layer_6="PlayerBullets"
-2d_physics/layer_7="Items"
 
 [rendering]
 
