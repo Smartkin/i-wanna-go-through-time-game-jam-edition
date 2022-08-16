@@ -1,4 +1,3 @@
-tool
 extends KinematicBody2D
 
 onready var n_SpikeOrientation : AnimationPlayer = $SpikeOrientation
@@ -25,8 +24,7 @@ func _physics_process(delta: float) -> void:
 		set_spike_dir(spike_dir)
 	elif check_dir < SPIKE_DIRECTION.DOWN:
 		_check_for_solids()
-		
-	print(n_BlockChecker.get_overlapping_bodies().size())
+	
 
 
 func set_spike_dir(value: int) -> void:
