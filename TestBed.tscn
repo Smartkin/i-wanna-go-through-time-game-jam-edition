@@ -30,19 +30,18 @@ __meta__ = {
 position = Vector2( 80, 656 )
 
 [node name="Ability" parent="." instance=ExtResource( 18 )]
-position = Vector2( 144, 616 )
-scale = Vector2( 0.285714, 0.285714 )
+position = Vector2( 136, 616 )
 id = 0
 
 [node name="Ability2" parent="." instance=ExtResource( 18 )]
 position = Vector2( 232, 616 )
-scale = Vector2( 0.285714, 0.285714 )
+frame = 4
 id = 4
 
 [node name="Ability3" parent="." instance=ExtResource( 18 )]
 position = Vector2( 192, 584 )
-scale = Vector2( 0.285714, 0.285714 )
-id = 3
+frame = 7
+id = 14
 
 [node name="Tiles" parent="." instance=ExtResource( 1 )]
 cell_size = Vector2( 32, 32 )
@@ -180,5 +179,6 @@ position = Vector2( 312, 632 )
 position = Vector2( 480, 281 )
 
 [node name="Goomba" parent="." instance=ExtResource( 20 )]
-position = Vector2( 464, 686 )
+position = Vector2( 464, 688 )
+moving_platform_apply_velocity_on_leave = 2
 speed = 100

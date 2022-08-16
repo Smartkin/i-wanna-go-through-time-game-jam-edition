@@ -29,6 +29,7 @@ const EMPTY_SAVE := { # Default save data when no save is present
 	"playerPosX": 0, # JSON doesn't support Vector2
 	"playerPosY": 0,
 	"health": 1,
+	"gun_power": 1,
 	"deaths": 0,
 	"time": {
 		"hours": 0,
