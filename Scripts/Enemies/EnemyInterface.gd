@@ -6,7 +6,8 @@ signal died
 var pl: Player = null
 var path_to_player := PoolVector2Array() setget set_path_to_player  # Only supplied if part of "chasing_enemies" group
 var stats := {
-	"hp": 1
+	hp = 1,
+	power = 1
 }
 
 func _ready():
@@ -16,7 +17,7 @@ func _ready():
 
 # Virtual function on player entering the area, by default just hits the player
 func _player_enter():
-	pl.hit()
+	pl.damage(stats.power)
 
 # Virtual function on running out of HP/dying
 func _die():

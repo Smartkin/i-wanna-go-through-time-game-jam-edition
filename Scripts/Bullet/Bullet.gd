@@ -2,6 +2,9 @@ class_name Bullet
 extends RigidBody2D
 
 var speed := Vector2.ZERO
+var stats := {
+	damage = 1
+}
 
 func _ready() -> void:
 	$Timer.start()

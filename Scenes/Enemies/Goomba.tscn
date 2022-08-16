@@ -1,0 +1,153 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://Scripts/Enemies/Goomba_FSM.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Hazards/Enemies/taggy_walk.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Enemies/Goomba.gd" type="Script" id=3]
+[ext_resource path="res://Sprites/Hazards/Enemies/taggy_stomped.png" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 4 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 4 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 4 )
+region = Rect2( 80, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 4 )
+region = Rect2( 96, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 4 )
+region = Rect2( 112, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 4 )
+region = Rect2( 144, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=10]
+animations = [ {
+"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
+"loop": true,
+"name": "bounced",
+"speed": 15.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": true,
+"name": "walk",
+"speed": 15.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 8, 10 )
+
+[node name="Goomba" type="KinematicBody2D"]
+collision_layer = 128
+collision_mask = 38
+script = ExtResource( 3 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 8, 8 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 8, 8 )
+frames = SubResource( 10 )
+animation = "walk"
+playing = true
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( 8, 8 )
+shape = SubResource( 2 )
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2( 8, 8 )
+shape = SubResource( 3 )
+
+[node name="Jumpbox" type="Area2D" parent="."]
+collision_layer = 0
+priority = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Jumpbox"]
+position = Vector2( 8, 6 )
+shape = SubResource( 4 )
+
+[node name="LeftEdge" type="RayCast2D" parent="."]
+position = Vector2( 0, 16 )
+enabled = true
+cast_to = Vector2( 0, 3 )
+collision_mask = 4
+
+[node name="RightEdge" type="RayCast2D" parent="."]
+position = Vector2( 16, 16 )
+enabled = true
+cast_to = Vector2( 0, 3 )
+collision_mask = 4
+
+[node name="StunTimer" type="Timer" parent="."]
+process_mode = 0
+one_shot = true
+
+[connection signal="animation_finished" from="Sprite" to="StateMachine" method="_on_Sprite_animation_finished"]
+[connection signal="body_entered" from="Jumpbox" to="." method="_on_Jumpbox_body_entered"]
+[connection signal="body_exited" from="Jumpbox" to="." method="_on_Jumpbox_body_exited"]
+[connection signal="timeout" from="StunTimer" to="StateMachine" method="_on_StunTimer_timeout"]
