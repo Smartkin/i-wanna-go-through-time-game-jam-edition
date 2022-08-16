@@ -19,10 +19,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/UI/InGame/AgeButton.gd"
 }, {
+"base": "RigidBody2D",
+"class": "Bullet",
+"language": "GDScript",
+"path": "res://Scripts/Bullet/Bullet.gd"
+}, {
 "base": "Sprite",
 "class": "Chip",
 "language": "GDScript",
 "path": "res://Scripts/Items/Chip.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "EnemyInterface",
+"language": "GDScript",
+"path": "res://Scripts/Enemies/EnemyInterface.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "GrabbableBase",
@@ -38,6 +48,11 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://Scripts/Player/Player.gd"
+}, {
+"base": "Node",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://Scripts/Enemies/StateMachine.gd"
 }, {
 "base": "Button",
 "class": "StyledButtonCheckbox",
@@ -522,10 +537,13 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Ability": "",
 "AgeButton": "",
+"Bullet": "",
 "Chip": "",
+"EnemyInterface": "",
 "GrabbableBase": "",
 "KillerBase": "",
 "Player": "",
+"StateMachine": "",
 "StyledButtonCheckbox": "",
 "VisualShaderNodeNoiseGeneric2d": "",
 "VisualShaderNodeNoiseGeneric2dFractal": "",

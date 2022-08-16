@@ -1,3 +1,4 @@
+class_name Bullet
 extends RigidBody2D
 
 var speed := Vector2.ZERO

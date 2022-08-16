@@ -47,6 +47,7 @@ const MAX_SLOP_ANGLE := deg2rad(50)
 const VINE_SLIDE_OFFSET := Vector2(9, 6)
 const STUCK_TEST_BUFFER := 1
 const MAX_IFRAMES := 60
+const CONTROLS_LOCK := 60
 
 # Public
 var speed := Vector2.ZERO
@@ -81,6 +82,8 @@ var states_stack: Array = [STATE.RUN]
 var do_stuck_test := 0
 var health := 1
 var iframes := 0
+var ground_position := Vector2.ZERO
+var control_lock := 0
 
 # Private
 var _debug_output_timer := 0
@@ -106,6 +109,8 @@ func _physics_process(delta: float) -> void:
 			$DashTimer.start()
 		coyote_frames = MAX_COYOTE
 		snap = cur_snap
+		if (not on_platform):
+			ground_position = global_position
 	else: # When ground is left give some leeway before taking the single jump away
 		coyote_frames -= 1
 		if (coyote_frames <= 0):
@@ -129,9 +134,13 @@ func _physics_process(delta: float) -> void:
 		down_buffer -= 1
 	if (iframes > 0):
 		iframes -= 1
-	_handle_inputs() # Process player's current inputs
+	if (control_lock > 0):
+		control_lock -= 1
+	else:
+		_handle_inputs() # Process player's current inputs
 	# Perform player movement but preserve only vertical momentum since we don't want any for horizontal
 	speed.y = move_and_slide_with_snap(speed, snap, grav_dir, !on_platform, 4, MAX_SLOP_ANGLE).y
+	# Do unstuck check test if fails, kills the player
 	if (do_stuck_test > 0):
 		do_stuck_test -= 1
 		var dispos_val = 8
@@ -492,3 +501,6 @@ func _on_DashTween_tween_completed(object, key):
 func _on_Hurtbox_hurt(source: Node):
 	if (source.is_in_group("Killers")):
 		damage(1)
+		global_position = ground_position
+		speed = Vector2.ZERO
+		control_lock = CONTROLS_LOCK

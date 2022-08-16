@@ -285,7 +285,6 @@ frames = SubResource( 15 )
 animation = "RunGun"
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, 1 )
 shape = SubResource( 16 )
 
