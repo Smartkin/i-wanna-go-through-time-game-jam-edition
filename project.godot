@@ -19,11 +19,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/UI/InGame/AgeButton.gd"
 }, {
-"base": "RigidBody2D",
-"class": "Bullet",
-"language": "GDScript",
-"path": "res://Scripts/Bullet/Bullet.gd"
-}, {
 "base": "Sprite",
 "class": "Chip",
 "language": "GDScript",
@@ -42,7 +37,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "KillerBase",
 "language": "GDScript",
-"path": "res://Scripts/Killers/Base.gd"
+"path": "res://Scripts/Killers/KillerBase.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Player",
@@ -537,7 +532,6 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Ability": "",
 "AgeButton": "",
-"Bullet": "",
 "Chip": "",
 "EnemyInterface": "",
 "GrabbableBase": "",
@@ -663,6 +657,7 @@ gdscript/warnings/treat_warnings_as_errors=true
 gdscript/warnings/unused_variable=false
 gdscript/warnings/unused_argument=false
 gdscript/warnings/return_value_discarded=false
+shapes/collision/shape_color=Color( 1, 1, 1, 0.419608 )
 
 [display]
 
@@ -784,12 +779,10 @@ dash={
 
 [rendering]
 
-2d/options/use_nvidia_rect_flicker_workaround=true
 quality/intended_usage/framebuffer_allocation=0
 2d/snapping/use_gpu_pixel_snap=true
 threads/thread_model=2
-2d/options/use_software_skinning=false
 gles3/shaders/shader_compilation_mode=2
-environment/default_clear_color=Color( 0.266667, 0.501961, 0.709804, 1 )
+environment/default_clear_color=Color( 0.152941, 0.14902, 0.192157, 1 )
 environment/default_environment="res://default_env.tres"
 quality/2d/use_pixel_snap=true

@@ -2,7 +2,7 @@ extends Node2D
 
 # Constants
 # Bullet object information
-const Bullet := preload("res://Objects/Player/Bullet.tscn")
+const Bullet := preload("res://Scenes/Player/Bullet.tscn")
 
 # Public
 var player_dead := false
