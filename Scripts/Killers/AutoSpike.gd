@@ -23,7 +23,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if spike_dir != SPIKE_DIRECTION.AUTO:
 		set_spike_dir(spike_dir)
-	if check_dir < SPIKE_DIRECTION.LEFT:
+	elif check_dir < SPIKE_DIRECTION.LEFT:
 		_check_for_solids()
 
 
