@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=2]
 
-[ext_resource path="res://Scripts/Enemies/StateMachine.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Enemies/Balloon_FSM.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Hazards/Enemies/balloon.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Hazards/Enemies/balloon_popped.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Hazards/Enemies/balloon_bounce.png" type="Texture" id=4]
@@ -86,7 +86,10 @@ __meta__ = {
 }
 
 [node name="Balloon" type="KinematicBody2D" parent="."]
-position = Vector2( 0, 1.85306 )
+position = Vector2( 0, -1.52984 )
+collision_layer = 128
+collision_mask = 38
+moving_platform_apply_velocity_on_leave = 2
 script = ExtResource( 5 )
 
 [node name="StateMachine" type="Node" parent="Balloon"]
@@ -99,7 +102,6 @@ shape = SubResource( 1 )
 [node name="Sprite" type="AnimatedSprite" parent="Balloon"]
 position = Vector2( 16, 16 )
 frames = SubResource( 10 )
-frame = 2
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -126,3 +128,7 @@ position = Vector2( 16, 8 )
 shape = SubResource( 11 )
 
 [node name="MoveTween" type="Tween" parent="Balloon"]
+
+[connection signal="animation_finished" from="Balloon/Sprite" to="Balloon" method="_on_Sprite_animation_finished"]
+[connection signal="body_entered" from="Balloon/Jumpbox" to="Balloon" method="_on_Jumpbox_body_entered"]
+[connection signal="body_exited" from="Balloon/Jumpbox" to="Balloon" method="_on_Jumpbox_body_exited"]
