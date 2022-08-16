@@ -107,7 +107,7 @@ shape = SubResource( 1 )
 [node name="Sprite" type="AnimatedSprite" parent="PathFollow2D/Balloon"]
 position = Vector2( 16, 16 )
 frames = SubResource( 10 )
-frame = 5
+frame = 1
 playing = true
 __meta__ = {
 "_edit_lock_": true
