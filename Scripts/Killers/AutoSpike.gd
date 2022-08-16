@@ -1,4 +1,3 @@
-tool
 extends KinematicBody2D
 
 onready var n_SpikeOrientation : AnimationPlayer = $SpikeOrientation
