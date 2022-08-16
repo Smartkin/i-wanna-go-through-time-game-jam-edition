@@ -461,8 +461,6 @@ func _handle_inputs() -> void:
 
 # Handle any specific needed collisions
 func _handle_collision(collision: KinematicCollision2D) -> void:
-	if (collision.collider.is_in_group("Killers")): # Check if we collided with a killer(spike, delfruit, etc.)
-		damage(1)
 	if (collision.collider.is_in_group("Platforms")):
 		on_platform = true
 		
