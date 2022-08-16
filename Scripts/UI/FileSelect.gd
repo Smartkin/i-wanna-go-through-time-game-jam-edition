@@ -1,7 +1,7 @@
 extends Control
 
 # Save slot object
-const SaveSlotUI := preload("res://Objects/UI/FileSelect/SaveTabTemplate.tscn")
+const SaveSlotUI := preload("res://Scenes/UI/FileSelect/SaveTabTemplate.tscn")
 
 export(String, FILE, "*.tscn") var start_scene # Scene from which the game starts
 

@@ -2,7 +2,7 @@ extends Sprite
 
 
 var can_interact := false
-var age_selector := preload("res://Objects/UI/InGame/AgeSelector.tscn")
+var age_selector := preload("res://Scenes/UI/InGame/AgeSelector.tscn")
 var cur_selector: Node = null
 
 func _ready():
