@@ -7,6 +7,9 @@ const Bullet := preload("res://Objects/Player/Bullet.tscn")
 # Public
 var player_dead := false
 
+func _ready():
+	zoom_camera(0.5, false) # Set initial camera zoom
+
 func _physics_process(delta: float) -> void:
 	if (!player_dead):
 		$Camera.position = $Player.position
@@ -41,8 +44,8 @@ func _on_scene_built() -> void:
 func _on_Player_shoot(direction: int) -> void:
 	$Sounds/Shoot.play()
 	var b := Bullet.instance() # Create bullet object
-	var xPosOffset := -5 if direction == -1 else 5
-	var yPosOffset := -7 if WorldController.reverse_grav else 7 # Offset it against player's vertical position
+	var xPosOffset := -9 if direction == -1 else 9
+	var yPosOffset := -3 if WorldController.reverse_grav else 3 # Offset it against player's vertical position
 	add_child(b)
 	b.speed = Vector2(1500 * direction, 0)
 	b.position = Vector2($Player.position.x + xPosOffset, $Player.position.y + yPosOffset)
@@ -73,6 +76,15 @@ func _on_Player_dead(playerPos: Vector2) -> void:
 func _on_Player_dashed():
 	$CameraTween.interpolate_property($Camera, "offset", Vector2(-20, -20), \
 		Vector2(0, 0), 0.1, Tween.TRANS_ELASTIC, Tween.EASE_OUT)
+	$CameraTween.start()
+
+func zoom_camera(amount: float, smooth: bool = true, time: float = 1.0):
+	if (not smooth):
+		$Camera.zoom = Vector2(amount, amount)
+		return
+	var cur_zoom = $Camera.zoom
+	$CameraTween.interpolate_property($Camera, "zoom", cur_zoom, Vector2(amount, amount), time, \
+		Tween.TRANS_SINE, Tween.EASE_OUT)
 	$CameraTween.start()
 
 

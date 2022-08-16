@@ -92,7 +92,7 @@ onready var grab_pivot_distance := Vector2(abs($Pivot.position.x - $GrabHitbox/C
 onready var grab_start_pos: Vector2 = $GrabHitbox/CollisionShape2D.position
 
 func _ready() -> void:
-	$Sprite.play("Idle") # Set default sprite animation to idle
+	$Sprite.play(_get_animation("Idle")) # Set default sprite animation to idle
 
 func _physics_process(delta: float) -> void:
 	# Check if player is currently on floor
@@ -134,7 +134,7 @@ func _physics_process(delta: float) -> void:
 	speed.y = move_and_slide_with_snap(speed, snap, grav_dir, !on_platform, 4, MAX_SLOP_ANGLE).y
 	if (do_stuck_test > 0):
 		do_stuck_test -= 1
-		var dispos_val = 10
+		var dispos_val = 8
 		if ($UnstuckCheckTop.get_overlapping_bodies().empty()):
 			global_position.y -= dispos_val
 		if ($UnstuckCheckLeft.get_overlapping_bodies().empty()):
@@ -152,9 +152,9 @@ func _physics_process(delta: float) -> void:
 	match cur_state:
 		STATE.RUN:
 			if (speed.x == 0 && is_on_floor() && !set_run_sprite):
-				$Sprite.play("Idle")
+				$Sprite.play(_get_animation("Idle"))
 			if (get_falling()):
-				$Sprite.play("Fall")
+				$Sprite.play(_get_animation("Fall"))
 			set_run_sprite = false
 	# Debug output
 	_debug_print()
@@ -208,7 +208,7 @@ func jump(input_buffer: int) -> int:
 			speed = Vector2(3 * run_speed * hitbox_direction, jump_height)
 			jumped = true
 	if (jumped): # If the player jumped
-		$Sprite.play("Jump")
+		$Sprite.play(_get_animation("Jump"))
 		snap = Vector2.ZERO
 		return 0 # Indicate that the jump buffer input was consumed
 	return input_buffer - 1
@@ -225,7 +225,7 @@ func run(direction: int = DIRECTION_H.IDLE) -> void:
 		face_direction = direction
 		if (is_on_floor()):
 			set_run_sprite = true
-			$Sprite.play("Run")
+			$Sprite.play(_get_animation("Run"))
 		$Sprite.flip_h = (direction == DIRECTION_H.LEFT)
 		_mirror_hitbox_hor(direction)
 
@@ -269,6 +269,12 @@ func kill() -> void:
 		emit_signal("dead", global_position) # Tell player controller to do all the necessary post death logic
 		_switch_state(STATE.DEAD)
 	queue_free() # Destroy the player
+
+func _get_animation(name: String) -> String:
+	if not WorldController.check_item(Ability.ABILITIES.SHOOT):
+		return name
+	return name + "Gun"
+
 
 # Any necessary debug inputs like warping to mouse, saving anywhere, godmode, etc.
 func _debug_inputs() -> void:

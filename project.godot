@@ -765,9 +765,11 @@ dash={
 
 [rendering]
 
+2d/options/use_nvidia_rect_flicker_workaround=true
 quality/intended_usage/framebuffer_allocation=0
 2d/snapping/use_gpu_pixel_snap=true
 threads/thread_model=2
+2d/options/use_software_skinning=false
 gles3/shaders/shader_compilation_mode=2
 environment/default_clear_color=Color( 0.266667, 0.501961, 0.709804, 1 )
 environment/default_environment="res://default_env.tres"
