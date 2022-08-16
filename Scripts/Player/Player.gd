@@ -42,7 +42,7 @@ const DEFAULT_JUMP := 450
 const DEFAULT_DJUMP := 350
 const DEFAULT_GRAV := 20
 const DEFAULT_DASH_POWER := 1500
-const DASH_IFRAMES := 20
+const DASH_IFRAMES := 10
 const MAX_SLOP_ANGLE := deg2rad(50)
 const VINE_SLIDE_OFFSET := Vector2(9, 6)
 const STUCK_TEST_BUFFER := 1
@@ -489,3 +489,8 @@ func _on_DashTween_tween_completed(object, key):
 	speed.x = 0
 	gravity = DEFAULT_GRAV if !WorldController.reverse_grav else -DEFAULT_GRAV
 	_revert_state()
+
+
+func _on_Hurtbox_hurt(source: Node):
+	if (source.is_in_group("Killers")):
+		damage(1)
