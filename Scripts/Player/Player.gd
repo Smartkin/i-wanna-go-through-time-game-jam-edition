@@ -280,6 +280,8 @@ func kill() -> void:
 	queue_free() # Destroy the player
 
 func _get_animation(name: String) -> String:
+	if not WorldController.check_item(Ability.ABILITIES.SHOOT) and not WorldController.check_item(Ability.ABILITIES.DOUBLE_JUMP):
+		return name + "NoCape"
 	if not WorldController.check_item(Ability.ABILITIES.SHOOT):
 		return name
 	return name + "Gun"
@@ -503,4 +505,6 @@ func _on_Hurtbox_hurt(source: Node):
 		damage(1)
 		global_position = ground_position
 		speed = Vector2.ZERO
+		if $DashTween.is_active():
+			_on_DashTween_tween_completed(null, null)
 		control_lock = CONTROLS_LOCK

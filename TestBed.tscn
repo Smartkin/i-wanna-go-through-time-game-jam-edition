@@ -35,8 +35,8 @@ id = 0
 
 [node name="Ability2" parent="." instance=ExtResource( 18 )]
 position = Vector2( 232, 616 )
-frame = 4
-id = 4
+frame = 2
+id = 2
 
 [node name="Ability3" parent="." instance=ExtResource( 18 )]
 position = Vector2( 192, 584 )
