@@ -42,11 +42,12 @@ const DEFAULT_JUMP := 450
 const DEFAULT_DJUMP := 350
 const DEFAULT_GRAV := 20
 const DEFAULT_DASH_POWER := 1500
-const DASH_IFRAMES := 20
+const DASH_IFRAMES := 10
 const MAX_SLOP_ANGLE := deg2rad(50)
 const VINE_SLIDE_OFFSET := Vector2(9, 6)
 const STUCK_TEST_BUFFER := 1
 const MAX_IFRAMES := 60
+const CONTROLS_LOCK := 60
 
 # Public
 var speed := Vector2.ZERO
@@ -81,6 +82,8 @@ var states_stack: Array = [STATE.RUN]
 var do_stuck_test := 0
 var health := 1
 var iframes := 0
+var ground_position := Vector2.ZERO
+var control_lock := 0
 
 # Private
 var _debug_output_timer := 0
@@ -92,7 +95,7 @@ onready var grab_pivot_distance := Vector2(abs($Pivot.position.x - $GrabHitbox/C
 onready var grab_start_pos: Vector2 = $GrabHitbox/CollisionShape2D.position
 
 func _ready() -> void:
-	$Sprite.play("Idle") # Set default sprite animation to idle
+	$Sprite.play(_get_animation("Idle")) # Set default sprite animation to idle
 
 func _physics_process(delta: float) -> void:
 	# Check if player is currently on floor
@@ -106,6 +109,8 @@ func _physics_process(delta: float) -> void:
 			$DashTimer.start()
 		coyote_frames = MAX_COYOTE
 		snap = cur_snap
+		if (not on_platform):
+			ground_position = global_position
 	else: # When ground is left give some leeway before taking the single jump away
 		coyote_frames -= 1
 		if (coyote_frames <= 0):
@@ -129,12 +134,16 @@ func _physics_process(delta: float) -> void:
 		down_buffer -= 1
 	if (iframes > 0):
 		iframes -= 1
-	_handle_inputs() # Process player's current inputs
+	if (control_lock > 0):
+		control_lock -= 1
+	else:
+		_handle_inputs() # Process player's current inputs
 	# Perform player movement but preserve only vertical momentum since we don't want any for horizontal
 	speed.y = move_and_slide_with_snap(speed, snap, grav_dir, !on_platform, 4, MAX_SLOP_ANGLE).y
+	# Do unstuck check test if fails, kills the player
 	if (do_stuck_test > 0):
 		do_stuck_test -= 1
-		var dispos_val = 10
+		var dispos_val = 8
 		if ($UnstuckCheckTop.get_overlapping_bodies().empty()):
 			global_position.y -= dispos_val
 		if ($UnstuckCheckLeft.get_overlapping_bodies().empty()):
@@ -152,9 +161,9 @@ func _physics_process(delta: float) -> void:
 	match cur_state:
 		STATE.RUN:
 			if (speed.x == 0 && is_on_floor() && !set_run_sprite):
-				$Sprite.play("Idle")
+				$Sprite.play(_get_animation("Idle"))
 			if (get_falling()):
-				$Sprite.play("Fall")
+				$Sprite.play(_get_animation("Fall"))
 			set_run_sprite = false
 	# Debug output
 	_debug_print()
@@ -208,7 +217,7 @@ func jump(input_buffer: int) -> int:
 			speed = Vector2(3 * run_speed * hitbox_direction, jump_height)
 			jumped = true
 	if (jumped): # If the player jumped
-		$Sprite.play("Jump")
+		$Sprite.play(_get_animation("Jump"))
 		snap = Vector2.ZERO
 		return 0 # Indicate that the jump buffer input was consumed
 	return input_buffer - 1
@@ -225,7 +234,7 @@ func run(direction: int = DIRECTION_H.IDLE) -> void:
 		face_direction = direction
 		if (is_on_floor()):
 			set_run_sprite = true
-			$Sprite.play("Run")
+			$Sprite.play(_get_animation("Run"))
 		$Sprite.flip_h = (direction == DIRECTION_H.LEFT)
 		_mirror_hitbox_hor(direction)
 
@@ -269,6 +278,12 @@ func kill() -> void:
 		emit_signal("dead", global_position) # Tell player controller to do all the necessary post death logic
 		_switch_state(STATE.DEAD)
 	queue_free() # Destroy the player
+
+func _get_animation(name: String) -> String:
+	if not WorldController.check_item(Ability.ABILITIES.SHOOT):
+		return name
+	return name + "Gun"
+
 
 # Any necessary debug inputs like warping to mouse, saving anywhere, godmode, etc.
 func _debug_inputs() -> void:
@@ -455,8 +470,6 @@ func _handle_inputs() -> void:
 
 # Handle any specific needed collisions
 func _handle_collision(collision: KinematicCollision2D) -> void:
-	if (collision.collider.is_in_group("Killers")): # Check if we collided with a killer(spike, delfruit, etc.)
-		damage(1)
 	if (collision.collider.is_in_group("Platforms")):
 		on_platform = true
 		
@@ -483,3 +496,11 @@ func _on_DashTween_tween_completed(object, key):
 	speed.x = 0
 	gravity = DEFAULT_GRAV if !WorldController.reverse_grav else -DEFAULT_GRAV
 	_revert_state()
+
+
+func _on_Hurtbox_hurt(source: Node):
+	if (source.is_in_group("Killers")):
+		damage(1)
+		global_position = ground_position
+		speed = Vector2.ZERO
+		control_lock = CONTROLS_LOCK
