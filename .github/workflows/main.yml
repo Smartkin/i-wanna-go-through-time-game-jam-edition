@@ -20,6 +20,11 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: checkout
+        uses: actions/checkout@v3.0.2
+        with:
+          fetch-depth: 0
+        
       - name: Godot Export
         uses: firebelley/godot-export@v4.1.0
         with:
