@@ -12,7 +12,7 @@
 [ext_resource path="res://Fonts/small_font_outline.tres" type="DynamicFont" id=10]
 [ext_resource path="res://Scripts/UI/Options/MainOptionsTab.gd" type="Script" id=11]
 [ext_resource path="res://Scripts/UI/Options/KeyboardOptionsTab.gd" type="Script" id=12]
-[ext_resource path="res://Scripts/UI/Options/ScrollContainer.gd" type="Script" id=13]
+[ext_resource path="res://addons/SmoothScroll/SmoothScrollContainer.gd" type="Script" id=13]
 [ext_resource path="res://Scripts/UI/Options/ControllerOptionsTab.gd" type="Script" id=14]
 
 [sub_resource type="StyleBoxEmpty" id=1]
@@ -84,7 +84,6 @@ margin_right = -16.0
 follow_focus = true
 scroll_horizontal_enabled = false
 script = ExtResource( 13 )
-duration = 2.0
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
 margin_right = 592.0
@@ -727,8 +726,6 @@ music = "GuyRock"
 fade = true
 
 [connection signal="control_key_input" from="Center/ChangeControlPopup" to="." method="_on_ChangeControlPopup_control_key_input"]
-[connection signal="scroll_ended" from="ScrollContainer" to="ScrollContainer" method="_on_ScrollContainer_scroll_ended"]
-[connection signal="scroll_started" from="ScrollContainer" to="ScrollContainer" method="_on_ScrollContainer_scroll_started"]
 [connection signal="tab_changed" from="ScrollContainer/MarginContainer/OptionsTabs" to="." method="_on_OptionsTabs_tab_changed"]
 [connection signal="toggled" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MusicCheckbox" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MusicCheckbox_toggled"]
 [connection signal="focus_entered" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MasterVolumeContainer/MasterVolume" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MasterVolumeSlider_entered"]

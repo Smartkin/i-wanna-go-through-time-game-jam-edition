@@ -85,4 +85,4 @@ func _on_ControllerOptionsTab_controller_controls_reset_pressed() -> void:
 func _on_OptionsTabs_tab_changed(tab: int) -> void:
 	if tab == 0:
 		yield(get_tree().create_timer(.01), "timeout")
-		$"%ScrollContainer".scroll_vertical = 500
+		$"%ScrollContainer".velocity.y = -1500

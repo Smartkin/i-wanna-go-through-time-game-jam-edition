@@ -30,8 +30,7 @@ var scrolling := false
 
 func _ready() -> void:
 	get_v_scrollbar().connect("scrolling", self, "_on_VScrollBar_scrolling")
-	for c in get_children():
-		content_node = c
+	content_node = get_child(0)
 
 
 func _process(delta: float) -> void:
