@@ -107,14 +107,19 @@ func reset_camera():
 func lock_camera(pos: Vector2, size: Vector2):
 	$Camera.limit_smoothed = true
 	$Camera.reset_smoothing()
-	$Camera.limit_top = pos.y
-	$Camera.limit_left = pos.x
-	$Camera.limit_bottom = pos.y + size.y
-	$Camera.limit_right = pos.x + size.x
-	print($Camera.limit_left)
-	print($Camera.limit_top)
-	print($Camera.limit_right)
-	print($Camera.limit_bottom)
+	var view_size = get_viewport_rect().size
+	if size.y < view_size.y:
+		size.y = view_size.y
+		
+	if size.x < view_size.x:
+		size.x = view_size.x
+	
+	var cam = $Camera
+	cam.limit_top = pos.y
+	cam.limit_left = pos.x
+	
+	cam.limit_bottom = cam.limit_top + size.y
+	cam.limit_right = cam.limit_left + size.x
 	_cam_lock = true
 
 func _on_Player_damaged():
