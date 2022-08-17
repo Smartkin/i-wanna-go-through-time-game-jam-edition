@@ -1,4 +1,4 @@
-extends Popup
+extends CenterContainer
 
 signal control_key_input
 
@@ -20,3 +20,4 @@ func _input(event: InputEvent) -> void:
 		|| (event is InputEventJoypadButton && key_type == INPUT_WAIT.JOYPAD)):
 			emit_signal("control_key_input", event, key_to_change)
 			hide()
+			$ChangeControlPopup.hide()

@@ -8,12 +8,12 @@ func _ready() -> void:
 func _on_KeyboardSettings_pressed() -> void:
 	$"%OptionsTabs".current_tab = 1
 	$"%OptionsTabs"/KeyboardOptionsTab/Left.grab_focus()
-	$"%ChangeControlPopup".key_type = $"%ChangeControlPopup".INPUT_WAIT.KEYBOARD
+	$"%ButtonPrompt".key_type = $"%ButtonPrompt".INPUT_WAIT.KEYBOARD
 
 func _on_ControllerSettings_pressed() -> void:
 	$"%OptionsTabs".current_tab = 2
 	$"%OptionsTabs"/ControllerOptionsTab/Left.grab_focus()
-	$"%ChangeControlPopup".key_type = $"%ChangeControlPopup".INPUT_WAIT.JOYPAD
+	$"%ButtonPrompt".key_type = $"%ButtonPrompt".INPUT_WAIT.JOYPAD
 
 
 func _on_Button_pressed() -> void:
@@ -21,7 +21,7 @@ func _on_Button_pressed() -> void:
 	get_tree().change_scene("res://Rooms/Title.tscn")
 
 
-func _on_ChangeControlPopup_control_key_input(new_key: InputEvent, action_name: String) -> void:
+func _on_ButtonPrompt_control_key_input(new_key: InputEvent, action_name: String) -> void:
 	var key_input := InputMap.get_action_list(action_name)[0] as InputEventKey
 	var controller_input := InputMap.get_action_list(action_name)[1] as InputEventJoypadButton
 	InputMap.action_erase_event(action_name, key_input)
@@ -57,8 +57,10 @@ func _on_KeyboardOptionsTab_keyboard_controls_reset_pressed() -> void:
 
 func _on_ButtonBind_key_bind_pressed(bind: String, btn: Button) -> void:
 	btn_bind = btn
-	$"%ChangeControlPopup".key_to_change = bind
-	$"%ChangeControlPopup".show()
+	$"%ButtonPrompt".key_to_change = bind
+	$"%ButtonPrompt".show()
+	$ButtonPrompt/ChangeControlPopup.show()
+
 
 # Update labels and input map for controller
 func _on_ControllerOptionsTab_controller_controls_reset_pressed() -> void:
