@@ -1,0 +1,129 @@
+[gd_resource type="Theme" load_steps=30 format=2]
+
+[ext_resource path="res://Sprites/UI/theme_button_normal.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/UI/theme_button_hover.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/UI/theme_button_focus.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/UI/theme_button_pressed.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/UI/theme_button_disabled.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/UI/theme_vscroll_bar.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/UI/theme_hslider_bar.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/UI/theme_vscroll_grabber_highlight.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/UI/theme_hslider_highlight.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/UI/theme_hslider_disabled.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/UI/theme_hslider_grabber.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/UI/theme_vscroll_grabber.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/UI/theme_hslider_inside.png" type="Texture" id=13]
+[ext_resource path="res://Fonts/small_font_outline.tres" type="DynamicFont" id=14]
+[ext_resource path="res://Sprites/UI/theme_checkbox.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/UI/theme_checkbutton_off_big.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/UI/theme_checkbutton_on_big.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/UI/theme_checkbox_checked.png" type="Texture" id=18]
+[ext_resource path="res://Fonts/big_font_outline.tres" type="DynamicFont" id=19]
+
+[sub_resource type="StyleBoxTexture" id=5]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 16, 16 )
+margin_left = 4.0
+margin_right = 4.0
+margin_top = 4.0
+margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 16, 16 )
+margin_left = 4.0
+margin_right = 4.0
+margin_top = 4.0
+margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 16, 16 )
+margin_left = 4.0
+margin_right = 4.0
+margin_top = 4.0
+margin_bottom = 5.0
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 16, 16 )
+margin_left = 4.0
+margin_right = 4.0
+margin_top = 4.0
+margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 16, 16 )
+margin_left = 5.0
+margin_right = 5.0
+margin_top = 5.0
+margin_bottom = 5.0
+
+[sub_resource type="StyleBoxTexture" id=6]
+texture = ExtResource( 13 )
+region_rect = Rect2( 0, 0, 16, 10 )
+margin_left = 3.0
+margin_right = 3.0
+margin_top = 3.0
+margin_bottom = 3.0
+
+[sub_resource type="StyleBoxTexture" id=7]
+texture = ExtResource( 7 )
+region_rect = Rect2( 0, 0, 16, 10 )
+margin_left = 3.0
+margin_right = 3.0
+margin_top = 3.0
+margin_bottom = 3.0
+
+[sub_resource type="StyleBoxTexture" id=8]
+texture = ExtResource( 12 )
+region_rect = Rect2( 0, 0, 16, 16 )
+margin_left = 4.0
+margin_right = 4.0
+margin_top = 2.0
+margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id=9]
+texture = ExtResource( 8 )
+region_rect = Rect2( 0, 0, 16, 16 )
+margin_left = 4.0
+margin_right = 4.0
+margin_top = 2.0
+margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id=10]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 16, 16 )
+margin_left = 5.0
+margin_right = 5.0
+margin_top = 3.0
+margin_bottom = 3.0
+
+[resource]
+Button/colors/font_color_disabled = Color( 0.647059, 0.537255, 0.509804, 1 )
+Button/fonts/font = ExtResource( 14 )
+Button/styles/disabled = SubResource( 5 )
+Button/styles/focus = SubResource( 3 )
+Button/styles/hover = SubResource( 1 )
+Button/styles/normal = SubResource( 2 )
+Button/styles/pressed = SubResource( 4 )
+CheckBox/icons/checked = ExtResource( 18 )
+CheckBox/icons/unchecked = ExtResource( 15 )
+CheckButton/icons/off = ExtResource( 16 )
+CheckButton/icons/on = ExtResource( 17 )
+HSlider/icons/grabber = ExtResource( 11 )
+HSlider/icons/grabber_disabled = ExtResource( 10 )
+HSlider/icons/grabber_highlight = ExtResource( 9 )
+HSlider/styles/grabber_area = SubResource( 6 )
+HSlider/styles/grabber_area_highlight = SubResource( 6 )
+HSlider/styles/slider = SubResource( 7 )
+Label/colors/font_color_shadow = Color( 0.188235, 0.839216, 0.796078, 1 )
+Label/constants/shadow_as_outline = 0
+Label/constants/shadow_offset_x = 0
+Label/constants/shadow_offset_y = 3
+Label/fonts/font = ExtResource( 19 )
+VScrollBar/styles/grabber = SubResource( 8 )
+VScrollBar/styles/grabber_highlight = SubResource( 9 )
+VScrollBar/styles/grabber_pressed = SubResource( 9 )
+VScrollBar/styles/scroll = SubResource( 10 )
