@@ -48,7 +48,7 @@ script = ExtResource( 13 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
 margin_right = 592.0
-margin_bottom = 665.0
+margin_bottom = 506.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 130
@@ -61,7 +61,7 @@ unique_name_in_owner = true
 margin_left = 130.0
 margin_top = 50.0
 margin_right = 462.0
-margin_bottom = 615.0
+margin_bottom = 456.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/tab_fg = SubResource( 1 )
@@ -82,16 +82,16 @@ __meta__ = {
 
 [node name="MusicCheckbox" type="CheckBox" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
 margin_right = 332.0
-margin_bottom = 47.0
+margin_bottom = 25.0
 hint_tooltip = "Turn music on/off"
 size_flags_vertical = 3
 text = "Music"
 expand_icon = true
 
 [node name="MasterVolumeContainer" type="HBoxContainer" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 67.0
+margin_top = 45.0
 margin_right = 332.0
-margin_bottom = 84.0
+margin_bottom = 62.0
 custom_constants/separation = 10
 
 [node name="MasterVolume" type="Label" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MasterVolumeContainer"]
@@ -121,9 +121,9 @@ step = 0.01
 value = 1.0
 
 [node name="MusicVolumeContainer" type="HBoxContainer" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 104.0
+margin_top = 82.0
 margin_right = 332.0
-margin_bottom = 121.0
+margin_bottom = 99.0
 custom_constants/separation = 10
 
 [node name="MusicVolume" type="Label" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MusicVolumeContainer"]
@@ -152,9 +152,9 @@ step = 0.01
 value = 1.0
 
 [node name="SfxVolumeContainer" type="HBoxContainer" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 141.0
+margin_top = 119.0
 margin_right = 332.0
-margin_bottom = 158.0
+margin_bottom = 136.0
 custom_constants/separation = 10
 
 [node name="SfxVolume" type="Label" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/SfxVolumeContainer"]
@@ -183,27 +183,27 @@ step = 0.01
 value = 1.0
 
 [node name="FullscreenCheckbox" type="CheckBox" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 178.0
+margin_top = 156.0
 margin_right = 332.0
-margin_bottom = 226.0
+margin_bottom = 181.0
 hint_tooltip = "Display game in fullscreen"
 size_flags_vertical = 3
 text = "Fullscreen"
 expand_icon = true
 
 [node name="BorderlessCheckbox" type="CheckBox" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 246.0
+margin_top = 201.0
 margin_right = 332.0
-margin_bottom = 294.0
+margin_bottom = 226.0
 hint_tooltip = "Remove borders around the window"
 size_flags_vertical = 3
 text = "Borderless"
 expand_icon = true
 
 [node name="VsyncCheckbox" type="CheckBox" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 314.0
+margin_top = 246.0
 margin_right = 332.0
-margin_bottom = 361.0
+margin_bottom = 271.0
 hint_tooltip = "Turn on vertical synchronization. Helps with tearing."
 size_flags_vertical = 3
 text = "Vsync"
@@ -225,25 +225,25 @@ items = [ "Keyboard prompts", null, false, 0, null, "Playstation prompts", null,
 selected = 0
 
 [node name="KeyboardSettings" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 381.0
+margin_top = 291.0
 margin_right = 332.0
-margin_bottom = 429.0
+margin_bottom = 316.0
 size_flags_vertical = 3
 text = "Keyboard settings"
 align = 0
 
 [node name="ControllerSettings" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 449.0
+margin_top = 336.0
 margin_right = 332.0
-margin_bottom = 497.0
+margin_bottom = 361.0
 size_flags_vertical = 3
 text = "Controller settings"
 align = 0
 
 [node name="Back" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 517.0
+margin_top = 381.0
 margin_right = 332.0
-margin_bottom = 565.0
+margin_bottom = 406.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Back"
@@ -251,6 +251,7 @@ align = 0
 
 [node name="KeyboardOptionsTab" type="VBoxContainer" parent="ScrollContainer/MarginContainer/OptionsTabs"]
 unique_name_in_owner = true
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 20
@@ -697,14 +698,17 @@ fade = true
 [connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Left" to="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Left" method="_on_KeyBind_pressed"]
 [connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Right" to="." method="_on_ButtonBind_key_bind_pressed"]
 [connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Right" to="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Right" method="_on_KeyBind_pressed"]
+[connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Up" to="." method="_on_ButtonBind_key_bind_pressed"]
 [connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Up" to="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Up" method="_on_KeyBind_pressed"]
 [connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Down" to="." method="_on_ButtonBind_key_bind_pressed"]
 [connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Down" to="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Down" method="_on_KeyBind_pressed"]
+[connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Jump" to="." method="_on_ButtonBind_key_bind_pressed"]
 [connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Jump" to="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Jump" method="_on_KeyBind_pressed"]
 [connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Dash" to="." method="_on_ButtonBind_key_bind_pressed"]
 [connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Dash" to="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Dash" method="_on_KeyBind_pressed"]
 [connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Shoot" to="." method="_on_ButtonBind_key_bind_pressed"]
 [connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Shoot" to="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Shoot" method="_on_KeyBind_pressed"]
+[connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Restart" to="." method="_on_ButtonBind_key_bind_pressed"]
 [connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Restart" to="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Restart" method="_on_KeyBind_pressed"]
 [connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Skip" to="." method="_on_ButtonBind_key_bind_pressed"]
 [connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Skip" to="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Skip" method="_on_KeyBind_pressed"]
@@ -717,19 +721,23 @@ fade = true
 [connection signal="controller_controls_reset_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab" to="." method="_on_ControllerOptionsTab_controller_controls_reset_pressed"]
 [connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Left" to="." method="_on_ButtonBind_key_bind_pressed"]
 [connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Left" to="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Left" method="_on_KeyBind_pressed"]
+[connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Right" to="." method="_on_ButtonBind_key_bind_pressed"]
 [connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Right" to="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Right" method="_on_KeyBind_pressed"]
 [connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Up" to="." method="_on_ButtonBind_key_bind_pressed"]
 [connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Up" to="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Up" method="_on_KeyBind_pressed"]
+[connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Down" to="." method="_on_ButtonBind_key_bind_pressed"]
 [connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Down" to="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Down" method="_on_KeyBind_pressed"]
 [connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Jump" to="." method="_on_ButtonBind_key_bind_pressed"]
 [connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Jump" to="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Jump" method="_on_KeyBind_pressed"]
 [connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Dash" to="." method="_on_ButtonBind_key_bind_pressed"]
 [connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Dash" to="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Dash" method="_on_KeyBind_pressed"]
+[connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Shoot" to="." method="_on_ButtonBind_key_bind_pressed"]
 [connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Shoot" to="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Shoot" method="_on_KeyBind_pressed"]
 [connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Restart" to="." method="_on_ButtonBind_key_bind_pressed"]
 [connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Restart" to="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Restart" method="_on_KeyBind_pressed"]
 [connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Skip" to="." method="_on_ButtonBind_key_bind_pressed"]
 [connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Skip" to="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Skip" method="_on_KeyBind_pressed"]
+[connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Suicide" to="." method="_on_ButtonBind_key_bind_pressed"]
 [connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Suicide" to="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Suicide" method="_on_KeyBind_pressed"]
 [connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Pause" to="." method="_on_ButtonBind_key_bind_pressed"]
 [connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Pause" to="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Pause" method="_on_KeyBind_pressed"]
