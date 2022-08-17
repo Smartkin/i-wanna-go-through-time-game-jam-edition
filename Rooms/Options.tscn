@@ -44,7 +44,7 @@ script = ExtResource( 13 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
 margin_right = 592.0
-margin_bottom = 665.0
+margin_bottom = 506.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 130
@@ -57,7 +57,7 @@ unique_name_in_owner = true
 margin_left = 130.0
 margin_top = 50.0
 margin_right = 462.0
-margin_bottom = 615.0
+margin_bottom = 456.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/tab_fg = SubResource( 1 )
@@ -68,7 +68,6 @@ tabs_visible = false
 
 [node name="MainOptionsTab" type="VBoxContainer" parent="ScrollContainer/MarginContainer/OptionsTabs"]
 unique_name_in_owner = true
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 20
@@ -79,16 +78,16 @@ __meta__ = {
 
 [node name="MusicCheckbox" type="CheckBox" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
 margin_right = 332.0
-margin_bottom = 47.0
+margin_bottom = 25.0
 hint_tooltip = "Turn music on/off"
 size_flags_vertical = 3
 text = "Music"
 expand_icon = true
 
 [node name="MasterVolumeContainer" type="HBoxContainer" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 67.0
+margin_top = 45.0
 margin_right = 332.0
-margin_bottom = 84.0
+margin_bottom = 62.0
 custom_constants/separation = 10
 
 [node name="MasterVolume" type="Label" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MasterVolumeContainer"]
@@ -118,9 +117,9 @@ step = 0.01
 value = 1.0
 
 [node name="MusicVolumeContainer" type="HBoxContainer" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 104.0
+margin_top = 82.0
 margin_right = 332.0
-margin_bottom = 121.0
+margin_bottom = 99.0
 custom_constants/separation = 10
 
 [node name="MusicVolume" type="Label" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MusicVolumeContainer"]
@@ -149,9 +148,9 @@ step = 0.01
 value = 1.0
 
 [node name="SfxVolumeContainer" type="HBoxContainer" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 141.0
+margin_top = 119.0
 margin_right = 332.0
-margin_bottom = 158.0
+margin_bottom = 136.0
 custom_constants/separation = 10
 
 [node name="SfxVolume" type="Label" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/SfxVolumeContainer"]
@@ -180,27 +179,27 @@ step = 0.01
 value = 1.0
 
 [node name="FullscreenCheckbox" type="CheckBox" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 178.0
+margin_top = 156.0
 margin_right = 332.0
-margin_bottom = 226.0
+margin_bottom = 181.0
 hint_tooltip = "Display game in fullscreen"
 size_flags_vertical = 3
 text = "Fullscreen"
 expand_icon = true
 
 [node name="BorderlessCheckbox" type="CheckBox" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 246.0
+margin_top = 201.0
 margin_right = 332.0
-margin_bottom = 294.0
+margin_bottom = 226.0
 hint_tooltip = "Remove borders around the window"
 size_flags_vertical = 3
 text = "Borderless"
 expand_icon = true
 
 [node name="VsyncCheckbox" type="CheckBox" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 314.0
+margin_top = 246.0
 margin_right = 332.0
-margin_bottom = 361.0
+margin_bottom = 271.0
 hint_tooltip = "Turn on vertical synchronization. Helps with tearing."
 size_flags_vertical = 3
 text = "Vsync"
@@ -222,25 +221,25 @@ items = [ "Keyboard prompts", null, false, 0, null, "Playstation prompts", null,
 selected = 0
 
 [node name="KeyboardSettings" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 381.0
+margin_top = 291.0
 margin_right = 332.0
-margin_bottom = 429.0
+margin_bottom = 316.0
 size_flags_vertical = 3
 text = "Keyboard settings"
 align = 0
 
 [node name="ControllerSettings" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 449.0
+margin_top = 336.0
 margin_right = 332.0
-margin_bottom = 497.0
+margin_bottom = 361.0
 size_flags_vertical = 3
 text = "Controller settings"
 align = 0
 
 [node name="Back" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 517.0
+margin_top = 381.0
 margin_right = 332.0
-margin_bottom = 565.0
+margin_bottom = 406.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Back"
@@ -248,6 +247,7 @@ align = 0
 
 [node name="KeyboardOptionsTab" type="VBoxContainer" parent="ScrollContainer/MarginContainer/OptionsTabs"]
 unique_name_in_owner = true
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 20
@@ -575,7 +575,6 @@ position = Vector2( 11.7368, 10.6315 )
 music = "GuyRock"
 fade = true
 
-[connection signal="tab_changed" from="ScrollContainer/MarginContainer/OptionsTabs" to="." method="_on_OptionsTabs_tab_changed"]
 [connection signal="toggled" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MusicCheckbox" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MusicCheckbox_toggled"]
 [connection signal="focus_entered" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MasterVolumeContainer/MasterVolume" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MasterVolumeSlider_entered"]
 [connection signal="focus_exited" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MasterVolumeContainer/MasterVolume" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MasterVolumeSlider_exited"]

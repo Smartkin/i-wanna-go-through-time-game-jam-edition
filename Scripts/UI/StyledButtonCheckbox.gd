@@ -19,8 +19,9 @@ func _ready() -> void:
 	toggle_lbl.valign = toggle_lbl.VALIGN_CENTER
 	toggle_lbl.text = right_lbl
 	prev_right_lbl = right_lbl
+	toggle_lbl.margin_top = 3
 	toggle_lbl.margin_left = margin_left
-	toggle_lbl.margin_right = margin_right
+	toggle_lbl.margin_right = margin_right - 10
 
 func _process(delta: float) -> void:
 	if (prev_right_lbl != right_lbl):

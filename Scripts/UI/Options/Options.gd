@@ -9,11 +9,13 @@ func _on_KeyboardSettings_pressed() -> void:
 	$"%OptionsTabs".current_tab = 1
 	$"%OptionsTabs"/KeyboardOptionsTab/Left.grab_focus()
 	$"%ButtonPrompt".key_type = $"%ButtonPrompt".INPUT_WAIT.KEYBOARD
+	$"%ScrollContainer".velocity.y = 2500
 
 func _on_ControllerSettings_pressed() -> void:
 	$"%OptionsTabs".current_tab = 2
 	$"%OptionsTabs"/ControllerOptionsTab/Left.grab_focus()
 	$"%ButtonPrompt".key_type = $"%ButtonPrompt".INPUT_WAIT.JOYPAD
+	$"%ScrollContainer".velocity.y = 2500
 
 
 func _on_Button_pressed() -> void:
@@ -82,9 +84,3 @@ func _on_ControllerOptionsTab_controller_controls_reset_pressed() -> void:
 		InputMap.action_add_event(controller_control, ev)
 		btn_binds[btn_index].right_lbl = Util.get_controller_button_string(ev.button_index)
 		btn_index += 1
-
-
-func _on_OptionsTabs_tab_changed(tab: int) -> void:
-	if tab == 0:
-		yield(get_tree().create_timer(.01), "timeout")
-		$"%ScrollContainer".velocity.y = -1500
