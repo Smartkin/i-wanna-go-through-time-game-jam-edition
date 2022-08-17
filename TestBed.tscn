@@ -170,3 +170,8 @@ speed = 100
 
 [node name="Balloon" parent="." instance=ExtResource( 7 )]
 position = Vector2( 392, 488 )
+
+[node name="Ability4" parent="." instance=ExtResource( 18 )]
+position = Vector2( 154, 642 )
+frame = 1
+id = 1

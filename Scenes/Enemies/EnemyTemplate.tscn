@@ -13,6 +13,8 @@ extents = Vector2( 1, 1 )
 extents = Vector2( 1, 1 )
 
 [node name="Enemy" type="KinematicBody2D"]
+collision_layer = 128
+collision_mask = 6
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 1 )
@@ -27,6 +29,8 @@ scale = Vector2( 0.0178572, 0.0178572 )
 texture = ExtResource( 2 )
 
 [node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( 1, 1 )

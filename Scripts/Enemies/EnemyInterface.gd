@@ -14,6 +14,7 @@ func _ready():
 	$Hurtbox.connect("body_entered", self, "_on_Hurtbox_body_entered")
 	$Hurtbox.connect("body_exited", self, "_on_Hurtbox_body_exited")
 	$Hitbox.connect("body_entered", self, "_on_Hitbox_body_entered")
+	set_meta("enemy", true)
 
 # Virtual function on player entering the area, by default just hits the player
 func _player_enter():
@@ -36,6 +37,8 @@ func _on_Hurtbox_body_exited(body: Player):
 		return
 	pl = null
 
+func damaged(bul: Bullet):
+	_on_Hitbox_body_entered(bul)
 
 func _on_Hitbox_body_entered(bul: Bullet):
 	if bul == null:

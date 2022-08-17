@@ -16,8 +16,12 @@ func _jumped_on(delta: float) -> bool:
 func _when_idle(delta: float, binds: Array):
 	pass
 
-func _when_die(delta: float, binds: Array):
-	pass
+func _die():
+	$Hitbox.set_deferred("monitoring", false)
+	$Hurtbox.set_deferred("monitoring", false)
+	$Jumpbox.set_deferred("monitoring", false)
+	emit_signal("died")
+	anim.play("pop")
 
 func _on_Hurtbox_body_entered(body: Player):
 	if body == null or _player_above:
