@@ -48,7 +48,7 @@ script = ExtResource( 13 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
 margin_right = 592.0
-margin_bottom = 506.0
+margin_bottom = 665.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 130
@@ -61,7 +61,7 @@ unique_name_in_owner = true
 margin_left = 130.0
 margin_top = 50.0
 margin_right = 462.0
-margin_bottom = 456.0
+margin_bottom = 615.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/tab_fg = SubResource( 1 )
@@ -82,16 +82,16 @@ __meta__ = {
 
 [node name="MusicCheckbox" type="CheckBox" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
 margin_right = 332.0
-margin_bottom = 25.0
+margin_bottom = 47.0
 hint_tooltip = "Turn music on/off"
 size_flags_vertical = 3
 text = "Music"
 expand_icon = true
 
 [node name="MasterVolumeContainer" type="HBoxContainer" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 45.0
+margin_top = 67.0
 margin_right = 332.0
-margin_bottom = 62.0
+margin_bottom = 84.0
 custom_constants/separation = 10
 
 [node name="MasterVolume" type="Label" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MasterVolumeContainer"]
@@ -121,9 +121,9 @@ step = 0.01
 value = 1.0
 
 [node name="MusicVolumeContainer" type="HBoxContainer" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 82.0
+margin_top = 104.0
 margin_right = 332.0
-margin_bottom = 99.0
+margin_bottom = 121.0
 custom_constants/separation = 10
 
 [node name="MusicVolume" type="Label" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MusicVolumeContainer"]
@@ -152,9 +152,9 @@ step = 0.01
 value = 1.0
 
 [node name="SfxVolumeContainer" type="HBoxContainer" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 119.0
+margin_top = 141.0
 margin_right = 332.0
-margin_bottom = 136.0
+margin_bottom = 158.0
 custom_constants/separation = 10
 
 [node name="SfxVolume" type="Label" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/SfxVolumeContainer"]
@@ -183,27 +183,27 @@ step = 0.01
 value = 1.0
 
 [node name="FullscreenCheckbox" type="CheckBox" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 156.0
+margin_top = 178.0
 margin_right = 332.0
-margin_bottom = 181.0
+margin_bottom = 226.0
 hint_tooltip = "Display game in fullscreen"
 size_flags_vertical = 3
 text = "Fullscreen"
 expand_icon = true
 
 [node name="BorderlessCheckbox" type="CheckBox" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 201.0
+margin_top = 246.0
 margin_right = 332.0
-margin_bottom = 226.0
+margin_bottom = 294.0
 hint_tooltip = "Remove borders around the window"
 size_flags_vertical = 3
 text = "Borderless"
 expand_icon = true
 
 [node name="VsyncCheckbox" type="CheckBox" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 246.0
+margin_top = 314.0
 margin_right = 332.0
-margin_bottom = 271.0
+margin_bottom = 361.0
 hint_tooltip = "Turn on vertical synchronization. Helps with tearing."
 size_flags_vertical = 3
 text = "Vsync"
@@ -225,25 +225,25 @@ items = [ "Keyboard prompts", null, false, 0, null, "Playstation prompts", null,
 selected = 0
 
 [node name="KeyboardSettings" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 291.0
+margin_top = 381.0
 margin_right = 332.0
-margin_bottom = 316.0
+margin_bottom = 429.0
 size_flags_vertical = 3
 text = "Keyboard settings"
 align = 0
 
 [node name="ControllerSettings" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 336.0
+margin_top = 449.0
 margin_right = 332.0
-margin_bottom = 361.0
+margin_bottom = 497.0
 size_flags_vertical = 3
 text = "Controller settings"
 align = 0
 
 [node name="Back" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 381.0
+margin_top = 517.0
 margin_right = 332.0
-margin_bottom = 406.0
+margin_bottom = 565.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Back"
@@ -251,14 +251,14 @@ align = 0
 
 [node name="KeyboardOptionsTab" type="VBoxContainer" parent="ScrollContainer/MarginContainer/OptionsTabs"]
 unique_name_in_owner = true
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_constants/separation = 20
 script = ExtResource( 12 )
 
 [node name="Left" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab"]
-margin_right = 640.0
-margin_bottom = 24.0
+margin_right = 332.0
+margin_bottom = 25.0
 size_flags_vertical = 3
 text = "Left"
 align = 0
@@ -266,9 +266,9 @@ script = ExtResource( 9 )
 bind = "left"
 
 [node name="Right" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab"]
-margin_top = 28.0
-margin_right = 640.0
-margin_bottom = 52.0
+margin_top = 45.0
+margin_right = 332.0
+margin_bottom = 70.0
 size_flags_vertical = 3
 text = "Right"
 align = 0
@@ -276,9 +276,9 @@ script = ExtResource( 9 )
 bind = "right"
 
 [node name="Up" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab"]
-margin_top = 56.0
-margin_right = 640.0
-margin_bottom = 80.0
+margin_top = 90.0
+margin_right = 332.0
+margin_bottom = 115.0
 size_flags_vertical = 3
 text = "Up"
 align = 0
@@ -286,9 +286,9 @@ script = ExtResource( 9 )
 bind = "up"
 
 [node name="Down" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab"]
-margin_top = 84.0
-margin_right = 640.0
-margin_bottom = 108.0
+margin_top = 135.0
+margin_right = 332.0
+margin_bottom = 160.0
 size_flags_vertical = 3
 text = "Down"
 align = 0
@@ -296,9 +296,9 @@ script = ExtResource( 9 )
 bind = "down"
 
 [node name="Jump" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab"]
-margin_top = 112.0
-margin_right = 640.0
-margin_bottom = 136.0
+margin_top = 180.0
+margin_right = 332.0
+margin_bottom = 205.0
 size_flags_vertical = 3
 text = "Jump"
 align = 0
@@ -306,9 +306,9 @@ script = ExtResource( 9 )
 bind = "jump"
 
 [node name="Dash" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab"]
-margin_top = 140.0
-margin_right = 640.0
-margin_bottom = 164.0
+margin_top = 225.0
+margin_right = 332.0
+margin_bottom = 250.0
 size_flags_vertical = 3
 text = "Dash"
 align = 0
@@ -316,9 +316,9 @@ script = ExtResource( 9 )
 bind = "dash"
 
 [node name="Shoot" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab"]
-margin_top = 168.0
-margin_right = 640.0
-margin_bottom = 192.0
+margin_top = 270.0
+margin_right = 332.0
+margin_bottom = 295.0
 size_flags_vertical = 3
 text = "Shoot"
 align = 0
@@ -326,9 +326,9 @@ script = ExtResource( 9 )
 bind = "shoot"
 
 [node name="Restart" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab"]
-margin_top = 196.0
-margin_right = 640.0
-margin_bottom = 220.0
+margin_top = 315.0
+margin_right = 332.0
+margin_bottom = 340.0
 size_flags_vertical = 3
 text = "Restart"
 align = 0
@@ -336,9 +336,9 @@ script = ExtResource( 9 )
 bind = "restart"
 
 [node name="Skip" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab"]
-margin_top = 224.0
-margin_right = 640.0
-margin_bottom = 248.0
+margin_top = 360.0
+margin_right = 332.0
+margin_bottom = 385.0
 size_flags_vertical = 3
 text = "Skip"
 align = 0
@@ -346,9 +346,9 @@ script = ExtResource( 9 )
 bind = "skip"
 
 [node name="Suicide" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab"]
-margin_top = 252.0
-margin_right = 640.0
-margin_bottom = 276.0
+margin_top = 405.0
+margin_right = 332.0
+margin_bottom = 430.0
 size_flags_vertical = 3
 text = "Suicide"
 align = 0
@@ -356,9 +356,9 @@ script = ExtResource( 9 )
 bind = "suicide"
 
 [node name="Pause" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab"]
-margin_top = 280.0
-margin_right = 640.0
-margin_bottom = 304.0
+margin_top = 450.0
+margin_right = 332.0
+margin_bottom = 475.0
 size_flags_vertical = 3
 text = "Pause"
 align = 0
@@ -366,17 +366,17 @@ script = ExtResource( 9 )
 bind = "pause"
 
 [node name="ResetControls" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab"]
-margin_top = 308.0
-margin_right = 640.0
-margin_bottom = 332.0
+margin_top = 495.0
+margin_right = 332.0
+margin_bottom = 520.0
 size_flags_vertical = 3
 text = "Reset controls"
 align = 0
 
 [node name="BackKeyboard" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab"]
-margin_top = 336.0
-margin_right = 640.0
-margin_bottom = 360.0
+margin_top = 540.0
+margin_right = 332.0
+margin_bottom = 565.0
 size_flags_vertical = 3
 text = "Back"
 align = 0
@@ -386,6 +386,7 @@ unique_name_in_owner = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_constants/separation = 20
 script = ExtResource( 14 )
 
 [node name="Left" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
