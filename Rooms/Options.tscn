@@ -575,7 +575,6 @@ position = Vector2( 11.7368, 10.6315 )
 music = "GuyRock"
 fade = true
 
-[connection signal="tab_changed" from="ScrollContainer/MarginContainer/OptionsTabs" to="." method="_on_OptionsTabs_tab_changed"]
 [connection signal="toggled" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MusicCheckbox" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MusicCheckbox_toggled"]
 [connection signal="focus_entered" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MasterVolumeContainer/MasterVolume" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MasterVolumeSlider_entered"]
 [connection signal="focus_exited" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MasterVolumeContainer/MasterVolume" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MasterVolumeSlider_exited"]

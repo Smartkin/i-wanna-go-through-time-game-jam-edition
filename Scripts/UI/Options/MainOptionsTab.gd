@@ -1,6 +1,8 @@
 extends VBoxContainer
 
 func _ready() -> void:
+	Input.connect("joy_connection_changed",self,"_joy_connection_changed")
+	_check_for_controllers()
 	var cur_conf := WorldController.cur_config
 	$MusicCheckbox.pressed = WorldController.cur_config.music
 	$FullscreenCheckbox.pressed = WorldController.cur_config.fullscreen
@@ -15,6 +17,20 @@ func _ready() -> void:
 	else:
 		$BorderlessCheckbox.toggle_mode = false
 	$MusicCheckbox.grab_focus()
+
+
+func _joy_connection_changed(id: int, connected: bool) -> void:
+	_check_for_controllers()
+
+
+func _check_for_controllers() -> void:
+	if Input.get_connected_joypads().size() > 0:
+		print(Input.get_joy_name(0))
+		$KeyboardSettings.hide()
+		$ControllerSettings.show()
+	else:
+		$KeyboardSettings.show()
+		$ControllerSettings.hide()
 
 
 func _on_MusicCheckbox_toggled(button_pressed: bool) -> void:
