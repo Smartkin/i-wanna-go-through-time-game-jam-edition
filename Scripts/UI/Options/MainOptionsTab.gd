@@ -2,6 +2,10 @@ extends VBoxContainer
 
 func _ready() -> void:
 	var cur_conf := WorldController.cur_config
+	$MusicCheckbox.pressed = WorldController.cur_config.music
+	$FullscreenCheckbox.pressed = WorldController.cur_config.fullscreen
+	$BorderlessCheckbox.pressed = WorldController.cur_config.borderless
+	$VsyncCheckbox.pressed = WorldController.cur_config.vsync
 	$"%MasterVolumeSlider".value = cur_conf.volume_master
 	$"%MusicVolumeSlider".value = cur_conf.volume_music
 	$"%SfxVolumeSlider".value = cur_conf.volume_sfx
