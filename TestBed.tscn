@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Tiles/BrownBlocksTiles1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player/PlayerController.tscn" type="PackedScene" id=2]
@@ -9,25 +9,17 @@
 [ext_resource path="res://Scenes/Enemies/Balloon.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Gimmicks/WallJumpL.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Gimmicks/WalljumpR.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/Gimmicks/GravitySwitch.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/Gimmicks/GravitySwitchNormal.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Save.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Warp.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/Gimmicks/Water.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/MusicPlayer.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Scenes/Items/Chip.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Scenes/Interactables/TimeMachine.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/Items/Ability.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/Block.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Scenes/Enemies/Goomba.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Scenes/Enemies/Slimy.tscn" type="PackedScene" id=21]
 
 [node name="TestBed" type="Node2D"]
 __meta__ = {
 "_editor_description_": "This room is where all aspects of the engine are tested"
 }
-
-[node name="PlayerController" parent="." instance=ExtResource( 2 )]
-position = Vector2( 80, 656 )
 
 [node name="Ability" parent="." instance=ExtResource( 18 )]
 position = Vector2( 136, 616 )
@@ -52,12 +44,6 @@ position = Vector2( 0, -16 )
 
 [node name="DelFruit" parent="Killers" instance=ExtResource( 4 )]
 position = Vector2( 336, 592 )
-
-[node name="SpikeUp" parent="Killers" instance=ExtResource( 5 )]
-position = Vector2( 384, 656 )
-
-[node name="SpikeUp2" parent="Killers" instance=ExtResource( 5 )]
-position = Vector2( 416, 656 )
 
 [node name="SpikeUp4" parent="Killers" instance=ExtResource( 5 )]
 position = Vector2( 544, 560 )
@@ -98,10 +84,6 @@ position = Vector2( 304, 464 )
 position = Vector2( 512, 336 )
 start_speed = Vector2( 0, 50 )
 
-[node name="Platform7" parent="Platforms" instance=ExtResource( 3 )]
-position = Vector2( 32, 656 )
-start_speed = Vector2( 0, 180 )
-
 [node name="Platform5" parent="Platforms" instance=ExtResource( 3 )]
 position = Vector2( 256, 160 )
 start_speed = Vector2( 420, 0 )
@@ -110,37 +92,11 @@ start_speed = Vector2( 420, 0 )
 position = Vector2( 656, 32 )
 bounce = false
 
-[node name="Platform6" parent="Platforms" instance=ExtResource( 3 )]
-position = Vector2( 672, 624 )
-start_speed = Vector2( 240, 0 )
-
 [node name="Platform3" parent="Platforms" instance=ExtResource( 3 )]
 position = Vector2( 848, 192 )
 start_speed = Vector2( 600, 720 )
 
 [node name="Waters" type="Node2D" parent="."]
-
-[node name="Water" parent="Waters" instance=ExtResource( 14 )]
-position = Vector2( 128, 480 )
-type = 1
-
-[node name="Water2" parent="Waters" instance=ExtResource( 14 )]
-position = Vector2( 160, 480 )
-type = 1
-
-[node name="Water3" parent="Waters" instance=ExtResource( 14 )]
-position = Vector2( 160, 512 )
-type = 1
-
-[node name="Water4" parent="Waters" instance=ExtResource( 14 )]
-position = Vector2( 128, 512 )
-type = 1
-
-[node name="GravitySwitch" parent="." instance=ExtResource( 10 )]
-position = Vector2( 224, 672 )
-
-[node name="GravitySwitch2" parent="." instance=ExtResource( 11 )]
-position = Vector2( 144, 416 )
 
 [node name="Save" parent="." instance=ExtResource( 12 )]
 position = Vector2( 144, 672 )
@@ -153,20 +109,8 @@ warp_to = "res://TestBed2.tscn"
 position = Vector2( 80, 608 )
 music = "Megaman"
 
-[node name="Chip" parent="." instance=ExtResource( 16 )]
-position = Vector2( 192, 632 )
-id = 1
-
-[node name="TimeMachine" parent="." instance=ExtResource( 17 )]
-position = Vector2( 312, 632 )
-
 [node name="Block" parent="." instance=ExtResource( 19 )]
 position = Vector2( 480, 281 )
-
-[node name="Goomba" parent="." instance=ExtResource( 20 )]
-position = Vector2( 464, 688 )
-moving_platform_apply_velocity_on_leave = 2
-speed = 100
 
 [node name="Balloon" parent="." instance=ExtResource( 7 )]
 position = Vector2( 392, 488 )
@@ -175,3 +119,9 @@ position = Vector2( 392, 488 )
 position = Vector2( 154, 642 )
 frame = 1
 id = 1
+
+[node name="Slimy" parent="." instance=ExtResource( 21 )]
+position = Vector2( 364, 691 )
+
+[node name="PlayerController" parent="." instance=ExtResource( 2 )]
+position = Vector2( 201, 696 )
