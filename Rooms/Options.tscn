@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scenes/MusicPlayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/UI/ButtonNormal.tres" type="StyleBox" id=2]
@@ -25,10 +25,6 @@
 
 [sub_resource type="StyleBoxEmpty" id=6]
 
-[sub_resource type="StyleBoxEmpty" id=10]
-
-[sub_resource type="StyleBoxEmpty" id=11]
-
 [node name="Options" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -48,7 +44,7 @@ script = ExtResource( 13 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
 margin_right = 592.0
-margin_bottom = 506.0
+margin_bottom = 665.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 130
@@ -61,7 +57,7 @@ unique_name_in_owner = true
 margin_left = 130.0
 margin_top = 50.0
 margin_right = 462.0
-margin_bottom = 456.0
+margin_bottom = 615.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/tab_fg = SubResource( 1 )
@@ -72,6 +68,7 @@ tabs_visible = false
 
 [node name="MainOptionsTab" type="VBoxContainer" parent="ScrollContainer/MarginContainer/OptionsTabs"]
 unique_name_in_owner = true
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 20
@@ -82,16 +79,16 @@ __meta__ = {
 
 [node name="MusicCheckbox" type="CheckBox" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
 margin_right = 332.0
-margin_bottom = 25.0
+margin_bottom = 47.0
 hint_tooltip = "Turn music on/off"
 size_flags_vertical = 3
 text = "Music"
 expand_icon = true
 
 [node name="MasterVolumeContainer" type="HBoxContainer" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 45.0
+margin_top = 67.0
 margin_right = 332.0
-margin_bottom = 62.0
+margin_bottom = 84.0
 custom_constants/separation = 10
 
 [node name="MasterVolume" type="Label" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MasterVolumeContainer"]
@@ -121,9 +118,9 @@ step = 0.01
 value = 1.0
 
 [node name="MusicVolumeContainer" type="HBoxContainer" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 82.0
+margin_top = 104.0
 margin_right = 332.0
-margin_bottom = 99.0
+margin_bottom = 121.0
 custom_constants/separation = 10
 
 [node name="MusicVolume" type="Label" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MusicVolumeContainer"]
@@ -152,9 +149,9 @@ step = 0.01
 value = 1.0
 
 [node name="SfxVolumeContainer" type="HBoxContainer" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 119.0
+margin_top = 141.0
 margin_right = 332.0
-margin_bottom = 136.0
+margin_bottom = 158.0
 custom_constants/separation = 10
 
 [node name="SfxVolume" type="Label" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/SfxVolumeContainer"]
@@ -183,27 +180,27 @@ step = 0.01
 value = 1.0
 
 [node name="FullscreenCheckbox" type="CheckBox" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 156.0
+margin_top = 178.0
 margin_right = 332.0
-margin_bottom = 181.0
+margin_bottom = 226.0
 hint_tooltip = "Display game in fullscreen"
 size_flags_vertical = 3
 text = "Fullscreen"
 expand_icon = true
 
 [node name="BorderlessCheckbox" type="CheckBox" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 201.0
+margin_top = 246.0
 margin_right = 332.0
-margin_bottom = 226.0
+margin_bottom = 294.0
 hint_tooltip = "Remove borders around the window"
 size_flags_vertical = 3
 text = "Borderless"
 expand_icon = true
 
 [node name="VsyncCheckbox" type="CheckBox" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 246.0
+margin_top = 314.0
 margin_right = 332.0
-margin_bottom = 271.0
+margin_bottom = 361.0
 hint_tooltip = "Turn on vertical synchronization. Helps with tearing."
 size_flags_vertical = 3
 text = "Vsync"
@@ -225,25 +222,25 @@ items = [ "Keyboard prompts", null, false, 0, null, "Playstation prompts", null,
 selected = 0
 
 [node name="KeyboardSettings" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 291.0
+margin_top = 381.0
 margin_right = 332.0
-margin_bottom = 316.0
+margin_bottom = 429.0
 size_flags_vertical = 3
 text = "Keyboard settings"
 align = 0
 
 [node name="ControllerSettings" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 336.0
+margin_top = 449.0
 margin_right = 332.0
-margin_bottom = 361.0
+margin_bottom = 497.0
 size_flags_vertical = 3
 text = "Controller settings"
 align = 0
 
 [node name="Back" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
-margin_top = 381.0
+margin_top = 517.0
 margin_right = 332.0
-margin_bottom = 406.0
+margin_bottom = 565.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Back"
@@ -251,7 +248,6 @@ align = 0
 
 [node name="KeyboardOptionsTab" type="VBoxContainer" parent="ScrollContainer/MarginContainer/OptionsTabs"]
 unique_name_in_owner = true
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 20
@@ -391,15 +387,9 @@ custom_constants/separation = 20
 script = ExtResource( 14 )
 
 [node name="Left" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
-margin_right = 1280.0
-margin_bottom = 44.0
+margin_right = 332.0
+margin_bottom = 25.0
 size_flags_vertical = 3
-custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = SubResource( 10 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 2 )
 text = "Left"
 align = 0
 script = ExtResource( 9 )
@@ -407,16 +397,10 @@ bind = "left"
 controller_bind = true
 
 [node name="Right" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
-margin_top = 48.0
-margin_right = 1280.0
-margin_bottom = 92.0
+margin_top = 45.0
+margin_right = 332.0
+margin_bottom = 70.0
 size_flags_vertical = 3
-custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = SubResource( 10 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 2 )
 text = "Right"
 align = 0
 script = ExtResource( 9 )
@@ -424,16 +408,10 @@ bind = "right"
 controller_bind = true
 
 [node name="Up" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
-margin_top = 96.0
-margin_right = 1280.0
-margin_bottom = 140.0
+margin_top = 90.0
+margin_right = 332.0
+margin_bottom = 115.0
 size_flags_vertical = 3
-custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = SubResource( 10 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 2 )
 text = "Up"
 align = 0
 script = ExtResource( 9 )
@@ -441,16 +419,10 @@ bind = "up"
 controller_bind = true
 
 [node name="Down" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
-margin_top = 144.0
-margin_right = 1280.0
-margin_bottom = 188.0
+margin_top = 135.0
+margin_right = 332.0
+margin_bottom = 160.0
 size_flags_vertical = 3
-custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = SubResource( 10 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 2 )
 text = "Down"
 align = 0
 script = ExtResource( 9 )
@@ -458,16 +430,10 @@ bind = "down"
 controller_bind = true
 
 [node name="Jump" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
-margin_top = 192.0
-margin_right = 1280.0
-margin_bottom = 236.0
+margin_top = 180.0
+margin_right = 332.0
+margin_bottom = 205.0
 size_flags_vertical = 3
-custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = SubResource( 10 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 2 )
 text = "Jump"
 align = 0
 script = ExtResource( 9 )
@@ -475,16 +441,10 @@ bind = "jump"
 controller_bind = true
 
 [node name="Dash" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
-margin_top = 240.0
-margin_right = 1280.0
-margin_bottom = 284.0
+margin_top = 225.0
+margin_right = 332.0
+margin_bottom = 250.0
 size_flags_vertical = 3
-custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = SubResource( 10 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 2 )
 text = "Dash"
 align = 0
 script = ExtResource( 9 )
@@ -492,16 +452,10 @@ bind = "dash"
 controller_bind = true
 
 [node name="Shoot" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
-margin_top = 288.0
-margin_right = 1280.0
-margin_bottom = 332.0
+margin_top = 270.0
+margin_right = 332.0
+margin_bottom = 295.0
 size_flags_vertical = 3
-custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = SubResource( 10 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 2 )
 text = "Shoot"
 align = 0
 script = ExtResource( 9 )
@@ -509,16 +463,10 @@ bind = "shoot"
 controller_bind = true
 
 [node name="Restart" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
-margin_top = 336.0
-margin_right = 1280.0
-margin_bottom = 380.0
+margin_top = 315.0
+margin_right = 332.0
+margin_bottom = 340.0
 size_flags_vertical = 3
-custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = SubResource( 10 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 2 )
 text = "Restart"
 align = 0
 script = ExtResource( 9 )
@@ -526,16 +474,10 @@ bind = "restart"
 controller_bind = true
 
 [node name="Skip" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
-margin_top = 384.0
-margin_right = 1280.0
-margin_bottom = 428.0
+margin_top = 360.0
+margin_right = 332.0
+margin_bottom = 385.0
 size_flags_vertical = 3
-custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = SubResource( 10 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 2 )
 text = "Skip"
 align = 0
 script = ExtResource( 9 )
@@ -543,16 +485,10 @@ bind = "skip"
 controller_bind = true
 
 [node name="Suicide" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
-margin_top = 432.0
-margin_right = 1280.0
-margin_bottom = 476.0
+margin_top = 405.0
+margin_right = 332.0
+margin_bottom = 430.0
 size_flags_vertical = 3
-custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = SubResource( 10 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 2 )
 text = "Suicide"
 align = 0
 script = ExtResource( 9 )
@@ -560,16 +496,10 @@ bind = "suicide"
 controller_bind = true
 
 [node name="Pause" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
-margin_top = 480.0
-margin_right = 1280.0
-margin_bottom = 524.0
+margin_top = 450.0
+margin_right = 332.0
+margin_bottom = 475.0
 size_flags_vertical = 3
-custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = SubResource( 10 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 2 )
 text = "Pause"
 align = 0
 script = ExtResource( 9 )
@@ -577,30 +507,18 @@ bind = "pause"
 controller_bind = true
 
 [node name="ResetControls" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
-margin_top = 528.0
-margin_right = 1280.0
-margin_bottom = 572.0
+margin_top = 495.0
+margin_right = 332.0
+margin_bottom = 520.0
 size_flags_vertical = 3
-custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 2 )
 text = "Reset controls"
 align = 0
 
 [node name="BackController" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
-margin_top = 576.0
-margin_right = 1280.0
-margin_bottom = 620.0
+margin_top = 540.0
+margin_right = 332.0
+margin_bottom = 565.0
 size_flags_vertical = 3
-custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 2 )
 text = "Back"
 align = 0
 
