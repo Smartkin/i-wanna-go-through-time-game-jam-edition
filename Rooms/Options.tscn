@@ -1,23 +1,19 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scenes/MusicPlayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/UI/ButtonNormal.tres" type="StyleBox" id=2]
-[ext_resource path="res://Scenes/UI/MenuTheme.tres" type="Theme" id=3]
+[ext_resource path="res://Themes/default_theme.tres" type="Theme" id=3]
 [ext_resource path="res://Scenes/UI/ButtonHover.tres" type="StyleBox" id=4]
 [ext_resource path="res://Scenes/UI/ButtonPress.tres" type="StyleBox" id=5]
 [ext_resource path="res://Scenes/UI/ButtonDisabled.tres" type="StyleBox" id=6]
 [ext_resource path="res://Scripts/UI/Options/Options.gd" type="Script" id=7]
 [ext_resource path="res://Scripts/UI/Options/ControlsKeyPopup.gd" type="Script" id=8]
 [ext_resource path="res://Scripts/UI/Options/ControlBindButton.gd" type="Script" id=9]
+[ext_resource path="res://Fonts/small_font_outline.tres" type="DynamicFont" id=10]
 [ext_resource path="res://Scripts/UI/Options/MainOptionsTab.gd" type="Script" id=11]
 [ext_resource path="res://Scripts/UI/Options/KeyboardOptionsTab.gd" type="Script" id=12]
-[ext_resource path="res://Scripts/UI/Options/MusicCheckbox.gd" type="Script" id=13]
+[ext_resource path="res://Scripts/UI/Options/ScrollContainer.gd" type="Script" id=13]
 [ext_resource path="res://Scripts/UI/Options/ControllerOptionsTab.gd" type="Script" id=14]
-[ext_resource path="res://Scripts/UI/Options/FullscreenCheckbox.gd" type="Script" id=15]
-[ext_resource path="res://Scripts/UI/Options/BorderlessCheckbox.gd" type="Script" id=16]
-[ext_resource path="res://Scripts/UI/Options/VsyncCheckbox.gd" type="Script" id=17]
-[ext_resource path="res://Scenes/UI/Slider_SliderStyle.tres" type="StyleBox" id=18]
-[ext_resource path="res://Scenes/UI/Slider_GrabberArea.tres" type="StyleBox" id=19]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -27,15 +23,7 @@
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
-[sub_resource type="StyleBoxEmpty" id=5]
-
 [sub_resource type="StyleBoxEmpty" id=6]
-
-[sub_resource type="StyleBoxEmpty" id=7]
-
-[sub_resource type="StyleBoxEmpty" id=8]
-
-[sub_resource type="StyleBoxEmpty" id=9]
 
 [sub_resource type="StyleBoxEmpty" id=10]
 
@@ -56,10 +44,11 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ChangeControlPopup" type="PopupDialog" parent="Center"]
-margin_left = 390.0
-margin_top = 110.0
-margin_right = 890.0
-margin_bottom = 610.0
+unique_name_in_owner = true
+margin_left = 70.0
+margin_top = -70.0
+margin_right = 570.0
+margin_bottom = 430.0
 rect_min_size = Vector2( 500, 500 )
 popup_exclusive = true
 script = ExtResource( 8 )
@@ -72,10 +61,10 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Center/ChangeControlPopup/CenterContainer"]
-margin_left = 106.0
-margin_top = 230.0
-margin_right = 393.0
-margin_bottom = 269.0
+margin_left = 93.0
+margin_top = 233.0
+margin_right = 407.0
+margin_bottom = 267.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
 text = "Press any button..."
@@ -85,10 +74,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OptionsTabs" type="TabContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 64.0
+margin_right = -16.0
+follow_focus = true
+scroll_horizontal_enabled = false
+script = ExtResource( 13 )
+duration = 2.0
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
+margin_right = 592.0
+margin_bottom = 506.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 130
+custom_constants/margin_top = 50
+custom_constants/margin_left = 130
+custom_constants/margin_bottom = 50
+
+[node name="OptionsTabs" type="TabContainer" parent="ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+margin_left = 130.0
 margin_top = 50.0
-margin_right = 1280.0
-margin_bottom = 670.0
+margin_right = 462.0
+margin_bottom = 456.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/tab_fg = SubResource( 1 )
@@ -96,168 +109,151 @@ custom_styles/tab_disabled = SubResource( 2 )
 custom_styles/tab_bg = SubResource( 3 )
 custom_styles/panel = SubResource( 4 )
 tabs_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="MainOptionsTab" type="VBoxContainer" parent="OptionsTabs"]
+[node name="MainOptionsTab" type="VBoxContainer" parent="ScrollContainer/MarginContainer/OptionsTabs"]
+unique_name_in_owner = true
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_constants/separation = 20
 script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MusicCheckbox" type="Button" parent="OptionsTabs/MainOptionsTab"]
-margin_right = 1280.0
-margin_bottom = 48.0
+[node name="MusicCheckbox" type="CheckBox" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
+margin_right = 332.0
+margin_bottom = 25.0
 hint_tooltip = "Turn music on/off"
 size_flags_vertical = 3
-custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 2 )
 text = "Music"
-align = 0
 expand_icon = true
-script = ExtResource( 13 )
 
-[node name="MasterVolume" type="Label" parent="OptionsTabs/MainOptionsTab"]
-margin_top = 52.0
-margin_right = 1280.0
-margin_bottom = 100.0
+[node name="MasterVolumeContainer" type="HBoxContainer" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
+margin_top = 45.0
+margin_right = 332.0
+margin_bottom = 62.0
+custom_constants/separation = 10
+
+[node name="MasterVolume" type="Label" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MasterVolumeContainer"]
+unique_name_in_owner = true
+margin_right = 154.0
+margin_bottom = 17.0
 hint_tooltip = "General game volume"
 mouse_filter = 1
 size_flags_vertical = 7
-text = "Master volume"
+custom_constants/shadow_offset_y = 0
+custom_fonts/font = ExtResource( 10 )
+text = "Master volume         "
 valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MasterVolumeSlider" type="HSlider" parent="OptionsTabs/MainOptionsTab"]
-margin_top = 104.0
-margin_right = 1280.0
-margin_bottom = 120.0
+[node name="MasterVolumeSlider" type="HSlider" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MasterVolumeContainer"]
+unique_name_in_owner = true
+margin_left = 164.0
+margin_right = 332.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_styles/slider = ExtResource( 18 )
-custom_styles/grabber_area = ExtResource( 19 )
 max_value = 1.0
 step = 0.01
 value = 1.0
 
-[node name="MusicVolume" type="Label" parent="OptionsTabs/MainOptionsTab"]
-margin_top = 124.0
-margin_right = 1280.0
-margin_bottom = 172.0
+[node name="MusicVolumeContainer" type="HBoxContainer" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
+margin_top = 82.0
+margin_right = 332.0
+margin_bottom = 99.0
+custom_constants/separation = 10
+
+[node name="MusicVolume" type="Label" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MusicVolumeContainer"]
+unique_name_in_owner = true
+margin_right = 154.0
+margin_bottom = 17.0
 mouse_filter = 1
 size_flags_vertical = 7
-text = "Music volume"
+custom_constants/shadow_offset_y = 0
+custom_fonts/font = ExtResource( 10 )
+text = "Music volume          "
 valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MusicVolumeSlider" type="HSlider" parent="OptionsTabs/MainOptionsTab"]
-margin_top = 176.0
-margin_right = 1280.0
-margin_bottom = 192.0
+[node name="MusicVolumeSlider" type="HSlider" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MusicVolumeContainer"]
+unique_name_in_owner = true
+margin_left = 164.0
+margin_right = 332.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_styles/slider = ExtResource( 18 )
-custom_styles/grabber_area = ExtResource( 19 )
 max_value = 1.0
 step = 0.01
 value = 1.0
 
-[node name="SfxVolume" type="Label" parent="OptionsTabs/MainOptionsTab"]
-margin_top = 196.0
-margin_right = 1280.0
-margin_bottom = 244.0
+[node name="SfxVolumeContainer" type="HBoxContainer" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
+margin_top = 119.0
+margin_right = 332.0
+margin_bottom = 136.0
+custom_constants/separation = 10
+
+[node name="SfxVolume" type="Label" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/SfxVolumeContainer"]
+unique_name_in_owner = true
+margin_right = 154.0
+margin_bottom = 17.0
 mouse_filter = 1
 size_flags_vertical = 7
-text = "Sound effects volume"
+custom_constants/shadow_offset_y = 0
+custom_fonts/font = ExtResource( 10 )
+text = "Sound effects volume  "
 valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SfxVolumeSlider" type="HSlider" parent="OptionsTabs/MainOptionsTab"]
-margin_top = 248.0
-margin_right = 1280.0
-margin_bottom = 264.0
+[node name="SfxVolumeSlider" type="HSlider" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/SfxVolumeContainer"]
+unique_name_in_owner = true
+margin_left = 164.0
+margin_right = 332.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_styles/slider = ExtResource( 18 )
-custom_styles/grabber_area = ExtResource( 19 )
 max_value = 1.0
 step = 0.01
 value = 1.0
 
-[node name="FullscreenCheckbox" type="Button" parent="OptionsTabs/MainOptionsTab"]
-margin_top = 268.0
-margin_right = 1280.0
-margin_bottom = 316.0
+[node name="FullscreenCheckbox" type="CheckBox" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
+margin_top = 156.0
+margin_right = 332.0
+margin_bottom = 181.0
 hint_tooltip = "Display game in fullscreen"
 size_flags_vertical = 3
-custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 2 )
 text = "Fullscreen"
-align = 0
 expand_icon = true
-script = ExtResource( 15 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="BorderlessCheckbox" type="Button" parent="OptionsTabs/MainOptionsTab"]
-margin_top = 320.0
-margin_right = 1280.0
-margin_bottom = 368.0
+[node name="BorderlessCheckbox" type="CheckBox" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
+margin_top = 201.0
+margin_right = 332.0
+margin_bottom = 226.0
 hint_tooltip = "Remove borders around the window"
 size_flags_vertical = 3
-custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 2 )
 text = "Borderless"
-align = 0
 expand_icon = true
-script = ExtResource( 16 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="VsyncCheckbox" type="Button" parent="OptionsTabs/MainOptionsTab"]
-margin_top = 372.0
-margin_right = 1280.0
-margin_bottom = 420.0
+[node name="VsyncCheckbox" type="CheckBox" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
+margin_top = 246.0
+margin_right = 332.0
+margin_bottom = 271.0
 hint_tooltip = "Turn on vertical synchronization. Helps with tearing."
 size_flags_vertical = 3
-custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 2 )
 text = "Vsync"
-align = 0
 expand_icon = true
-script = ExtResource( 17 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="ButtonPrompts" type="OptionButton" parent="OptionsTabs/MainOptionsTab"]
-margin_top = 424.0
-margin_right = 1280.0
-margin_bottom = 463.0
+[node name="ButtonPrompts" type="OptionButton" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
+visible = false
+margin_top = 278.0
+margin_right = 640.0
+margin_bottom = 295.0
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
@@ -268,58 +264,41 @@ text = "Keyboard prompts"
 items = [ "Keyboard prompts", null, false, 0, null, "Playstation prompts", null, false, 1, null, "XBox prompts", null, false, 2, null, "Generic controller prompts", null, false, 3, null ]
 selected = 0
 
-[node name="KeyboardSettings" type="Button" parent="OptionsTabs/MainOptionsTab"]
-margin_top = 467.0
-margin_right = 1280.0
-margin_bottom = 515.0
+[node name="KeyboardSettings" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
+margin_top = 291.0
+margin_right = 332.0
+margin_bottom = 316.0
 size_flags_vertical = 3
-custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = SubResource( 7 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 2 )
 text = "Keyboard settings"
 align = 0
 
-[node name="ControllerSettings" type="Button" parent="OptionsTabs/MainOptionsTab"]
-margin_top = 519.0
-margin_right = 1280.0
-margin_bottom = 567.0
+[node name="ControllerSettings" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
+margin_top = 336.0
+margin_right = 332.0
+margin_bottom = 361.0
 size_flags_vertical = 3
-custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = SubResource( 8 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 2 )
 text = "Controller settings"
 align = 0
 
-[node name="Back" type="Button" parent="OptionsTabs/MainOptionsTab"]
-margin_top = 571.0
-margin_right = 1280.0
-margin_bottom = 620.0
+[node name="Back" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab"]
+margin_top = 381.0
+margin_right = 332.0
+margin_bottom = 406.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = SubResource( 9 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 2 )
 text = "Back"
 align = 0
 
-[node name="KeyboardOptionsTab" type="VBoxContainer" parent="OptionsTabs"]
+[node name="KeyboardOptionsTab" type="VBoxContainer" parent="ScrollContainer/MarginContainer/OptionsTabs"]
+unique_name_in_owner = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 12 )
 
-[node name="Left" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
-margin_right = 1280.0
-margin_bottom = 44.0
+[node name="Left" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab"]
+margin_right = 640.0
+margin_bottom = 24.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -332,10 +311,10 @@ align = 0
 script = ExtResource( 9 )
 bind = "left"
 
-[node name="Right" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
-margin_top = 48.0
-margin_right = 1280.0
-margin_bottom = 92.0
+[node name="Right" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab"]
+margin_top = 28.0
+margin_right = 640.0
+margin_bottom = 52.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -348,10 +327,10 @@ align = 0
 script = ExtResource( 9 )
 bind = "right"
 
-[node name="Up" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
-margin_top = 96.0
-margin_right = 1280.0
-margin_bottom = 140.0
+[node name="Up" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab"]
+margin_top = 56.0
+margin_right = 640.0
+margin_bottom = 80.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -364,10 +343,10 @@ align = 0
 script = ExtResource( 9 )
 bind = "up"
 
-[node name="Down" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
-margin_top = 144.0
-margin_right = 1280.0
-margin_bottom = 188.0
+[node name="Down" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab"]
+margin_top = 84.0
+margin_right = 640.0
+margin_bottom = 108.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -380,10 +359,10 @@ align = 0
 script = ExtResource( 9 )
 bind = "down"
 
-[node name="Jump" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
-margin_top = 192.0
-margin_right = 1280.0
-margin_bottom = 236.0
+[node name="Jump" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab"]
+margin_top = 112.0
+margin_right = 640.0
+margin_bottom = 136.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -396,10 +375,10 @@ align = 0
 script = ExtResource( 9 )
 bind = "jump"
 
-[node name="Dash" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
-margin_top = 240.0
-margin_right = 1280.0
-margin_bottom = 284.0
+[node name="Dash" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab"]
+margin_top = 140.0
+margin_right = 640.0
+margin_bottom = 164.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -412,10 +391,10 @@ align = 0
 script = ExtResource( 9 )
 bind = "dash"
 
-[node name="Shoot" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
-margin_top = 288.0
-margin_right = 1280.0
-margin_bottom = 332.0
+[node name="Shoot" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab"]
+margin_top = 168.0
+margin_right = 640.0
+margin_bottom = 192.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -428,10 +407,10 @@ align = 0
 script = ExtResource( 9 )
 bind = "shoot"
 
-[node name="Restart" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
-margin_top = 336.0
-margin_right = 1280.0
-margin_bottom = 380.0
+[node name="Restart" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab"]
+margin_top = 196.0
+margin_right = 640.0
+margin_bottom = 220.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -444,10 +423,10 @@ align = 0
 script = ExtResource( 9 )
 bind = "restart"
 
-[node name="Skip" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
-margin_top = 384.0
-margin_right = 1280.0
-margin_bottom = 428.0
+[node name="Skip" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab"]
+margin_top = 224.0
+margin_right = 640.0
+margin_bottom = 248.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -460,10 +439,10 @@ align = 0
 script = ExtResource( 9 )
 bind = "skip"
 
-[node name="Suicide" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
-margin_top = 432.0
-margin_right = 1280.0
-margin_bottom = 476.0
+[node name="Suicide" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab"]
+margin_top = 252.0
+margin_right = 640.0
+margin_bottom = 276.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -476,10 +455,10 @@ align = 0
 script = ExtResource( 9 )
 bind = "suicide"
 
-[node name="Pause" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
-margin_top = 480.0
-margin_right = 1280.0
-margin_bottom = 524.0
+[node name="Pause" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab"]
+margin_top = 280.0
+margin_right = 640.0
+margin_bottom = 304.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -492,10 +471,10 @@ align = 0
 script = ExtResource( 9 )
 bind = "pause"
 
-[node name="ResetControls" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
-margin_top = 528.0
-margin_right = 1280.0
-margin_bottom = 572.0
+[node name="ResetControls" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab"]
+margin_top = 308.0
+margin_right = 640.0
+margin_bottom = 332.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -506,10 +485,10 @@ custom_styles/normal = ExtResource( 2 )
 text = "Reset controls"
 align = 0
 
-[node name="BackKeyboard" type="Button" parent="OptionsTabs/KeyboardOptionsTab"]
-margin_top = 576.0
-margin_right = 1280.0
-margin_bottom = 620.0
+[node name="BackKeyboard" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab"]
+margin_top = 336.0
+margin_right = 640.0
+margin_bottom = 360.0
 size_flags_vertical = 3
 custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 custom_styles/hover = ExtResource( 4 )
@@ -520,13 +499,14 @@ custom_styles/normal = ExtResource( 2 )
 text = "Back"
 align = 0
 
-[node name="ControllerOptionsTab" type="VBoxContainer" parent="OptionsTabs"]
+[node name="ControllerOptionsTab" type="VBoxContainer" parent="ScrollContainer/MarginContainer/OptionsTabs"]
+unique_name_in_owner = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 14 )
 
-[node name="Left" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
+[node name="Left" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
 margin_right = 1280.0
 margin_bottom = 44.0
 size_flags_vertical = 3
@@ -542,7 +522,7 @@ script = ExtResource( 9 )
 bind = "left"
 controller_bind = true
 
-[node name="Right" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
+[node name="Right" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
 margin_top = 48.0
 margin_right = 1280.0
 margin_bottom = 92.0
@@ -559,7 +539,7 @@ script = ExtResource( 9 )
 bind = "right"
 controller_bind = true
 
-[node name="Up" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
+[node name="Up" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
 margin_top = 96.0
 margin_right = 1280.0
 margin_bottom = 140.0
@@ -576,7 +556,7 @@ script = ExtResource( 9 )
 bind = "up"
 controller_bind = true
 
-[node name="Down" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
+[node name="Down" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
 margin_top = 144.0
 margin_right = 1280.0
 margin_bottom = 188.0
@@ -593,7 +573,7 @@ script = ExtResource( 9 )
 bind = "down"
 controller_bind = true
 
-[node name="Jump" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
+[node name="Jump" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
 margin_top = 192.0
 margin_right = 1280.0
 margin_bottom = 236.0
@@ -610,7 +590,7 @@ script = ExtResource( 9 )
 bind = "jump"
 controller_bind = true
 
-[node name="Dash" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
+[node name="Dash" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
 margin_top = 240.0
 margin_right = 1280.0
 margin_bottom = 284.0
@@ -627,7 +607,7 @@ script = ExtResource( 9 )
 bind = "dash"
 controller_bind = true
 
-[node name="Shoot" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
+[node name="Shoot" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
 margin_top = 288.0
 margin_right = 1280.0
 margin_bottom = 332.0
@@ -644,7 +624,7 @@ script = ExtResource( 9 )
 bind = "shoot"
 controller_bind = true
 
-[node name="Restart" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
+[node name="Restart" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
 margin_top = 336.0
 margin_right = 1280.0
 margin_bottom = 380.0
@@ -661,7 +641,7 @@ script = ExtResource( 9 )
 bind = "restart"
 controller_bind = true
 
-[node name="Skip" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
+[node name="Skip" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
 margin_top = 384.0
 margin_right = 1280.0
 margin_bottom = 428.0
@@ -678,7 +658,7 @@ script = ExtResource( 9 )
 bind = "skip"
 controller_bind = true
 
-[node name="Suicide" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
+[node name="Suicide" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
 margin_top = 432.0
 margin_right = 1280.0
 margin_bottom = 476.0
@@ -695,7 +675,7 @@ script = ExtResource( 9 )
 bind = "suicide"
 controller_bind = true
 
-[node name="Pause" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
+[node name="Pause" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
 margin_top = 480.0
 margin_right = 1280.0
 margin_bottom = 524.0
@@ -712,7 +692,7 @@ script = ExtResource( 9 )
 bind = "pause"
 controller_bind = true
 
-[node name="ResetControls" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
+[node name="ResetControls" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
 margin_top = 528.0
 margin_right = 1280.0
 margin_bottom = 572.0
@@ -726,7 +706,7 @@ custom_styles/normal = ExtResource( 2 )
 text = "Reset controls"
 align = 0
 
-[node name="BackKeyboard" type="Button" parent="OptionsTabs/ControllerOptionsTab"]
+[node name="BackController" type="Button" parent="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab"]
 margin_top = 576.0
 margin_right = 1280.0
 margin_bottom = 620.0
@@ -741,86 +721,90 @@ text = "Back"
 align = 0
 
 [node name="MusicPlayer" parent="." instance=ExtResource( 1 )]
+unique_name_in_owner = true
 position = Vector2( 11.7368, 10.6315 )
 music = "GuyRock"
 fade = true
 
 [connection signal="control_key_input" from="Center/ChangeControlPopup" to="." method="_on_ChangeControlPopup_control_key_input"]
-[connection signal="pressed" from="OptionsTabs/MainOptionsTab/MusicCheckbox" to="OptionsTabs/MainOptionsTab" method="_on_MusicCheckbox_pressed"]
-[connection signal="focus_entered" from="OptionsTabs/MainOptionsTab/MasterVolume" to="OptionsTabs/MainOptionsTab" method="_on_MasterVolumeSlider_entered"]
-[connection signal="focus_exited" from="OptionsTabs/MainOptionsTab/MasterVolume" to="OptionsTabs/MainOptionsTab" method="_on_MasterVolumeSlider_exited"]
-[connection signal="mouse_entered" from="OptionsTabs/MainOptionsTab/MasterVolume" to="OptionsTabs/MainOptionsTab" method="_on_MasterVolumeSlider_entered"]
-[connection signal="mouse_exited" from="OptionsTabs/MainOptionsTab/MasterVolume" to="OptionsTabs/MainOptionsTab" method="_on_MasterVolumeSlider_exited"]
-[connection signal="focus_entered" from="OptionsTabs/MainOptionsTab/MasterVolumeSlider" to="OptionsTabs/MainOptionsTab" method="_on_MasterVolumeSlider_entered"]
-[connection signal="focus_exited" from="OptionsTabs/MainOptionsTab/MasterVolumeSlider" to="OptionsTabs/MainOptionsTab" method="_on_MasterVolumeSlider_exited"]
-[connection signal="mouse_entered" from="OptionsTabs/MainOptionsTab/MasterVolumeSlider" to="OptionsTabs/MainOptionsTab" method="_on_MasterVolumeSlider_entered"]
-[connection signal="mouse_exited" from="OptionsTabs/MainOptionsTab/MasterVolumeSlider" to="OptionsTabs/MainOptionsTab" method="_on_MasterVolumeSlider_exited"]
-[connection signal="value_changed" from="OptionsTabs/MainOptionsTab/MasterVolumeSlider" to="OptionsTabs/MainOptionsTab" method="_on_MasterVolumeSlider_value_changed"]
-[connection signal="focus_entered" from="OptionsTabs/MainOptionsTab/MusicVolume" to="OptionsTabs/MainOptionsTab" method="_on_MusicVolumeSlider_entered"]
-[connection signal="focus_exited" from="OptionsTabs/MainOptionsTab/MusicVolume" to="OptionsTabs/MainOptionsTab" method="_on_MusicVolumeSlider_exited"]
-[connection signal="mouse_entered" from="OptionsTabs/MainOptionsTab/MusicVolume" to="OptionsTabs/MainOptionsTab" method="_on_MusicVolumeSlider_entered"]
-[connection signal="mouse_exited" from="OptionsTabs/MainOptionsTab/MusicVolume" to="OptionsTabs/MainOptionsTab" method="_on_MusicVolumeSlider_exited"]
-[connection signal="focus_entered" from="OptionsTabs/MainOptionsTab/MusicVolumeSlider" to="OptionsTabs/MainOptionsTab" method="_on_MusicVolumeSlider_entered"]
-[connection signal="focus_exited" from="OptionsTabs/MainOptionsTab/MusicVolumeSlider" to="OptionsTabs/MainOptionsTab" method="_on_MusicVolumeSlider_exited"]
-[connection signal="mouse_entered" from="OptionsTabs/MainOptionsTab/MusicVolumeSlider" to="OptionsTabs/MainOptionsTab" method="_on_MusicVolumeSlider_entered"]
-[connection signal="mouse_exited" from="OptionsTabs/MainOptionsTab/MusicVolumeSlider" to="OptionsTabs/MainOptionsTab" method="_on_MusicVolumeSlider_exited"]
-[connection signal="value_changed" from="OptionsTabs/MainOptionsTab/MusicVolumeSlider" to="OptionsTabs/MainOptionsTab" method="_on_MusicVolumeSlider_value_changed"]
-[connection signal="focus_entered" from="OptionsTabs/MainOptionsTab/SfxVolume" to="OptionsTabs/MainOptionsTab" method="_on_SfxVolumeSlider_entered"]
-[connection signal="focus_exited" from="OptionsTabs/MainOptionsTab/SfxVolume" to="OptionsTabs/MainOptionsTab" method="_on_SfxVolumeSlider_exited"]
-[connection signal="mouse_entered" from="OptionsTabs/MainOptionsTab/SfxVolume" to="OptionsTabs/MainOptionsTab" method="_on_SfxVolumeSlider_entered"]
-[connection signal="mouse_exited" from="OptionsTabs/MainOptionsTab/SfxVolume" to="OptionsTabs/MainOptionsTab" method="_on_SfxVolumeSlider_exited"]
-[connection signal="focus_entered" from="OptionsTabs/MainOptionsTab/SfxVolumeSlider" to="OptionsTabs/MainOptionsTab" method="_on_SfxVolumeSlider_entered"]
-[connection signal="focus_exited" from="OptionsTabs/MainOptionsTab/SfxVolumeSlider" to="OptionsTabs/MainOptionsTab" method="_on_SfxVolumeSlider_exited"]
-[connection signal="mouse_entered" from="OptionsTabs/MainOptionsTab/SfxVolumeSlider" to="OptionsTabs/MainOptionsTab" method="_on_SfxVolumeSlider_entered"]
-[connection signal="mouse_exited" from="OptionsTabs/MainOptionsTab/SfxVolumeSlider" to="OptionsTabs/MainOptionsTab" method="_on_SfxVolumeSlider_exited"]
-[connection signal="value_changed" from="OptionsTabs/MainOptionsTab/SfxVolumeSlider" to="OptionsTabs/MainOptionsTab" method="_on_SfxVolumeSlider_value_changed"]
-[connection signal="pressed" from="OptionsTabs/MainOptionsTab/FullscreenCheckbox" to="OptionsTabs/MainOptionsTab" method="_on_FullscreenCheckbox_pressed"]
-[connection signal="pressed" from="OptionsTabs/MainOptionsTab/BorderlessCheckbox" to="OptionsTabs/MainOptionsTab" method="_on_BorderlessCheckbox_pressed"]
-[connection signal="pressed" from="OptionsTabs/MainOptionsTab/VsyncCheckbox" to="OptionsTabs/MainOptionsTab" method="_on_VsyncCheckbox_pressed"]
-[connection signal="item_selected" from="OptionsTabs/MainOptionsTab/ButtonPrompts" to="OptionsTabs/MainOptionsTab" method="_on_ButtonPrompts_item_selected"]
-[connection signal="pressed" from="OptionsTabs/MainOptionsTab/KeyboardSettings" to="." method="_on_KeyboardSettings_pressed"]
-[connection signal="pressed" from="OptionsTabs/MainOptionsTab/ControllerSettings" to="." method="_on_ControllerSettings_pressed"]
-[connection signal="pressed" from="OptionsTabs/MainOptionsTab/Back" to="." method="_on_Button_pressed"]
-[connection signal="keyboard_controls_reset_pressed" from="OptionsTabs/KeyboardOptionsTab" to="." method="_on_KeyboardOptionsTab_keyboard_controls_reset_pressed"]
-[connection signal="key_bind_pressed" from="OptionsTabs/KeyboardOptionsTab/Left" to="." method="_on_ButtonBind_key_bind_pressed"]
-[connection signal="pressed" from="OptionsTabs/KeyboardOptionsTab/Left" to="OptionsTabs/KeyboardOptionsTab/Left" method="_on_KeyBind_pressed"]
-[connection signal="key_bind_pressed" from="OptionsTabs/KeyboardOptionsTab/Right" to="." method="_on_ButtonBind_key_bind_pressed"]
-[connection signal="pressed" from="OptionsTabs/KeyboardOptionsTab/Right" to="OptionsTabs/KeyboardOptionsTab/Right" method="_on_KeyBind_pressed"]
-[connection signal="pressed" from="OptionsTabs/KeyboardOptionsTab/Up" to="OptionsTabs/KeyboardOptionsTab/Up" method="_on_KeyBind_pressed"]
-[connection signal="key_bind_pressed" from="OptionsTabs/KeyboardOptionsTab/Down" to="." method="_on_ButtonBind_key_bind_pressed"]
-[connection signal="pressed" from="OptionsTabs/KeyboardOptionsTab/Down" to="OptionsTabs/KeyboardOptionsTab/Down" method="_on_KeyBind_pressed"]
-[connection signal="pressed" from="OptionsTabs/KeyboardOptionsTab/Jump" to="OptionsTabs/KeyboardOptionsTab/Jump" method="_on_KeyBind_pressed"]
-[connection signal="key_bind_pressed" from="OptionsTabs/KeyboardOptionsTab/Dash" to="." method="_on_ButtonBind_key_bind_pressed"]
-[connection signal="pressed" from="OptionsTabs/KeyboardOptionsTab/Dash" to="OptionsTabs/KeyboardOptionsTab/Dash" method="_on_KeyBind_pressed"]
-[connection signal="key_bind_pressed" from="OptionsTabs/KeyboardOptionsTab/Shoot" to="." method="_on_ButtonBind_key_bind_pressed"]
-[connection signal="pressed" from="OptionsTabs/KeyboardOptionsTab/Shoot" to="OptionsTabs/KeyboardOptionsTab/Shoot" method="_on_KeyBind_pressed"]
-[connection signal="pressed" from="OptionsTabs/KeyboardOptionsTab/Restart" to="OptionsTabs/KeyboardOptionsTab/Restart" method="_on_KeyBind_pressed"]
-[connection signal="key_bind_pressed" from="OptionsTabs/KeyboardOptionsTab/Skip" to="." method="_on_ButtonBind_key_bind_pressed"]
-[connection signal="pressed" from="OptionsTabs/KeyboardOptionsTab/Skip" to="OptionsTabs/KeyboardOptionsTab/Skip" method="_on_KeyBind_pressed"]
-[connection signal="key_bind_pressed" from="OptionsTabs/KeyboardOptionsTab/Suicide" to="." method="_on_ButtonBind_key_bind_pressed"]
-[connection signal="pressed" from="OptionsTabs/KeyboardOptionsTab/Suicide" to="OptionsTabs/KeyboardOptionsTab/Suicide" method="_on_KeyBind_pressed"]
-[connection signal="key_bind_pressed" from="OptionsTabs/KeyboardOptionsTab/Pause" to="." method="_on_ButtonBind_key_bind_pressed"]
-[connection signal="pressed" from="OptionsTabs/KeyboardOptionsTab/Pause" to="OptionsTabs/KeyboardOptionsTab/Pause" method="_on_KeyBind_pressed"]
-[connection signal="pressed" from="OptionsTabs/KeyboardOptionsTab/ResetControls" to="OptionsTabs/KeyboardOptionsTab" method="_on_ResetControls_pressed"]
-[connection signal="pressed" from="OptionsTabs/KeyboardOptionsTab/BackKeyboard" to="OptionsTabs/MainOptionsTab" method="_on_BackKeyboard_pressed"]
-[connection signal="controller_controls_reset_pressed" from="OptionsTabs/ControllerOptionsTab" to="." method="_on_ControllerOptionsTab_controller_controls_reset_pressed"]
-[connection signal="key_bind_pressed" from="OptionsTabs/ControllerOptionsTab/Left" to="." method="_on_ButtonBind_key_bind_pressed"]
-[connection signal="pressed" from="OptionsTabs/ControllerOptionsTab/Left" to="OptionsTabs/ControllerOptionsTab/Left" method="_on_KeyBind_pressed"]
-[connection signal="pressed" from="OptionsTabs/ControllerOptionsTab/Right" to="OptionsTabs/ControllerOptionsTab/Right" method="_on_KeyBind_pressed"]
-[connection signal="key_bind_pressed" from="OptionsTabs/ControllerOptionsTab/Up" to="." method="_on_ButtonBind_key_bind_pressed"]
-[connection signal="pressed" from="OptionsTabs/ControllerOptionsTab/Up" to="OptionsTabs/ControllerOptionsTab/Up" method="_on_KeyBind_pressed"]
-[connection signal="pressed" from="OptionsTabs/ControllerOptionsTab/Down" to="OptionsTabs/ControllerOptionsTab/Down" method="_on_KeyBind_pressed"]
-[connection signal="key_bind_pressed" from="OptionsTabs/ControllerOptionsTab/Jump" to="." method="_on_ButtonBind_key_bind_pressed"]
-[connection signal="pressed" from="OptionsTabs/ControllerOptionsTab/Jump" to="OptionsTabs/ControllerOptionsTab/Jump" method="_on_KeyBind_pressed"]
-[connection signal="key_bind_pressed" from="OptionsTabs/ControllerOptionsTab/Dash" to="." method="_on_ButtonBind_key_bind_pressed"]
-[connection signal="pressed" from="OptionsTabs/ControllerOptionsTab/Dash" to="OptionsTabs/ControllerOptionsTab/Dash" method="_on_KeyBind_pressed"]
-[connection signal="pressed" from="OptionsTabs/ControllerOptionsTab/Shoot" to="OptionsTabs/ControllerOptionsTab/Shoot" method="_on_KeyBind_pressed"]
-[connection signal="key_bind_pressed" from="OptionsTabs/ControllerOptionsTab/Restart" to="." method="_on_ButtonBind_key_bind_pressed"]
-[connection signal="pressed" from="OptionsTabs/ControllerOptionsTab/Restart" to="OptionsTabs/ControllerOptionsTab/Restart" method="_on_KeyBind_pressed"]
-[connection signal="key_bind_pressed" from="OptionsTabs/ControllerOptionsTab/Skip" to="." method="_on_ButtonBind_key_bind_pressed"]
-[connection signal="pressed" from="OptionsTabs/ControllerOptionsTab/Skip" to="OptionsTabs/ControllerOptionsTab/Skip" method="_on_KeyBind_pressed"]
-[connection signal="pressed" from="OptionsTabs/ControllerOptionsTab/Suicide" to="OptionsTabs/ControllerOptionsTab/Suicide" method="_on_KeyBind_pressed"]
-[connection signal="key_bind_pressed" from="OptionsTabs/ControllerOptionsTab/Pause" to="." method="_on_ButtonBind_key_bind_pressed"]
-[connection signal="pressed" from="OptionsTabs/ControllerOptionsTab/Pause" to="OptionsTabs/ControllerOptionsTab/Pause" method="_on_KeyBind_pressed"]
-[connection signal="pressed" from="OptionsTabs/ControllerOptionsTab/ResetControls" to="OptionsTabs/ControllerOptionsTab" method="_on_ResetControls_pressed"]
-[connection signal="pressed" from="OptionsTabs/ControllerOptionsTab/BackKeyboard" to="OptionsTabs/MainOptionsTab" method="_on_BackKeyboard_pressed"]
+[connection signal="scroll_ended" from="ScrollContainer" to="ScrollContainer" method="_on_ScrollContainer_scroll_ended"]
+[connection signal="scroll_started" from="ScrollContainer" to="ScrollContainer" method="_on_ScrollContainer_scroll_started"]
+[connection signal="tab_changed" from="ScrollContainer/MarginContainer/OptionsTabs" to="." method="_on_OptionsTabs_tab_changed"]
+[connection signal="toggled" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MusicCheckbox" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MusicCheckbox_toggled"]
+[connection signal="focus_entered" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MasterVolumeContainer/MasterVolume" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MasterVolumeSlider_entered"]
+[connection signal="focus_exited" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MasterVolumeContainer/MasterVolume" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MasterVolumeSlider_exited"]
+[connection signal="mouse_entered" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MasterVolumeContainer/MasterVolume" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MasterVolumeSlider_entered"]
+[connection signal="mouse_exited" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MasterVolumeContainer/MasterVolume" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MasterVolumeSlider_exited"]
+[connection signal="focus_entered" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MasterVolumeContainer/MasterVolumeSlider" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MasterVolumeSlider_entered"]
+[connection signal="focus_exited" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MasterVolumeContainer/MasterVolumeSlider" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MasterVolumeSlider_exited"]
+[connection signal="mouse_entered" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MasterVolumeContainer/MasterVolumeSlider" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MasterVolumeSlider_entered"]
+[connection signal="mouse_exited" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MasterVolumeContainer/MasterVolumeSlider" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MasterVolumeSlider_exited"]
+[connection signal="value_changed" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MasterVolumeContainer/MasterVolumeSlider" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MasterVolumeSlider_value_changed"]
+[connection signal="focus_entered" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MusicVolumeContainer/MusicVolume" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MusicVolumeSlider_entered"]
+[connection signal="focus_exited" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MusicVolumeContainer/MusicVolume" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MusicVolumeSlider_exited"]
+[connection signal="mouse_entered" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MusicVolumeContainer/MusicVolume" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MusicVolumeSlider_entered"]
+[connection signal="mouse_exited" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MusicVolumeContainer/MusicVolume" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MusicVolumeSlider_exited"]
+[connection signal="focus_entered" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MusicVolumeContainer/MusicVolumeSlider" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MusicVolumeSlider_entered"]
+[connection signal="focus_exited" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MusicVolumeContainer/MusicVolumeSlider" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MusicVolumeSlider_exited"]
+[connection signal="mouse_entered" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MusicVolumeContainer/MusicVolumeSlider" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MusicVolumeSlider_entered"]
+[connection signal="mouse_exited" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MusicVolumeContainer/MusicVolumeSlider" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MusicVolumeSlider_exited"]
+[connection signal="value_changed" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MusicVolumeContainer/MusicVolumeSlider" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MusicVolumeSlider_value_changed"]
+[connection signal="focus_entered" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/SfxVolumeContainer/SfxVolume" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_SfxVolumeSlider_entered"]
+[connection signal="focus_exited" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/SfxVolumeContainer/SfxVolume" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_SfxVolumeSlider_exited"]
+[connection signal="mouse_entered" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/SfxVolumeContainer/SfxVolume" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_SfxVolumeSlider_entered"]
+[connection signal="mouse_exited" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/SfxVolumeContainer/SfxVolume" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_SfxVolumeSlider_exited"]
+[connection signal="focus_entered" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/SfxVolumeContainer/SfxVolumeSlider" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_SfxVolumeSlider_entered"]
+[connection signal="focus_exited" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/SfxVolumeContainer/SfxVolumeSlider" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_SfxVolumeSlider_exited"]
+[connection signal="mouse_entered" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/SfxVolumeContainer/SfxVolumeSlider" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_SfxVolumeSlider_entered"]
+[connection signal="mouse_exited" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/SfxVolumeContainer/SfxVolumeSlider" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_SfxVolumeSlider_exited"]
+[connection signal="value_changed" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/SfxVolumeContainer/SfxVolumeSlider" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_SfxVolumeSlider_value_changed"]
+[connection signal="toggled" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/FullscreenCheckbox" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_FullscreenCheckbox_toggled"]
+[connection signal="toggled" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/BorderlessCheckbox" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_BorderlessCheckbox_toggled"]
+[connection signal="toggled" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/VsyncCheckbox" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_VsyncCheckbox_toggled"]
+[connection signal="item_selected" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/ButtonPrompts" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_ButtonPrompts_item_selected"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/KeyboardSettings" to="." method="_on_KeyboardSettings_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/ControllerSettings" to="." method="_on_ControllerSettings_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/Back" to="." method="_on_Button_pressed"]
+[connection signal="keyboard_controls_reset_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab" to="." method="_on_KeyboardOptionsTab_keyboard_controls_reset_pressed"]
+[connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Left" to="." method="_on_ButtonBind_key_bind_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Left" to="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Left" method="_on_KeyBind_pressed"]
+[connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Right" to="." method="_on_ButtonBind_key_bind_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Right" to="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Right" method="_on_KeyBind_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Up" to="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Up" method="_on_KeyBind_pressed"]
+[connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Down" to="." method="_on_ButtonBind_key_bind_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Down" to="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Down" method="_on_KeyBind_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Jump" to="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Jump" method="_on_KeyBind_pressed"]
+[connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Dash" to="." method="_on_ButtonBind_key_bind_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Dash" to="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Dash" method="_on_KeyBind_pressed"]
+[connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Shoot" to="." method="_on_ButtonBind_key_bind_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Shoot" to="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Shoot" method="_on_KeyBind_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Restart" to="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Restart" method="_on_KeyBind_pressed"]
+[connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Skip" to="." method="_on_ButtonBind_key_bind_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Skip" to="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Skip" method="_on_KeyBind_pressed"]
+[connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Suicide" to="." method="_on_ButtonBind_key_bind_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Suicide" to="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Suicide" method="_on_KeyBind_pressed"]
+[connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Pause" to="." method="_on_ButtonBind_key_bind_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Pause" to="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/Pause" method="_on_KeyBind_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/ResetControls" to="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab" method="_on_ResetControls_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/KeyboardOptionsTab/BackKeyboard" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_BackKeyboard_pressed"]
+[connection signal="controller_controls_reset_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab" to="." method="_on_ControllerOptionsTab_controller_controls_reset_pressed"]
+[connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Left" to="." method="_on_ButtonBind_key_bind_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Left" to="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Left" method="_on_KeyBind_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Right" to="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Right" method="_on_KeyBind_pressed"]
+[connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Up" to="." method="_on_ButtonBind_key_bind_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Up" to="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Up" method="_on_KeyBind_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Down" to="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Down" method="_on_KeyBind_pressed"]
+[connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Jump" to="." method="_on_ButtonBind_key_bind_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Jump" to="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Jump" method="_on_KeyBind_pressed"]
+[connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Dash" to="." method="_on_ButtonBind_key_bind_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Dash" to="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Dash" method="_on_KeyBind_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Shoot" to="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Shoot" method="_on_KeyBind_pressed"]
+[connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Restart" to="." method="_on_ButtonBind_key_bind_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Restart" to="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Restart" method="_on_KeyBind_pressed"]
+[connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Skip" to="." method="_on_ButtonBind_key_bind_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Skip" to="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Skip" method="_on_KeyBind_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Suicide" to="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Suicide" method="_on_KeyBind_pressed"]
+[connection signal="key_bind_pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Pause" to="." method="_on_ButtonBind_key_bind_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Pause" to="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/Pause" method="_on_KeyBind_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/ResetControls" to="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab" method="_on_ResetControls_pressed"]
+[connection signal="pressed" from="ScrollContainer/MarginContainer/OptionsTabs/ControllerOptionsTab/BackController" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_BackController_pressed"]

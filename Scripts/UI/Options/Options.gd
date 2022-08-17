@@ -6,14 +6,14 @@ func _ready() -> void:
 	pass
 
 func _on_KeyboardSettings_pressed() -> void:
-	$OptionsTabs.current_tab = 1
-	$OptionsTabs/KeyboardOptionsTab/Left.grab_focus()
-	$Center/ChangeControlPopup.key_type = $Center/ChangeControlPopup.INPUT_WAIT.KEYBOARD
+	$"%OptionsTabs".current_tab = 1
+	$"%OptionsTabs"/KeyboardOptionsTab/Left.grab_focus()
+	$"%ChangeControlPopup".key_type = $"%ChangeControlPopup".INPUT_WAIT.KEYBOARD
 
 func _on_ControllerSettings_pressed() -> void:
-	$OptionsTabs.current_tab = 2
-	$OptionsTabs/ControllerOptionsTab/Left.grab_focus()
-	$Center/ChangeControlPopup.key_type = $Center/ChangeControlPopup.INPUT_WAIT.JOYPAD
+	$"%OptionsTabs".current_tab = 2
+	$"%OptionsTabs"/ControllerOptionsTab/Left.grab_focus()
+	$"%ChangeControlPopup".key_type = $"%ChangeControlPopup".INPUT_WAIT.JOYPAD
 
 
 func _on_Button_pressed() -> void:
@@ -40,7 +40,7 @@ func _on_ChangeControlPopup_control_key_input(new_key: InputEvent, action_name: 
 # Update labels and input map for keyboard
 func _on_KeyboardOptionsTab_keyboard_controls_reset_pressed() -> void:
 	var cur_conf :=  WorldController.cur_config.keyboard_controls as Dictionary
-	var btn_binds := $OptionsTabs/KeyboardOptionsTab.get_children()
+	var btn_binds := $"%KeyboardOptionsTab".get_children()
 	var btn_index := 0
 	for keyboard_control in cur_conf:
 		var controller_input := InputMap.get_action_list(keyboard_control)[1] as InputEventJoypadButton
@@ -57,13 +57,13 @@ func _on_KeyboardOptionsTab_keyboard_controls_reset_pressed() -> void:
 
 func _on_ButtonBind_key_bind_pressed(bind: String, btn: Button) -> void:
 	btn_bind = btn
-	$Center/ChangeControlPopup.key_to_change = bind
-	$Center/ChangeControlPopup.show()
+	$"%ChangeControlPopup".key_to_change = bind
+	$"%ChangeControlPopup".show()
 
 # Update labels and input map for controller
 func _on_ControllerOptionsTab_controller_controls_reset_pressed() -> void:
 	var cur_conf := WorldController.cur_config.controller_controls as Dictionary
-	var btn_binds := $OptionsTabs/ControllerOptionsTab.get_children()
+	var btn_binds := $"%ControllerOptionsTab".get_children()
 	var btn_index := 0
 	for controller_control in cur_conf:
 		if (controller_control == "controller"):
@@ -80,3 +80,9 @@ func _on_ControllerOptionsTab_controller_controls_reset_pressed() -> void:
 		InputMap.action_add_event(controller_control, ev)
 		btn_binds[btn_index].right_lbl = Util.get_controller_button_string(ev.button_index)
 		btn_index += 1
+
+
+func _on_OptionsTabs_tab_changed(tab: int) -> void:
+	if tab == 0:
+		yield(get_tree().create_timer(.01), "timeout")
+		$"%ScrollContainer".scroll_vertical = 500

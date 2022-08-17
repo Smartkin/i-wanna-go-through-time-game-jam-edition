@@ -1,87 +1,63 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Fonts/ABeeZee-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Themes/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scenes/MusicPlayer.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/UI/ButtonNormal.tres" type="StyleBox" id=3]
-[ext_resource path="res://Scenes/UI/MenuTheme.tres" type="Theme" id=4]
-[ext_resource path="res://Scenes/UI/ButtonHover.tres" type="StyleBox" id=5]
-[ext_resource path="res://Scenes/UI/ButtonPress.tres" type="StyleBox" id=6]
-[ext_resource path="res://Scenes/UI/ButtonDisabled.tres" type="StyleBox" id=7]
 [ext_resource path="res://Scripts/UI/Title/Title.gd" type="Script" id=8]
 [ext_resource path="res://Scripts/UI/Title/EngineName.gd" type="Script" id=9]
-
-[sub_resource type="DynamicFont" id=1]
-size = 64
-outline_size = 5
-outline_color = Color( 0, 0, 0, 1 )
-use_filter = true
-font_data = ExtResource( 1 )
-
-[sub_resource type="StyleBoxEmpty" id=2]
-
-[sub_resource type="StyleBoxEmpty" id=3]
 
 [node name="Title" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 4 )
+theme = ExtResource( 1 )
 script = ExtResource( 8 )
 
-[node name="Layout" type="VBoxContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="EngineName" type="Label" parent="Layout"]
-margin_right = 640.0
-margin_bottom = 139.0
+[node name="EngineName" type="Label" parent="."]
+margin_left = 192.0
+margin_top = 16.0
+margin_right = 448.0
+margin_bottom = 155.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 1 )
 text = "Godot Engine"
 align = 1
 valign = 1
 script = ExtResource( 9 )
 
+[node name="Layout" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -80.0
+margin_top = -200.0
+margin_right = 80.0
+margin_bottom = -72.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_group_": true
+}
+
 [node name="StartGame" type="Button" parent="Layout"]
-margin_top = 143.0
-margin_right = 640.0
-margin_bottom = 212.0
+margin_right = 160.0
+margin_bottom = 29.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
-custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
-custom_styles/hover = ExtResource( 5 )
-custom_styles/pressed = ExtResource( 6 )
-custom_styles/focus = SubResource( 2 )
-custom_styles/disabled = ExtResource( 7 )
-custom_styles/normal = ExtResource( 3 )
 text = "Start Game"
 
 [node name="Options" type="Button" parent="Layout"]
-margin_top = 216.0
-margin_right = 640.0
-margin_bottom = 286.0
+margin_top = 49.0
+margin_right = 160.0
+margin_bottom = 78.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
-custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
-custom_styles/hover = ExtResource( 5 )
-custom_styles/pressed = ExtResource( 6 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/disabled = ExtResource( 7 )
-custom_styles/normal = ExtResource( 3 )
 text = "Options"
 
 [node name="Exit" type="Button" parent="Layout"]
-margin_top = 290.0
-margin_right = 640.0
-margin_bottom = 360.0
+margin_top = 98.0
+margin_right = 160.0
+margin_bottom = 128.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
-custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
-custom_styles/hover = ExtResource( 5 )
-custom_styles/pressed = ExtResource( 6 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/disabled = ExtResource( 7 )
-custom_styles/normal = ExtResource( 3 )
 text = "Exit"
 
 [node name="MusicPlayer" parent="." instance=ExtResource( 2 )]

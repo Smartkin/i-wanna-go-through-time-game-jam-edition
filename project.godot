@@ -681,6 +681,10 @@ window/stretch/aspect="keep"
 version_control_autoload_on_startup=true
 version_control_plugin_name="GitAPI"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/SmoothScroll/plugin.cfg" )
+
 [global]
 
 fps=false
