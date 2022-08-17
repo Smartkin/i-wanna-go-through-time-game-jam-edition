@@ -8,7 +8,8 @@ const Bullet := preload("res://Scenes/Player/Bullet.tscn")
 var player_dead := false
 
 func _ready():
-	zoom_camera(0.5, false) # Set initial camera zoom
+#	zoom_camera(0.5, false) # Set initial camera zoom
+	pass
 
 func _physics_process(delta: float) -> void:
 	if (!player_dead):

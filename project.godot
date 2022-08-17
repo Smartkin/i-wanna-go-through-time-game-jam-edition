@@ -30,6 +30,11 @@ _global_script_classes=[ {
 "path": "res://Scripts/Items/Chip.gd"
 }, {
 "base": "KinematicBody2D",
+"class": "EnemyBulletBase",
+"language": "GDScript",
+"path": "res://Scripts/Killers/EnemyBulletBase.gd"
+}, {
+"base": "KinematicBody2D",
 "class": "EnemyInterface",
 "language": "GDScript",
 "path": "res://Scripts/Enemies/EnemyInterface.gd"
@@ -539,6 +544,7 @@ _global_script_class_icons={
 "AgeButton": "",
 "Bullet": "",
 "Chip": "",
+"EnemyBulletBase": "",
 "EnemyInterface": "",
 "GrabbableBase": "",
 "KillerBase": "",
