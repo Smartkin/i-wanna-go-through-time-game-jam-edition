@@ -16,6 +16,9 @@ func _jumped_on(delta: float) -> bool:
 func _when_idle(delta: float, binds: Array):
 	pass
 
+func _when_die(delta: float, binds: Array):
+	pass
+
 func _die():
 	$Hitbox.set_deferred("monitoring", false)
 	$Hurtbox.set_deferred("monitoring", false)

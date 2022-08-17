@@ -9,17 +9,20 @@
 [ext_resource path="res://Scenes/Enemies/Balloon.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Gimmicks/WallJumpL.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Gimmicks/WalljumpR.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Enemies/Gorfo.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Save.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Warp.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/MusicPlayer.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Items/Ability.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/Block.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Scenes/Enemies/Slimy.tscn" type="PackedScene" id=21]
 
 [node name="TestBed" type="Node2D"]
 __meta__ = {
 "_editor_description_": "This room is where all aspects of the engine are tested"
 }
+
+[node name="PlayerController" parent="." instance=ExtResource( 2 )]
+position = Vector2( 201, 696 )
 
 [node name="Ability" parent="." instance=ExtResource( 18 )]
 position = Vector2( 136, 616 )
@@ -92,10 +95,6 @@ start_speed = Vector2( 420, 0 )
 position = Vector2( 656, 32 )
 bounce = false
 
-[node name="Platform3" parent="Platforms" instance=ExtResource( 3 )]
-position = Vector2( 848, 192 )
-start_speed = Vector2( 600, 720 )
-
 [node name="Waters" type="Node2D" parent="."]
 
 [node name="Save" parent="." instance=ExtResource( 12 )]
@@ -120,8 +119,5 @@ position = Vector2( 154, 642 )
 frame = 1
 id = 1
 
-[node name="Slimy" parent="." instance=ExtResource( 21 )]
-position = Vector2( 364, 691 )
-
-[node name="PlayerController" parent="." instance=ExtResource( 2 )]
-position = Vector2( 201, 696 )
+[node name="Gorfo" parent="." instance=ExtResource( 10 )]
+position = Vector2( 91, 362 )

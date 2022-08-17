@@ -508,3 +508,5 @@ func _on_Hurtbox_hurt(source: Node):
 		if $DashTween.is_active():
 			_on_DashTween_tween_completed(null, null)
 		control_lock = CONTROLS_LOCK
+	elif (source.is_in_group("EnemyBullet")):
+		damage(source.damage)
