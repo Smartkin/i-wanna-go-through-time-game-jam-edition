@@ -182,13 +182,13 @@ func _process(delta):
 func free_transition() -> void:
 	_cur_transition = null
 
-func do_transition(speed: float = 1.0, ramp: float = 0.1, trans_color: Color = Color.black, halo_color: Color = Color.white) -> Node:
+func do_transition(dur: float = 0.7, ramp: float = 0.1, trans_color: Color = Color.black, halo_color: Color = Color.aqua) -> Node:
 	if _cur_transition != null:
 		if not _cur_transition.is_queued_for_deletion():
 			_cur_transition.queue_free()
 		free_transition()
 	_cur_transition = _transition.instance()
-	_cur_transition.trans_speed = speed
+	_cur_transition.dur = dur
 	_cur_transition.ramp = ramp
 	_cur_transition.trans_color = trans_color
 	_cur_transition.halo_color = halo_color
@@ -392,6 +392,14 @@ func save_game(save_pos: Vector2 = Vector2(-100000, -100000)) -> void:
 		cur_save_data.reverse_grav = reverse_grav
 		# Save the data to a file
 		save_to_file(false)
+		take_screenshot()
+
+
+func take_screenshot() -> void:
+	var image = get_viewport().get_texture().get_data()
+	image.flip_y()
+	image.save_png("user://screencap%d.png" % save_slot)
+
 
 # Load game data for a chosen save slot
 func get_game_data(slot: int) -> Dictionary:

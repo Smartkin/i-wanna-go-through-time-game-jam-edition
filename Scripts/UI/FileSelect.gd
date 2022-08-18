@@ -21,6 +21,15 @@ func _ready() -> void:
 			label.text = "Death: " + str(save_data.deaths)
 			label.text += "\nTime: " + WorldController.get_time_string_formatted(save_data.time)
 #			label.text += "\nScene: " + str(save_data.sceneName)
+			var dir := Directory.new()
+			if dir.file_exists(("user://screencap%d.png" % WorldController.save_slot)):
+				var image = Image.new()
+				image.load("user://screencap%d.png" % WorldController.save_slot)
+				var texture = ImageTexture.new()
+				texture.create_from_image(image)
+				texture.set_size_override(Vector2(213, 120))
+				var screencap := get_node("SaveSlots/Save " + str(i + 1) +"/HBoxContainer/ScreenCap") as TextureRect
+				screencap.texture = texture
 		else:
 			var load_button := get_node("SaveSlots/Save " + str(i + 1) +"/HBoxContainer/MarginContainer/NewOrLoad/Load") as Button
 			load_button.disabled = true
