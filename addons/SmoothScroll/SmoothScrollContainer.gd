@@ -10,6 +10,8 @@ export(float, 100, 1000) var speed = 200
 export(float, 5, 30) var friction = 10
 # How quick the scroll bar returns when overshot
 export(float, 10, 100) var pullback = 30
+# Drag impact from device input
+export(float, 100, 1000) var device_speed = 450
 
 
 # Current velocity of the `content_node`
@@ -43,17 +45,11 @@ func _process(delta: float) -> void:
 	# Distance between content_node and top of the scroll box
 	var top_distance:= content_node.rect_position.y
 	
-	# If overdragged on bottom:
-	if bottom_distance< 0 :
-		over_drag_multiplicator_bottom = 1/abs(bottom_distance)*10
-	else:
-		over_drag_multiplicator_bottom = 1
-	
-	# If overdragged on top:
-	if top_distance> 0:
-		over_drag_multiplicator_top = 1/abs(top_distance)*10
-	else:
-		over_drag_multiplicator_top = 1
+	# Check for joystick or keyboard input
+	if Input.is_action_just_pressed("down") and bottom_distance > 0:
+		velocity.y -= device_speed
+	if Input.is_action_just_pressed("up") and top_distance < 0:
+		velocity.y += device_speed
 	
 	# Simulate friction
 	velocity = velocity.move_toward(Vector2.ZERO, (velocity.length()*friction) * delta)

@@ -26,11 +26,9 @@ func _joy_connection_changed(id: int, connected: bool) -> void:
 func _check_for_controllers() -> void:
 	if Input.get_connected_joypads().size() > 0:
 		print(Input.get_joy_name(0))
-		$KeyboardSettings.hide()
-		$ControllerSettings.show()
+		$ControllerSettings.disabled = false
 	else:
-		$KeyboardSettings.show()
-		$ControllerSettings.hide()
+		$ControllerSettings.disabled = true
 
 
 func _on_MusicCheckbox_toggled(button_pressed: bool) -> void:
