@@ -126,14 +126,20 @@ func _on_Player_damaged():
 
 
 func _on_CheckpointTeleport_timeout():
-	if (instance_from_id(WorldController.cur_save_data.save_id) != null):
-		var come_back_tween = create_tween()
-		come_back_tween.tween_property($Camera, "global_position", \
-			instance_from_id(WorldController.cur_save_data.save_id).global_position, \
-			1.0).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
-		come_back_tween.parallel().tween_property($Player, "global_position", \
-			Vector2(WorldController.cur_save_data.playerPosX, WorldController.cur_save_data.playerPosY), \
-			1.0).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
-		come_back_tween.tween_callback($Player, "return_to_live")
-		player_dead = false
-		$Player.health = WorldController.cur_save_data.health
+	var player_save_pos := Vector2(WorldController.cur_save_data.playerPosX, WorldController.cur_save_data.playerPosY)
+	var come_back_tween := create_tween()
+	come_back_tween.tween_property($Camera, "global_position", \
+		player_save_pos, \
+		1.0).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+	come_back_tween.parallel().tween_property($Player, "global_position", \
+		player_save_pos, \
+		1.0).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+	come_back_tween.parallel().tween_property($Player, "global_position", \
+		player_save_pos, \
+		1.0).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+	come_back_tween.parallel().tween_property($Blood, "global_position", \
+		player_save_pos, \
+		1.0).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+	come_back_tween.tween_callback($Player, "return_to_live")
+	player_dead = false
+	$Player.health = WorldController.cur_save_data.health

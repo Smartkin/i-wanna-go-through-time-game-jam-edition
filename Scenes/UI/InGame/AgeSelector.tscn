@@ -23,9 +23,20 @@ anchor_bottom = 0.5
 margin_top = -22.5
 margin_bottom = 22.5
 
+[node name="GuyAge" type="Button" parent="VFlowContainer"]
+unique_name_in_owner = true
+margin_right = 326.0
+margin_bottom = 45.0
+size_flags_horizontal = 3
+theme = SubResource( 2 )
+text = "Guy age"
+script = ExtResource( 2 )
+age_scene = "res://Rooms/Ages/GuyAge.tscn"
+
 [node name="IceAge" type="Button" parent="VFlowContainer"]
 unique_name_in_owner = true
-margin_right = 598.0
+margin_left = 330.0
+margin_right = 639.0
 margin_bottom = 45.0
 size_flags_horizontal = 3
 theme = SubResource( 2 )
@@ -34,13 +45,5 @@ script = ExtResource( 2 )
 age_scene = "res://Rooms/Ages/IceAge.tscn"
 required_chip = 1
 
-[node name="AnotherAge" type="Button" parent="VFlowContainer"]
-margin_left = 602.0
-margin_right = 1280.0
-margin_bottom = 45.0
-size_flags_horizontal = 3
-theme = SubResource( 2 )
-text = "Another age"
-script = ExtResource( 2 )
-
+[connection signal="pressed" from="VFlowContainer/GuyAge" to="." method="_on_IceAge_pressed"]
 [connection signal="pressed" from="VFlowContainer/IceAge" to="." method="_on_IceAge_pressed"]

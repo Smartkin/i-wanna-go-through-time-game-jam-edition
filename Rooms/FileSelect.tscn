@@ -21,7 +21,7 @@ anchor_bottom = 1.0
 focus_mode = 2
 theme = SubResource( 2 )
 script = ExtResource( 3 )
-start_scene = "res://TestBed.tscn"
+start_scene = "res://Rooms/Ages/GuyAge.tscn"
 
 [node name="TileMap" parent="." instance=ExtResource( 1 )]
 visible = false

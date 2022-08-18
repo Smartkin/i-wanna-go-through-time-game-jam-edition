@@ -1,7 +1,7 @@
 class_name Chip
 extends Sprite
 
-enum CHIPS {TEST, ICE_AGE, INVALID = -1}
+enum CHIPS {GUY_AGE, ICE_AGE, INVALID = -1}
 export(CHIPS) var id = CHIPS.INVALID
 
 func _on_scene_built() -> void:
