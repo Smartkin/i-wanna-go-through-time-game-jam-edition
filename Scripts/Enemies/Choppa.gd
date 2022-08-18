@@ -1,4 +1,4 @@
-tool
+#tool
 extends Gorfo
 
 export(float, 0.0, 1000.0, 0.5) var x_mov = 64.0
@@ -17,6 +17,7 @@ onready var nav_agent := $ReturnNavAgent
 func _ready():
 	._ready()
 	timer = $Chasing
+	get_parent().get_node("%NavLine").global_position = Vector2.ZERO
 
 
 func _physics_process(delta):
@@ -37,7 +38,10 @@ func _die():
 	$Proximity.set_deferred("monitoring", false)
 
 func _when_chase(delta: float, binds: Array):
-	pass
+	vis_ray.cast_to = target_player.global_position - vis_ray.global_position
+	if $PlayerVisibility.get_collider() as Player == null:
+		timer.stop()
+		has_target = false
 
 func _when_fly(delta: float, binds: Array):
 	_do_movement(delta)
@@ -47,15 +51,18 @@ func _when_return(delta: float, binds: Array):
 	search_player()
 	var cur_pos = global_position
 	var next = nav_agent.get_next_location()
+	print(next)
 	if _path.size() > 0 and not step_flight:
 		var vel = cur_pos.direction_to(next) * lunge_speed
 		var fly := create_tween()
 		fly.tween_method(nav_agent, "set_velocity", vel, Vector2.ZERO, 1.0)
 		fly.tween_callback(self, "fly_again")
 		step_flight = true
-		
-	if (cur_pos.distance_to(next) < 1):
+	var target = nav_agent.get_target_location()
+	if (cur_pos.distance_to(target) < 9):
 		_path.remove(0)
+#		step_flight = false
+		get_parent().get_node("%NavLine").points = _path
 		if _path.size():
 			nav_agent.set_target_location(_path[0])
 		else:
@@ -70,11 +77,13 @@ func fly(sp: float):
 	if (target_player != null):
 		var dir := global_position.direction_to(target_player.global_position)
 		move_and_slide(dir * sp, Vector2.UP)
+		$Sprite.flip_h = -1 if dir.x < 0 else 1
 
 func fly_again():
 	step_flight = false
 
 func fly_home(sp: Vector2):
+	$Sprite.flip_h = -1 if sp.x < 0 else 1
 	move_and_slide(sp, Vector2.UP)
 
 func get_agent_rid() -> RID:

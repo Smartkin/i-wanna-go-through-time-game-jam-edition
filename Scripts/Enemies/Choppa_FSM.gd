@@ -20,6 +20,8 @@ func _enter_state(new_state: State, old_state: State):
 			var path = Navigation2DServer.map_get_path(parent.get_agent_rid(), parent.global_position, parent.home, true)
 			path.remove(0)
 			parent.navigate(path)
+			parent.get_parent().get_node("%NavLine").points = path
+			print(parent.get_parent().get_node("%NavLine").points)
 
 # Write the logic for when the current state is exited
 func _exit_state(old_state: State, new_state: State):
