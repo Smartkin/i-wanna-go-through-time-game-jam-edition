@@ -12,9 +12,8 @@ onready var init_speed := speed
 onready var anim := $Sprite
 
 func _when_walk(delta: float, binds: Array):
-	move_and_collide(speed * delta)
 	# Wall check
-	move_and_slide(Vector2.ZERO, Vector2.UP)
+	move_and_slide(speed, Vector2.UP)
 	print(speed)
 	_on_land = false
 	$Sprite.flip_h = speed.x < 0

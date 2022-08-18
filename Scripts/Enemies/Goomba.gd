@@ -7,9 +7,8 @@ var _player_above := false
 onready var anim := $Sprite
 
 func _when_walk(delta: float, binds: Array):
-	move_and_collide(Vector2(speed, 0) * delta)
 	# Wall check
-	move_and_slide(Vector2.ZERO, Vector2.UP)
+	move_and_slide(Vector2(speed, 0), Vector2.UP)
 	if _on_edge() or is_on_wall():
 		speed = -speed
 		$Sprite.flip_h = speed < 0

@@ -38,9 +38,8 @@ func search_player():
 func walk(sp: int):
 	sp = -sp if reverse_speed else sp
 	speed = sp
-	move_and_collide(Vector2(sp, 0) * get_physics_process_delta_time())
 	# Wall check
-	move_and_slide(Vector2.ZERO, Vector2.UP)
+	move_and_slide(Vector2(sp, 0), Vector2.UP)
 	$Sprite.flip_h = reverse_speed
 	$Proximity.scale.x = -1 if reverse_speed else 1
 	if _on_edge() or is_on_wall():
