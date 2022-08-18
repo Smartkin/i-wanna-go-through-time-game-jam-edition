@@ -99,6 +99,8 @@ func _ready() -> void:
 	$Sprite.play(_get_animation("Idle")) # Set default sprite animation to idle
 
 func _physics_process(delta: float) -> void:
+	if (cur_state == STATE.DEAD):
+		return
 	# Check if player is currently on floor
 	if (is_on_floor()):
 		if (cur_state == STATE.GRAB): # Something was being grabbed set free
@@ -260,8 +262,6 @@ func dash(direction: int = DIRECTION_H.IDLE) -> void:
 func return_to_live():
 	visible = true
 	states_stack.clear()
-	grabbables.clear()
-	waters.clear()
 	_switch_state(STATE.RUN)
 
 # Player shooting logic
@@ -292,7 +292,6 @@ func kill() -> void:
 		emit_signal("dead", global_position) # Tell player controller to do all the necessary post death logic
 		_switch_state(STATE.DEAD)
 	visible = false
-	camera_areas.clear()
 
 func _get_animation(name: String) -> String:
 	if not WorldController.check_item(Ability.ABILITIES.SHOOT) and not WorldController.check_item(Ability.ABILITIES.DOUBLE_JUMP):

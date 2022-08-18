@@ -9,6 +9,7 @@ var stats := {
 	hp = 1,
 	power = 1
 }
+var dead := false
 
 func _ready():
 	$Hurtbox.connect("body_entered", self, "_on_Hurtbox_body_entered")
@@ -22,6 +23,7 @@ func _player_enter():
 
 # Virtual function on running out of HP/dying
 func _die():
+	dead = true
 	emit_signal("died")
 	queue_free()
 

@@ -1,9 +1,11 @@
-#tool
+tool
 extends Gorfo
 
 export(float, 0.0, 1000.0, 0.5) var x_mov = 64.0
 export(float, 0.0, 1000.0, 0.5) var y_mov = 64.0
 export(float, 50.0, 400.0, 0.5) var lunge_speed = 100.0
+
+const propeller = preload("res://Scenes/Hazards/ChoppaPropeller.tscn")
 
 var _time := 0.0
 var _path: Array = []
@@ -25,6 +27,14 @@ func _do_movement(delta: float):
 	_time += delta * 100
 	position.x = cos(deg2rad(_time)) * x_mov
 	position.y = sin(deg2rad(_time)) * y_mov
+
+func _die():
+	dead = true
+	emit_signal("died")
+	anim.play("pop")
+	$Hitbox.set_deferred("monitoring", false)
+	$Hurtbox.set_deferred("monitoring", false)
+	$Proximity.set_deferred("monitoring", false)
 
 func _when_chase(delta: float, binds: Array):
 	pass
@@ -58,7 +68,7 @@ func navigate(path: Array) -> void:
 
 func fly(sp: float):
 	if (target_player != null):
-		var dir = global_position.direction_to(target_player.global_position)
+		var dir := global_position.direction_to(target_player.global_position)
 		move_and_slide(dir * sp, Vector2.UP)
 
 func fly_again():
@@ -80,3 +90,13 @@ func _on_Flying_timeout():
 
 func _on_ReturnNavAgent_velocity_computed(safe_velocity: Vector2):
 	fly_home(safe_velocity)
+
+
+func _on_Sprite_animation_finished():
+	if (anim.animation == "pop"):
+		var par := get_parent()
+		var prop := propeller.instance()
+		par.add_child(prop)
+		prop.global_position = global_position
+		queue_free()
+

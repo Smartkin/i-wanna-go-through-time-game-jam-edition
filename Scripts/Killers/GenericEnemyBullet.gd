@@ -5,6 +5,8 @@ signal destroyed
 var speed := Vector2.ZERO
 
 func _physics_process(delta: float):
+	if ($Sprite.animation == "destroy"):
+		return
 	position += speed * delta
 	var col = move_and_collide(Vector2.ZERO, true, true, true)
 	if (col != null):
