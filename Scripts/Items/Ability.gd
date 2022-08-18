@@ -56,5 +56,5 @@ func _on_Area2D_body_entered(body):
 	if (range(ABILITIES.GUN_1, ABILITIES.GUN_4 + 1).has(id)):
 		WorldController.cur_save_data.gun_power += 1
 	WorldController.save_item(id)
-	WorldController.save_game()
+#	WorldController.save_game()
 	queue_free()

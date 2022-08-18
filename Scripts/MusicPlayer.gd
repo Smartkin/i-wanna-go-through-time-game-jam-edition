@@ -1,7 +1,7 @@
 extends Node2D
 
 export(String) var music
-export(float, 5.0) var pitch = 1.0
+export(float, 0.1, 5.0, 0.1) var pitch = 1.0
 export(bool) var fade = false
 
 func _ready() -> void:
