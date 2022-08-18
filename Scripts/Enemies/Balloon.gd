@@ -3,12 +3,15 @@ extends EnemyInterface
 
 export(float, 0.0, 1000.0, 0.5) var x_mov := 0.0
 export(float, 0.0, 1000.0, 0.5) var y_mov := 2.0
+export(float, 0.0, 2.0) var jump_multi := 1.0
+
 var _player_above := false
+var _random_sin_offset := rand_range(0.0, 1000)
 onready var anim := $Sprite
 
 func _physics_process(delta: float):
-	position.x = cos(deg2rad(Time.get_ticks_msec() / 10.0)) * x_mov
-	position.y = sin(deg2rad(Time.get_ticks_msec() / 10.0)) * y_mov
+	position.x = cos(deg2rad((Time.get_ticks_msec()+_random_sin_offset) / 10.0)) * x_mov
+	position.y = sin(deg2rad((Time.get_ticks_msec()+_random_sin_offset) / 10.0)) * y_mov
 
 func _jumped_on(delta: float) -> bool:
 	return _player_above
@@ -38,7 +41,7 @@ func _on_Jumpbox_body_entered(body: Player):
 	if body.speed.y <= 0:
 		return
 	_player_above = true
-	body.speed.y = body.jump_height * 1.5
+	body.speed.y = body.jump_height * jump_multi
 
 
 func _on_Jumpbox_body_exited(body):

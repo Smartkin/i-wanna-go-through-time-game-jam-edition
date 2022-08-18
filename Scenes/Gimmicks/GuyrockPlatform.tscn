@@ -1,0 +1,112 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Scripts/Platform/PlatformSprite.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Platform/Platform.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Platform/CollisionChecker.gd" type="Script" id=3]
+[ext_resource path="res://Sprites/Gimmicks/guyrock_platform.png" type="Texture" id=4]
+
+[sub_resource type="Shader" id=4]
+code = "shader_type canvas_item;
+
+uniform vec2 scale;
+
+uniform int right;
+uniform int top;
+uniform int left;
+uniform int bottom;
+
+float map(float value, float originalMin, float originalMax, float newMin, float newMax) {
+    return (value - originalMin) / (originalMax - originalMin) * (newMax - newMin) + newMin;
+} 
+
+float process_axis(float coord, float pixel, float texture_pixel, float start, float end) {
+	if (coord > 1.0 - end * pixel) {
+		return map(coord, 1.0 - end * pixel, 1.0, 1.0 - texture_pixel * end, 1.0);
+	} else if (coord > start * pixel) {
+		return map(coord, start * pixel, 1.0 - end * pixel, start * texture_pixel, 1.0 - end * texture_pixel);
+	} else {
+		return map(coord, 0.0, start * pixel, 0.0, start * texture_pixel);
+	}
+}
+
+void fragment() {
+	vec2 pixel_size = TEXTURE_PIXEL_SIZE / scale;
+	
+	vec2 mappedUV = vec2(
+		process_axis(UV.x, pixel_size.x, TEXTURE_PIXEL_SIZE.x, float(left), float(right)),
+		process_axis(UV.y, pixel_size.y, TEXTURE_PIXEL_SIZE.y, float(top), float(bottom))
+	);
+	COLOR = texture(TEXTURE, mappedUV);
+}"
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
+shader_param/scale = Vector2( 2, 1 )
+shader_param/right = 8
+shader_param/top = 8
+shader_param/left = 8
+shader_param/bottom = 2
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 5 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 7, 4 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 16, 8 )
+
+[node name="Platform" type="KinematicBody2D" groups=["GravityAffected", "Platforms"]]
+collision_layer = 2
+collision_mask = 5
+collision/safe_margin = 0.5
+motion/sync_to_physics = true
+moving_platform_apply_velocity_on_leave = 2
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 5 )
+position = Vector2( 16, 5 )
+scale = Vector2( 2, 1 )
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 16, 10 )
+script = ExtResource( 1 )
+
+[node name="Debug" type="RichTextLabel" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 16.0
+margin_bottom = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 8, 5 )
+shape = SubResource( 1 )
+one_way_collision = true
+
+[node name="CollisionChecker" type="KinematicBody2D" parent="."]
+visible = false
+position = Vector2( 0, -8 )
+collision_layer = 0
+collision_mask = 4
+motion/sync_to_physics = true
+moving_platform_apply_velocity_on_leave = 2
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionChecker"]
+position = Vector2( 8, 13 )
+shape = SubResource( 2 )
+
+[node name="GrabArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea"]
+visible = false
+position = Vector2( 16, 8 )
+shape = SubResource( 3 )
+
+[connection signal="block_collision" from="CollisionChecker" to="." method="on_block_collision"]
+[connection signal="body_entered" from="GrabArea" to="." method="_on_GrabArea_body_entered"]
+[connection signal="body_exited" from="GrabArea" to="." method="_on_GrabArea_body_exited"]
