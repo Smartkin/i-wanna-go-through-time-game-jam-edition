@@ -4,7 +4,7 @@
 [ext_resource path="res://Scripts/Killers/AutoSpike.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 8, 8 )
+extents = Vector2( 7, 7 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 3 )
@@ -172,7 +172,6 @@ moving_platform_apply_velocity_on_leave = 2
 script = ExtResource( 2 )
 
 [node name="BlockChecker" type="Area2D" parent="."]
-position = Vector2( 6.12303e-17, 1 )
 collision_layer = 0
 collision_mask = 4
 
