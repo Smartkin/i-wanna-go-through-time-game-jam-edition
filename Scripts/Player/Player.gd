@@ -33,15 +33,17 @@ const DOWN := Vector2.DOWN
 const GROUND_SNAP := Vector2.DOWN * 10
 const REVERSE_SNAP := Vector2.UP * 10
 const DEBUG_OUTPUT_RATE := 60
-const MAX_COYOTE := 2
-const MAX_JUMP_BUFFER := 2
-const MAX_DOWN_BUFFER := 10
-const DEFAULT_RUN := 190
-const DEFAULT_FALL := 420
-const DEFAULT_JUMP := 450
-const DEFAULT_DJUMP := 350
-const DEFAULT_GRAV := 20
-const DEFAULT_DASH_POWER := 1500
+const MAX_COYOTE := 4
+const MAX_JUMP_BUFFER := 5
+const MAX_DOWN_BUFFER := 15
+const DEFAULT_RUN := 130
+const DEFAULT_FRICTION := 20
+const DEFAULT_ACCEL := 15
+const DEFAULT_FALL := 350
+const DEFAULT_JUMP := 330
+const DEFAULT_DJUMP := 290
+const DEFAULT_GRAV := 13
+const DEFAULT_DASH_POWER := 800
 const DASH_IFRAMES := 10
 const MAX_SLOP_ANGLE := deg2rad(50)
 const VINE_SLIDE_OFFSET := Vector2(9, 6)
@@ -52,6 +54,7 @@ const CONTROLS_LOCK := 60
 # Public
 var speed := Vector2.ZERO
 var snap := GROUND_SNAP
+var move_direction : int = DIRECTION_H.IDLE
 var can_jump := true
 var can_djump := true
 var can_dash := true
@@ -71,6 +74,8 @@ var camera_areas: Array = []
 var grav_dir := UP
 var cur_snap := GROUND_SNAP
 var run_speed := DEFAULT_RUN
+var run_friction := DEFAULT_FRICTION
+var run_accel := DEFAULT_ACCEL
 var fall_speed := DEFAULT_FALL
 var jump_height := -DEFAULT_JUMP
 var djump_height := -DEFAULT_DJUMP
@@ -163,7 +168,7 @@ func _physics_process(delta: float) -> void:
 	# Handle current sprite depending on player's state
 	match cur_state:
 		STATE.RUN:
-			if (speed.x == 0 && is_on_floor() && !set_run_sprite):
+			if (move_direction == DIRECTION_H.IDLE && is_on_floor() && !set_run_sprite):
 				$Sprite.play(_get_animation("Idle"))
 			if (get_falling()):
 				$Sprite.play(_get_animation("Fall"))
@@ -237,22 +242,27 @@ func get_grab_direction() -> int:
 	return priority_grabbed.type
 
 # Player running logic
-func run(direction: int = DIRECTION_H.IDLE) -> void:
-	speed.x = run_speed * direction
-	if (direction != DIRECTION_H.IDLE):
-		face_direction = direction
+func run() -> void:
+	if move_direction == DIRECTION_H.IDLE:
+		if is_on_wall():
+			speed.x = 0
+		speed.x = lerp(speed.x, 0.0, run_friction * get_physics_process_delta_time())
+	else:
+		speed.x = lerp(speed.x, run_speed * move_direction, run_accel * get_physics_process_delta_time())
+	if (move_direction != DIRECTION_H.IDLE):
+		face_direction = move_direction
 		if (is_on_floor()):
 			set_run_sprite = true
 			$Sprite.play(_get_animation("Run"))
-		$Sprite.flip_h = (direction == DIRECTION_H.LEFT)
-		_mirror_hitbox_hor(direction)
+		$Sprite.flip_h = (move_direction == DIRECTION_H.LEFT)
+		_mirror_hitbox_hor()
 
-func dash(direction: int = DIRECTION_H.IDLE) -> void:
-	if direction == DIRECTION_H.IDLE:
-		direction = -1 if $Sprite.flip_h else 1
+func dash() -> void:
+#	if move_direction == DIRECTION_H.IDLE:
+#		move_direction = -1 if $Sprite.flip_h else 1
 	iframes = DASH_IFRAMES
-	$DashTween.interpolate_property(self, "speed", Vector2(DEFAULT_DASH_POWER * direction, 0), \
-		Vector2(DEFAULT_DASH_POWER * direction, 0), 0.08, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	$DashTween.interpolate_property(self, "speed", Vector2(DEFAULT_DASH_POWER * face_direction, 0), \
+		Vector2(DEFAULT_DASH_POWER * face_direction, 0), 0.08, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	$DashTween.start()
 	can_dash = false
 	gravity = 0
@@ -266,16 +276,16 @@ func return_to_live():
 
 # Player shooting logic
 func shoot() -> void:
-	var direction = face_direction
+	var dir = face_direction
 	if (cur_state == STATE.GRAB): # If we are grabbed onto something allow to manipulate shoot direction logic
 		var grab: GrabbableBase = grabbables.back()
 		var type = grab.getType()
 		match type:
 			GrabbableBase.TYPE.LEFT:
-				direction = DIRECTION_H.RIGHT
+				dir = DIRECTION_H.RIGHT
 			GrabbableBase.TYPE.RIGHT:
-				direction = DIRECTION_H.LEFT
-	emit_signal("shoot", direction) # Tell player controller to create a bullet
+				dir = DIRECTION_H.LEFT
+	emit_signal("shoot", dir) # Tell player controller to create a bullet
 
 func damage(amount: int) -> void:
 	if (iframes > 0 or cur_state == STATE.DEAD):
@@ -375,10 +385,10 @@ func _mirror_against_pivot(direction: int, origin: float, distance: float) -> fl
 	return origin - 2 * distance if (direction == DIRECTION_H.LEFT) else origin
 
 # Mirrors player's hitbox around X axis against a central pivot point
-func _mirror_hitbox_hor(direction: int) -> void:
-	$Hitbox.position.x = _mirror_against_pivot(direction, collision_start_pos.x, collision_pivot_distance.x)
-	$DotKid.position.x = _mirror_against_pivot(direction, collision_start_pos.x, collision_pivot_distance.x)
-	$GrabHitbox/CollisionShape2D.position.x = _mirror_against_pivot(direction, grab_start_pos.x, grab_pivot_distance.x)
+func _mirror_hitbox_hor(dir: int = face_direction) -> void:
+	$Hitbox.position.x = _mirror_against_pivot(dir, collision_start_pos.x, collision_pivot_distance.x)
+	$DotKid.position.x = _mirror_against_pivot(dir, collision_start_pos.x, collision_pivot_distance.x)
+	$GrabHitbox/CollisionShape2D.position.x = _mirror_against_pivot(dir, grab_start_pos.x, grab_pivot_distance.x)
 
 # Mirrors player's hitbox around Y axis against a central pivot point
 func _mirror_hitbox_ver(direction: int) -> void:
@@ -439,22 +449,22 @@ func _handle_inputs() -> void:
 	if (Input.is_action_pressed("suicide")):
 		kill()
 		return
-	var direction: int = DIRECTION_H.IDLE
+	move_direction = DIRECTION_H.IDLE
 	var action := "right"
 	if (Input.is_action_pressed("right")):
-		direction = DIRECTION_H.RIGHT
+		move_direction = DIRECTION_H.RIGHT
 	elif (Input.is_action_pressed("left")):
-		direction = DIRECTION_H.LEFT
+		move_direction = DIRECTION_H.LEFT
 	# Check for player state
 	match cur_state:
 		STATE.RUN:
-			run(direction)
+			run()
 			if (can_dash and WorldController.check_item(Ability.ABILITIES.DASH) and Input.is_action_just_pressed("dash")):
-				dash(direction)
+				dash()
 				_switch_state(STATE.DASH)
 		STATE.GRAB:
-			run(direction)
-			action = _slide_on_grab(direction)
+			run()
+			action = _slide_on_grab(move_direction)
 	# Handle dotkid
 	if (can_jump || platform != null):
 		if (Input.is_action_just_pressed("down") and WorldController.check_item(Ability.ABILITIES.DOT_KID)):

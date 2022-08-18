@@ -1,6 +1,6 @@
 extends EnemyInterface
 
-export var speed := 200
+export var speed := 70
 var _player_above := false
 
 
