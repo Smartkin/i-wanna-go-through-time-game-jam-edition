@@ -84,7 +84,7 @@ extents = Vector2( 16, 12 )
 
 [node name="TimeMachine" type="AnimatedSprite"]
 frames = SubResource( 19 )
-frame = 12
+frame = 15
 playing = true
 centered = false
 offset = Vector2( -12, -24 )

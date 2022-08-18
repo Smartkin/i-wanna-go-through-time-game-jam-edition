@@ -23,7 +23,7 @@ extents = Vector2( 640, 184 )
 extents = Vector2( 320, 180 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 320, 180 )
+extents = Vector2( 320, 182 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 320, 178 )
@@ -41,6 +41,9 @@ __meta__ = {
 
 [node name="CameraArea" parent="CameraAreas" instance=ExtResource( 12 )]
 position = Vector2( 640, 0 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraAreas/CameraArea"]
 self_modulate = Color( 0.196078, 0.862745, 0.439216, 0.196078 )
@@ -48,27 +51,25 @@ position = Vector2( 640, 184 )
 shape = SubResource( 1 )
 
 [node name="CameraArea2" parent="CameraAreas" instance=ExtResource( 12 )]
-position = Vector2( 640, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraAreas/CameraArea2"]
 self_modulate = Color( 0.333333, 0.85098, 0.741176, 0.266667 )
-position = Vector2( -320, 184 )
+position = Vector2( 320, 180 )
 shape = SubResource( 2 )
 
 [node name="CameraArea3" parent="CameraAreas" instance=ExtResource( 12 )]
-position = Vector2( 640, 0 )
+position = Vector2( 1280, 360 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraAreas/CameraArea3"]
-self_modulate = Color( 0.85098, 0.333333, 0.831373, 0.266667 )
-position = Vector2( 960, 540 )
+position = Vector2( 320, 178 )
 shape = SubResource( 3 )
 
 [node name="CameraArea4" parent="CameraAreas" instance=ExtResource( 12 )]
-position = Vector2( 640, 0 )
+position = Vector2( 1280, 720 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraAreas/CameraArea4"]
 self_modulate = Color( 1, 0.639216, 0.254902, 0.321569 )
-position = Vector2( 960, 898 )
+position = Vector2( 320, 184 )
 shape = SubResource( 4 )
 
 [node name="PlayerController" parent="." instance=ExtResource( 2 )]
@@ -76,7 +77,7 @@ position = Vector2( 752, 272 )
 
 [node name="TimeMachine" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1600, 896 )
-frame = 14
+frame = 2
 __meta__ = {
 "_edit_group_": true
 }

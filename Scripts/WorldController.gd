@@ -430,7 +430,7 @@ func load_game(loadFromSave := false) -> void:
 	cur_save_data = _save_data.duplicate(true)
 	# Load data
 	reverse_grav = _save_data.reverse_grav
-	tree.change_scene(_save_data.scene)
+	Util.change_scene_transition(_save_data.scene)
 
 func save_to_file(save_death_time: bool = true) -> void:
 	# Create/Open save file

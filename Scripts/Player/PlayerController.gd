@@ -10,6 +10,7 @@ var player_dead := false
 var _camera_follow_player_state := {}
 var _cam_lock := false
 var _cam_manip := false
+var limits_to_set := {}
 
 func _ready():
 	_camera_follow_player_state = {
@@ -106,7 +107,11 @@ func reset_camera():
 	$Camera.limit_bottom = _camera_follow_player_state.limit_bottom
 	$Camera.limit_right = _camera_follow_player_state.limit_right
 	$Camera.limit_left = _camera_follow_player_state.limit_left
-	_cam_lock = false
+	
+	limits_to_set.limit_top = $Camera.limit_top
+	limits_to_set.limit_left = $Camera.limit_left
+	limits_to_set.limit_bottom = $Camera.limit_bottom
+	limits_to_set.limit_right = $Camera.limit_right
 
 func lock_camera(pos: Vector2, size: Vector2):
 	$Camera.limit_smoothed = true
@@ -119,18 +124,32 @@ func lock_camera(pos: Vector2, size: Vector2):
 		size.x = view_size.x
 	
 	var cam = $Camera
-	cam.limit_top = pos.y
-	cam.limit_left = pos.x
+	if not _cam_lock:
+		cam.limit_top = pos.y
+		cam.limit_left = pos.x
+		
+		cam.limit_bottom = cam.limit_top + size.y
+		cam.limit_right = cam.limit_left + size.x
 	
-	cam.limit_bottom = cam.limit_top + size.y
-	cam.limit_right = cam.limit_left + size.x
-	_cam_lock = true
+	limits_to_set.limit_top = pos.y
+	limits_to_set.limit_left = pos.x
+	
+	limits_to_set.limit_bottom = cam.limit_top + size.y
+	limits_to_set.limit_right = cam.limit_left + size.x
 
 func _on_Player_damaged():
 	$Sounds/Death.play()
 
+func _cam_unlock():
+	_cam_lock = false
+	var cam = $Camera
+	cam.limit_top = limits_to_set.limit_top
+	cam.limit_left = limits_to_set.limit_left
+	cam.limit_bottom = limits_to_set.limit_bottom
+	cam.limit_right = limits_to_set.limit_right
 
 func _on_CheckpointTeleport_timeout():
+	_cam_lock = true
 	var player_save_pos := Vector2(WorldController.cur_save_data.playerPosX, WorldController.cur_save_data.playerPosY)
 	var come_back_tween := create_tween()
 	come_back_tween.tween_property($Camera, "global_position", \
@@ -146,5 +165,6 @@ func _on_CheckpointTeleport_timeout():
 		player_save_pos, \
 		1.0).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
 	come_back_tween.tween_callback($Player, "return_to_live")
+	come_back_tween.tween_callback(self, "_cam_unlock")
 	player_dead = false
 	$Player.health = WorldController.cur_save_data.health
