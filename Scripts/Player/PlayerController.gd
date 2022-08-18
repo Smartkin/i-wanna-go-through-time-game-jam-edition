@@ -9,6 +9,7 @@ var player_dead := false
 
 var _camera_follow_player_state := {}
 var _cam_lock := false
+var _cam_manip := false
 
 func _ready():
 	_camera_follow_player_state = {
@@ -19,7 +20,7 @@ func _ready():
 	}
 
 func _physics_process(delta: float) -> void:
-	if (not player_dead):
+	if (not player_dead and not _cam_manip):
 		$Camera.position = $Player.position
 
 
@@ -39,6 +40,10 @@ func _input(event: InputEvent) -> void:
 			print($Camera.zoom.length())
 			if ($Camera.zoom.x >= maxZoomOut.x):
 				$Camera.zoom = maxZoomOut
+		_cam_manip = false
+		if (Input.is_key_pressed(ord("F"))):
+			$Camera.global_position = get_global_mouse_position()
+			_cam_manip = true
 
 # Callback from WorldController when scene is changed and finishes being built
 func _on_scene_built() -> void:

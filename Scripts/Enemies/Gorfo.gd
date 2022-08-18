@@ -1,19 +1,20 @@
+class_name Gorfo
 extends EnemyInterface
 
 signal player_spotted
 
-const GorfoShot := preload("res://Scenes/Hazards/GorfoShot.tscn")
+const Shot := preload("res://Scenes/Hazards/GorfoShot.tscn")
 
-export var walk_speed := 100
+export var speed := 100
 
 var has_target := false
 var target_player: Player = null
 var reverse_speed := false
-var speed := 0
+var walk_speed := 0
 
 onready var anim := $Sprite
 onready var vis_ray := $PlayerVisibility
-
+onready var timer := $Shoot
 
 func _when_walk(delta: float, binds: Array):
 	search_player()
@@ -21,7 +22,7 @@ func _when_walk(delta: float, binds: Array):
 func _when_spit(delta: float, binds: Array):
 	vis_ray.cast_to = target_player.global_position - vis_ray.global_position
 	if $PlayerVisibility.get_collider() as Player == null:
-		$Shoot.stop()
+		timer.stop()
 		has_target = false
 
 func search_player():
@@ -31,13 +32,14 @@ func search_player():
 	if $PlayerVisibility.get_collider() as Player != null:
 		if not has_target:
 			has_target = true
-			$Shoot.start()
-			$Walking.stop()
+			timer.start()
+			if ($Walking != null):
+				$Walking.stop()
 			emit_signal("player_spotted")
 
 func walk(sp: int):
 	sp = -sp if reverse_speed else sp
-	speed = sp
+	walk_speed = sp
 	# Wall check
 	move_and_slide(Vector2(sp, 0), Vector2.UP)
 	$Sprite.flip_h = reverse_speed
@@ -46,7 +48,7 @@ func walk(sp: int):
 		reverse_speed = !reverse_speed
 
 func _on_edge() -> bool:
-	if speed > 0:
+	if walk_speed > 0:
 		return not $RightEdge.is_colliding()
 	else:
 		return not $LeftEdge.is_colliding()
@@ -62,11 +64,11 @@ func _on_Proximity_body_entered(body: Player):
 func _on_Proximity_body_exited(body):
 	target_player = null
 	has_target = false
-	$Shoot.stop()
+	timer.stop()
 
 
 func _on_Shoot_timeout():
-	var bul := GorfoShot.instance()
+	var bul := Shot.instance()
 	get_tree().current_scene.add_child(bul)
 	bul.global_position = $ShootPos.global_position
 	bul.get_node("Hitbox").speed = Vector2(target_player.global_position.x - global_position.x, -100)

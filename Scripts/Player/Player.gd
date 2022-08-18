@@ -271,7 +271,7 @@ func shoot() -> void:
 	emit_signal("shoot", direction) # Tell player controller to create a bullet
 
 func damage(amount: int) -> void:
-	if (iframes > 0):
+	if (iframes > 0 or cur_state == STATE.DEAD):
 		return
 	health -= amount
 	iframes = MAX_IFRAMES

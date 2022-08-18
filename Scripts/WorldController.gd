@@ -17,7 +17,7 @@ enum FADE_MODE {
 }
 
 # Constants
-const SAVE_FILES := 99 # Amount of save slots
+const SAVE_FILES := 3 # Amount of save slots
 const SAVE_PASSWORD := "Change me!" # Save's encryption password
 const SAVE_FILE_NAME := "save" # Save file's name
 const CONFIG_FILE_NAME := "config.cfg" # Config's file name
