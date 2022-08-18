@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Tiles/BrownBlocksTiles1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Fonts/ABeeZee-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Scripts/UI/FileSelect.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/UI/FileSelect/FileSelectTabStyle.tres" type="StyleBox" id=4]
 [ext_resource path="res://Scenes/MusicPlayer.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Fonts/big_font_outline.tres" type="DynamicFont" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -31,8 +32,11 @@ tile_data = PoolIntArray( 0, 1, 0, 1, 2, 0, 2, 2, 0, 3, 2, 0, 4, 2, 0, 5, 2, 0, 
 [node name="SaveSlots" type="TabContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 16.0
-margin_bottom = -16.0
+margin_top = 32.0
+margin_bottom = -32.0
+custom_colors/font_color_bg = Color( 1, 1, 1, 1 )
+custom_colors/font_color_fg = Color( 0.4, 0.921569, 0.835294, 1 )
+custom_fonts/font = ExtResource( 6 )
 custom_styles/tab_fg = ExtResource( 4 )
 custom_styles/tab_bg = ExtResource( 4 )
 custom_styles/panel = SubResource( 3 )
