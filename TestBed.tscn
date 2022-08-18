@@ -1,27 +1,21 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Tiles/BrownBlocksTiles1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player/PlayerController.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Gimmicks/Platform.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Hazards/DelFruit.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/Hazards/SpikeUp.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Enemies/Choppa.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Hazards/GuyrockSpike.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Enemies/Balloon.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Gimmicks/WallJumpL.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Gimmicks/WalljumpR.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/Enemies/Gorfo.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/CameraArea.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Save.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/Warp.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/MusicPlayer.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Items/Ability.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/Block.tscn" type="PackedScene" id=19]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 48, 47.5 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 48, 48 )
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( 736, 32, 832, 32, 832, 128, 736, 384, 832, 160, 800, 352, 736, 576, 736, 704, 704, 704, 704, 480, 736, 544, 864, 416, 864, 448, 736, 448, 800, 416, 704, 448, 736, 416, 832, 384, 864, 392.468, 864, 160, 832, 352, 800, 384, 960, 544, 928, 480, 992, 448, 960, 448, 960, 416, 928, 160, 928, 128, 1248, 32, 1248, 704, 960, 576, 928, 448, 960, 480, 992, 480 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 3, 2, 4, 5 ), PoolIntArray( 6, 7, 8, 9 ), PoolIntArray( 10, 6, 9 ), PoolIntArray( 11, 12, 10, 9, 13, 14 ), PoolIntArray( 9, 15, 13 ), PoolIntArray( 13, 16, 14 ), PoolIntArray( 11, 14, 17, 18 ), PoolIntArray( 19, 18, 17, 20 ), PoolIntArray( 4, 19, 20, 5 ), PoolIntArray( 3, 5, 21 ), PoolIntArray( 22, 10, 12, 23 ), PoolIntArray( 24, 25, 26 ), PoolIntArray( 26, 11, 19, 27 ), PoolIntArray( 28, 2, 1, 29 ), PoolIntArray( 27, 28, 29, 30, 24 ), PoolIntArray( 30, 7, 6, 31 ), PoolIntArray( 12, 32, 23 ), PoolIntArray( 22, 23, 33 ), PoolIntArray( 22, 33, 34, 30 ), PoolIntArray( 30, 31, 22 ), PoolIntArray( 30, 34, 24 ), PoolIntArray( 27, 24, 26 ) ]
+outlines = [ PoolVector2Array( 736, 32, 736, 384, 800, 384, 800, 352, 832, 352, 832, 384, 800, 416, 736, 416, 736, 448, 704, 448, 704, 480, 704, 704, 736, 704, 736, 576, 736, 544, 864, 448, 864, 416, 864, 392.468, 864, 160, 832, 160, 832, 128, 832, 32 ), PoolVector2Array( 928, 448, 864, 448, 736, 544, 960, 544, 960, 576, 736, 576, 736, 704, 1248, 704, 1248, 32, 832, 32, 832, 128, 928, 128, 928, 160, 864, 160, 864, 416, 960, 416, 960, 448, 992, 448, 992, 480, 960, 480, 928, 480 ) ]
 
 [node name="TestBed" type="Node2D"]
 __meta__ = {
@@ -31,32 +25,15 @@ __meta__ = {
 [node name="PlayerController" parent="." instance=ExtResource( 2 )]
 position = Vector2( 201, 696 )
 
-[node name="Ability" parent="." instance=ExtResource( 18 )]
-position = Vector2( 136, 616 )
-id = 0
-
-[node name="Ability2" parent="." instance=ExtResource( 18 )]
-position = Vector2( 232, 616 )
-frame = 2
-id = 2
-
-[node name="Ability3" parent="." instance=ExtResource( 18 )]
-position = Vector2( 192, 584 )
-frame = 7
-id = 14
-
 [node name="Tiles" parent="." instance=ExtResource( 1 )]
 cell_size = Vector2( 32, 32 )
 tile_data = PoolIntArray( 0, 3, 0, 1, 2, 0, 2, 2, 0, 3, 2, 0, 4, 2, 0, 5, 2, 0, 6, 2, 0, 7, 2, 0, 8, 2, 0, 9, 2, 0, 10, 2, 0, 11, 2, 0, 12, 2, 0, 13, 2, 0, 14, 2, 0, 15, 2, 0, 16, 2, 0, 17, 2, 0, 18, 2, 0, 19, 2, 0, 20, 2, 0, 21, 2, 0, 22, 2, 0, 23, 2, 0, 24, 2, 0, 25, 2, 0, 26, 2, 0, 27, 2, 0, 28, 2, 0, 29, 2, 0, 30, 2, 0, 31, 2, 0, 32, 2, 0, 33, 2, 0, 34, 2, 0, 35, 2, 0, 36, 2, 0, 37, 2, 0, 38, 2, 0, 39, 1, 0, 65536, 1, 0, 65575, 1, 0, 131072, 1, 0, 131111, 1, 0, 196608, 1, 0, 196615, 0, 0, 196630, 0, 0, 196647, 1, 0, 262144, 1, 0, 262151, 1, 0, 262166, 1, 0, 262170, 0, 0, 262171, 0, 0, 262172, 0, 0, 262183, 1, 0, 327680, 1, 0, 327686, 0, 0, 327687, 2, 0, 327691, 0, 0, 327692, 0, 0, 327693, 0, 0, 327694, 0, 0, 327702, 1, 0, 327719, 1, 0, 393216, 1, 0, 393221, 0, 0, 393222, 2, 0, 393226, 0, 0, 393227, 1, 0, 393228, 1, 0, 393229, 1, 0, 393230, 1, 0, 393231, 0, 0, 393238, 2, 0, 393255, 1, 0, 458752, 1, 0, 458756, 0, 0, 458762, 2, 0, 458763, 3, 0, 458764, 3, 0, 458765, 3, 0, 458766, 3, 0, 458767, 2, 0, 458791, 1, 0, 524288, 1, 0, 524299, 2, 0, 524300, 2, 0, 524301, 2, 0, 524302, 2, 0, 524327, 1, 0, 589824, 1, 0, 589825, 0, 0, 589826, 0, 0, 589863, 1, 0, 655360, 1, 0, 655371, 0, 0, 655372, 0, 0, 655373, 0, 0, 655374, 0, 0, 655375, 0, 0, 655377, 0, 0, 655378, 0, 0, 655399, 1, 0, 720896, 1, 0, 720921, 0, 0, 720935, 1, 0, 786432, 1, 0, 786433, 0, 0, 786434, 0, 0, 786435, 0, 0, 786436, 0, 0, 786437, 0, 0, 786455, 0, 0, 786456, 0, 0, 786471, 1, 0, 851968, 1, 0, 851981, 0, 0, 851982, 0, 0, 851983, 0, 0, 851984, 0, 0, 851985, 0, 0, 851990, 0, 0, 851995, 0, 0, 851996, 0, 0, 851997, 0, 0, 852007, 1, 0, 917504, 1, 0, 917513, 0, 0, 917525, 0, 0, 917533, 2, 0, 917534, 0, 0, 917543, 1, 0, 983040, 1, 0, 983079, 1, 0, 1048576, 1, 0, 1048615, 1, 0, 1114112, 1, 0, 1114119, 0, 0, 1114124, 0, 0, 1114125, 0, 0, 1114135, 0, 0, 1114136, 0, 0, 1114137, 0, 0, 1114138, 0, 0, 1114139, 0, 0, 1114140, 0, 0, 1114141, 0, 0, 1114151, 1, 0, 1179648, 1, 0, 1179665, 0, 0, 1179669, 0, 0, 1179687, 1, 0, 1245184, 1, 0, 1245223, 1, 0, 1310720, 1, 0, 1310759, 1, 0, 1376256, 1, 0, 1376295, 1, 0, 1441792, 1, 0, 1441793, 0, 0, 1441794, 0, 0, 1441795, 0, 0, 1441796, 0, 0, 1441797, 0, 0, 1441798, 0, 0, 1441799, 0, 0, 1441800, 0, 0, 1441801, 0, 0, 1441802, 0, 0, 1441803, 0, 0, 1441804, 0, 0, 1441805, 0, 0, 1441806, 0, 0, 1441807, 0, 0, 1441808, 0, 0, 1441809, 0, 0, 1441810, 0, 0, 1441811, 0, 0, 1441812, 0, 0, 1441813, 0, 0, 1441814, 0, 0, 1441815, 0, 0, 1441816, 0, 0, 1441817, 0, 0, 1441818, 0, 0, 1441819, 0, 0, 1441820, 0, 0, 1441821, 0, 0, 1441822, 0, 0, 1441823, 0, 0, 1441824, 0, 0, 1441825, 0, 0, 1441826, 0, 0, 1441827, 0, 0, 1441828, 0, 0, 1441829, 0, 0, 1441830, 0, 0, 1441831, 1, 0 )
 
+[node name="Position2D" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1024, 320 )
+
 [node name="Killers" type="Node2D" parent="."]
 position = Vector2( 0, -16 )
-
-[node name="DelFruit" parent="Killers" instance=ExtResource( 4 )]
-position = Vector2( 336, 592 )
-
-[node name="SpikeUp4" parent="Killers" instance=ExtResource( 5 )]
-position = Vector2( 544, 560 )
 
 [node name="GuyrockSpike" parent="." instance=ExtResource( 6 )]
 position = Vector2( 32, 32 )
@@ -129,13 +106,6 @@ bounce = false
 [node name="Save" parent="." instance=ExtResource( 12 )]
 position = Vector2( 144, 688 )
 
-[node name="Save2" parent="." instance=ExtResource( 12 )]
-position = Vector2( 344, 688 )
-
-[node name="Warp" parent="." instance=ExtResource( 13 )]
-position = Vector2( 976, 96 )
-warp_to = "res://TestBed2.tscn"
-
 [node name="MusicPlayer" parent="." instance=ExtResource( 15 )]
 position = Vector2( 80, 608 )
 music = "Megaman"
@@ -143,30 +113,11 @@ music = "Megaman"
 [node name="Block" parent="." instance=ExtResource( 19 )]
 position = Vector2( 480, 281 )
 
-[node name="Balloon" parent="." instance=ExtResource( 7 )]
-position = Vector2( 392, 488 )
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="."]
+visible = false
+navpoly = SubResource( 1 )
 
-[node name="Ability4" parent="." instance=ExtResource( 18 )]
-position = Vector2( 154, 642 )
+[node name="Ability" parent="." instance=ExtResource( 18 )]
+position = Vector2( 160, 632 )
 frame = 1
 id = 1
-
-[node name="Gorfo" parent="." instance=ExtResource( 10 )]
-position = Vector2( 91, 362 )
-
-[node name="CameraArea" parent="." instance=ExtResource( 11 )]
-position = Vector2( 832, 33 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraArea"]
-position = Vector2( 48, 47.5 )
-shape = SubResource( 1 )
-
-[node name="CameraArea2" parent="." instance=ExtResource( 11 )]
-position = Vector2( 864, 448 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraArea2"]
-position = Vector2( 48, 48 )
-shape = SubResource( 2 )

@@ -44,3 +44,7 @@ func _get_transition_state() -> State:
 
 func _on_Choppa_player_spotted():
 	set_state(states.chase)
+
+
+func _on_Choppa_died():
+	queue_free()
