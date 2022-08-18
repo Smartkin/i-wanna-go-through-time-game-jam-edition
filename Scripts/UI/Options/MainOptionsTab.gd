@@ -33,10 +33,11 @@ func _check_for_controllers() -> void:
 
 func _on_MusicCheckbox_toggled(button_pressed: bool) -> void:
 	WorldController.cur_config.music = button_pressed
-	if (button_pressed):
-		WorldController.play_music($"%MusicPlayer".music)
-	else:
-		WorldController.stop_music()
+	if (WorldController.music_to_play != $"%MusicPlayer".music):
+		if (button_pressed):
+			WorldController.play_music($"%MusicPlayer".music)
+		else:
+			WorldController.stop_music()
 
 
 func _on_FullscreenCheckbox_toggled(button_pressed: bool) -> void:

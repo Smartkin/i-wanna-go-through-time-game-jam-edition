@@ -31,6 +31,11 @@ anchor_bottom = 1.0
 theme = ExtResource( 3 )
 script = ExtResource( 7 )
 
+[node name="MusicPlayer" parent="." instance=ExtResource( 1 )]
+unique_name_in_owner = true
+position = Vector2( 11.7368, 10.6315 )
+music = "title"
+
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 unique_name_in_owner = true
 anchor_right = 1.0
@@ -568,12 +573,6 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="MusicPlayer" parent="." instance=ExtResource( 1 )]
-unique_name_in_owner = true
-position = Vector2( 11.7368, 10.6315 )
-music = "GuyRock"
-fade = true
 
 [connection signal="toggled" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MusicCheckbox" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MusicCheckbox_toggled"]
 [connection signal="focus_entered" from="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab/MasterVolumeContainer/MasterVolume" to="ScrollContainer/MarginContainer/OptionsTabs/MainOptionsTab" method="_on_MasterVolumeSlider_entered"]
