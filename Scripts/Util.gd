@@ -49,6 +49,12 @@ func call_group(groupName: String, funcName: String) -> void:
 func set_volume(channel: String, value: float) -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(channel), linear2db(value))
 
+func change_scene(scene: String) -> void:
+	get_tree().change_scene(scene)
+
+func change_scene_transition(scene: String) -> void:
+	var trans = WorldController.do_transition()
+	trans.connect("transition_finished", Util, "change_scene", [scene])
 
 # Integer version of abs since we use static typing abs only works with floats
 func absi(a: int) -> int:

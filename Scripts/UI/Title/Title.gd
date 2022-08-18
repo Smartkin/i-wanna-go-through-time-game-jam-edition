@@ -1,7 +1,7 @@
 extends Control
 
-onready var file_scene := preload("res://Rooms/FileSelect.tscn")
-onready var options_scene := preload("res://Rooms/Options.tscn")
+onready var file_scene := "res://Rooms/FileSelect.tscn"
+onready var options_scene := "res://Rooms/Options.tscn"
 
 
 func _ready() -> void:
@@ -9,7 +9,7 @@ func _ready() -> void:
 
 
 func _on_StartGame_pressed() -> void:
-	get_tree().change_scene_to(file_scene)
+	Util.change_scene_transition(file_scene)
 
 
 func _on_Exit_pressed() -> void:
@@ -17,4 +17,4 @@ func _on_Exit_pressed() -> void:
 
 
 func _on_Options_pressed() -> void:
-	get_tree().change_scene_to(options_scene)
+	Util.change_scene_transition(options_scene)

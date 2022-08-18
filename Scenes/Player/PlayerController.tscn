@@ -1,11 +1,10 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sounds/Player/sndDeath.wav" type="AudioStream" id=2]
 [ext_resource path="res://Sounds/Player/sndJump.wav" type="AudioStream" id=3]
 [ext_resource path="res://Sounds/Player/sndDJump.wav" type="AudioStream" id=4]
 [ext_resource path="res://Sounds/Player/sndShoot.wav" type="AudioStream" id=5]
-[ext_resource path="res://Sprites/sprGameOver_0.png" type="Texture" id=6]
 [ext_resource path="res://Scripts/Player/PlayerController.gd" type="Script" id=7]
 
 [sub_resource type="Curve" id=1]
@@ -89,26 +88,10 @@ drag_margin_bottom = 0.01
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
-[node name="CameraFollowLayer" type="CanvasLayer" parent="."]
-
-[node name="UiCentered" type="CenterContainer" parent="CameraFollowLayer"]
-margin_right = 1280.0
-margin_bottom = 720.0
-__meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="GameOver" type="TextureRect" parent="CameraFollowLayer/UiCentered"]
-visible = false
-margin_left = 261.0
-margin_top = 281.0
-margin_right = 1018.0
-margin_bottom = 439.0
-texture = ExtResource( 6 )
-stretch_mode = 4
-
 [node name="CameraTween" type="Tween" parent="."]
+
+[node name="CheckpointTeleport" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="damaged" from="Player" to="." method="_on_Player_damaged"]
 [connection signal="dashed" from="Player" to="." method="_on_Player_dashed"]
@@ -116,3 +99,4 @@ stretch_mode = 4
 [connection signal="shoot" from="Player" to="." method="_on_Player_shoot"]
 [connection signal="sound" from="Player" to="." method="_on_Player_sound"]
 [connection signal="timeout" from="BloodTimer" to="." method="_on_BloodTimer_timeout"]
+[connection signal="timeout" from="CheckpointTeleport" to="." method="_on_CheckpointTeleport_timeout"]
