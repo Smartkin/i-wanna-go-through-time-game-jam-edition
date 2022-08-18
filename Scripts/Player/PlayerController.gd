@@ -7,12 +7,20 @@ const Bullet := preload("res://Scenes/Player/Bullet.tscn")
 # Public
 var player_dead := false
 
+var _camera_follow_player_state := {}
+var _cam_lock := false
+
 func _ready():
-#	zoom_camera(0.5, false) # Set initial camera zoom
-	pass
+#	zoom_camera(0.5)
+	_camera_follow_player_state = {
+		limit_top = $Camera.limit_top,
+		limit_bottom = $Camera.limit_bottom,
+		limit_left = $Camera.limit_left,
+		limit_right = $Camera.limit_right,
+	}
 
 func _physics_process(delta: float) -> void:
-	if (!player_dead):
+	if (not player_dead):
 		$Camera.position = $Player.position
 
 
@@ -40,6 +48,7 @@ func _on_scene_built() -> void:
 		position.y = WorldController.cur_save_data.playerPosY
 		$Player.health = WorldController.cur_save_data.health
 	$Camera.current = true
+	$Camera.reset_smoothing()
 
 # Callback when player shoots
 func _on_Player_shoot(direction: int) -> void:
@@ -88,6 +97,30 @@ func zoom_camera(amount: float, smooth: bool = true, time: float = 1.0):
 		Tween.TRANS_SINE, Tween.EASE_OUT)
 	$CameraTween.start()
 
+func reset_camera():
+	$Camera.limit_top = _camera_follow_player_state.limit_top
+	$Camera.limit_bottom = _camera_follow_player_state.limit_bottom
+	$Camera.limit_right = _camera_follow_player_state.limit_right
+	$Camera.limit_left = _camera_follow_player_state.limit_left
+	_cam_lock = false
+
+func lock_camera(pos: Vector2, size: Vector2):
+	$Camera.limit_smoothed = true
+	$Camera.reset_smoothing()
+	var view_size = get_viewport_rect().size
+	if size.y < view_size.y:
+		size.y = view_size.y
+		
+	if size.x < view_size.x:
+		size.x = view_size.x
+	
+	var cam = $Camera
+	cam.limit_top = pos.y
+	cam.limit_left = pos.x
+	
+	cam.limit_bottom = cam.limit_top + size.y
+	cam.limit_right = cam.limit_left + size.x
+	_cam_lock = true
 
 func _on_Player_damaged():
 	$Sounds/Death.play()
