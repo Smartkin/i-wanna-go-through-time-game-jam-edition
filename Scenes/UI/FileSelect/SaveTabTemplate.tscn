@@ -1,80 +1,113 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/UI/SaveTabTemplate.gd" type="Script" id=1]
+[ext_resource path="res://Themes/default_theme.tres" type="Theme" id=2]
+[ext_resource path="res://Fonts/small_font_outline.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Sprites/UI/no_save_texture.png" type="Texture" id=4]
 
-[sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0.6, 0.6, 0.6, 0 )
-border_width_left = 30
-border_blend = true
-shadow_color = Color( 0, 0, 0, 0.47451 )
-shadow_size = 1
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
 
-[sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 0.25098, 0.45098, 0.709804, 0.392157 )
+uniform float tilt : hint_range(0.0, 2.0) = 0.2;
+uniform float depth : hint_range(0.0, 1.0) = 0.2;
+uniform vec2 tex_size = vec2(100, 100);
+const float PI = 3.14159265359;
 
-[sub_resource type="StyleBoxEmpty" id=2]
+void vertex() {
+	vec2 uv_offset = vec2(0.0);
+	float xt = sin(tilt * (PI/2.0));
+	float yt = sin(tilt * PI);
+	
+	if (tilt != 0.0) {
+		if(UV == vec2(0.0))
+			uv_offset = vec2(xt, -yt * depth);
+		else if(UV == vec2(1.0, 0.0))
+			uv_offset = vec2(-xt, yt * depth);
+		else if(UV == vec2(0.0, 1.0))
+			uv_offset = vec2(xt, yt * depth);
+		else
+			uv_offset = vec2(-xt, -yt * depth);
+	}
 
-[sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 1, 0, 0, 0.427451 )
-border_color = Color( 1, 1, 1, 1 )
+	VERTEX = VERTEX + (uv_offset*tex_size);
+}"
 
-[sub_resource type="StyleBoxEmpty" id=7]
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/tilt = 0.0
+shader_param/depth = 0.2
+shader_param/tex_size = Vector2( 213, 120 )
 
-[sub_resource type="StyleBoxEmpty" id=3]
-
-[sub_resource type="StyleBoxEmpty" id=1]
-
-[node name="SaveTab" type="VBoxContainer"]
+[node name="SaveTab" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 49.0
-focus_neighbour_top = NodePath("Load")
-focus_mode = 2
-alignment = 1
+custom_constants/margin_right = 60
+custom_constants/margin_top = 100
+custom_constants/margin_left = 60
+custom_constants/margin_bottom = 100
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="SaveData" type="Label" parent="."]
-margin_right = 1280.0
-margin_bottom = 331.0
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 60.0
+margin_top = 100.0
+margin_right = 580.0
+margin_bottom = 260.0
+focus_neighbour_top = NodePath("MarginContainer/NewOrLoad/Load")
+focus_mode = 2
+theme = ExtResource( 2 )
+custom_constants/separation = 40
+alignment = 1
+
+[node name="ScreenCap" type="TextureRect" parent="HBoxContainer"]
+material = SubResource( 2 )
+margin_right = 240.0
+margin_bottom = 160.0
+size_flags_horizontal = 3
+texture = ExtResource( 4 )
+stretch_mode = 6
+
+[node name="SaveData" type="Label" parent="HBoxContainer/ScreenCap"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_y = 0
+custom_fonts/font = ExtResource( 3 )
 text = "No Data"
 align = 1
 valign = 1
 
-[node name="Load" type="Button" parent="."]
-margin_top = 335.0
-margin_right = 1280.0
-margin_bottom = 500.0
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+margin_left = 280.0
+margin_right = 520.0
+margin_bottom = 160.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.5
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/focus = SubResource( 2 )
-custom_styles/disabled = SubResource( 6 )
-custom_styles/normal = SubResource( 7 )
-custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
-text = "Load"
+custom_constants/margin_top = 25
+custom_constants/margin_bottom = 25
 
-[node name="New" type="Button" parent="."]
-margin_top = 504.0
-margin_right = 1280.0
-margin_bottom = 671.0
+[node name="NewOrLoad" type="VBoxContainer" parent="HBoxContainer/MarginContainer"]
+margin_top = 25.0
+margin_right = 240.0
+margin_bottom = 135.0
+size_flags_horizontal = 3
+custom_constants/separation = 20
+
+[node name="New" type="Button" parent="HBoxContainer/MarginContainer/NewOrLoad"]
+margin_right = 240.0
+margin_bottom = 45.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/disabled = SubResource( 6 )
-custom_styles/normal = SubResource( 1 )
-custom_colors/font_color_hover = Color( 0, 0.992157, 0.827451, 0.490196 )
 text = "New"
 
-[connection signal="pressed" from="Load" to="." method="_on_Load_pressed"]
-[connection signal="pressed" from="New" to="." method="_on_New_pressed"]
+[node name="Load" type="Button" parent="HBoxContainer/MarginContainer/NewOrLoad"]
+margin_top = 65.0
+margin_right = 240.0
+margin_bottom = 110.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+text = "Load"
+
+[connection signal="pressed" from="HBoxContainer/MarginContainer/NewOrLoad/New" to="." method="_on_New_pressed"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer/NewOrLoad/Load" to="." method="_on_Load_pressed"]

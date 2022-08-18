@@ -127,6 +127,8 @@ margin_bottom = 3.0
 
 [resource]
 Button/colors/font_color_disabled = Color( 0.647059, 0.537255, 0.509804, 1 )
+Button/colors/font_color_focus = Color( 0.188235, 0.839216, 0.796078, 1 )
+Button/colors/font_color_hover = Color( 0.188235, 0.839216, 0.796078, 1 )
 Button/constants/hseparation = 4
 Button/fonts/font = ExtResource( 14 )
 Button/styles/disabled = SubResource( 5 )
@@ -134,10 +136,14 @@ Button/styles/focus = SubResource( 14 )
 Button/styles/hover = SubResource( 1 )
 Button/styles/normal = SubResource( 2 )
 Button/styles/pressed = SubResource( 4 )
+CheckBox/colors/font_color_focus = Color( 0.188235, 0.839216, 0.796078, 1 )
+CheckBox/colors/font_color_hover = Color( 0.188235, 0.839216, 0.796078, 1 )
 CheckBox/icons/checked = ExtResource( 18 )
 CheckBox/icons/checked_disabled = ExtResource( 22 )
 CheckBox/icons/unchecked = ExtResource( 15 )
 CheckBox/icons/unchecked_disabled = ExtResource( 23 )
+CheckButton/colors/font_color_focus = Color( 0.188235, 0.839216, 0.796078, 1 )
+CheckButton/colors/font_color_hover = Color( 0.188235, 0.839216, 0.796078, 1 )
 CheckButton/icons/off = ExtResource( 16 )
 CheckButton/icons/on = ExtResource( 17 )
 HSlider/icons/grabber = ExtResource( 11 )

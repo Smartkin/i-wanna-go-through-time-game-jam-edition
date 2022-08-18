@@ -23,9 +23,7 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 16, 16 )
 
-[node name="Save" type="Node2D" groups=[
-"GravityAffected",
-]]
+[node name="Save" type="Node2D" groups=["GravityAffected"]]
 script = ExtResource( 3 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
@@ -43,6 +41,7 @@ shape = SubResource( 4 )
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="Area2D" method="_on_Area2D_body_exited"]
 [connection signal="saved" from="Area2D" to="." method="onSave"]

@@ -22,7 +22,7 @@ const SAVE_PASSWORD := "Change me!" # Save's encryption password
 const SAVE_FILE_NAME := "save" # Save file's name
 const CONFIG_FILE_NAME := "config.cfg" # Config's file name
 const ENCRYPT_SAVES := false # Whether saves should be encrypted
-const TIME_FORMAT := "%02d:%02d:%02d.%03d" # Time format of 00:00:00.000
+const TIME_FORMAT := "%02d.%02d.%02d" # Time format of 00:00:00.000
 const SANDBOXED_SAVES := true # Whether saves are stored in user's APPDATA or along with exe file
 const DEBUG_MODE := true # Whether debug mode is turned on
 const EMPTY_SAVE := { # Default save data when no save is present
@@ -247,9 +247,9 @@ func get_music() -> String:
 func set_music(fileName: String) -> void:
 	music_to_play = fileName
 
-# Get time string in 00:00:00.000 format
+# Get time string in 00:00:00 format
 func get_time_string_formatted(timeJson: Dictionary) -> String:
-	return TIME_FORMAT % [timeJson.hours, timeJson.minutes, timeJson.seconds, timeJson.milliseconds]
+	return TIME_FORMAT % [timeJson.hours, timeJson.minutes, timeJson.seconds]
 
 func pause_physics() -> void:
 	_scene_tree.paused = !physics_paused

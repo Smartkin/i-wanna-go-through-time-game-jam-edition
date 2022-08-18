@@ -16,19 +16,19 @@ func _ready() -> void:
 		$SaveSlots.add_child(slot_ui)
 		# Get save data from all the slots
 		var save_data := WorldController.get_game_data(i)
-		var label := get_node("SaveSlots/Save " + str(i + 1) +"/SaveData") as Label
+		var label := get_node("SaveSlots/Save " + str(i + 1) +"/HBoxContainer/ScreenCap/SaveData") as Label
 		if (save_data.message != "No data"):
 			label.text = "Death: " + str(save_data.deaths)
 			label.text += "\nTime: " + WorldController.get_time_string_formatted(save_data.time)
-			label.text += "\nScene: " + str(save_data.sceneName)
+#			label.text += "\nScene: " + str(save_data.sceneName)
 		else:
-			var load_button := get_node("SaveSlots/Save " + str(i + 1) +"/Load") as Button
+			var load_button := get_node("SaveSlots/Save " + str(i + 1) +"/HBoxContainer/MarginContainer/NewOrLoad/Load") as Button
 			load_button.disabled = true
 			label.text = save_data.message
 	# Disable load button if no save data is present
-	var load_button := $"SaveSlots/Save 1/Load" as Button
+	var load_button := $"SaveSlots/Save 1/HBoxContainer/MarginContainer/NewOrLoad/Load" as Button
 	if (load_button.disabled):
-		$"SaveSlots/Save 1/New".grab_focus()
+		$"SaveSlots/Save 1/HBoxContainer/MarginContainer/NewOrLoad/New".grab_focus()
 	else:
 		load_button.grab_focus()
 
@@ -48,9 +48,9 @@ func _start_new_game() -> void:
 
 
 func _on_SaveSlots_tab_changed(tab: int) -> void:
-	var load_button := get_node("SaveSlots/Save " + str(tab + 1) +"/Load") as Button
+	var load_button := get_node("SaveSlots/Save " + str(tab + 1) +"/HBoxContainer/MarginContainer/NewOrLoad/Load") as Button
 	if (load_button.disabled):
-		get_node("SaveSlots/Save " + str(tab + 1) +"/New").grab_focus()
+		get_node("SaveSlots/Save " + str(tab + 1) +"/HBoxContainer/MarginContainer/NewOrLoad/New").grab_focus()
 	else:
 		load_button.grab_focus()
 	WorldController.save_slot = tab
