@@ -102,7 +102,10 @@ bounce = false
 [node name="Waters" type="Node2D" parent="."]
 
 [node name="Save" parent="." instance=ExtResource( 12 )]
-position = Vector2( 144, 672 )
+position = Vector2( 144, 688 )
+
+[node name="Save2" parent="." instance=ExtResource( 12 )]
+position = Vector2( 344, 688 )
 
 [node name="Warp" parent="." instance=ExtResource( 13 )]
 position = Vector2( 976, 96 )

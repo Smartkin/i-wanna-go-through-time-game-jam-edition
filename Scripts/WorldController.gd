@@ -39,6 +39,7 @@ const EMPTY_SAVE := { # Default save data when no save is present
 	},
 	"chips": {},
 	"items": {},
+	"save_id": -1,
 	"scene": "res://TestBed.tscn",
 	"sceneName": "TestBed",
 	"reverse_grav": false,
@@ -367,19 +368,23 @@ func check_item(id: int) -> bool:
 	return cur_save_data.items.has(String(id))
 
 
-func save_game() -> void:
+func save_game(save_pos: Vector2 = Vector2(-100000, -100000)) -> void:
 	var tree := _scene_tree
 	var scene := tree.current_scene
 	var player_controller := scene.find_node("PlayerController")
 	if (player_controller != null && !player_controller.player_dead):
 		# Transfer needed data
-		cur_save_data.playerPosX = player_controller.find_node("Player").global_position.x
-		cur_save_data.playerPosY = player_controller.find_node("Player").global_position.y
+		if (save_pos != Vector2(-100000, -100000)):
+			cur_save_data.playerPosX = save_pos.x
+			cur_save_data.playerPosY = save_pos.y
+		else:
+			cur_save_data.playerPosX = player_controller.find_node("Player").global_position.x
+			cur_save_data.playerPosY = player_controller.find_node("Player").global_position.y
 		cur_save_data.scene = scene.filename
 		cur_save_data.sceneName = scene.name
 		cur_save_data.reverse_grav = reverse_grav
 		# Save the data to a file
-		save_to_file()
+		save_to_file(false)
 
 # Load game data for a chosen save slot
 func get_game_data(slot: int) -> Dictionary:
@@ -407,17 +412,21 @@ func load_game(loadFromSave := false) -> void:
 			return
 		_open_save_file(load_file, save_slot, File.READ)
 		_save_data = parse_json(load_file.get_line())
-		cur_save_data = _save_data
+	cur_save_data = _save_data.duplicate(true)
 	# Load data
 	reverse_grav = _save_data.reverse_grav
 	tree.change_scene(_save_data.scene)
 
-func save_to_file() -> void:
+func save_to_file(save_death_time: bool = true) -> void:
 	# Create/Open save file
 	var save_file := File.new()
 	_open_save_file(save_file, save_slot, File.WRITE)
 	# Save needed data
-	_save_data = cur_save_data
+	if (not save_death_time):
+		_save_data = cur_save_data.duplicate(true)
+	else:
+		_save_data.deaths = cur_save_data.deaths
+		_save_data.time = cur_save_data.time.duplicate(true)
 	# Write to save file
 	save_file.store_string(to_json(_save_data))
 	save_file.close()
