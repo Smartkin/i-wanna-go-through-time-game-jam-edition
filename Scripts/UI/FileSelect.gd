@@ -53,7 +53,7 @@ func _input(event: InputEvent) -> void:
 func _start_new_game() -> void:
 	WorldController.game_started = true
 	WorldController.new_game_started = true
-	get_tree().change_scene(start_scene)
+	Util.change_scene_transition(start_scene)
 
 
 func _on_SaveSlots_tab_changed(tab: int) -> void:

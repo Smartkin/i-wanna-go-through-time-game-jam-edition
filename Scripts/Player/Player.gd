@@ -67,6 +67,7 @@ var save_point: Node2D = null
 var face_direction: int = DIRECTION_H.RIGHT
 var grabbables: Array = []
 var waters: Array = []
+var camera_areas: Array = []
 var grav_dir := UP
 var cur_snap := GROUND_SNAP
 var run_speed := DEFAULT_RUN
@@ -179,6 +180,12 @@ func get_falling() -> bool:
 func reset_falling_speed() -> void:
 	fall_speed = DEFAULT_FALL
 
+func add_camera_area(area: Area2D) -> void:
+	camera_areas.append(area)
+
+func remove_camera_area(area: Area2D) -> void:
+	camera_areas.remove(camera_areas.find(area))
+
 # Sets player's fall speed
 func set_falling_speed(new_fall_speed: int) -> void:
 	fall_speed = new_fall_speed
@@ -271,7 +278,7 @@ func shoot() -> void:
 	emit_signal("shoot", direction) # Tell player controller to create a bullet
 
 func damage(amount: int) -> void:
-	if (iframes > 0):
+	if (iframes > 0 or cur_state == STATE.DEAD):
 		return
 	health -= amount
 	iframes = MAX_IFRAMES
@@ -285,6 +292,7 @@ func kill() -> void:
 		emit_signal("dead", global_position) # Tell player controller to do all the necessary post death logic
 		_switch_state(STATE.DEAD)
 	visible = false
+	camera_areas.clear()
 
 func _get_animation(name: String) -> String:
 	if not WorldController.check_item(Ability.ABILITIES.SHOOT) and not WorldController.check_item(Ability.ABILITIES.DOUBLE_JUMP):
