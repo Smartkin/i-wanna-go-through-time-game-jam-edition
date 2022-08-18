@@ -86,11 +86,14 @@ __meta__ = {
 }
 
 [node name="Balloon" type="KinematicBody2D" parent="."]
-position = Vector2( 0, -1.98423 )
+position = Vector2( 0, 1.75597 )
 collision_layer = 128
 collision_mask = 6
 moving_platform_apply_velocity_on_leave = 2
 script = ExtResource( 5 )
+__meta__ = {
+"enemy": true
+}
 
 [node name="StateMachine" type="Node" parent="Balloon"]
 script = ExtResource( 1 )

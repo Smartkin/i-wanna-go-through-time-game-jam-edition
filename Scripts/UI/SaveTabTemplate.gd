@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends MarginContainer
 
 signal load_game_pressed
 signal new_game_pressed
