@@ -90,7 +90,7 @@ position = Vector2( 752, 272 )
 
 [node name="TimeMachine" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1600, 896 )
-frame = 15
+frame = 3
 __meta__ = {
 "_edit_group_": true
 }

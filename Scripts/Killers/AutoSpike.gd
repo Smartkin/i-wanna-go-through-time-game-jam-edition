@@ -12,7 +12,7 @@ enum SPIKE_DIRECTION {
 }
 
 export(SPIKE_DIRECTION) var spike_dir := SPIKE_DIRECTION.AUTO
-var check_dir := 0
+var check_dir := -1
 
 
 func _ready() -> void:
@@ -22,7 +22,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if spike_dir != SPIKE_DIRECTION.AUTO:
 		set_spike_dir(spike_dir)
-	elif check_dir < SPIKE_DIRECTION.DOWN:
+	elif check_dir < SPIKE_DIRECTION.LEFT:
 		_check_for_solids()
 	
 
@@ -42,8 +42,8 @@ func set_spike_dir(value: int) -> void:
 
 func _check_for_solids() -> void:
 	check_dir += 1
-	var dir = deg2rad(90 * float(check_dir))
-	n_BlockChecker.position = Vector2(cos(dir), sin(dir))
+	var dir = deg2rad((90 * float(check_dir)) - 180)
+	n_BlockChecker.position = Vector2(cos(dir), sin(dir))*2.0
 
 
 func _on_BlockChecker_body_entered(body: Node) -> void:
