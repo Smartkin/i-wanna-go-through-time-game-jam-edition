@@ -11,7 +11,6 @@ var _camera_follow_player_state := {}
 var _cam_lock := false
 
 func _ready():
-#	zoom_camera(0.5)
 	_camera_follow_player_state = {
 		limit_top = $Camera.limit_top,
 		limit_bottom = $Camera.limit_bottom,
@@ -73,7 +72,6 @@ func _on_BloodTimer_timeout():
 func _on_Player_dead(playerPos: Vector2) -> void:
 	global_position = playerPos
 	$Camera.position = Vector2.ZERO
-	$CameraFollowLayer/UiCentered/GameOver.visible = true
 	$Blood.emitting = true
 	$Blood.global_position = playerPos
 	$BloodTimer.start()
@@ -81,6 +79,7 @@ func _on_Player_dead(playerPos: Vector2) -> void:
 	player_dead = true
 	WorldController.cur_save_data.deaths += 1
 	WorldController.save_to_file() # Save only deaths/time
+	$CheckpointTeleport.start()
 
 
 func _on_Player_dashed():
@@ -124,3 +123,17 @@ func lock_camera(pos: Vector2, size: Vector2):
 
 func _on_Player_damaged():
 	$Sounds/Death.play()
+
+
+func _on_CheckpointTeleport_timeout():
+	if (instance_from_id(WorldController.cur_save_data.save_id) != null):
+		var come_back_tween = create_tween()
+		come_back_tween.tween_property($Camera, "global_position", \
+			instance_from_id(WorldController.cur_save_data.save_id).global_position, \
+			1.0).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+		come_back_tween.parallel().tween_property($Player, "global_position", \
+			Vector2(WorldController.cur_save_data.playerPosX, WorldController.cur_save_data.playerPosY), \
+			1.0).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+		come_back_tween.tween_callback($Player, "return_to_live")
+		player_dead = false
+		$Player.health = WorldController.cur_save_data.health

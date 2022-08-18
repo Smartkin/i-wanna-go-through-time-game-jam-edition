@@ -45,7 +45,7 @@ func _change_sprite():
 func _on_scene_built() -> void:
 	if Engine.editor_hint:
 		return
-	if WorldController.check_item(id) and id != -1:
+	if WorldController.check_item(id) and id != ABILITIES.INVALID:
 		queue_free()
 
 func _on_Area2D_body_entered(body):

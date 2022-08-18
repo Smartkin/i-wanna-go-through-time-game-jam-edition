@@ -15,6 +15,7 @@ export(String, FILE, "*.png") var mask
 
 var _t := 0.0
 var _state = STATE.FROM
+var _time := 0
 
 func _ready() -> void:
 	$CanvasLayer/ColorRect.material = preload("res://Shaders/Transition.tres")
@@ -24,7 +25,6 @@ func _ready() -> void:
 	$CanvasLayer/ColorRect.material.set_shader_param("halo_color", halo_color)
 	$CanvasLayer/ColorRect.material.set_shader_param("ramp", ramp)
 	$CanvasLayer/ColorRect.material.set_shader_param("mask", load(mask))
-	$Timer.start()
 
 
 func _exit_tree():
@@ -37,16 +37,15 @@ func set_state(new_state) -> void:
 func set_time(new_time: float) -> void:
 	_t = new_time
 
-func _on_Timer_timeout():
+func _process(delta: float):
 	match _state:
 		STATE.FROM:
-			_t += trans_speed
+			_t += trans_speed * delta
 			if _t >= 1.0:
 				emit_signal("transition_finished")
 				_state = STATE.TO
 		STATE.TO:
-			_t -= trans_speed
+			_t -= trans_speed * delta
 			if _t <= 0.0:
 				queue_free()
-	print(_t)
 	$CanvasLayer/ColorRect.material.set_shader_param("t", _t)

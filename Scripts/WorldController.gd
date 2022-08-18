@@ -137,6 +137,7 @@ func _ready() -> void:
 	_load_music() # Load music
 	_load_ui_sfx() # Load UI sfx
 	_load_config() # Load user's configuration
+	do_post_transition()
 
 # Any globally handled user input
 func _input(event: InputEvent) -> void:
@@ -177,6 +178,27 @@ func _process(delta):
 		_prev_win_cap = win_cap
 	if _fade_engine.fading:
 		_fade_music(delta)
+
+func free_transition() -> void:
+	_cur_transition = null
+
+func do_transition(speed: float = 1.0, ramp: float = 0.1, trans_color: Color = Color.black, halo_color: Color = Color.white) -> Node:
+	if _cur_transition != null:
+		if not _cur_transition.is_queued_for_deletion():
+			_cur_transition.queue_free()
+		free_transition()
+	_cur_transition = _transition.instance()
+	_cur_transition.trans_speed = speed
+	_cur_transition.ramp = ramp
+	_cur_transition.trans_color = trans_color
+	_cur_transition.halo_color = halo_color
+	add_child(_cur_transition)
+	return _cur_transition
+
+func do_post_transition() -> void:
+	do_transition()
+	_cur_transition.set_time(1.0)
+	_cur_transition.set_state(_cur_transition.STATE.TO)
 
 # Plays a UI sfx
 func play_ui_sfx(fileName: String) -> void:
@@ -272,7 +294,7 @@ func restart_game():
 	save_to_file() # Save death/time
 	if (game_paused):
 		pause_game() # Unpause the game if it was paused
-	_scene_tree.change_scene(ProjectSettings.get_setting("application/run/main_scene"))
+	Util.change_scene_transition(ProjectSettings.get_setting("application/run/main_scene"))
 	game_started = false
 
 func get_reverse_grav() -> bool:
@@ -304,21 +326,6 @@ func set_save_slot(slot: int) -> void:
 
 func get_loading_save() -> bool:
 	return loading_save
-
-func free_transition() -> void:
-	_cur_transition = null
-
-func do_transition() -> void:
-	if _cur_transition != null:
-		_cur_transition.queue_free()
-		free_transition()
-	_cur_transition = _transition.instance()
-	add_child(_cur_transition)
-
-func do_post_transition() -> void:
-	do_transition()
-	_cur_transition.set_time(1.0)
-	_cur_transition.set_state(_cur_transition.STATE.TO)
 
 # Save player's configuration
 func save_config() -> void:
