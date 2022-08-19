@@ -54,10 +54,14 @@ radius = 8.0
 [sub_resource type="CircleShape2D" id=11]
 radius = 368.087
 
-[node name="Position2D" type="Position2D"]
+[node name="ChoppaPos" type="Position2D"]
+
+[node name="NavLine" type="Line2D" parent="."]
+unique_name_in_owner = true
+visible = false
 
 [node name="Choppa" type="KinematicBody2D" parent="."]
-position = Vector2( -25.3485, -58.7661 )
+position = Vector2( 61.3113, 18.3554 )
 collision_layer = 128
 collision_mask = 4
 moving_platform_apply_velocity_on_leave = 2
@@ -74,7 +78,6 @@ shape = SubResource( 8 )
 
 [node name="Sprite" type="AnimatedSprite" parent="Choppa"]
 frames = SubResource( 7 )
-frame = 2
 playing = true
 
 [node name="Hitbox" type="Area2D" parent="Choppa"]
@@ -104,6 +107,7 @@ shape = SubResource( 11 )
 
 [node name="ReturnNavAgent" type="NavigationAgent2D" parent="Choppa"]
 avoidance_enabled = true
+radius = 32.0
 
 [connection signal="died" from="Choppa" to="Choppa/StateMachine" method="_on_Choppa_died"]
 [connection signal="player_spotted" from="Choppa" to="Choppa/StateMachine" method="_on_Choppa_player_spotted"]

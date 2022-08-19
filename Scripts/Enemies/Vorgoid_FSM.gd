@@ -14,14 +14,11 @@ func _enter_state(new_state: State, old_state: State):
 			condition = ""
 		states.chase:
 			condition = "_no_player_in_sight"
-			parent.get_node("Chasing").start()
 		states.return:
 			condition = "_came_home"
 			var path = Navigation2DServer.map_get_path(parent.get_agent_rid(), parent.global_position, parent.home, true)
 			path.remove(0)
 			parent.navigate(path)
-			parent.get_parent().get_node("%NavLine").points = path
-			print(parent.get_parent().get_node("%NavLine").points)
 
 # Write the logic for when the current state is exited
 func _exit_state(old_state: State, new_state: State):
@@ -44,9 +41,9 @@ func _get_transition_state() -> State:
 			return states.fly
 	return null
 
-func _on_Choppa_player_spotted():
+func _on_Vorgoid_player_spotted():
 	set_state(states.chase)
 
 
-func _on_Choppa_died():
+func _on_Vorgoid_died():
 	queue_free()

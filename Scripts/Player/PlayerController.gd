@@ -131,6 +131,8 @@ func lock_camera(pos: Vector2, size: Vector2):
 func _on_Player_damaged():
 	$Sounds/Death.play()
 
+func player_alive():
+	player_dead = false
 
 func _on_CheckpointTeleport_timeout():
 	_cam_lock = true
@@ -151,6 +153,6 @@ func _on_CheckpointTeleport_timeout():
 		player_save_pos, \
 		dur).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
 	come_back_tween.tween_callback($Player, "return_to_live")
-	player_dead = false
+	come_back_tween.tween_callback(self, "player_alive")
 	$Player.speed = Vector2.ZERO
 	$Player.health = WorldController.cur_save_data.health

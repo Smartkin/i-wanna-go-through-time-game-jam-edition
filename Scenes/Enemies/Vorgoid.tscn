@@ -1,0 +1,90 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Scripts/Enemies/Vorgoid_FSM.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Hazards/Enemies/vorgoid.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Enemies/Vorgoid.gd" type="Script" id=3]
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="CircleShape2D" id=8]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id=9]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id=10]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id=11]
+radius = 256.125
+
+[node name="VorgoidPos" type="Position2D"]
+
+[node name="Vorgoid" type="KinematicBody2D" parent="."]
+collision_layer = 128
+collision_mask = 4
+script = ExtResource( 3 )
+
+[node name="StateMachine" type="Node" parent="Vorgoid"]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="AnimatedSprite" parent="Vorgoid"]
+frames = SubResource( 7 )
+frame = 2
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vorgoid"]
+shape = SubResource( 8 )
+
+[node name="Hitbox" type="Area2D" parent="Vorgoid"]
+collision_layer = 256
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vorgoid/Hitbox"]
+shape = SubResource( 9 )
+
+[node name="Hurtbox" type="Area2D" parent="Vorgoid"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vorgoid/Hurtbox"]
+shape = SubResource( 10 )
+
+[node name="ReturnNavAgent" type="NavigationAgent2D" parent="Vorgoid"]
+avoidance_enabled = true
+radius = 32.0
+
+[node name="Proximity" type="Area2D" parent="Vorgoid"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vorgoid/Proximity"]
+shape = SubResource( 11 )
+
+[node name="PlayerVisibility" type="RayCast2D" parent="Vorgoid"]
+enabled = true
+collision_mask = 5
+
+[node name="Shoot" type="Timer" parent="Vorgoid"]
+
+[connection signal="died" from="Vorgoid" to="Vorgoid/StateMachine" method="_on_Vorgoid_died"]
+[connection signal="player_spotted" from="Vorgoid" to="Vorgoid/StateMachine" method="_on_Vorgoid_player_spotted"]
+[connection signal="velocity_computed" from="Vorgoid/ReturnNavAgent" to="Vorgoid" method="_on_ReturnNavAgent_velocity_computed"]
+[connection signal="body_entered" from="Vorgoid/Proximity" to="Vorgoid" method="_on_Proximity_body_entered"]
+[connection signal="body_exited" from="Vorgoid/Proximity" to="Vorgoid" method="_on_Proximity_body_exited"]
+[connection signal="timeout" from="Vorgoid/Shoot" to="Vorgoid" method="_on_Shoot_timeout"]
