@@ -59,6 +59,14 @@ func walk(sp: int):
 	if _on_edge() or is_on_wall():
 		reverse_speed = !reverse_speed
 
+func _enable():
+	._enable()
+	$Proximity.set_deferred("monitoring", true)
+
+func _disable():
+	._disable()
+	$Proximity.set_deferred("monitoring", false)
+
 func _on_edge() -> bool:
 	if walk_speed > 0:
 		return not $RightEdge.is_colliding()

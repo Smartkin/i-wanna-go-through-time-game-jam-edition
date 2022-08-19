@@ -166,8 +166,12 @@ func _on_CheckpointTeleport_timeout():
 
 
 func _on_CameraVisibility_area_entered(area):
+	if player_dead:
+		return
 	area.respawn_enemies()
 
 
 func _on_CameraVisibility_area_exited(area):
+	if player_dead:
+		return
 	area.kill_enemies()

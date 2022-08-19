@@ -56,6 +56,8 @@ func _disable():
 	set_process(false)
 	set_process_input(false)
 	set_physics_process(false)
+	$Hitbox.set_monitoring(false)
+	$Hurtbox.set_monitoring(false)
 	for c in get_children():
 		c.set_process(false)
 		c.set_process_input(false)
@@ -65,6 +67,8 @@ func _enable():
 	set_process(true)
 	set_process_input(true)
 	set_physics_process(true)
+	$Hitbox.set_monitoring(true)
+	$Hurtbox.set_monitoring(true)
 	for c in get_children():
 		c.set_process(true)
 		c.set_process_input(true)
