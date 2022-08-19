@@ -132,27 +132,29 @@ func _on_Player_damaged():
 	$Sounds/Death.play()
 
 func player_alive():
-	player_dead = false
+	WorldController.load_game(false, 0.4)
 
 func _on_CheckpointTeleport_timeout():
 	_cam_lock = true
-	var player_save_pos := Vector2(WorldController.cur_save_data.playerPosX, WorldController.cur_save_data.playerPosY)
-	var come_back_tween := create_tween()
-	var dur := 0.4
-	WorldController.do_transition(dur)
+#	var player_save_pos := Vector2(WorldController.cur_save_data.playerPosX, WorldController.cur_save_data.playerPosY)
+##	var come_back_tween := create_tween()
+#	var dur := 0.4
+#	var trans := WorldController.do_transition(dur)
+#	trans.connect("transition_finished", self, "player_alive")
 #	come_back_tween.tween_property($Camera, "global_position", \
 #		player_save_pos, \
 #		dur).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
-	come_back_tween.parallel().tween_property($Player, "global_position", \
-		player_save_pos, \
-		dur).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
-	come_back_tween.parallel().tween_property($Player, "global_position", \
-		player_save_pos, \
-		dur).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
-	come_back_tween.parallel().tween_property($Blood, "global_position", \
-		player_save_pos, \
-		dur).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
-	come_back_tween.tween_callback($Player, "return_to_live")
-	come_back_tween.tween_callback(self, "player_alive")
+#	come_back_tween.parallel().tween_property($Player, "global_position", \
+#		player_save_pos, \
+#		dur).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+#	come_back_tween.parallel().tween_property($Player, "global_position", \
+#		player_save_pos, \
+#		dur).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+#	come_back_tween.parallel().tween_property($Blood, "global_position", \
+#		player_save_pos, \
+#		dur).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+#	come_back_tween.tween_callback($Player, "return_to_live")
+#	come_back_tween.tween_callback(self, "player_alive")
 	$Player.speed = Vector2.ZERO
 	$Player.health = WorldController.cur_save_data.health
+	player_alive()

@@ -38,7 +38,7 @@ texture = ExtResource( 2 )
 centered = false
 script = ExtResource( 3 )
 
-[node name="KillerHitbox" type="Area2D" parent="."]
+[node name="KillerHitbox" type="KinematicBody2D" parent="."]
 collision_layer = 8
 collision_mask = 0
 

@@ -465,6 +465,7 @@ moving_platform_apply_velocity_on_leave = 2
 script = ExtResource( 11 )
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Hurtbox"]
+self_modulate = Color( 0.129412, 0.807843, 0.0313726, 1 )
 position = Vector2( 0, 1 )
 shape = SubResource( 16 )
 

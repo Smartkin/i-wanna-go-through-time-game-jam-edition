@@ -52,8 +52,8 @@ func set_volume(channel: String, value: float) -> void:
 func change_scene(scene: String) -> void:
 	get_tree().change_scene(scene)
 
-func change_scene_transition(scene: String) -> void:
-	var trans = WorldController.do_transition()
+func change_scene_transition(scene: String, trans_speed: float = 0.7) -> void:
+	var trans = WorldController.do_transition(trans_speed)
 	trans.connect("transition_finished", Util, "change_scene", [scene])
 
 # Integer version of abs since we use static typing abs only works with floats
