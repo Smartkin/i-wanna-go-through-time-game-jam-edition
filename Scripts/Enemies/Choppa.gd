@@ -21,6 +21,7 @@ func __ready():
 	set_meta("enemy", true)
 	timer = $Chasing
 	anim = $Sprite
+	vis_ray = $PlayerVisibility
 	get_parent().get_node("%NavLine").global_position = Vector2.ZERO
 
 
