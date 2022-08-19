@@ -75,7 +75,6 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraAreas/CameraArea"]
-visible = false
 self_modulate = Color( 0.196078, 0.862745, 0.705882, 0.552941 )
 position = Vector2( 640, 180 )
 shape = SubResource( 1 )
@@ -178,7 +177,7 @@ position = Vector2( 640, 180 )
 shape = SubResource( 9 )
 
 [node name="PlayerController" parent="." instance=ExtResource( 2 )]
-position = Vector2( 768, 288 )
+position = Vector2( 752, 288 )
 
 [node name="TimeMachine" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1600, 896 )
@@ -331,12 +330,6 @@ position = Vector2( 944, 848 )
 
 [node name="GuyrockSpike125" parent="Spikes" instance=ExtResource( 13 )]
 position = Vector2( 928, 848 )
-
-[node name="GuyrockSpike128" parent="Spikes" instance=ExtResource( 13 )]
-position = Vector2( 944, 768 )
-
-[node name="GuyrockSpike129" parent="Spikes" instance=ExtResource( 13 )]
-position = Vector2( 928, 768 )
 
 [node name="GuyrockSpike130" parent="Spikes" instance=ExtResource( 13 )]
 position = Vector2( 1056, 800 )
@@ -881,6 +874,9 @@ scale = Vector2( 4, 1 )
 [node name="Taggy" parent="Enemies" instance=ExtResource( 14 )]
 position = Vector2( 1536, 1040 )
 
+[node name="Taggy10" parent="Enemies" instance=ExtResource( 14 )]
+position = Vector2( 976, 928 )
+
 [node name="Taggy8" parent="Enemies" instance=ExtResource( 14 )]
 position = Vector2( 2464, 592 )
 
@@ -939,34 +935,31 @@ position = Vector2( 952, 1584 )
 position = Vector2( 1056, 1728 )
 
 [node name="Balloon" parent="Enemies/Balloon15" index="0"]
-position = Vector2( -7.69596, 0.701377 )
+position = Vector2( 14.8647, -0.295974 )
 x_mov = 40.0
 move_multi = 0.4
 
 [node name="Sprite" parent="Enemies/Balloon15/Balloon" index="2"]
-frame = 1
+frame = 5
 
 [node name="Balloon16" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 912, 1680 )
 
 [node name="Balloon" parent="Enemies/Balloon16" index="0"]
-position = Vector2( 14.8555, 0.297123 )
+position = Vector2( -12.9585, 0.469248 )
 x_mov = -40.0
 move_multi = 0.4
 
 [node name="Sprite" parent="Enemies/Balloon16/Balloon" index="2"]
-frame = 0
+frame = 4
 
 [node name="Balloon3" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 2688, 896 )
 
 [node name="Balloon" parent="Enemies/Balloon3" index="0"]
-position = Vector2( 0, 20.5173 )
+position = Vector2( 0, -22.5201 )
 y_mov = 70.0
 move_multi = 0.7
-
-[node name="Sprite" parent="Enemies/Balloon3/Balloon" index="2"]
-frame = 5
 
 [node name="Balloon4" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 2624, 944 )
@@ -975,12 +968,9 @@ position = Vector2( 2624, 944 )
 position = Vector2( 2256, 288 )
 
 [node name="Balloon" parent="Enemies/Balloon8" index="0"]
-position = Vector2( -38.3874, -0.449718 )
+position = Vector2( 39.2225, -0.313929 )
 x_mov = 50.0
 move_multi = 0.8
-
-[node name="Sprite" parent="Enemies/Balloon8/Balloon" index="2"]
-frame = 5
 
 [node name="Balloon5" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 2832, 1024 )
