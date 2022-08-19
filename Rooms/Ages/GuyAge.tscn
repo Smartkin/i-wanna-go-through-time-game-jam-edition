@@ -182,7 +182,7 @@ position = Vector2( 768, 288 )
 
 [node name="TimeMachine" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1600, 896 )
-frame = 6
+frame = 7
 __meta__ = {
 "_edit_group_": true
 }
@@ -939,7 +939,7 @@ position = Vector2( 952, 1584 )
 position = Vector2( 1056, 1728 )
 
 [node name="Balloon" parent="Enemies/Balloon15" index="0"]
-position = Vector2( -7.69596, 0.701377 )
+position = Vector2( -0.810823, 0.798972 )
 x_mov = 40.0
 move_multi = 0.4
 
@@ -950,7 +950,7 @@ frame = 1
 position = Vector2( 912, 1680 )
 
 [node name="Balloon" parent="Enemies/Balloon16" index="0"]
-position = Vector2( 14.8555, 0.297123 )
+position = Vector2( 7.47769, 0.707256 )
 x_mov = -40.0
 move_multi = 0.4
 
@@ -961,7 +961,7 @@ frame = 0
 position = Vector2( 2688, 896 )
 
 [node name="Balloon" parent="Enemies/Balloon3" index="0"]
-position = Vector2( 0, 20.5173 )
+position = Vector2( 0, 48.9199 )
 y_mov = 70.0
 move_multi = 0.7
 
@@ -975,7 +975,7 @@ position = Vector2( 2624, 944 )
 position = Vector2( 2256, 288 )
 
 [node name="Balloon" parent="Enemies/Balloon8" index="0"]
-position = Vector2( -38.3874, -0.449718 )
+position = Vector2( 2.85477, 1.59592 )
 x_mov = 50.0
 move_multi = 0.8
 
