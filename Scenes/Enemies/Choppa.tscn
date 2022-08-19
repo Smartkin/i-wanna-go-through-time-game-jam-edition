@@ -52,7 +52,7 @@ radius = 8.0
 radius = 8.0
 
 [sub_resource type="CircleShape2D" id=11]
-radius = 368.087
+radius = 147.031
 
 [node name="ChoppaPos" type="Position2D"]
 
@@ -101,7 +101,7 @@ collision_mask = 5
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Choppa/Proximity"]
-position = Vector2( 16, 16 )
+position = Vector2( -0.311295, 0.6446 )
 shape = SubResource( 11 )
 
 [node name="Chasing" type="Timer" parent="Choppa"]
