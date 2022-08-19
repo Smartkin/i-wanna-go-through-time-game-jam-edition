@@ -5,6 +5,7 @@ extends Sprite
 func _ready():
 	$SkullParticles.set_as_toplevel(true)
 	set_notify_transform(true)
+	$KillerHitbox.add_to_group("Killers")
 
 
 func _notification(what):
