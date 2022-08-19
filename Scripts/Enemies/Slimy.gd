@@ -1,15 +1,17 @@
 extends EnemyInterface
 
-export var speed := Vector2(200, 0)
-export var jump_force := -100
+export var speed := Vector2(30, 0)
+export var jump_force := Vector2(80, -300)
+export var jump_force_hrand := 1.5
 var _player_above := false
 var _on_land := false
 var gravity := 10
 var can_jump := true
 var track_player: Player = null
 
-onready var init_speed := speed
+onready var init_spd := speed
 onready var anim := $Sprite
+
 
 func _when_walk(delta: float, binds: Array):
 	# Wall check
@@ -28,11 +30,10 @@ func _when_jump(delta: float, binds: Array):
 	if (track_player == null):
 		return
 	if (not _on_land or can_jump):
-		speed.x = clamp((track_player.global_position.x - 10) - global_position.x, -init_speed.x, init_speed.x)
-		print(speed)
-		move_and_collide(speed * delta)
+		var hor_jump_force = jump_force.x * rand_range(1.0, jump_force_hrand)
+		speed.x = clamp((track_player.global_position.x - 10) - global_position.x, -hor_jump_force, hor_jump_force)
 		# Floor check
-		move_and_slide(Vector2.ZERO, Vector2.UP)
+		move_and_slide(speed, Vector2.UP)
 		can_jump = false
 		_on_land = is_on_floor()
 		if (_on_land):
@@ -79,4 +80,4 @@ func _on_Jumpbox_body_exited(body: Player):
 
 func _on_JumpWait_timeout():
 	can_jump = true
-	speed.y = jump_force
+	speed.y = jump_force.y

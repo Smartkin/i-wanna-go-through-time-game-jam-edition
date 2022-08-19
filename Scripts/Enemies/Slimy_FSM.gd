@@ -13,11 +13,11 @@ func _enter_state(new_state: State, old_state: State):
 		states.walk:
 			condition = "_stuck"
 			parent.anim.play("walk")
-			parent.speed.x = parent.init_speed.x
+			parent.speed.x = parent.init_spd.x
 			parent.get_node("JumpWait").stop()
 		states.jump:
 			condition = ""
-			parent.speed.y = parent.jump_force
+			parent.speed.y = parent.jump_force.y
 
 # Write the logic for getting transitions to new states
 func _get_transition_state() -> State:
