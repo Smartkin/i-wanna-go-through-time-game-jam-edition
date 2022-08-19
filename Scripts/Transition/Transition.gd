@@ -27,7 +27,7 @@ func _ready() -> void:
 		var tween := create_tween()
 		tween.tween_property(self, "_t", 0.0, dur).set_ease(Tween.EASE_IN).set_trans(_trans)
 	$CanvasLayer/ColorRect.material = preload("res://Shaders/Transition.tres")
-	print(material)
+#	print(material)
 	$CanvasLayer/ColorRect.material.set_shader_param("after", trans_color)
 	$CanvasLayer/ColorRect.material.set_shader_param("t", _t)
 	$CanvasLayer/ColorRect.material.set_shader_param("halo_color", halo_color)

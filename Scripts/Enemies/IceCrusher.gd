@@ -9,6 +9,9 @@ var wall_met := false
 var speed := 0.0
 
 onready var vis_ray := $PlayerVisibility
+onready var vis_ray2 := $PlayerVisibility2
+onready var vis_ray3 := $PlayerVisibility3
+onready var vis_ray4 := $PlayerVisibility4
 onready var anim := $Sprite
 
 func _when_idle(delta: float, binds: Array):
@@ -31,22 +34,39 @@ func _on_Hitbox_body_entered(bul: Bullet):
 		return
 	bul.destroy()
 
+func calc_player_pos_clamped(ray: RayCast2D) -> Vector2:
+	var dir: Vector2 = ray.global_position.direction_to(target_player.global_position)
+	var abs_dir := Vector2(abs(dir.x), abs(dir.y))
+	var angle = rad2deg(abs_dir.angle())
+	if (angle > 30 and angle < 60):
+		return Vector2.INF
+	dir = Vector2(round(dir.x), round(dir.y))
+	var dist: float = ray.global_position.distance_to(target_player.global_position)
+	return dist * dir
+
 func search_player():
 	if target_player == null:
 		return
-	var dir: Vector2 = vis_ray.global_position.direction_to(target_player.global_position)
-	var abs_dir := Vector2(abs(dir.x), abs(dir.y))
-	var angle = rad2deg(abs_dir.angle())
-	dir = Vector2(round(dir.x), round(dir.y))
-	var dist: float = vis_ray.global_position.distance_to(target_player.global_position)
-	vis_ray.cast_to = dist * dir
-	if (angle > 30 and angle < 60):
-		print(angle)
+#	var dir: Vector2 = vis_ray.global_position.direction_to(target_player.global_position)
+#	var abs_dir := Vector2(abs(dir.x), abs(dir.y))
+#	var angle = rad2deg(abs_dir.angle())
+#	dir = Vector2(round(dir.x), round(dir.y))
+#	var dist: float = vis_ray.global_position.distance_to(target_player.global_position)
+	var cast1 := calc_player_pos_clamped(vis_ray)
+	var cast2 := calc_player_pos_clamped(vis_ray2)
+	var cast3 := calc_player_pos_clamped(vis_ray3)
+	var cast4 := calc_player_pos_clamped(vis_ray4)
+	if (cast1 == Vector2.INF or cast2 == Vector2.INF or cast3 == Vector2.INF or cast4 == Vector2.INF):
 		return
-	if $PlayerVisibility.get_collider() as Player != null:
+	vis_ray.cast_to = cast1
+	vis_ray2.cast_to = cast2
+	vis_ray3.cast_to = cast3
+	vis_ray4.cast_to = cast4
+	if vis_ray.get_collider() as Player != null or vis_ray2.get_collider() as Player != null or \
+		vis_ray3.get_collider() as Player != null or vis_ray4.get_collider() as Player != null:
 		if not has_target:
 			has_target = true
-			slide_dir = dir
+			slide_dir = vis_ray.cast_to.normalized()
 			speed = 0.0
 			anim.play("going")
 			var slide_tween := create_tween()

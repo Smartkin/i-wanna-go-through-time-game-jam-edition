@@ -12,6 +12,17 @@ var stats := {
 var dead := false
 
 func _ready():
+#	var notifier := VisibilityNotifier2D.new()
+#	notifier.name = "ViewportChecker"
+#	add_child(notifier)
+#	notifier.connect("viewport_exited", self, "_die")
+#	notifier.connect("viewport_entered", self, "_respawn")
+#	var sprite: Node2D = $Sprite
+#	if sprite is Sprite:
+#		notifier.rect = sprite.get_rect()
+#	elif sprite is AnimatedSprite:
+#		notifier.rect = Rect2(position, sprite.frames.get_frame(sprite.animation, 0).get_size())
+	add_to_group("enemies")
 	__ready()
 
 
@@ -30,7 +41,34 @@ func _player_enter():
 func _die():
 	dead = true
 	emit_signal("died")
-	queue_free()
+	_disable()
+	visible = false
+#	queue_free()
+
+func _respawn():
+	if dead:
+		_enable()
+		visible = true
+		$StateMachine.reset()
+		print("respawned")
+
+func _disable():
+	set_process(false)
+	set_process_input(false)
+	set_physics_process(false)
+	for c in get_children():
+		c.set_process(false)
+		c.set_process_input(false)
+		c.set_physics_process(false)
+
+func _enable():
+	set_process(true)
+	set_process_input(true)
+	set_physics_process(true)
+	for c in get_children():
+		c.set_process(true)
+		c.set_process_input(true)
+		c.set_physics_process(true)
 
 func _on_Hurtbox_body_entered(body: Player):
 	if body == null:

@@ -75,6 +75,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraAreas/CameraArea"]
+visible = false
 self_modulate = Color( 0.196078, 0.862745, 0.705882, 0.552941 )
 position = Vector2( 640, 180 )
 shape = SubResource( 1 )

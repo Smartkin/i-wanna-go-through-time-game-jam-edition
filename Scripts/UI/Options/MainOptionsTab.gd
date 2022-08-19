@@ -25,7 +25,7 @@ func _joy_connection_changed(id: int, connected: bool) -> void:
 
 func _check_for_controllers() -> void:
 	if Input.get_connected_joypads().size() > 0:
-		print(Input.get_joy_name(0))
+#		print(Input.get_joy_name(0))
 		$ControllerSettings.disabled = false
 	else:
 		$ControllerSettings.disabled = true

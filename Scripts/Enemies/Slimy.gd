@@ -16,7 +16,7 @@ onready var anim := $Sprite
 func _when_walk(delta: float, binds: Array):
 	# Wall check
 	move_and_slide(speed, Vector2.UP)
-	print(speed)
+#	print(speed)
 	_on_land = false
 	$Sprite.flip_h = speed.x < 0
 	if (not is_on_floor()):

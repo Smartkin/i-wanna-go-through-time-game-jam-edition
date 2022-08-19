@@ -45,6 +45,12 @@ func _add_state(state_name: String, callback: String, binds: Array = []):
 	states[state_name].callback = callback
 	states[state_name].binds = binds
 
+func reset():
+	states.clear()
+	state = null
+	prev_state = null
+	condition = ""
+	_ready()
 
 class State:
 	var callback := ""

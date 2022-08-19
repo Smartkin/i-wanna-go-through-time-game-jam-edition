@@ -20,6 +20,7 @@ func __ready():
 	$Hitbox.connect("body_entered", self, "_on_Hitbox_body_entered")
 	set_meta("enemy", true)
 	timer = $Chasing
+	anim = $Sprite
 	get_parent().get_node("%NavLine").global_position = Vector2.ZERO
 
 
@@ -54,7 +55,7 @@ func _when_return(delta: float, binds: Array):
 	search_player()
 	var cur_pos = global_position
 	var next = nav_agent.get_next_location()
-	print(next)
+#	print(next)
 	if _path.size() > 0 and not step_flight:
 		var vel = cur_pos.direction_to(next) * lunge_speed
 		var fly := create_tween()

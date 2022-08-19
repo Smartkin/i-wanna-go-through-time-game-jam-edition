@@ -801,6 +801,7 @@ dash={
 2d_physics/layer_7="Items"
 2d_physics/layer_8="Enemies"
 2d_physics/layer_9="EnemyHitbox"
+2d_physics/layer_10="VisibilityArea"
 
 [rendering]
 
