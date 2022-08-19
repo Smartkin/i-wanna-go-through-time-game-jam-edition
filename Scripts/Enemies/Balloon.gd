@@ -1,8 +1,8 @@
 tool
 extends EnemyInterface
 
-export(float, 0.0, 1000.0, 0.5) var x_mov := 0.0
-export(float, 0.0, 1000.0, 0.5) var y_mov := 2.0
+export(float, -300.0, 300.0, 5.0) var x_mov := 0.0
+export(float, -300.0, 300.0, 5.0) var y_mov := 2.0
 export(float, 0.0, 2.0, 0.1) var move_multi := 1.0
 export(float, 0.0, 2.0) var jump_multi := 1.0
 

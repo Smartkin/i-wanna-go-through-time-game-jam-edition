@@ -26,7 +26,7 @@ width = 100
 [sub_resource type="ParticlesMaterial" id=6]
 resource_local_to_scene = true
 emission_shape = 2
-emission_box_extents = Vector3( 104, 1, 1 )
+emission_box_extents = Vector3( 32, 1, 1 )
 flag_disable_z = true
 gravity = Vector3( 0, -8, 0 )
 orbit_velocity = 0.0
