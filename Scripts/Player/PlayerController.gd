@@ -53,6 +53,7 @@ func _on_scene_built() -> void:
 		position.y = WorldController.cur_save_data.playerPosY
 		$Player.health = WorldController.cur_save_data.health
 	$Camera.current = true
+	$Camera.position = position
 	$Camera.reset_smoothing()
 
 # Callback when player shoots

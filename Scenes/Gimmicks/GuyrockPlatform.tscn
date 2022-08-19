@@ -1,50 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
+[ext_resource path="res://Scenes/Gimmicks/GuyrockPlatform.tres" type="Material" id=1]
 [ext_resource path="res://Scripts/Platform/Platform.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/Platform/CollisionChecker.gd" type="Script" id=3]
-
-[sub_resource type="Shader" id=6]
-code = "shader_type canvas_item;
-
-uniform vec2 scale;
-
-uniform int right;
-uniform int top;
-uniform int left;
-uniform int bottom;
-
-float map(float value, float originalMin, float originalMax, float newMin, float newMax) {
-    return (value - originalMin) / (originalMax - originalMin) * (newMax - newMin) + newMin;
-} 
-
-float process_axis(float coord, float pixel, float texture_pixel, float start, float end) {
-	if (coord > 1.0 - end * pixel) {
-		return map(coord, 1.0 - end * pixel, 1.0, 1.0 - texture_pixel * end, 1.0);
-	} else if (coord > start * pixel) {
-		return map(coord, start * pixel, 1.0 - end * pixel, start * texture_pixel, 1.0 - end * texture_pixel);
-	} else {
-		return map(coord, 0.0, start * pixel, 0.0, start * texture_pixel);
-	}
-}
-
-void fragment() {
-	vec2 pixel_size = TEXTURE_PIXEL_SIZE / scale;
-	
-	vec2 mappedUV = vec2(
-		process_axis(UV.x, pixel_size.x, TEXTURE_PIXEL_SIZE.x, float(left), float(right)),
-		process_axis(UV.y, pixel_size.y, TEXTURE_PIXEL_SIZE.y, float(top), float(bottom))
-	);
-	COLOR = texture(TEXTURE, mappedUV);
-}"
-
-[sub_resource type="ShaderMaterial" id=7]
-resource_local_to_scene = true
-shader = SubResource( 6 )
-shader_param/scale = Vector2( 2, 1 )
-shader_param/right = 8
-shader_param/top = 8
-shader_param/left = 8
-shader_param/bottom = 2
 
 [sub_resource type="StreamTexture" id=8]
 load_path = "res://.import/guyrock_platform.png-aea9adecfb54a28c38db3fba1b17fd56.stex"
@@ -68,7 +26,7 @@ moving_platform_apply_velocity_on_leave = 2
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 7 )
+material = ExtResource( 1 )
 texture = SubResource( 8 )
 centered = false
 
