@@ -1,11 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Scripts/Platform/PlatformSprite.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Platform/Platform.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/Platform/CollisionChecker.gd" type="Script" id=3]
-[ext_resource path="res://Sprites/Gimmicks/guyrock_platform.png" type="Texture" id=4]
 
-[sub_resource type="Shader" id=4]
+[sub_resource type="Shader" id=6]
 code = "shader_type canvas_item;
 
 uniform vec2 scale;
@@ -39,15 +37,19 @@ void fragment() {
 	COLOR = texture(TEXTURE, mappedUV);
 }"
 
-[sub_resource type="ShaderMaterial" id=5]
-shader = SubResource( 4 )
-shader_param/scale = Vector2( 6, 1 )
+[sub_resource type="ShaderMaterial" id=7]
+resource_local_to_scene = true
+shader = SubResource( 6 )
+shader_param/scale = Vector2( 2, 1 )
 shader_param/right = 8
 shader_param/top = 8
 shader_param/left = 8
 shader_param/bottom = 2
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="StreamTexture" id=8]
+load_path = "res://.import/guyrock_platform.png-aea9adecfb54a28c38db3fba1b17fd56.stex"
+
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 8, 5 )
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -66,14 +68,13 @@ moving_platform_apply_velocity_on_leave = 2
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 5 )
-texture = ExtResource( 4 )
+material = SubResource( 7 )
+texture = SubResource( 8 )
 centered = false
-script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 8, 5 )
-shape = SubResource( 1 )
+shape = SubResource( 10 )
 one_way_collision = true
 
 [node name="Debug" type="RichTextLabel" parent="."]
