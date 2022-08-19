@@ -101,7 +101,22 @@ position = Vector2( 16, 16 )
 shape = SubResource( 13 )
 
 [node name="PlayerVisibility" type="RayCast2D" parent="."]
-position = Vector2( 16, 16 )
+position = Vector2( 8, 24 )
+enabled = true
+collision_mask = 5
+
+[node name="PlayerVisibility2" type="RayCast2D" parent="."]
+position = Vector2( 24, 24 )
+enabled = true
+collision_mask = 5
+
+[node name="PlayerVisibility3" type="RayCast2D" parent="."]
+position = Vector2( 8, 8 )
+enabled = true
+collision_mask = 5
+
+[node name="PlayerVisibility4" type="RayCast2D" parent="."]
+position = Vector2( 24, 8 )
 enabled = true
 collision_mask = 5
 

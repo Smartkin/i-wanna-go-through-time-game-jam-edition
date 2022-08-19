@@ -10,6 +10,7 @@ var player_dead := false
 var _camera_follow_player_state := {}
 var _cam_lock := false
 var _cam_manip := false
+var respawn_player := false
 var limits_to_set := {}
 
 func _ready():
@@ -23,6 +24,7 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	if (not player_dead and not _cam_manip):
 		$Camera.position = $Player.position
+		$CameraVisibility.global_position = $Camera.get_camera_screen_center()
 
 
 func _input(event: InputEvent) -> void:
@@ -52,6 +54,7 @@ func _on_scene_built() -> void:
 		position.x = WorldController.cur_save_data.playerPosX
 		position.y = WorldController.cur_save_data.playerPosY
 		$Player.health = WorldController.cur_save_data.health
+		respawn_player = true
 	$Camera.current = true
 	$Camera.position = position
 	$Camera.reset_smoothing()
@@ -86,6 +89,7 @@ func _on_Player_dead(playerPos: Vector2) -> void:
 	player_dead = true
 	WorldController.cur_save_data.deaths += 1
 	WorldController.save_to_file() # Save only deaths/time
+	$Player.queue_free()
 	$CheckpointTeleport.start()
 
 
@@ -112,7 +116,9 @@ func reset_camera():
 
 func lock_camera(pos: Vector2, size: Vector2):
 	$Camera.limit_smoothed = true
-	$Camera.reset_smoothing()
+	if (respawn_player):
+		$Camera.reset_smoothing()
+		respawn_player = false
 	var view_size = get_viewport_rect().size
 	if size.y < view_size.y:
 		size.y = view_size.y
@@ -156,6 +162,12 @@ func _on_CheckpointTeleport_timeout():
 #		dur).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
 #	come_back_tween.tween_callback($Player, "return_to_live")
 #	come_back_tween.tween_callback(self, "player_alive")
-	$Player.speed = Vector2.ZERO
-	$Player.health = WorldController.cur_save_data.health
 	player_alive()
+
+
+func _on_CameraVisibility_area_entered(area):
+	area.respawn_enemies()
+
+
+func _on_CameraVisibility_area_exited(area):
+	area.kill_enemies()

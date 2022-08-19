@@ -27,8 +27,14 @@ func _die():
 	$Hitbox.set_deferred("monitoring", false)
 	$Hurtbox.set_deferred("monitoring", false)
 	$Jumpbox.set_deferred("monitoring", false)
-	emit_signal("died")
 	anim.play("pop")
+
+func _respawn():
+	$Hitbox.set_deferred("monitoring", true)
+	$Hurtbox.set_deferred("monitoring", true)
+	$Jumpbox.set_deferred("monitoring", true)
+	anim.play("default")
+	._respawn()
 
 func _on_Hurtbox_body_entered(body: Player):
 	if body == null or _player_above:
@@ -55,4 +61,6 @@ func _on_Sprite_animation_finished():
 	if anim.animation == "bounced":
 		anim.play("pop")
 	elif anim.animation == "pop":
-		queue_free()
+		anim.stop()
+		._die()
+#		queue_free()

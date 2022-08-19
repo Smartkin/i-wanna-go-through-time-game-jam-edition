@@ -102,6 +102,7 @@ onready var grab_start_pos: Vector2 = $GrabHitbox/CollisionShape2D.position
 
 func _ready() -> void:
 	$Sprite.play(_get_animation("Idle")) # Set default sprite animation to idle
+	get_parent().get_node("Camera").reset_smoothing()
 
 func _physics_process(delta: float) -> void:
 	if (cur_state == STATE.DEAD):
@@ -486,7 +487,7 @@ func _handle_inputs() -> void:
 		jump_buffer = MAX_JUMP_BUFFER
 	if (jump_buffer > 0):
 		jump_buffer = jump(jump_buffer)
-		print(speed)
+#		print(speed)
 	# Handle player jump release
 	if (Input.is_action_just_released("jump") && !get_falling()):
 		_cut_jump()
