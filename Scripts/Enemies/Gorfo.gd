@@ -8,13 +8,21 @@ const Shot := preload("res://Scenes/Hazards/GorfoShot.tscn")
 export var speed := 100
 
 var has_target := false
-var target_player: Player = null
+var target_player: Player = null setget set_target_player
 var reverse_speed := false
 var walk_speed := 0
 
-onready var anim := $Sprite
-onready var vis_ray := $PlayerVisibility
-onready var timer := $Shoot
+var anim: AnimatedSprite = null
+var vis_ray: RayCast2D = null
+var timer: Timer = null
+var walk_timer: Timer = null
+
+func __ready():
+	.__ready()
+	anim = $Sprite
+	vis_ray = $PlayerVisibility
+	timer = $Shoot
+	walk_timer = $Walking
 
 func _when_walk(delta: float, binds: Array):
 	search_player()
@@ -25,6 +33,9 @@ func _when_spit(delta: float, binds: Array):
 		timer.stop()
 		has_target = false
 
+func set_target_player(player: Player):
+	target_player = player
+
 func search_player():
 	if target_player == null:
 		return
@@ -32,9 +43,10 @@ func search_player():
 	if $PlayerVisibility.get_collider() as Player != null:
 		if not has_target:
 			has_target = true
-			timer.start()
-			if ($Walking != null):
-				$Walking.stop()
+			if (timer != null):
+				timer.start()
+			if (walk_timer != null):
+				walk_timer.stop()
 			emit_signal("player_spotted")
 
 func walk(sp: int):
@@ -64,7 +76,8 @@ func _on_Proximity_body_entered(body: Player):
 func _on_Proximity_body_exited(body):
 	target_player = null
 	has_target = false
-	timer.stop()
+	if (timer != null):
+		timer.stop()
 
 
 func _on_Shoot_timeout():
