@@ -149,7 +149,7 @@ scale = Vector2( 4, 1 )
 
 [node name="TimeMachine" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1600, 896 )
-frame = 11
+frame = 14
 __meta__ = {
 "_edit_group_": true
 }
@@ -538,12 +538,12 @@ position = Vector2( 2208, 976 )
 position = Vector2( 2688, 896 )
 
 [node name="Balloon" parent="Enemies/Balloon3" index="0"]
-position = Vector2( 0, -47.034 )
+position = Vector2( 0, 44.0142 )
 y_mov = 70.0
 move_multi = 0.7
 
 [node name="Sprite" parent="Enemies/Balloon3/Balloon" index="2"]
-frame = 2
+frame = 4
 
 [node name="Balloon4" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 2624, 944 )
@@ -552,12 +552,12 @@ position = Vector2( 2624, 944 )
 position = Vector2( 2256, 288 )
 
 [node name="Balloon" parent="Enemies/Balloon8" index="0"]
-position = Vector2( 2.47955, -1.59692 )
+position = Vector2( -33.9513, 0.845986 )
 x_mov = 50.0
 move_multi = 0.8
 
 [node name="Sprite" parent="Enemies/Balloon8/Balloon" index="2"]
-frame = 2
+frame = 4
 
 [node name="Balloon5" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 2832, 1024 )
@@ -576,11 +576,9 @@ position = Vector2( 2368, 928 )
 
 [node name="Slimy" parent="Enemies" instance=ExtResource( 20 )]
 position = Vector2( 2544, 304 )
-jump_force = Vector2( 80, -300 )
 
 [node name="Slimy2" parent="Enemies" instance=ExtResource( 20 )]
 position = Vector2( 2672, 304 )
-jump_force = Vector2( 80, -300 )
 
 [node name="Platforms" type="Node2D" parent="."]
 
