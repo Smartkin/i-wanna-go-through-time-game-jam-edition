@@ -181,7 +181,7 @@ position = Vector2( 752, 288 )
 
 [node name="TimeMachine" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1600, 896 )
-frame = 7
+frame = 1
 __meta__ = {
 "_edit_group_": true
 }
@@ -1183,6 +1183,11 @@ motion_mirroring = Vector2( 640, 0 )
 texture = ExtResource( 4 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 1280, 360 )
+
+[node name="Ability" parent="." instance=ExtResource( 22 )]
+position = Vector2( 2030, 999 )
+frame = 1
+id = 1
 
 [editable path="Enemies/Balloon15"]
 [editable path="Enemies/Balloon16"]

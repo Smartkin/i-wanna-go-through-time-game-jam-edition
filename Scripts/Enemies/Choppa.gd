@@ -38,9 +38,6 @@ func _die():
 	dead = true
 	emit_signal("died")
 	anim.play("pop")
-	$Hitbox.set_deferred("monitoring", false)
-	$Hurtbox.set_deferred("monitoring", false)
-	$Proximity.set_deferred("monitoring", false)
 
 func _when_chase(delta: float, binds: Array):
 	vis_ray.cast_to = target_player.global_position - vis_ray.global_position

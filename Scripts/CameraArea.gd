@@ -11,7 +11,7 @@ var enemy_to_manip := []
 
 func _on_CameraArea_body_entered(body: KinematicBody2D):
 	if not body is Player:
-		enemy_to_manip.append(body)
+		enemy_to_manip.append(weakref(body))
 		return
 	camera_controller = body.get_parent()
 	camera_controller.lock_camera(global_position, Vector2(area.extents.x * 2, area.extents.y * 2))
@@ -36,8 +36,10 @@ func _on_CameraArea_child_entered_tree(node):
 
 func kill_enemies():
 	for e in enemy_to_manip:
-		e._die()
+		if (e.get_ref()):
+			e.get_ref()._die()
 
 func respawn_enemies():
 	for e in enemy_to_manip:
-		e._respawn()
+		if (e.get_ref()):
+			e.get_ref()._respawn()

@@ -16,12 +16,12 @@ onready var anim := $Sprite
 func _when_walk(delta: float, binds: Array):
 	# Wall check
 	move_and_slide(speed, Vector2.UP)
-#	print(speed)
-	_on_land = false
 	$Sprite.flip_h = speed.x < 0
+	print(is_on_wall())
 	if (not is_on_floor()):
 		speed.y += gravity
 	else:
+		_on_land = true
 		speed.y = 0
 	if _on_edge() or is_on_wall():
 		speed.x = -speed.x
@@ -29,11 +29,11 @@ func _when_walk(delta: float, binds: Array):
 func _when_jump(delta: float, binds: Array):
 	if (track_player == null):
 		return
+	move_and_slide(speed, Vector2.UP)
 	if (not _on_land or can_jump):
 		var hor_jump_force = jump_force.x * rand_range(1.0, jump_force_hrand)
 		speed.x = clamp((track_player.global_position.x - 10) - global_position.x, -hor_jump_force, hor_jump_force)
 		# Floor check
-		move_and_slide(speed, Vector2.UP)
 		can_jump = false
 		_on_land = is_on_floor()
 		if (_on_land):
@@ -57,6 +57,13 @@ func _on_Hurtbox_body_entered(body: Player):
 	pl = body
 	_player_enter()
 
+func _enable():
+	._enable()
+	$ProximityCheck.set_deferred("monitoring", true)
+
+func _disable():
+	._disable()
+	$ProximityCheck.set_deferred("monitoring", false)
 
 func _stuck(delta: float) -> bool:
 	return (not $LeftEdge.is_colliding() and not $RightEdge.is_colliding())

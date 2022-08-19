@@ -31,6 +31,13 @@ func _on_Hurtbox_body_entered(body: Player):
 	pl = body
 	_player_enter()
 
+func _disable():
+	._disable()
+	$Jumpbox.set_monitoring(false)
+
+func _enable():
+	._enable()
+	$Jumpbox.set_monitoring(true)
 
 func _stuck(delta: float) -> bool:
 	return (not $LeftEdge.is_colliding() and not $RightEdge.is_colliding()) or _player_above
