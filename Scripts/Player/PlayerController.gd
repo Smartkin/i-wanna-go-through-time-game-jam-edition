@@ -136,7 +136,7 @@ func _on_CheckpointTeleport_timeout():
 	_cam_lock = true
 	var player_save_pos := Vector2(WorldController.cur_save_data.playerPosX, WorldController.cur_save_data.playerPosY)
 	var come_back_tween := create_tween()
-	var dur := 0.2
+	var dur := 0.4
 	WorldController.do_transition(dur)
 #	come_back_tween.tween_property($Camera, "global_position", \
 #		player_save_pos, \

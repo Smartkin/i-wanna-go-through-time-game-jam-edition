@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Enemies/EnemyInterface.gd"
 }, {
+"base": "EnemyInterface",
+"class": "Gorfo",
+"language": "GDScript",
+"path": "res://Scripts/Enemies/Gorfo.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "GrabbableBase",
 "language": "GDScript",
@@ -546,6 +551,7 @@ _global_script_class_icons={
 "Chip": "",
 "EnemyBulletBase": "",
 "EnemyInterface": "",
+"Gorfo": "",
 "GrabbableBase": "",
 "KillerBase": "",
 "Player": "",
