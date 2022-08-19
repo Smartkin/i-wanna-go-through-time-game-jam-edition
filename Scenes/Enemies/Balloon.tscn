@@ -72,7 +72,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 8, 10 )
+extents = Vector2( 10, 5 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 8 )
@@ -83,7 +83,7 @@ extents = Vector2( 5, 7 )
 [node name="Balloon" type="Position2D"]
 
 [node name="Balloon" type="KinematicBody2D" parent="."]
-position = Vector2( 0, -0.561252 )
+position = Vector2( 0, -0.313848 )
 collision_layer = 128
 collision_mask = 6
 moving_platform_apply_velocity_on_leave = 2
@@ -103,7 +103,7 @@ shape = SubResource( 1 )
 [node name="Sprite" type="AnimatedSprite" parent="Balloon"]
 position = Vector2( 16, 16 )
 frames = SubResource( 10 )
-frame = 2
+frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -114,7 +114,7 @@ collision_layer = 0
 priority = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Balloon/Jumpbox"]
-position = Vector2( 16, 8 )
+position = Vector2( 16, 1.9927 )
 shape = SubResource( 11 )
 
 [node name="Hitbox" type="Area2D" parent="Balloon"]
