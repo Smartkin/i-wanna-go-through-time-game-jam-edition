@@ -14,11 +14,13 @@ var dead := false
 func _ready():
 	__ready()
 
+
 func __ready():
 	$Hurtbox.connect("body_entered", self, "_on_Hurtbox_body_entered")
 	$Hurtbox.connect("body_exited", self, "_on_Hurtbox_body_exited")
 	$Hitbox.connect("body_entered", self, "_on_Hitbox_body_entered")
 	set_meta("enemy", true)
+
 
 # Virtual function on player entering the area, by default just hits the player
 func _player_enter():

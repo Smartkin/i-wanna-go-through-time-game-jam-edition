@@ -106,7 +106,7 @@ shape = SubResource( 1 )
 position = Vector2( 8, 8 )
 frames = SubResource( 10 )
 animation = "walk"
-frame = 2
+frame = 4
 playing = true
 
 [node name="Hitbox" type="Area2D" parent="."]
@@ -148,7 +148,6 @@ wait_time = 0.7
 one_shot = true
 
 [connection signal="animation_finished" from="Sprite" to="StateMachine" method="_on_Sprite_animation_finished"]
-[connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
 [connection signal="body_entered" from="Jumpbox" to="." method="_on_Jumpbox_body_entered"]
 [connection signal="body_exited" from="Jumpbox" to="." method="_on_Jumpbox_body_exited"]
 [connection signal="timeout" from="StunTimer" to="StateMachine" method="_on_StunTimer_timeout"]

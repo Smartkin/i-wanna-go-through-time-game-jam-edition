@@ -191,7 +191,8 @@ func add_camera_area(area: Area2D) -> void:
 	camera_areas.append(area)
 
 func remove_camera_area(area: Area2D) -> void:
-	camera_areas.remove(camera_areas.find(area))
+	if camera_areas.has(area):
+		camera_areas.remove(camera_areas.find(area))
 
 # Sets player's fall speed
 func set_falling_speed(new_fall_speed: int) -> void:

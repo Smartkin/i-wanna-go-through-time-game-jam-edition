@@ -1,3 +1,4 @@
+tool
 extends KinematicBody2D
 
 const UP := Vector2.DOWN
@@ -18,6 +19,9 @@ func _ready() -> void:
 		($CollisionChecker as KinematicBody2D).to_move = self
 	else:
 		($CollisionChecker as KinematicBody2D).disconnect("block_collision", self, "on_block_collision")
+	$Sprite.get_material().set_shader_param("scale", scale)
+	set_notify_transform(true)
+
 
 func _physics_process(delta):
 	if (!bounce):
@@ -47,3 +51,8 @@ func _on_GrabArea_body_entered(body: Node2D) -> void:
 func _on_GrabArea_body_exited(body: Node2D) -> void:
 	if (body.is_in_group("Player")):
 		body.platform = null
+
+
+func _notification(what):
+	if what == NOTIFICATION_TRANSFORM_CHANGED:
+		$Sprite.get_material().set_shader_param("scale", scale)
