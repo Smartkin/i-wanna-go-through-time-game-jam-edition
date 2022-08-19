@@ -188,7 +188,8 @@ func reset_falling_speed() -> void:
 	fall_speed = DEFAULT_FALL
 
 func add_camera_area(area: Area2D) -> void:
-	camera_areas.append(area)
+	if (camera_areas.find(area) == -1):
+		camera_areas.append(area)
 
 func remove_camera_area(area: Area2D) -> void:
 	if camera_areas.has(area):

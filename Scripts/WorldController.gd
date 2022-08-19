@@ -142,8 +142,10 @@ func _ready() -> void:
 # Any globally handled user input
 func _input(event: InputEvent) -> void:
 	if (game_started):
-		if (event.is_action_pressed("restart")):
-			load_game()
+		var tree := get_tree()
+		var player_controller := tree.current_scene.find_node("PlayerController")
+		if (event.is_action_pressed("restart") and not player_controller.player_dead):
+			player_controller.get_node("Player").kill()
 		if (event.is_action_pressed("pause")):
 			pause_game()
 	if (DEBUG_MODE && !game_started):
@@ -414,7 +416,7 @@ func get_game_data(slot: int) -> Dictionary:
 	data.message = "Has data"
 	return data
 
-func load_game(loadFromSave := false) -> void:
+func load_game(loadFromSave := false, trans_duration: float = 0.7) -> void:
 	var tree := _scene_tree
 	loading_save = true
 	if (loadFromSave):
@@ -430,7 +432,7 @@ func load_game(loadFromSave := false) -> void:
 	cur_save_data = _save_data.duplicate(true)
 	# Load data
 	reverse_grav = _save_data.reverse_grav
-	Util.change_scene_transition(_save_data.scene)
+	Util.change_scene_transition(_save_data.scene, trans_duration)
 
 func save_to_file(save_death_time: bool = true) -> void:
 	# Create/Open save file
