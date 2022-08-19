@@ -20,7 +20,7 @@ func _on_ControllerSettings_pressed() -> void:
 
 func _on_Button_pressed() -> void:
 	WorldController.save_config()
-	get_tree().change_scene("res://Rooms/Title.tscn")
+	Util.change_scene_transition("res://Rooms/Title.tscn")
 
 
 func _on_ButtonPrompt_control_key_input(new_key: InputEvent, action_name: String) -> void:
