@@ -12,6 +12,7 @@ func _enter_state(new_state: State, old_state: State):
 	match new_state:
 		states.fly:
 			condition = ""
+			parent.anim.play("default")
 		states.chase:
 			condition = "_no_player_in_sight"
 			parent.get_node("Chasing").start()
@@ -47,6 +48,3 @@ func _get_transition_state() -> State:
 func _on_Choppa_player_spotted():
 	set_state(states.chase)
 
-
-func _on_Choppa_died():
-	queue_free()

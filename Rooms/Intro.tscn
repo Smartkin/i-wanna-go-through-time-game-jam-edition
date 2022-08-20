@@ -25,7 +25,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 250, 305 ), Vector2( 250, 115 ) ]
+"values": [ Vector2( 250, 401 ), Vector2( 250, 115 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Kid:animation")
@@ -59,9 +59,9 @@ tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 3, 7 ),
-"transitions": PoolRealArray( 3.13834, 1 ),
+"transitions": PoolRealArray( 3.13834, -5.46415 ),
 "update": 0,
-"values": [ Vector2( 572, 101 ), Vector2( 45, 101 ) ]
+"values": [ Vector2( 720, 101 ), Vector2( -100, 101 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Teleport:visible")
@@ -150,7 +150,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 251, 115 ) ]
+"values": [ Vector2( 251, 600 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Truck:position")
@@ -162,7 +162,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 572, 101 ) ]
+"values": [ Vector2( 1000, 101 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Teleport:visible")
@@ -189,7 +189,7 @@ tracks/5/keys = {
 "values": [ Vector2( 1e-05, 1e-05 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "Teleport"
 length = 2.0
 tracks/0/type = "value"
@@ -243,7 +243,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 resource_name = "Trucked"
 length = 4.0
 tracks/0/type = "value"
@@ -263,9 +263,10 @@ tracks/0/keys = {
 script = ExtResource( 4 )
 
 [node name="Kid" type="AnimatedSprite" parent="."]
-position = Vector2( 251, 115 )
+position = Vector2( 251, 600 )
 frames = ExtResource( 1 )
 animation = "Run"
+frame = 1
 playing = true
 __meta__ = {
 "_edit_group_": true
@@ -275,7 +276,7 @@ __meta__ = {
 occluder = SubResource( 2 )
 
 [node name="Truck" type="Sprite" parent="."]
-position = Vector2( 572, 101 )
+position = Vector2( 1000, 101 )
 texture = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
@@ -303,8 +304,8 @@ texture = ExtResource( 3 )
 [node name="IntroPlayer" type="AnimationPlayer" parent="."]
 anims/PlayerWalk = SubResource( 3 )
 anims/RESET = SubResource( 4 )
-anims/Teleport = SubResource( 6 )
-anims/Trucked = SubResource( 5 )
+anims/Teleport = SubResource( 5 )
+anims/Trucked = SubResource( 6 )
 
 [node name="Control" type="Control" parent="."]
 margin_left = 16.0
