@@ -173,6 +173,7 @@ script = ExtResource( 3 )
 [node name="Machine" type="AnimatedSprite" parent="."]
 position = Vector2( 8, 10 )
 frames = SubResource( 3 )
+frame = 1
 playing = true
 
 [node name="SavedText" type="Sprite" parent="."]
