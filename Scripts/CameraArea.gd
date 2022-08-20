@@ -37,7 +37,7 @@ func _on_CameraArea_child_entered_tree(node):
 func kill_enemies():
 	for e in enemy_to_manip:
 		if (e.get_ref()):
-			e.get_ref()._die()
+			e.get_ref()._disable()
 
 func respawn_enemies():
 	for e in enemy_to_manip:

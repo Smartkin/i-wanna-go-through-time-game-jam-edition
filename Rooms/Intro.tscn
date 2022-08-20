@@ -266,6 +266,7 @@ script = ExtResource( 4 )
 position = Vector2( 251, 115 )
 frames = ExtResource( 1 )
 animation = "Run"
+frame = 5
 playing = true
 __meta__ = {
 "_edit_group_": true

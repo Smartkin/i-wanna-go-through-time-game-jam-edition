@@ -78,8 +78,9 @@ func navigate(path: Array) -> void:
 func fly(sp: float):
 	if (target_player != null):
 		var dir := global_position.direction_to(target_player.global_position)
-		move_and_slide(dir * sp, Vector2.UP)
-		$Sprite.flip_h = -1 if dir.x < 0 else 1
+		var res_sp := dir * sp
+		move_and_slide(res_sp, Vector2.UP)
+		$Sprite.flip_h = -1 if res_sp.x < 0 else 1
 
 func fly_again():
 	step_flight = false
@@ -109,5 +110,6 @@ func _on_Sprite_animation_finished():
 		var prop := propeller.instance()
 		par.add_child(prop)
 		prop.global_position = global_position
+		anim.stop()
 		_disable()
 
