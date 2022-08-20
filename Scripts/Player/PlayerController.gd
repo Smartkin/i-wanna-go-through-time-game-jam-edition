@@ -66,7 +66,7 @@ func _on_Player_shoot(direction: int) -> void:
 	var xPosOffset := -9 if direction == -1 else 9
 	var yPosOffset := -3 if WorldController.reverse_grav else 3 # Offset it against player's vertical position
 	add_child(b)
-	b.speed = Vector2(1500 * direction, 0)
+	b.speed = Vector2(800 * direction, 0)
 	b.position = Vector2($Player.position.x + xPosOffset, $Player.position.y + yPosOffset)
 
 # Callback when player needs to play a sound

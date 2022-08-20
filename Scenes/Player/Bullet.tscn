@@ -62,13 +62,13 @@ wait_time = 0.8
 
 [node name="EnemyCheck" type="RayCast2D" parent="."]
 enabled = true
-cast_to = Vector2( 20, 0 )
+cast_to = Vector2( 50, 0 )
 collision_mask = 256
 collide_with_areas = true
 
 [node name="BreakableBlockCheck" type="RayCast2D" parent="."]
 enabled = true
-cast_to = Vector2( 20, 0 )
+cast_to = Vector2( 50, 0 )
 collision_mask = 1024
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
