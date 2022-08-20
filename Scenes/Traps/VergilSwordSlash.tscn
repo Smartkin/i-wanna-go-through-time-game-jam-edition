@@ -16,3 +16,4 @@ texture = ExtResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 self_modulate = Color( 0.819608, 0.254902, 0.254902, 1 )
 shape = SubResource( 1 )
+disabled = true
