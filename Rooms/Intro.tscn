@@ -1,0 +1,319 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Scenes/Player/Player.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://godot.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/sprPointLight.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Intro.gd" type="Script" id=4]
+[ext_resource path="res://Themes/default_theme.tres" type="Theme" id=5]
+
+[sub_resource type="OccluderPolygon2D" id=2]
+polygon = PoolVector2Array( -4, 8, 5, 8, 5, -6, -4, -6 )
+
+[sub_resource type="OccluderPolygon2D" id=1]
+polygon = PoolVector2Array( -28, -29, 32, -1, -29, 30, -18, 0 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "PlayerWalk"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Kid:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 250, 305 ), Vector2( 250, 115 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Kid:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 2,
+"values": [ "Run", "Idle" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Kid:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Truck:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 3, 7 ),
+"transitions": PoolRealArray( 3.13834, 1 ),
+"update": 0,
+"values": [ Vector2( 572, 101 ), Vector2( 45, 101 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Teleport:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 6 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Teleport:scale")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 6, 6.5, 7 ),
+"transitions": PoolRealArray( 0.329877, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 0.05, 0.05 ), Vector2( 1e-05, 1e-05 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Kid:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 6, 6.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, false ]
+}
+tracks/7/type = "method"
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 8 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "teleport_kid"
+} ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Kid:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "Run" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Kid:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Kid:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 251, 115 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Truck:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 572, 101 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Teleport:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Teleport:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Teleport"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Teleport:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Teleport:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 0.329877, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 0.05, 0.05 ), Vector2( 1e-05, 1e-05 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Kid:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "teleport_kid"
+} ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Trucked"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Truck:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 3.13834, 1 ),
+"update": 0,
+"values": [ Vector2( 572, 101 ), Vector2( 45, 101 ) ]
+}
+
+[node name="Intro" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="Kid" type="AnimatedSprite" parent="."]
+position = Vector2( 251, 115 )
+frames = ExtResource( 1 )
+animation = "Run"
+playing = true
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Kid"]
+occluder = SubResource( 2 )
+
+[node name="Truck" type="Sprite" parent="."]
+position = Vector2( 572, 101 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Light2D" type="Light2D" parent="Truck"]
+position = Vector2( -31, 1 )
+texture = ExtResource( 3 )
+texture_scale = 0.2
+color = Color( 0.956863, 0.92549, 0.462745, 1 )
+energy = 1.5
+shadow_enabled = true
+shadow_gradient_length = 50.0
+shadow_filter = 2
+shadow_filter_smooth = 10.0
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Truck"]
+occluder = SubResource( 1 )
+
+[node name="Teleport" type="Sprite" parent="."]
+position = Vector2( 250, 115 )
+scale = Vector2( 1e-05, 1e-05 )
+texture = ExtResource( 3 )
+
+[node name="IntroPlayer" type="AnimationPlayer" parent="."]
+anims/PlayerWalk = SubResource( 3 )
+anims/RESET = SubResource( 4 )
+anims/Teleport = SubResource( 6 )
+anims/Trucked = SubResource( 5 )
+
+[node name="Control" type="Control" parent="."]
+margin_left = 16.0
+margin_top = 9.0
+margin_right = 123.0
+margin_bottom = 39.0
+theme = ExtResource( 5 )
+
+[node name="Skip" type="Label" parent="Control"]
+unique_name_in_owner = true
+margin_right = 40.0
+margin_bottom = 14.0
