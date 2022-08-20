@@ -1,4 +1,4 @@
-#tool
+tool
 extends Gorfo
 
 export(float, 0.0, 1000.0, 0.5) var x_mov = 64.0
