@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Tiles/guyrock_age_autotiles/tileset_guyrock_age_autotiles.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Player/PlayerController.tscn" type="PackedScene" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://Scripts/CameraAreas.gd" type="Script" id=21]
 [ext_resource path="res://Scenes/Items/Ability.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/Enemies/Choppa.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Scenes/Gimmicks/BreakableBlock.tscn" type="PackedScene" id=24]
 
 [sub_resource type="NavigationPolygon" id=7]
 vertices = PoolVector2Array( 640, 1216, 640, 1104, 1600, 1104, 784, 1216, 1600, 1424, 1024, 1376, 1024, 1424, 784, 1376 )
@@ -181,7 +182,6 @@ position = Vector2( 752, 288 )
 
 [node name="TimeMachine" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1600, 896 )
-frame = 11
 __meta__ = {
 "_edit_group_": true
 }
@@ -935,34 +935,31 @@ position = Vector2( 952, 1584 )
 position = Vector2( 1056, 1728 )
 
 [node name="Balloon" parent="Enemies/Balloon15" index="0"]
-position = Vector2( 13.8569, 0.399961 )
+position = Vector2( 7.13726, -0.715995 )
 x_mov = 40.0
 move_multi = 0.4
 
 [node name="Sprite" parent="Enemies/Balloon15/Balloon" index="2"]
-frame = 2
+frame = 4
 
 [node name="Balloon16" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 912, 1680 )
 
 [node name="Balloon" parent="Enemies/Balloon16" index="0"]
-position = Vector2( -1.32509, 0.797252 )
+position = Vector2( -13.8944, -0.39669 )
 x_mov = -40.0
 move_multi = 0.4
-
-[node name="Sprite" parent="Enemies/Balloon16/Balloon" index="2"]
-frame = 1
 
 [node name="Balloon3" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 2688, 896 )
 
 [node name="Balloon" parent="Enemies/Balloon3" index="0"]
-position = Vector2( 0, 38.7295 )
+position = Vector2( 0, -43.7454 )
 y_mov = 70.0
 move_multi = 0.7
 
 [node name="Sprite" parent="Enemies/Balloon3/Balloon" index="2"]
-frame = 0
+frame = 2
 
 [node name="Balloon4" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 2624, 944 )
@@ -971,12 +968,12 @@ position = Vector2( 2624, 944 )
 position = Vector2( 2256, 288 )
 
 [node name="Balloon" parent="Enemies/Balloon8" index="0"]
-position = Vector2( -14.1986, 1.49581 )
+position = Vector2( 38.3117, 0.459933 )
 x_mov = 50.0
 move_multi = 0.8
 
 [node name="Sprite" parent="Enemies/Balloon8/Balloon" index="2"]
-frame = 0
+frame = 2
 
 [node name="Balloon5" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 2832, 1024 )
@@ -1101,6 +1098,17 @@ position = Vector2( 3120, 576 )
 [node name="Save5" parent="Saves" instance=ExtResource( 15 )]
 position = Vector2( 2896, 224 )
 
+[node name="BreakableBlocks" type="Node2D" parent="."]
+
+[node name="BreakableBlock" parent="BreakableBlocks" instance=ExtResource( 24 )]
+position = Vector2( 1856, 1600 )
+
+[node name="BreakableBlock2" parent="BreakableBlocks" instance=ExtResource( 24 )]
+position = Vector2( 1856, 1632 )
+
+[node name="BreakableBlock3" parent="BreakableBlocks" instance=ExtResource( 24 )]
+position = Vector2( 1856, 1664 )
+
 [node name="DoubleJumpAbility" parent="." instance=ExtResource( 22 )]
 position = Vector2( 1728, 160 )
 id = 0
@@ -1183,11 +1191,6 @@ motion_mirroring = Vector2( 640, 0 )
 texture = ExtResource( 4 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 1280, 360 )
-
-[node name="Ability" parent="." instance=ExtResource( 22 )]
-position = Vector2( 2030, 999 )
-frame = 1
-id = 1
 
 [editable path="Enemies/Balloon15"]
 [editable path="Enemies/Balloon16"]
