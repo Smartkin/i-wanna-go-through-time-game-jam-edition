@@ -196,4 +196,3 @@ volume_db = -6.199
 
 [connection signal="body_entered" from="Trigger" to="." method="_on_Trigger_body_entered"]
 [connection signal="finished" from="YouShallDieSfx" to="." method="_on_YouShallDieSfx_finished"]
-[connection signal="finished" from="SwordSlashesSfx" to="." method="_on_SwordSlashesSfx_finished"]

@@ -31,7 +31,7 @@ var is_slashing := false
 var has_hit_player := false
 var blades_counts := [3, 3, 3, 8]
 var blade_spawn_delay := 0.3
-var blade_slash_delays := [0.2, 0.2, 0.25, 0.01]
+var blade_slash_delays := [0.2, 0.2, 0.3, 0.5]
 var target_player: Player = null
 var target_slowdown := 500.0
 var game_spd := 1.0
@@ -136,6 +136,9 @@ func slow_down_time() -> void:
 
 
 func _blade_has_touched_player(body: Node) -> void:
+	if has_hit_player:
+		return
+	
 	has_hit_player = true
 	Engine.time_scale = 1.0
 	$ScreenFX.visible = false
@@ -165,14 +168,16 @@ func _on_YouShallDieSfx_finished() -> void:
 		tween.parallel().tween_property(self, "color_rate", 0.0, 0.1 / target_slowdown)
 			
 		for blade in blades_counts[i]:
+			print(game_spd)
 			n_SwordSlashes.get_child(blade_id).speed_mult = game_spd
 			n_SwordSlashes.get_child(blade_id).slash()
 			blade_id += 1
 		# Wait until we can slash more blades
 		yield(get_tree().create_timer(blade_slash_delays[i] / target_slowdown), "timeout")
+	blade_slashes_finished()
 
 
-func _on_SwordSlashesSfx_finished() -> void:
+func blade_slashes_finished() -> void:
 	if has_hit_player:
 		return
 	
