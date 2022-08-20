@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scripts/Traps/VergilTrap.gd" type="Script" id=1]
 [ext_resource path="res://Videos/I-am-the-storm-edit.ogv" type="VideoStream" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://godot.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/Traps/dmc_trap_vignentte.png" type="Texture" id=7]
 [ext_resource path="res://Sounds/You shall die.wav" type="AudioStream" id=8]
+[ext_resource path="res://Sounds/Kid got slashed.wav" type="AudioStream" id=9]
+[ext_resource path="res://Sounds/sword slashes.wav" type="AudioStream" id=10]
 
 [sub_resource type="VisualShaderNodeTexture" id=1]
 source = 5
@@ -119,10 +121,8 @@ shader_param/ScalarUniform = -0.12
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 18.5, 19 )
 
-[node name="VergilTrap" type="Node"]
+[node name="VergilTrap" type="Position2D"]
 script = ExtResource( 1 )
-
-[node name="SwordSlashes" type="Node2D" parent="."]
 
 [node name="ScreenFX" type="CanvasLayer" parent="."]
 visible = false
@@ -163,8 +163,16 @@ material = SubResource( 8 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="VideoPlayer" type="VideoPlayer" parent="."]
+[node name="SwordSlashes" type="CanvasLayer" parent="."]
+layer = 2
 visible = false
+follow_viewport_enable = true
+
+[node name="VideoLayer" type="CanvasLayer" parent="."]
+layer = 3
+visible = false
+
+[node name="VideoPlayer" type="VideoPlayer" parent="VideoLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 stream = ExtResource( 2 )
@@ -176,8 +184,16 @@ collision_layer = 0
 self_modulate = Color( 1, 0.301961, 0.941176, 1 )
 shape = SubResource( 9 )
 
-[node name="YouShallDie" type="AudioStreamPlayer" parent="."]
+[node name="YouShallDieSfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
 
+[node name="SwordSlashesSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+
+[node name="KidSlashedSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -6.199
+
 [connection signal="body_entered" from="Trigger" to="." method="_on_Trigger_body_entered"]
-[connection signal="finished" from="YouShallDie" to="." method="_on_YouShallDie_finished"]
+[connection signal="finished" from="YouShallDieSfx" to="." method="_on_YouShallDieSfx_finished"]
+[connection signal="finished" from="SwordSlashesSfx" to="." method="_on_SwordSlashesSfx_finished"]
