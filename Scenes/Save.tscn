@@ -85,7 +85,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=22]
 extents = Vector2( 8, 6 )
 
 [sub_resource type="Animation" id=20]
@@ -173,7 +173,6 @@ script = ExtResource( 3 )
 [node name="Machine" type="AnimatedSprite" parent="."]
 position = Vector2( 8, 10 )
 frames = SubResource( 3 )
-frame = 1
 playing = true
 
 [node name="SavedText" type="Sprite" parent="."]
@@ -184,11 +183,12 @@ texture = ExtResource( 6 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
+monitoring = false
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 8, 10 )
-shape = SubResource( 4 )
+shape = SubResource( 22 )
 
 [node name="SavePosition" type="Position2D" parent="."]
 position = Vector2( 8, 8 )

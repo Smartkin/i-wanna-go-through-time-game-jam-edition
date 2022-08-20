@@ -4,7 +4,6 @@ export var wiggle_dist := 3.0
 export var wiggle_speed := 400.0
 var elapsed_time := 0.0
 onready var moved_pos := position
-onready var n_AnimationPlayer := $AnimationPlayer
 
 
 func _ready() -> void:
