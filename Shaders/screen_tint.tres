@@ -63,10 +63,10 @@ void fragment() {
 [resource]
 shader = SubResource( 1 )
 shader_param/brightness = -0.126
-shader_param/contrast = 1.045
-shader_param/saturation = 0.504
+shader_param/contrast = 1.135
+shader_param/saturation = 0.4
 shader_param/redVal = 0.0
-shader_param/greenVal = 0.68
-shader_param/blueVal = 0.677
+shader_param/greenVal = 0.7
+shader_param/blueVal = 0.7
 shader_param/tint_color = Color( 1, 1, 1, 1 )
 shader_param/tint_effect_factor = 0.0
