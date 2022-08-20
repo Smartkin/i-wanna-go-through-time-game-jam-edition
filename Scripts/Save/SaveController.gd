@@ -1,6 +1,8 @@
 extends Node2D
 
-onready var anim := $Sprite
+onready var anim := $Machine
+onready var anim_player := $AnimationPlayer
+
 
 func _on_scene_built():
 	if (WorldController.cur_save_data.save_id == get_instance_id()):
@@ -26,4 +28,5 @@ func _on_Sprite_animation_finished():
 
 func _on_Area2D_activate():
 	if (anim.animation != "active"):
+		anim_player.play("display_text")
 		anim.play("activation")
