@@ -109,5 +109,5 @@ func _on_Sprite_animation_finished():
 		var prop := propeller.instance()
 		par.add_child(prop)
 		prop.global_position = global_position
-		queue_free()
+		_disable()
 
