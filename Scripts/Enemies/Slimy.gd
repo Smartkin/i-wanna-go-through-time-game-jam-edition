@@ -17,11 +17,10 @@ func _when_walk(delta: float, binds: Array):
 	# Wall check
 	move_and_slide(speed, Vector2.UP)
 	$Sprite.flip_h = speed.x < 0
-	print(is_on_wall())
+	_on_land = false
 	if (not is_on_floor()):
 		speed.y += gravity
 	else:
-		_on_land = true
 		speed.y = 0
 	if _on_edge() or is_on_wall():
 		speed.x = -speed.x
@@ -31,8 +30,9 @@ func _when_jump(delta: float, binds: Array):
 		return
 	move_and_slide(speed, Vector2.UP)
 	if (not _on_land or can_jump):
-		var hor_jump_force = jump_force.x * rand_range(1.0, jump_force_hrand)
-		speed.x = clamp((track_player.global_position.x - 10) - global_position.x, -hor_jump_force, hor_jump_force)
+		if (can_jump):
+			var hor_jump_force = jump_force.x * rand_range(1.0, jump_force_hrand)
+			speed.x = clamp((track_player.global_position.x - 10) - global_position.x, -hor_jump_force, hor_jump_force)
 		# Floor check
 		can_jump = false
 		_on_land = is_on_floor()
