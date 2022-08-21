@@ -26,7 +26,7 @@ animations = [ {
 "frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
 "name": "break",
-"speed": 15.0
+"speed": 30.0
 } ]
 
 [sub_resource type="CanvasItemMaterial" id=8]

@@ -1,10 +1,37 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Sprites/UI/abitlity_icons.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Items/Ability.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Items/item_halo.png" type="Texture" id=3]
+[ext_resource path="res://Sounds/Items/ability_get.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 8 )
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0, 0.286364, 0.7, 1 )
+colors = PoolColorArray( 0.266667, 0.929412, 0.819608, 0, 0.266667, 0.929412, 0.819608, 1, 0.913725, 0.603922, 0.0627451, 1, 0.913725, 0.603922, 0.0627451, 0 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+width = 100
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0.0205761, 0.309091 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.490909 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+width = 100
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 720.0
+angle_random = 1.0
+scale_curve = SubResource( 6 )
+color_ramp = SubResource( 4 )
 
 [node name="Ability" type="Sprite" groups=["Saved"]]
 position = Vector2( 8, 8 )
@@ -20,5 +47,13 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 2 )
+
+[node name="Aura" type="Particles2D" parent="."]
+amount = 4
+process_material = SubResource( 7 )
+texture = ExtResource( 3 )
+
+[node name="Collected" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

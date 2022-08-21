@@ -2,7 +2,6 @@ tool
 class_name Ability
 extends Sprite
 
-
 enum ABILITIES {
 	DOUBLE_JUMP,
 	SHOOT,
@@ -22,6 +21,9 @@ enum ABILITIES {
 	INVALID = -1
 }
 export(ABILITIES) var id = ABILITIES.INVALID
+export var description := "No description."
+
+var ability_description_scene := preload("res://Scenes/Items/AbilityGrabbed.tscn")
 
 func _ready():
 	if id == ABILITIES.INVALID:
@@ -57,4 +59,11 @@ func _on_Area2D_body_entered(body):
 		WorldController.cur_save_data.gun_power += 1
 	WorldController.save_item(id)
 #	WorldController.save_game()
+
+	var ability_ui := ability_description_scene.instance()
+	ability_ui.description = description
+	ability_ui.ability_frame = frame
+	
+	get_tree().current_scene.add_child(ability_ui)
+
 	queue_free()
