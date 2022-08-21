@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Sprites/Hazards/Enemies/spiky_big.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Enemies/Spiky.gd" type="Script" id=2]
@@ -45,15 +45,24 @@ animations = [ {
 
 [sub_resource type="CircleShape2D" id=10]
 
+[sub_resource type="Curve2D" id=11]
+resource_local_to_scene = true
+_data = {
+"points": PoolVector2Array(  )
+}
+
 [node name="Spiky" type="KinematicBody2D"]
+collision_layer = 8
+collision_mask = 0
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 9 )
-frame = 3
+frame = 6
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 10 )
 
 [node name="FollowPath" type="Path2D" parent="."]
+curve = SubResource( 11 )

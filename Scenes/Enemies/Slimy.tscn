@@ -87,7 +87,7 @@ shape = SubResource( 3 )
 position = Vector2( 8, 11 )
 frames = SubResource( 10 )
 animation = "walk"
-frame = 3
+frame = 1
 playing = true
 
 [node name="LeftEdge" type="RayCast2D" parent="."]

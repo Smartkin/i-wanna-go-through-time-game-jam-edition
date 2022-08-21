@@ -61,7 +61,7 @@ unique_name_in_owner = true
 visible = false
 
 [node name="Choppa" type="KinematicBody2D" parent="."]
-position = Vector2( 61.3113, 18.3554 )
+position = Vector2( 20.5692, -7.66044 )
 collision_layer = 128
 collision_mask = 4
 moving_platform_apply_velocity_on_leave = 2
@@ -69,6 +69,9 @@ script = ExtResource( 1 )
 __meta__ = {
 "enemy": true
 }
+x_mov = 32.0
+y_mov = 10.0
+lunge_speed = 200.0
 
 [node name="StateMachine" type="Node" parent="Choppa"]
 script = ExtResource( 4 )

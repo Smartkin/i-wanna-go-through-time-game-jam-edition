@@ -1,9 +1,10 @@
-extends KinematicBody2D
+extends KillerBase
 
 export var ease_dur := 1.0 
 export var mirror_path := false
 
 onready var n_FollowPath := $FollowPath
+onready var starting_pos := global_position 
 var current_node := 0
 var node_increment := 1
 var path_nodes := []
@@ -28,8 +29,7 @@ func goto_next_path_node() -> void:
 		current_node = (current_node+1) % path_nodes.size()
 	
 	var tween := create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
-	tween.tween_property(self, "position", path_nodes[current_node], ease_dur)
-	print(path_nodes)
+	tween.tween_property(self, "global_position", starting_pos + path_nodes[current_node], ease_dur)
 	
 	yield(tween, "finished")
 	goto_next_path_node()
