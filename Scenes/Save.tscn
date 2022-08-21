@@ -177,7 +177,6 @@ script = ExtResource( 3 )
 [node name="Machine" type="AnimatedSprite" parent="."]
 position = Vector2( 8, 10 )
 frames = SubResource( 3 )
-frame = 1
 playing = true
 
 [node name="SavedText" type="Sprite" parent="."]
@@ -216,5 +215,4 @@ shape = SubResource( 23 )
 [connection signal="activate" from="Area2D" to="." method="_on_Area2D_activate"]
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="Area2D" method="_on_Area2D_body_exited"]
-[connection signal="body_entered" from="Area2D2" to="." method="_on_Area2D2_body_entered"]
 [connection signal="body_exited" from="Area2D2" to="." method="_on_Area2D2_body_exited"]
