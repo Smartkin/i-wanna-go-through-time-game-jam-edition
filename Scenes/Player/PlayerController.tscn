@@ -58,7 +58,6 @@ z_index = 1
 
 [node name="Death" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 2 )
-volume_db = 5.0
 bus = "Sfx"
 
 [node name="Jump" type="AudioStreamPlayer" parent="Sounds"]
@@ -73,7 +72,7 @@ bus = "Sfx"
 
 [node name="Shoot" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 5 )
-volume_db = 5.0
+volume_db = -2.0
 bus = "Sfx"
 
 [node name="Blood" type="Particles2D" parent="."]
