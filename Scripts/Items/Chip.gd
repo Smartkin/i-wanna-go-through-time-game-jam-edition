@@ -1,5 +1,5 @@
 class_name Chip
-extends Sprite
+extends AnimatedSprite
 
 enum CHIPS {GUY_AGE, ICE_AGE, INVALID = -1}
 export(CHIPS) var id = CHIPS.INVALID
