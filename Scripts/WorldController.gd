@@ -365,6 +365,12 @@ func save_config() -> void:
 	config.set_value("controller", "pause", cur_config.controller_controls.pause)
 	config.save(_get_config_path())
 
+func shake_camera(ease_type: int, duration: float, strength: float):
+	var tree := _scene_tree
+	var scene := tree.current_scene
+	var player_controller := scene.find_node("PlayerController")
+	player_controller.shake_camera(ease_type, duration, strength)
+
 func save_chip(id: int) -> void:
 	cur_save_data.chips[String(id)] = true
 
