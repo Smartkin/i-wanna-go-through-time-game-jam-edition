@@ -73,7 +73,7 @@ func navigate(path: Array) -> void:
 
 func fly(sp: float):
 	if (target_player != null):
-		var dir := global_position.direction_to(.global_position)
+		var dir := global_position.direction_to(target_player.global_position)
 		var sp_scale: float = global_position.distance_to(target_player.global_position) / safe_distance - 1
 		if (sp_scale < 1 and timer.is_stopped()):
 			timer.start()

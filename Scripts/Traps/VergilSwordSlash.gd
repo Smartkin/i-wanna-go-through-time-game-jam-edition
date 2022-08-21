@@ -26,5 +26,5 @@ func withdraw() -> void:
 	var tween := create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(self, "modulate:a", 0.0, 0.3)
 	tween.parallel().tween_property(self, "scale:y", 0.0, 0.3)
-	yield(tween, "finished")
+	(yield(tween, "finished"))
 	queue_free()

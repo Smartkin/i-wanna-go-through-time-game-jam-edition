@@ -8,7 +8,7 @@ func _input(event: InputEvent):
 		return
 	if event.is_action_pressed("up"):
 		player._switch_state(Player.STATE.CUTSCENE)
-		yield(WorldController.do_transition(1.0), "transition_finished")
+		(yield(WorldController.do_transition(1.0), "transition_finished"))
 		var time_machine = get_tree().current_scene.find_node("TimeMachine")
 		player.global_position = Vector2(time_machine.global_position.x, time_machine.global_position.y - 16)
 		player._revert_state()

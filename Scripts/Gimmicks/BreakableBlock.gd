@@ -17,7 +17,7 @@ func destroy() -> void:
 	n_CollisionShape.disabled = true
 	n_SmokeParticles.emitting = true
 	n_AnimatedPlayer.play("chunks_scatter")
-	yield(get_tree().create_timer(2.0), "timeout")
+	(yield(get_tree().create_timer(2.0), "timeout"))
 	queue_free()
 
 

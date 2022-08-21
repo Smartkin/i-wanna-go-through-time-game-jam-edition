@@ -483,12 +483,15 @@ frame = 0
 curve = SubResource( 21 )
 
 [node name="Boss" type="Node2D" parent="."]
-position = Vector2( 2880, 1904 )
+position = Vector2( 2880, 1984 )
 
 [node name="TissonBoss" parent="Boss" instance=ExtResource( 33 )]
 
+[node name="AnimatedSprite" parent="Boss/TissonBoss/TaisonBoss" index="3"]
+frame = 2
+
 [node name="BossTrigger" type="Area2D" parent="Boss"]
-position = Vector2( 0, -288 )
+position = Vector2( -208, -411 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -1552,13 +1555,13 @@ script = ExtResource( 34 )
 position = Vector2( 2560, 1568 )
 
 [node name="SpawnBlock2" parent="SpawnBlocks" instance=ExtResource( 32 )]
-position = Vector2( 2560, 1601 )
+position = Vector2( 2560, 1600 )
 
 [node name="SpawnBlock3" parent="SpawnBlocks" instance=ExtResource( 32 )]
-position = Vector2( 2560, 1633 )
+position = Vector2( 2560, 1632 )
 
 [node name="SpawnBlock4" parent="SpawnBlocks" instance=ExtResource( 32 )]
-position = Vector2( 2560, 1665 )
+position = Vector2( 2560, 1664 )
 
 [node name="SpawnBlock5" parent="SpawnBlocks" instance=ExtResource( 32 )]
 position = Vector2( 3168, 1568 )
@@ -1577,7 +1580,7 @@ position = Vector2( 3168, 1664 )
 [connection signal="body_entered" from="Traps/RyuTrap2/Area2D" to="Traps/RyuTrap2" method="_on_Area2D_body_entered" flags=6]
 [connection signal="body_entered" from="Traps/RyuTrap2/Area2D" to="Traps/RyuTrap3/Area2D" method="_on_connected_area_entered" flags=6]
 [connection signal="body_entered" from="Traps/RyuTrap3/Area2D" to="Traps/RyuTrap3" method="_on_Area2D_body_entered" flags=6]
-[connection signal="body_entered" from="Boss/BossTrigger" to="Boss/TissonBoss" method="_on_BossTrigger_body_entered" flags=6]
+[connection signal="body_entered" from="Boss/BossTrigger" to="Boss/TissonBoss/TaisonBoss" method="_on_BossTrigger_body_entered" flags=6]
 [connection signal="body_entered" from="Boss/BossTrigger" to="SpawnBlocks" method="_on_BossTrigger_body_entered" flags=6]
 
 [editable path="Spikies/Spiky"]
@@ -1590,6 +1593,8 @@ position = Vector2( 3168, 1664 )
 [editable path="Spikies/Spiky8"]
 [editable path="Spikies/Spiky10"]
 [editable path="Spikies/Spiky11"]
+[editable path="Boss/TissonBoss"]
+[editable path="Boss/TissonBoss/TaisonBoss/AnimatedSprite"]
 [editable path="Enemies/Balloon15"]
 [editable path="Enemies/Balloon16"]
 [editable path="Enemies/Balloon3"]
