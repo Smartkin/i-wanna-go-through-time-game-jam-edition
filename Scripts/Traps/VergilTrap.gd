@@ -109,7 +109,7 @@ func disable_fx() -> void:
 	tween.parallel().tween_property(self, "blue", 1.0, fx_fade_dur/2.0)
 	tween.parallel().tween_property(self, "fisheye", 0.0, fx_fade_dur/2.0)
 	WorldController.fade_music(WorldController.FADE_MODE.IN, fx_fade_dur/2.0, 1.0)
-	yield(tween, "finished")
+	(yield(tween, "finished"))
 	# Trap passed, delete to conserve memory
 	queue_free()
 
@@ -129,7 +129,7 @@ func spawn_blades() -> void:
 				slash.connect("body_entered", self, "_blade_has_touched_player")
 				rand_offset += 200.0
 			# Wait until we can spawn the next wave of blades
-			yield(get_tree().create_timer(blade_spawn_delay), "timeout")
+			(yield(get_tree().create_timer(blade_spawn_delay), "timeout"))
 	slow_down_time()
 
 
@@ -176,7 +176,7 @@ func _on_YouShallDieSfx_finished() -> void:
 			n_SwordSlashes.get_child(blade_id).slash()
 			blade_id += 1
 		# Wait until we can slash more blades
-		yield(get_tree().create_timer(blade_slash_delays[i] / target_slowdown), "timeout")
+		(yield(get_tree().create_timer(blade_slash_delays[i] / target_slowdown), "timeout"))
 	blade_slashes_finished()
 
 

@@ -12,3 +12,6 @@ func _ready() -> void:
 
 func _enter_tree():
 	WorldController.music_to_play = music
+
+func play():
+	WorldController.play_music(music)

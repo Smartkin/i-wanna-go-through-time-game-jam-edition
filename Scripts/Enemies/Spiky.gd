@@ -31,7 +31,7 @@ func goto_next_path_node() -> void:
 	var point_pos : Vector2 = n_FollowPath.curve.get_point_position(current_node)
 	var tween := create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
 	tween.tween_property(self, "global_position", starting_pos + point_pos, ease_dur)
-	print(point_pos)
+#	print(point_pos)
 	
-	yield(tween, "finished")
+	(yield(tween, "finished"))
 	goto_next_path_node()

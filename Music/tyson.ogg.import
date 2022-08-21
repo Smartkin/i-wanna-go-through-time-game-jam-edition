@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/tyson.ogg-628fc8f992599759a6c63eae4b96f072.oggstr"
+
+[deps]
+
+source_file="res://Music/tyson.ogg"
+dest_files=[ "res://.import/tyson.ogg-628fc8f992599759a6c63eae4b96f072.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
