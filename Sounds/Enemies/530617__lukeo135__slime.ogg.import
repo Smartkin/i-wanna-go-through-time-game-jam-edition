@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/530617__lukeo135__slime.ogg-cd7d402ae1a4fe8b80337b3a85c0bdc1.oggstr"
+
+[deps]
+
+source_file="res://Sounds/Enemies/530617__lukeo135__slime.ogg"
+dest_files=[ "res://.import/530617__lukeo135__slime.ogg-cd7d402ae1a4fe8b80337b3a85c0bdc1.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

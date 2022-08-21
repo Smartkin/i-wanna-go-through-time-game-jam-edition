@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/enemy_killed.wav-049e18229890a8e02c898ad609e8dac0.sample"
+
+[deps]
+
+source_file="res://Sounds/Enemies/enemy_killed.wav"
+dest_files=[ "res://.import/enemy_killed.wav-049e18229890a8e02c898ad609e8dac0.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

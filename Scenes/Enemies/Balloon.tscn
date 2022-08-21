@@ -1,10 +1,12 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scripts/Enemies/Balloon_FSM.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Hazards/Enemies/balloon.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Hazards/Enemies/balloon_popped.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Hazards/Enemies/balloon_bounce.png" type="Texture" id=4]
 [ext_resource path="res://Scripts/Enemies/Balloon.gd" type="Script" id=5]
+[ext_resource path="res://Sounds/Enemies/balloon_pop.wav" type="AudioStream" id=6]
+[ext_resource path="res://Sounds/Enemies/balloon_stretch.wav" type="AudioStream" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.75, 8 )
@@ -83,7 +85,7 @@ extents = Vector2( 5, 7 )
 [node name="Balloon" type="Position2D"]
 
 [node name="Balloon" type="KinematicBody2D" parent="."]
-position = Vector2( 0, -0.688452 )
+position = Vector2( 0, -1.48312 )
 collision_layer = 128
 collision_mask = 6
 moving_platform_apply_velocity_on_leave = 2
@@ -96,6 +98,10 @@ __meta__ = {
 [node name="StateMachine" type="Node" parent="Balloon"]
 script = ExtResource( 1 )
 
+[node name="Stretch" type="AudioStreamPlayer" parent="Balloon/StateMachine"]
+stream = ExtResource( 7 )
+bus = "Sfx"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Balloon"]
 position = Vector2( 16.25, 10 )
 shape = SubResource( 1 )
@@ -103,6 +109,7 @@ shape = SubResource( 1 )
 [node name="Sprite" type="AnimatedSprite" parent="Balloon"]
 position = Vector2( 16, 16 )
 frames = SubResource( 10 )
+frame = 1
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -131,6 +138,10 @@ position = Vector2( 16, 10 )
 shape = SubResource( 3 )
 
 [node name="MoveTween" type="Tween" parent="Balloon"]
+
+[node name="Pop" type="AudioStreamPlayer" parent="Balloon"]
+stream = ExtResource( 6 )
+bus = "Sfx"
 
 [connection signal="animation_finished" from="Balloon/Sprite" to="Balloon" method="_on_Sprite_animation_finished"]
 [connection signal="body_entered" from="Balloon/Jumpbox" to="Balloon" method="_on_Jumpbox_body_entered"]

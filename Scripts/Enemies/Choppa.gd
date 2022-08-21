@@ -102,6 +102,8 @@ func _came_home(delta: float) -> bool:
 func _on_Flying_timeout():
 	var fly := create_tween()
 	fly.tween_method(self, "fly", lunge_speed, 0.0, 1.0)
+	$Move.pitch_scale = rand_range(0.8, 1.2)
+	$Move.play()
 
 
 func _on_ReturnNavAgent_velocity_computed(safe_velocity: Vector2):

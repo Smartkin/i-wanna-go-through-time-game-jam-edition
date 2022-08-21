@@ -6,6 +6,7 @@ var speed := Vector2.ZERO
 var gravity = -4
 
 func _ready():
+	$Start.play()
 	damage = 2
 
 func _physics_process(delta: float):
@@ -16,6 +17,7 @@ func _physics_process(delta: float):
 		var col = get_slide_collision(i)
 		if (col != null and not col.collider is KinematicBody2D):
 			var par = get_parent()
+			$Hit.play()
 			for j in range(180, 361, 10):
 				var bul = split.instance()
 				bul.global_position = global_position

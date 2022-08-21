@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/Enemies/Choppa.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Hazards/Enemies/choppa.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Hazards/Enemies/choppa_popped.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/Enemies/Choppa_FSM.gd" type="Script" id=4]
+[ext_resource path="res://Sounds/Enemies/choppa_move.wav" type="AudioStream" id=5]
 
 [sub_resource type="CircleShape2D" id=8]
 radius = 8.0
@@ -61,7 +62,7 @@ unique_name_in_owner = true
 visible = false
 
 [node name="Choppa" type="KinematicBody2D" parent="."]
-position = Vector2( 20.5692, -7.66044 )
+position = Vector2( -23.9049, 6.64791 )
 collision_layer = 128
 collision_mask = 4
 moving_platform_apply_velocity_on_leave = 2
@@ -71,7 +72,7 @@ __meta__ = {
 }
 x_mov = 32.0
 y_mov = 10.0
-lunge_speed = 200.0
+lunge_speed = 160.0
 
 [node name="StateMachine" type="Node" parent="Choppa"]
 script = ExtResource( 4 )
@@ -81,6 +82,7 @@ shape = SubResource( 8 )
 
 [node name="Sprite" type="AnimatedSprite" parent="Choppa"]
 frames = SubResource( 7 )
+frame = 2
 playing = true
 
 [node name="Hitbox" type="Area2D" parent="Choppa"]
@@ -107,10 +109,14 @@ position = Vector2( -0.311295, 0.6446 )
 shape = SubResource( 11 )
 
 [node name="Chasing" type="Timer" parent="Choppa"]
+wait_time = 0.8
 
 [node name="ReturnNavAgent" type="NavigationAgent2D" parent="Choppa"]
 avoidance_enabled = true
 radius = 32.0
+
+[node name="Move" type="AudioStreamPlayer" parent="Choppa"]
+stream = ExtResource( 5 )
 
 [connection signal="player_spotted" from="Choppa" to="Choppa/StateMachine" method="_on_Choppa_player_spotted"]
 [connection signal="animation_finished" from="Choppa/Sprite" to="Choppa" method="_on_Sprite_animation_finished"]

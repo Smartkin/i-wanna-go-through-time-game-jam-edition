@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Yeti Sanctuary.mp3-a131ff8f29c8db99b2a1f84163371dac.mp3str"
+
+[deps]
+
+source_file="res://Music/Yeti Sanctuary.mp3"
+dest_files=[ "res://.import/Yeti Sanctuary.mp3-a131ff8f29c8db99b2a1f84163371dac.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

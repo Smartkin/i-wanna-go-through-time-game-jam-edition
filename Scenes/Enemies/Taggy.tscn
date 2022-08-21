@@ -1,9 +1,10 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scripts/Enemies/Goomba_FSM.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Hazards/Enemies/taggy_walk.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Enemies/Goomba.gd" type="Script" id=3]
 [ext_resource path="res://Sprites/Hazards/Enemies/taggy_stomped.png" type="Texture" id=4]
+[ext_resource path="res://Sounds/Enemies/taggy_boing.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -107,7 +108,7 @@ shape = SubResource( 1 )
 position = Vector2( 8, 8 )
 frames = SubResource( 10 )
 animation = "walk"
-frame = 2
+frame = 1
 playing = true
 
 [node name="Hitbox" type="Area2D" parent="."]
@@ -147,6 +148,10 @@ collision_mask = 4
 [node name="StunTimer" type="Timer" parent="."]
 wait_time = 0.7
 one_shot = true
+
+[node name="Boing" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+bus = "Sfx"
 
 [connection signal="animation_finished" from="Sprite" to="StateMachine" method="_on_Sprite_animation_finished"]
 [connection signal="body_entered" from="Jumpbox" to="." method="_on_Jumpbox_body_entered"]

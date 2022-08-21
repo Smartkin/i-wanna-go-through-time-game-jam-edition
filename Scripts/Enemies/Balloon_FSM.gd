@@ -20,6 +20,8 @@ func _enter_state(new_state: State, old_state: State):
 			parent.get_node("Hurtbox").monitoring = false
 			parent.get_node("Jumpbox").monitoring = false
 			parent.anim.play("bounced")
+			$Stretch.pitch_scale = rand_range(1.0, 1.4)
+			$Stretch.play()
 
 # Write the logic for when the current state is exited
 func _exit_state(old_state: State, new_state: State):
