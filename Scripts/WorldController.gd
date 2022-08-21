@@ -379,6 +379,9 @@ func check_item(id: int) -> bool:
 
 func add_health_to_player():
 	cur_save_data.health += 1
+	restore_player_health()
+
+func restore_player_health():
 	var tree := _scene_tree
 	var scene := tree.current_scene
 	var player_controller := scene.find_node("PlayerController")
