@@ -86,11 +86,12 @@ position = Vector2( 8, 7 )
 shape = SubResource( 3 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-position = Vector2( 8, 11 )
+position = Vector2( 8, 16 )
 frames = SubResource( 10 )
 animation = "walk"
 frame = 2
 playing = true
+offset = Vector2( 0, -5 )
 
 [node name="LeftEdge" type="RayCast2D" parent="."]
 position = Vector2( 0, 16 )

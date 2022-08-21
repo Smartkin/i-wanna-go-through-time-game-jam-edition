@@ -7,7 +7,9 @@ var _player_above := false
 var _on_land := false
 var gravity := 10
 var can_jump := true
+var has_jumped := false
 var track_player: Player = null
+var last_jump_dir := 1.0
 
 onready var init_spd := speed
 onready var anim := $Sprite
@@ -15,6 +17,10 @@ onready var anim := $Sprite
 
 func _when_walk(delta: float, binds: Array):
 	# Wall check
+	if is_on_floor() and has_jumped:
+		has_jumped = false
+		_land_animation()
+	
 	move_and_slide(speed, Vector2.UP)
 	$Sprite.flip_h = speed.x < 0
 	_on_land = false
@@ -34,15 +40,20 @@ func _when_jump(delta: float, binds: Array):
 			var rand_force = jump_force_hrand * randf() * sign(track_player.global_position.x - 10 - global_position.x)
 			var hor_jump_force = jump_force.x
 			speed.x = clamp((track_player.global_position.x - 10) + rand_force - global_position.x, -hor_jump_force, hor_jump_force)
+			last_jump_dir = sign(speed.x)
 			$Jump.pitch_scale = rand_range(0.9, 1.3)
 			$Jump.play()
+			$Sprite.scale.x = 0.5
+			$Sprite.scale.y = 1.5
+			var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+			tween.tween_property($Sprite, "scale:y", 1.0, 0.2)
+			tween.parallel().tween_property($Sprite, "scale:x", 1.0, 0.2)
 		# Floor check
 		can_jump = false
 		_on_land = is_on_floor()
 		if (_on_land):
 			$JumpWait.start()
-			$Land.pitch_scale = rand_range(0.7, 1.3)
-			$Land.play()
+			_land_animation()
 		speed.y += gravity
 		$Sprite.flip_h = speed.x < 0
 	if (_on_land):
@@ -61,6 +72,15 @@ func _on_Hurtbox_body_entered(body: Player):
 		return
 	pl = body
 	_player_enter()
+
+func _land_animation() -> void:
+	$Land.pitch_scale = rand_range(0.7, 1.3)
+	$Land.play()
+	$Sprite.scale.x = 2.0
+	$Sprite.scale.y = 0.25
+	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+	tween.tween_property($Sprite, "scale:y", 1.0, 0.2)
+	tween.parallel().tween_property($Sprite, "scale:x", 1.0, 0.2)
 
 func _enable():
 	._enable()
@@ -92,4 +112,5 @@ func _on_Jumpbox_body_exited(body: Player):
 
 func _on_JumpWait_timeout():
 	can_jump = true
+	has_jumped = true
 	speed.y = jump_force.y

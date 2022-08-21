@@ -169,7 +169,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=23]
-radius = 24.0
+radius = 62.0081
 
 [node name="Save" type="Node2D" groups=["GravityAffected", "Saved"]]
 script = ExtResource( 3 )

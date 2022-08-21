@@ -29,7 +29,7 @@ var fisheye := 0.0
 var active := false
 var is_slashing := false
 var has_hit_player := false
-var blades_counts := [3, 3, 3, 8]
+var blades_counts := [3, 3, 3, 12]
 var blade_spawn_delay := 0.3
 var blade_slash_delays := [0.2, 0.2, 0.3, 0.5]
 var target_player: Player = null
@@ -117,15 +117,17 @@ func disable_fx() -> void:
 func spawn_blades() -> void:
 	var rand_offset
 	if target_player != null:
+		var cam: Camera2D = get_tree().current_scene.find_node("PlayerController").get_node("Camera")
+		var view_center := cam.get_camera_screen_center()
 		for i in blades_counts.size():
 			rand_offset = 30.0
 			for blade in blades_counts[i]:
 				var slash = s_SwordSlash.instance()
 				var rand_vec = Vector2(rand_range(-rand_offset, rand_offset), rand_range(-rand_offset, rand_offset))
-				slash.global_position = target_player.global_position + rand_vec
+				slash.global_position = view_center + rand_vec
 				n_SwordSlashes.call_deferred("add_child", slash)
 				slash.connect("body_entered", self, "_blade_has_touched_player")
-				rand_offset += 150.0
+				rand_offset += 200.0
 			# Wait until we can spawn the next wave of blades
 			yield(get_tree().create_timer(blade_spawn_delay), "timeout")
 	slow_down_time()

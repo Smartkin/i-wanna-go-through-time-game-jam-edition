@@ -131,6 +131,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id=23]
 extents = Vector2( 10, 145 )
 
+[sub_resource type="RectangleShape2D" id=22]
+extents = Vector2( 18.5, 48 )
+
 [node name="GuyAge" type="Node2D"]
 __meta__ = {
 "_edit_horizontal_guides_": [ 360.0, 720.0, 1080.0, 1440.0 ],
@@ -416,9 +419,6 @@ curve = SubResource( 18 )
 
 [node name="Spiky9" parent="Spikies" instance=ExtResource( 30 )]
 position = Vector2( 1776, 1312 )
-__meta__ = {
-"_edit_group_": true
-}
 ease_dur = 0.5
 mirror_path = true
 
@@ -1216,7 +1216,7 @@ position = Vector2( 1408, 1664 )
 position = Vector2( 1184, 1712 )
 
 [node name="Balloon14" parent="Enemies" instance=ExtResource( 16 )]
-position = Vector2( 1184, 1648 )
+position = Vector2( 1184, 1659 )
 
 [node name="Balloon19" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 1280, 1712 )
@@ -1532,7 +1532,8 @@ region_rect = Rect2( 0, 0, 1280, 360 )
 position = Vector2( 2176, 1488 )
 
 [node name="CollisionShape2D" parent="VergilTrap/Trigger" index="0"]
-position = Vector2( 0, 30.5 )
+position = Vector2( 0, 32 )
+shape = SubResource( 22 )
 
 [node name="MusicPlayer" parent="." instance=ExtResource( 28 )]
 position = Vector2( 736, 256 )
