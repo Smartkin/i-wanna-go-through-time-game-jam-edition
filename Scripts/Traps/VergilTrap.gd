@@ -185,3 +185,7 @@ func blade_slashes_finished() -> void:
 	for blade in n_SwordSlashes.get_children():
 		blade.withdraw()
 	disable_fx()
+
+
+func _on_VideoPlayer_finished():
+	WorldController.load_game()

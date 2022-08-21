@@ -194,5 +194,6 @@ stream = ExtResource( 10 )
 stream = ExtResource( 9 )
 volume_db = -6.199
 
+[connection signal="finished" from="VideoLayer/VideoPlayer" to="." method="_on_VideoPlayer_finished"]
 [connection signal="body_entered" from="Trigger" to="." method="_on_Trigger_body_entered"]
 [connection signal="finished" from="YouShallDieSfx" to="." method="_on_YouShallDieSfx_finished"]

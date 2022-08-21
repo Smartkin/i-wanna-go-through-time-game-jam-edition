@@ -9,7 +9,6 @@ func activate():
 
 func _on_Area2D_body_entered(body):
 	activate()
-	$Area2D.queue_free()
 
 
 func _on_PunchTrap_animation_finished(anim_name):
