@@ -1,11 +1,13 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sounds/Player/sndDeath.wav" type="AudioStream" id=2]
 [ext_resource path="res://Sounds/Player/sndJump.wav" type="AudioStream" id=3]
 [ext_resource path="res://Sounds/Player/sndDJump.wav" type="AudioStream" id=4]
 [ext_resource path="res://Sounds/Player/sndShoot.wav" type="AudioStream" id=5]
+[ext_resource path="res://Scenes/Player/PlayerHeart.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scripts/Player/PlayerController.gd" type="Script" id=7]
+[ext_resource path="res://Themes/default_theme.tres" type="Theme" id=8]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
@@ -105,6 +107,26 @@ editor_draw_drag_margin = true
 
 [node name="CheckpointTeleport" type="Timer" parent="."]
 one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="HealthContainer" type="GridContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -320.0
+margin_top = -180.0
+margin_right = -192.0
+margin_bottom = -148.0
+theme = ExtResource( 8 )
+
+[node name="PlayerHeart" parent="CanvasLayer/HealthContainer" instance=ExtResource( 6 )]
+unique_name_in_owner = true
+margin_right = 64.0
+margin_bottom = 64.0
 
 [connection signal="damaged" from="Player" to="." method="_on_Player_damaged"]
 [connection signal="dashed" from="Player" to="." method="_on_Player_dashed"]

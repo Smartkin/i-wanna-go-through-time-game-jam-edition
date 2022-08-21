@@ -3,6 +3,7 @@ extends Node2D
 # Constants
 # Bullet object information
 const Bullet := preload("res://Scenes/Player/Bullet.tscn")
+const PlayerHeart := preload("res://Scenes/Player/PlayerHeart.tscn")
 
 # Public
 var player_dead := false
@@ -12,6 +13,9 @@ var _cam_lock := false
 var _cam_manip := false
 var respawn_player := false
 var limits_to_set := {}
+
+onready var player_health_draw := [$"%PlayerHeart"]
+onready var health_container := $"%HealthContainer"
 
 func _ready():
 	_camera_follow_player_state = {
@@ -54,10 +58,27 @@ func _on_scene_built() -> void:
 		position.x = WorldController.cur_save_data.playerPosX
 		position.y = WorldController.cur_save_data.playerPosY
 		$Player.health = WorldController.cur_save_data.health
+		health_container.columns = $Player.health
+		for i in range(1, $Player.health):
+			var heart = PlayerHeart.instance()
+			player_health_draw.push_front(heart)
+			health_container.add_child(heart)
 		respawn_player = true
 	$Camera.current = true
 	$Camera.position = position
 	$Camera.reset_smoothing()
+
+func restore_health():
+	$Player.health = WorldController.cur_save_data.health
+	# Remove all health display
+	player_health_draw.clear()
+	for c in health_container.get_children():
+		c.queue_free()
+	health_container.columns = $Player.health
+	for i in range($Player.health):
+		var heart = PlayerHeart.instance()
+		player_health_draw.push_front(heart)
+		health_container.add_child(heart)
 
 # Callback when player shoots
 func _on_Player_shoot(direction: int) -> void:
@@ -136,6 +157,8 @@ func lock_camera(pos: Vector2, size: Vector2):
 	_cam_lock = true
 
 func _on_Player_damaged():
+	var heart = player_health_draw.pop_front()
+	heart.queue_free()
 	$Sounds/Death.play()
 
 func player_alive():

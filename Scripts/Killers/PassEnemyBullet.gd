@@ -12,6 +12,7 @@ func _physics_process(delta: float):
 func _on_Sprite_animation_finished():
 	if ($Sprite.animation == "destroy"):
 		emit_signal("destroyed")
+		$Hitbox.disabled = true
 		get_parent().queue_free()
 
 

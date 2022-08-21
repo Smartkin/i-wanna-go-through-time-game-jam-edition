@@ -376,6 +376,12 @@ func save_item(id: int) -> void:
 func check_item(id: int) -> bool:
 	return cur_save_data.items.has(String(id))
 
+func add_health_to_player():
+	cur_save_data.health += 1
+	var tree := _scene_tree
+	var scene := tree.current_scene
+	var player_controller := scene.find_node("PlayerController")
+	player_controller.restore_health()
 
 func save_game(save_pos: Vector2 = Vector2(-100000, -100000)) -> void:
 	var tree := _scene_tree

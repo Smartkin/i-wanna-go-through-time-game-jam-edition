@@ -10,7 +10,7 @@ trans_color = Color( 0.054902, 0.0823529, 0.392157, 1 )
 mask = "res://Sprites/transition_mask2.png"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 12
+layer = 100
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 material = ExtResource( 1 )

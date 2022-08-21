@@ -52,7 +52,7 @@ func _on_Area2D_body_entered(body):
 	if id == ABILITIES.INVALID or Engine.editor_hint:
 		return
 	if (range(ABILITIES.HEALTH_1, ABILITIES.HEALTH_5 + 1).has(id)):
-		WorldController.cur_save_data.health += 1
+		WorldController.add_health_to_player()
 	if (range(ABILITIES.GUN_1, ABILITIES.GUN_4 + 1).has(id)):
 		WorldController.cur_save_data.gun_power += 1
 	WorldController.save_item(id)
