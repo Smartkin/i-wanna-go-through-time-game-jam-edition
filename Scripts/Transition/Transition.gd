@@ -1,3 +1,4 @@
+class_name Transition
 extends Node2D
 
 signal transition_finished

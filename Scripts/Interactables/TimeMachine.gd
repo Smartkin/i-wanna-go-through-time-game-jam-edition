@@ -13,7 +13,7 @@ func _ready():
 	pause_mode = PAUSE_MODE_PROCESS
 	WorldController.connect("game_got_paused", self, "_on_game_got_paused")
 	is_active = WorldController.cur_save_data.chips.size() > 0
-	is_active = true
+#	is_active = true
 
 func _input(event: InputEvent):
 	if not can_interact:

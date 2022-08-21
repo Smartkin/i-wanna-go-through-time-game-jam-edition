@@ -105,7 +105,7 @@ func _ready() -> void:
 	get_parent().get_node("Camera").reset_smoothing()
 
 func _physics_process(delta: float) -> void:
-	if (cur_state == STATE.DEAD):
+	if (cur_state == STATE.DEAD or cur_state == STATE.CUTSCENE):
 		return
 	# Check if player is currently on floor
 	if (is_on_floor()):

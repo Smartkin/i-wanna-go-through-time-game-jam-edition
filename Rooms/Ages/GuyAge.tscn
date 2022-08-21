@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://Tiles/guyrock_age_autotiles/tileset_guyrock_age_autotiles.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Player/PlayerController.tscn" type="PackedScene" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://Scenes/MusicPlayer.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scripts/Gimmicks/TrapConnector.gd" type="Script" id=29]
 [ext_resource path="res://Scenes/Enemies/Spiky.tscn" type="PackedScene" id=30]
+[ext_resource path="res://Scenes/Interactables/Teleporter.tscn" type="PackedScene" id=31]
 
 [sub_resource type="NavigationPolygon" id=7]
 vertices = PoolVector2Array( 640, 1216, 640, 1104, 1600, 1104, 784, 1216, 1600, 1424, 1024, 1376, 1024, 1424, 784, 1376 )
@@ -318,6 +319,9 @@ __meta__ = {
 "_edit_group_": true
 }
 
+[node name="AnimatedSprite" parent="Spikies/Spiky" index="0"]
+frame = 0
+
 [node name="FollowPath" parent="Spikies/Spiky" index="2"]
 curve = SubResource( 14 )
 
@@ -329,7 +333,7 @@ __meta__ = {
 ease_dur = 2.0
 
 [node name="AnimatedSprite" parent="Spikies/Spiky5" index="0"]
-frame = 7
+frame = 1
 
 [node name="FollowPath" parent="Spikies/Spiky5" index="2"]
 curve = SubResource( 17 )
@@ -341,7 +345,7 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" parent="Spikies/Spiky2" index="0"]
-frame = 7
+frame = 1
 
 [node name="FollowPath" parent="Spikies/Spiky2" index="2"]
 curve = SubResource( 15 )
@@ -354,7 +358,7 @@ __meta__ = {
 
 [node name="AnimatedSprite" parent="Spikies/Spiky3" index="0"]
 position = Vector2( 64, 0 )
-frame = 7
+frame = 1
 
 [node name="CollisionShape2D" parent="Spikies/Spiky3" index="1"]
 position = Vector2( 64, 0 )
@@ -368,7 +372,6 @@ position = Vector2( 1984, 496 )
 
 [node name="AnimatedSprite" parent="Spikies/Spiky4" index="0"]
 position = Vector2( 0.5, 63.5 )
-frame = 4
 
 [node name="CollisionShape2D" parent="Spikies/Spiky4" index="1"]
 position = Vector2( 0.5, 63.5 )
@@ -387,7 +390,7 @@ mirror_path = true
 
 [node name="AnimatedSprite" parent="Spikies/Spiky9" index="0"]
 position = Vector2( 0, 16 )
-frame = 2
+frame = 4
 
 [node name="CollisionShape2D" parent="Spikies/Spiky9" index="1"]
 position = Vector2( 0, 16 )
@@ -402,7 +405,7 @@ position = Vector2( 1232, 1680 )
 position = Vector2( 1472, 1536 )
 
 [node name="AnimatedSprite" parent="Spikies/Spiky8" index="0"]
-frame = 7
+frame = 1
 
 [node name="FollowPath" parent="Spikies/Spiky8" index="2"]
 curve = SubResource( 20 )
@@ -417,7 +420,7 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" parent="Spikies/Spiky10" index="0"]
-frame = 2
+frame = 4
 
 [node name="FollowPath" parent="Spikies/Spiky10" index="2"]
 curve = SubResource( 21 )
@@ -429,7 +432,7 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" parent="Spikies/Spiky11" index="0"]
-frame = 1
+frame = 3
 
 [node name="FollowPath" parent="Spikies/Spiky11" index="2"]
 curve = SubResource( 21 )
@@ -1171,7 +1174,7 @@ position = Vector2( 952, 1584 )
 position = Vector2( 1056, 1728 )
 
 [node name="Balloon" parent="Enemies/Balloon15" index="0"]
-position = Vector2( -15.3563, -0.224633 )
+position = Vector2( -4.36237, 0.769691 )
 x_mov = 40.0
 move_multi = 0.4
 
@@ -1182,7 +1185,7 @@ frame = 4
 position = Vector2( 912, 1680 )
 
 [node name="Balloon" parent="Enemies/Balloon16" index="0"]
-position = Vector2( 14.8601, 0.296556 )
+position = Vector2( -11.8358, 0.538318 )
 x_mov = -40.0
 move_multi = 0.4
 
@@ -1193,7 +1196,7 @@ frame = 0
 position = Vector2( 2688, 896 )
 
 [node name="Balloon" parent="Enemies/Balloon3" index="0"]
-position = Vector2( 0, 35.068 )
+position = Vector2( 0, 47.4463 )
 y_mov = 70.0
 move_multi = 0.7
 
@@ -1207,7 +1210,7 @@ position = Vector2( 2624, 944 )
 position = Vector2( 2256, 288 )
 
 [node name="Balloon" parent="Enemies/Balloon8" index="0"]
-position = Vector2( -22.4667, 1.32378 )
+position = Vector2( 10.1283, 1.54786 )
 x_mov = 50.0
 move_multi = 0.8
 
@@ -1437,6 +1440,9 @@ position = Vector2( 2032, 1664 )
 [node name="MusicPlayer" parent="." instance=ExtResource( 28 )]
 position = Vector2( 736, 256 )
 music = "yeti_sanctuary_w1_track"
+
+[node name="Teleporter" parent="." instance=ExtResource( 31 )]
+position = Vector2( 1168, 192 )
 
 [connection signal="body_entered" from="TisonTrap/Area2D" to="TisonTrap" method="_on_Area2D_body_entered" flags=6]
 [connection signal="body_entered" from="Traps/RyuTrap/Area2D" to="Traps/RyuTrap" method="_on_Area2D_body_entered" flags=6]
