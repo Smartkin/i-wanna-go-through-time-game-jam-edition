@@ -37,6 +37,7 @@ func spawn_circle():
 
 func hit_ceiling():
 	var rand_offset = rand_range(-30, 30)
+	WorldController.shake_camera(Tween.EASE_OUT, 3.0, 20.0)
 	for i in range(70+rand_offset, 570+rand_offset, 60):
 		var proj := ROCK.instance()
 		proj.get_node("Hitbox").speed = Vector2(0, rand_range(50.0, 150.0))
@@ -50,15 +51,28 @@ func punch():
 	(yield(animations, "animation_finished"))
 	shift()
 
+
+func punch_shake() -> void:
+	WorldController.shake_camera(Tween.EASE_OUT, 1.0, 5.0)
+
+
 func uppercut():
 	animations.play("Uppercut")
 	(yield(animations, "animation_finished"))
 	shift()
 
 func lunge():
-	animations.play("Lunge")
+	if randf() > 0.5:
+		animations.play("Lunge")
+	else:
+		animations.play("LungeBottom")
 	(yield(animations, "animation_finished"))
 	shift()
+
+
+func lunge_shake() -> void:
+	WorldController.shake_camera(Tween.EASE_OUT, 1.5, 10.0)
+
 
 func attack_finished(delta: float) -> bool:
 	return finished_attack
@@ -120,7 +134,7 @@ func create_after_image():
 		trail.texture = anim.frames.get_frame(anim.animation, anim.frame)
 		trail.global_position = anim.global_position
 		get_tree().current_scene.add_child(trail)
-		(yield(get_tree().create_timer(0.1), "timeout"))
+		(yield(get_tree().create_timer(0.05), "timeout"))
 
 func stop_after_image():
 	do_trail = false
@@ -130,7 +144,7 @@ func _on_Animations_animation_finished(anim_name):
 	if (anim_name == "Appear"):
 		return
 	# Wait a little before starting new attack
-	(yield(get_tree().create_timer(3.0), "timeout"))
+	(yield(get_tree().create_timer(1.5), "timeout"))
 	finished_attack = true
 
 

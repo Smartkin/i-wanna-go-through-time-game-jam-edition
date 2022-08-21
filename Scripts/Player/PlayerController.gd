@@ -125,7 +125,7 @@ func _on_Player_dashed():
 
 func shake_camera(ease_type: int, duration: float, strength: float):
 	$CameraTween.interpolate_property($Camera, "offset", Vector2(-strength, -strength), \
-		Vector2(0, 0), 0.1, Tween.TRANS_QUINT, ease_type)
+		Vector2(0, 0), 0.1, Tween.TRANS_SINE, ease_type)
 	$CameraTween.start()
 
 func zoom_camera(amount: float, smooth: bool = true, time: float = 1.0):
