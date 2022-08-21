@@ -16,5 +16,6 @@ func activate():
 
 func deactivate():
 	$CollisionShape2D.set_deferred("disabled", true)
-	visible = false
 	n_AnimationPlayer.play_backwards("appear")
+	yield(n_AnimationPlayer, "animation_finished")
+	visible = false

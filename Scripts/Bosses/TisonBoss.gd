@@ -6,13 +6,14 @@ const AFTER_IMAGE := preload("res://Scenes/AfterImage.tscn")
 var do_trail := false
 var finished_attack := false
 var pos_index := -1
+export var fx_zoom := 0.0
 
 onready var anim := $AnimatedSprite
 onready var animations := $Animations
 onready var shift_positions := $"%ShiftPositions".get_children()
 
 func __ready():
-	stats.hp = 100
+	stats.hp = 50
 	stats.total_hp = stats.hp
 
 
@@ -60,6 +61,13 @@ func lunge():
 func attack_finished(delta: float) -> bool:
 	return finished_attack
 
+func _process(delta):
+	update_shader_params()
+
+func update_shader_params():
+	var mat = $AnimatedSprite.get_material()
+	mat.set_shader_param("fxZoomBlur", fx_zoom)
+
 func damaged(bul: Bullet):
 	if bul == null:
 		return
@@ -73,13 +81,18 @@ func damaged(bul: Bullet):
 	mod_tween.parallel().tween_property(self, "modulate:b", 1.0, 0.2)
 	bul.destroy()
 	if (stats.hp == 0):
-		$Hitbox/CollisionShape2D.disabled = true
+		$AttackStateMachine.stop()
+		$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 		animations.stop()
+		animations.play("Die")
 		WorldController.fade_music()
 		_die()
 
 func _die():
-	pass
+	yield(animations, "animation_finished")
+	get_tree().current_scene.find_node("MusicPlayer").play()
+	emit_signal("died")
+	queue_free()
 
 func shift():
 	create_after_image()

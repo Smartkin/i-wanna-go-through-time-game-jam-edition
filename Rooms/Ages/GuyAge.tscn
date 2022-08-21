@@ -33,7 +33,7 @@
 [ext_resource path="res://Scenes/Interactables/Teleporter.tscn" type="PackedScene" id=31]
 [ext_resource path="res://Scenes/Gimmicks/SpawnBlock.tscn" type="PackedScene" id=32]
 [ext_resource path="res://Scenes/Bosses/TisonBoss.tscn" type="PackedScene" id=33]
-[ext_resource path="res://Scripts/Gimmicks/ActivateSpawnBlocks.gd" type="Script" id=34]
+[ext_resource path="res://Scripts/Gimmicks/ManipulateSpawnBlocks.gd" type="Script" id=34]
 
 [sub_resource type="NavigationPolygon" id=7]
 vertices = PoolVector2Array( 640, 1216, 640, 1104, 1600, 1104, 784, 1216, 1600, 1424, 1024, 1376, 1024, 1424, 784, 1376 )
@@ -356,7 +356,7 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" parent="Spikies/Spiky" index="0"]
-frame = 3
+frame = 1
 
 [node name="FollowPath" parent="Spikies/Spiky" index="2"]
 curve = SubResource( 14 )
@@ -369,7 +369,7 @@ __meta__ = {
 ease_dur = 2.0
 
 [node name="AnimatedSprite" parent="Spikies/Spiky5" index="0"]
-frame = 4
+frame = 2
 
 [node name="FollowPath" parent="Spikies/Spiky5" index="2"]
 curve = SubResource( 17 )
@@ -381,7 +381,7 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" parent="Spikies/Spiky2" index="0"]
-frame = 4
+frame = 2
 
 [node name="FollowPath" parent="Spikies/Spiky2" index="2"]
 curve = SubResource( 15 )
@@ -394,7 +394,7 @@ __meta__ = {
 
 [node name="AnimatedSprite" parent="Spikies/Spiky3" index="0"]
 position = Vector2( 64, 0 )
-frame = 4
+frame = 2
 
 [node name="CollisionShape2D" parent="Spikies/Spiky3" index="1"]
 position = Vector2( 64, 0 )
@@ -408,7 +408,7 @@ position = Vector2( 1984, 496 )
 
 [node name="AnimatedSprite" parent="Spikies/Spiky4" index="0"]
 position = Vector2( 0.5, 63.5 )
-frame = 1
+frame = 7
 
 [node name="CollisionShape2D" parent="Spikies/Spiky4" index="1"]
 position = Vector2( 0.5, 63.5 )
@@ -423,7 +423,7 @@ ease_dur = 0.5
 mirror_path = true
 
 [node name="AnimatedSprite" parent="Spikies/Spiky9" index="0"]
-frame = 7
+frame = 5
 
 [node name="FollowPath" parent="Spikies/Spiky9" index="2"]
 position = Vector2( 0, -16 )
@@ -436,7 +436,7 @@ position = Vector2( 1248, 1696 )
 position = Vector2( 1472, 1536 )
 
 [node name="AnimatedSprite" parent="Spikies/Spiky8" index="0"]
-frame = 4
+frame = 2
 
 [node name="FollowPath" parent="Spikies/Spiky8" index="2"]
 curve = SubResource( 20 )
@@ -457,7 +457,7 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" parent="Spikies/Spiky10" index="0"]
-frame = 7
+frame = 5
 
 [node name="FollowPath" parent="Spikies/Spiky10" index="2"]
 curve = SubResource( 21 )
@@ -467,6 +467,9 @@ position = Vector2( 2736, 608 )
 __meta__ = {
 "_edit_group_": true
 }
+
+[node name="AnimatedSprite" parent="Spikies/Spiky11" index="0"]
+frame = 4
 
 [node name="FollowPath" parent="Spikies/Spiky11" index="2"]
 curve = SubResource( 21 )
@@ -1231,31 +1234,31 @@ position = Vector2( 952, 1584 )
 position = Vector2( 1056, 1728 )
 
 [node name="Balloon" parent="Enemies/Balloon15" index="0"]
-position = Vector2( 15.9992, -0.00779772 )
+position = Vector2( -14.4886, 0.339413 )
 x_mov = 40.0
 move_multi = 0.4
-
-[node name="Sprite" parent="Enemies/Balloon15/Balloon" index="2"]
-frame = 3
 
 [node name="Balloon16" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 912, 1680 )
 
 [node name="Balloon" parent="Enemies/Balloon16" index="0"]
-position = Vector2( -14.5596, -0.331734 )
+position = Vector2( 14.8354, 0.299632 )
 x_mov = -40.0
 move_multi = 0.4
+
+[node name="Sprite" parent="Enemies/Balloon16/Balloon" index="2"]
+frame = 5
 
 [node name="Balloon3" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 2688, 896 )
 
 [node name="Balloon" parent="Enemies/Balloon3" index="0"]
-position = Vector2( 0, -0.710198 )
+position = Vector2( 0, -3.38557 )
 y_mov = 70.0
 move_multi = 0.7
 
 [node name="Sprite" parent="Enemies/Balloon3/Balloon" index="2"]
-frame = 0
+frame = 4
 
 [node name="Balloon4" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 2624, 944 )
@@ -1264,12 +1267,12 @@ position = Vector2( 2624, 944 )
 position = Vector2( 2256, 288 )
 
 [node name="Balloon" parent="Enemies/Balloon8" index="0"]
-position = Vector2( 26.528, 1.19751 )
+position = Vector2( -37.4328, 0.563965 )
 x_mov = 50.0
 move_multi = 0.8
 
 [node name="Sprite" parent="Enemies/Balloon8/Balloon" index="2"]
-frame = 0
+frame = 4
 
 [node name="Balloon5" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 2832, 1024 )
@@ -1571,6 +1574,7 @@ position = Vector2( 3168, 1664 )
 [connection signal="body_entered" from="Traps/RyuTrap2/Area2D" to="Traps/RyuTrap2" method="_on_Area2D_body_entered" flags=6]
 [connection signal="body_entered" from="Traps/RyuTrap2/Area2D" to="Traps/RyuTrap3/Area2D" method="_on_connected_area_entered" flags=6]
 [connection signal="body_entered" from="Traps/RyuTrap3/Area2D" to="Traps/RyuTrap3" method="_on_Area2D_body_entered" flags=6]
+[connection signal="died" from="Boss/TissonBoss/TaisonBoss" to="SpawnBlocks" method="_on_TaisonBoss_died"]
 [connection signal="body_entered" from="Boss/BossTrigger" to="Boss/TissonBoss/TaisonBoss" method="_on_BossTrigger_body_entered" flags=6]
 [connection signal="body_entered" from="Boss/BossTrigger" to="SpawnBlocks" method="_on_BossTrigger_body_entered" flags=6]
 

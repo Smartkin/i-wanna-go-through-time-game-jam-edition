@@ -14,13 +14,11 @@ initialized = true
 script = ExtResource( 1 )
 
 [sub_resource type="VisualShaderNodeScalarUniform" id=13]
-uniform_name = "ScalarUniform"
-default_value_enabled = true
-default_value = 2.0
+uniform_name = "fxZoomBlur"
 
 [resource]
 code = "shader_type canvas_item;
-uniform float ScalarUniform = 2;
+uniform float fxZoomBlur;
 
 
 // ZoomBlur
@@ -59,7 +57,7 @@ void fragment() {
 	vec3 n_out2p0 = vec3(UV, 0.0);
 
 // ScalarUniform:6
-	float n_out6p0 = ScalarUniform;
+	float n_out6p0 = fxZoomBlur;
 
 // ZoomBlur:5
 	float n_in5p2 = -1.00000;
@@ -84,7 +82,7 @@ void light() {
 
 }
 "
-graph_offset = Vector2( -532.158, 3.20139 )
+graph_offset = Vector2( -560, 5 )
 mode = 1
 flags/light_only = false
 nodes/fragment/2/node = SubResource( 8 )
