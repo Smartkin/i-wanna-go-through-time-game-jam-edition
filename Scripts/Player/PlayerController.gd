@@ -49,6 +49,7 @@ func _input(event: InputEvent) -> void:
 				$Camera.zoom = maxZoomOut
 		_cam_manip = false
 		if (Input.is_key_pressed(ord("F"))):
+			reset_camera()
 			$Camera.global_position = get_global_mouse_position()
 			_cam_manip = true
 

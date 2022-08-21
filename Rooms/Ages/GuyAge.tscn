@@ -33,7 +33,7 @@
 [ext_resource path="res://Scenes/Interactables/Teleporter.tscn" type="PackedScene" id=31]
 [ext_resource path="res://Scenes/Gimmicks/SpawnBlock.tscn" type="PackedScene" id=32]
 [ext_resource path="res://Scenes/Bosses/TisonBoss.tscn" type="PackedScene" id=33]
-[ext_resource path="res://Scripts/Gimmicks/ActivateSpawnBlocks.gd" type="Script" id=34]
+[ext_resource path="res://Scripts/Gimmicks/ManipulateSpawnBlocks.gd" type="Script" id=34]
 
 [sub_resource type="NavigationPolygon" id=7]
 vertices = PoolVector2Array( 640, 1216, 640, 1104, 1600, 1104, 784, 1216, 1600, 1424, 1024, 1376, 1024, 1424, 784, 1376 )
@@ -1633,6 +1633,7 @@ position = Vector2( 3168, 1664 )
 [connection signal="body_entered" from="Traps/RyuTrap2/Area2D" to="Traps/RyuTrap2" method="_on_Area2D_body_entered" flags=6]
 [connection signal="body_entered" from="Traps/RyuTrap2/Area2D" to="Traps/RyuTrap3/Area2D" method="_on_connected_area_entered" flags=6]
 [connection signal="body_entered" from="Traps/RyuTrap3/Area2D" to="Traps/RyuTrap3" method="_on_Area2D_body_entered" flags=6]
+[connection signal="died" from="Boss/TissonBoss/TaisonBoss" to="SpawnBlocks" method="_on_TaisonBoss_died"]
 [connection signal="body_entered" from="Boss/BossTrigger" to="Boss/TissonBoss/TaisonBoss" method="_on_BossTrigger_body_entered" flags=6]
 [connection signal="body_entered" from="Boss/BossTrigger" to="SpawnBlocks" method="_on_BossTrigger_body_entered" flags=6]
 

@@ -6,13 +6,20 @@ var state: State = null setget set_state
 var prev_state: State = null
 var condition: String = "" # Predicate for state switching
 var starting_state: State = null
+var stopped := false
 
 onready var parent := get_parent()
 
 func start():
 	set_state(starting_state)
 
+func stop():
+	stopped = true
+
 func _physics_process(delta):
+	if stopped:
+		return
+	
 	if state != null:
 		# Switch state if the condition is met
 		if condition != "" and parent.has_method(condition) and parent.call(condition, delta):
