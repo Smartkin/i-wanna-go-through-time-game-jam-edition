@@ -1002,7 +1002,7 @@ position = Vector2( 952, 1584 )
 position = Vector2( 1056, 1728 )
 
 [node name="Balloon" parent="Enemies/Balloon15" index="0"]
-position = Vector2( -10.6618, 0.596501 )
+position = Vector2( 3.73271, 0.777925 )
 x_mov = 40.0
 move_multi = 0.4
 
@@ -1013,7 +1013,7 @@ frame = 1
 position = Vector2( 912, 1680 )
 
 [node name="Balloon" parent="Enemies/Balloon16" index="0"]
-position = Vector2( -11.5353, 0.554384 )
+position = Vector2( -13.1115, 0.458498 )
 x_mov = -40.0
 move_multi = 0.4
 
@@ -1024,7 +1024,7 @@ frame = 0
 position = Vector2( 2688, 896 )
 
 [node name="Balloon" parent="Enemies/Balloon3" index="0"]
-position = Vector2( 0, 45.4353 )
+position = Vector2( 0, 48.6645 )
 y_mov = 70.0
 move_multi = 0.7
 
@@ -1038,7 +1038,7 @@ position = Vector2( 2624, 944 )
 position = Vector2( 2256, 288 )
 
 [node name="Balloon" parent="Enemies/Balloon8" index="0"]
-position = Vector2( 12.8934, 1.5146 )
+position = Vector2( -2.90479, 1.59578 )
 x_mov = 50.0
 move_multi = 0.8
 

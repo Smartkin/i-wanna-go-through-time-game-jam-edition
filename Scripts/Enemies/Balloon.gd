@@ -18,7 +18,9 @@ func _jumped_on(delta: float) -> bool:
 	return _player_above
 
 func _when_idle(delta: float, binds: Array):
-	pass
+	var player: Player = get_tree().current_scene.find_node("PlayerController").get_player()
+	if player != null:
+		$Sprite.flip_h = global_position.x > player.global_position.x
 
 func _when_die(delta: float, binds: Array):
 	pass

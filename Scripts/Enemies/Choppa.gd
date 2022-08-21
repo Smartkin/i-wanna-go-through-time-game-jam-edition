@@ -84,13 +84,13 @@ func fly(sp: float):
 		var dir := global_position.direction_to(target_player.global_position)
 		var res_sp := dir * sp
 		move_and_slide(res_sp, Vector2.UP)
-		$Sprite.flip_h = -1 if res_sp.x < 0 else 1
+		$Sprite.flip_h = res_sp.x < 0
 
 func fly_again():
 	step_flight = false
 
 func fly_home(sp: Vector2):
-	$Sprite.flip_h = -1 if sp.x < 0 else 1
+	$Sprite.flip_h = sp.x < 0
 	move_and_slide(sp, Vector2.UP)
 
 func get_agent_rid() -> RID:

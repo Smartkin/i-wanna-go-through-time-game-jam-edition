@@ -44,4 +44,5 @@ color = Color( 1, 1, 1, 0 )
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 15 )
+frame = 5
 playing = true
