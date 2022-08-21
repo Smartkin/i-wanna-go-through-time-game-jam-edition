@@ -38,6 +38,7 @@ func _on_Area2D_activate():
 		WorldController.cur_save_data.save_id = get_id()
 		WorldController.save_game($SavePosition.global_position)
 		$SavedGame.play()
+		WorldController.restore_player_health()
 		can_resave = false
 
 func _on_Area2D2_body_exited(body: Player):
