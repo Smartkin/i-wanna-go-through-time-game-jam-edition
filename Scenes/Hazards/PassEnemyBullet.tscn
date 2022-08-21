@@ -58,7 +58,7 @@ animations = [ {
 "frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
 "loop": true,
 "name": "destroy",
-"speed": 5.0
+"speed": 30.0
 } ]
 
 [sub_resource type="CircleShape2D" id=5]

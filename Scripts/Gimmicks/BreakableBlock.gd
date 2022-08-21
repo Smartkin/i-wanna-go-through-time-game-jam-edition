@@ -7,6 +7,8 @@ onready var n_AnimatedPlayer := $AnimationPlayer
 
 
 func break_block() -> void:
+	$Break.pitch_scale = rand_range(0.8, 1.2)
+	$Break.play()
 	n_AnimatedSprite.play("break")
 
 
@@ -15,8 +17,6 @@ func destroy() -> void:
 	n_CollisionShape.disabled = true
 	n_SmokeParticles.emitting = true
 	n_AnimatedPlayer.play("chunks_scatter")
-	$Break.pitch_scale = rand_range(0.8, 1.2)
-	$Break.play()
 	yield(get_tree().create_timer(2.0), "timeout")
 	queue_free()
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://Tiles/guyrock_age_autotiles/tileset_guyrock_age_autotiles.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Player/PlayerController.tscn" type="PackedScene" id=2]
@@ -121,6 +121,9 @@ bake_interval = 512.0
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 96, 0 )
 }
+
+[sub_resource type="RectangleShape2D" id=22]
+extents = Vector2( 18.5, 48 )
 
 [node name="GuyAge" type="Node2D"]
 __meta__ = {
@@ -331,7 +334,7 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" parent="Spikies/Spiky" index="0"]
-frame = 7
+frame = 5
 
 [node name="FollowPath" parent="Spikies/Spiky" index="2"]
 curve = SubResource( 14 )
@@ -343,9 +346,6 @@ __meta__ = {
 }
 ease_dur = 2.0
 
-[node name="AnimatedSprite" parent="Spikies/Spiky5" index="0"]
-frame = 0
-
 [node name="FollowPath" parent="Spikies/Spiky5" index="2"]
 curve = SubResource( 17 )
 
@@ -354,9 +354,6 @@ position = Vector2( 2560, 512 )
 __meta__ = {
 "_edit_group_": true
 }
-
-[node name="AnimatedSprite" parent="Spikies/Spiky2" index="0"]
-frame = 0
 
 [node name="FollowPath" parent="Spikies/Spiky2" index="2"]
 curve = SubResource( 15 )
@@ -369,7 +366,6 @@ __meta__ = {
 
 [node name="AnimatedSprite" parent="Spikies/Spiky3" index="0"]
 position = Vector2( 64, 0 )
-frame = 0
 
 [node name="CollisionShape2D" parent="Spikies/Spiky3" index="1"]
 position = Vector2( 64, 0 )
@@ -383,7 +379,7 @@ position = Vector2( 1984, 496 )
 
 [node name="AnimatedSprite" parent="Spikies/Spiky4" index="0"]
 position = Vector2( 0.5, 63.5 )
-frame = 5
+frame = 3
 
 [node name="CollisionShape2D" parent="Spikies/Spiky4" index="1"]
 position = Vector2( 0.5, 63.5 )
@@ -394,14 +390,11 @@ curve = SubResource( 18 )
 
 [node name="Spiky9" parent="Spikies" instance=ExtResource( 30 )]
 position = Vector2( 1776, 1312 )
-__meta__ = {
-"_edit_group_": true
-}
 ease_dur = 0.5
 mirror_path = true
 
 [node name="AnimatedSprite" parent="Spikies/Spiky9" index="0"]
-frame = 3
+frame = 1
 
 [node name="FollowPath" parent="Spikies/Spiky9" index="2"]
 position = Vector2( 0, -16 )
@@ -412,9 +405,6 @@ position = Vector2( 1248, 1696 )
 
 [node name="Spiky8" parent="Spikies" instance=ExtResource( 30 )]
 position = Vector2( 1472, 1536 )
-
-[node name="AnimatedSprite" parent="Spikies/Spiky8" index="0"]
-frame = 0
 
 [node name="FollowPath" parent="Spikies/Spiky8" index="2"]
 curve = SubResource( 20 )
@@ -435,7 +425,7 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" parent="Spikies/Spiky10" index="0"]
-frame = 3
+frame = 1
 
 [node name="FollowPath" parent="Spikies/Spiky10" index="2"]
 curve = SubResource( 21 )
@@ -447,7 +437,7 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" parent="Spikies/Spiky11" index="0"]
-frame = 2
+frame = 0
 
 [node name="FollowPath" parent="Spikies/Spiky11" index="2"]
 curve = SubResource( 21 )
@@ -1180,7 +1170,7 @@ position = Vector2( 1408, 1664 )
 position = Vector2( 1184, 1712 )
 
 [node name="Balloon14" parent="Enemies" instance=ExtResource( 16 )]
-position = Vector2( 1184, 1648 )
+position = Vector2( 1184, 1659 )
 
 [node name="Balloon19" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 1280, 1712 )
@@ -1195,31 +1185,34 @@ position = Vector2( 952, 1584 )
 position = Vector2( 1056, 1728 )
 
 [node name="Balloon" parent="Enemies/Balloon15" index="0"]
-position = Vector2( -14.6717, -0.31915 )
+position = Vector2( -15.993, 0.0236661 )
 x_mov = 40.0
 move_multi = 0.4
+
+[node name="Sprite" parent="Enemies/Balloon15/Balloon" index="2"]
+frame = 5
 
 [node name="Balloon16" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 912, 1680 )
 
 [node name="Balloon" parent="Enemies/Balloon16" index="0"]
-position = Vector2( 15.1558, -0.256429 )
+position = Vector2( 14.6993, -0.315959 )
 x_mov = -40.0
 move_multi = 0.4
 
 [node name="Sprite" parent="Enemies/Balloon16/Balloon" index="2"]
-frame = 1
+frame = 3
 
 [node name="Balloon3" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 2688, 896 )
 
 [node name="Balloon" parent="Enemies/Balloon3" index="0"]
-position = Vector2( 0, -20.1743 )
+position = Vector2( 0, 1.13202 )
 y_mov = 70.0
 move_multi = 0.7
 
 [node name="Sprite" parent="Enemies/Balloon3/Balloon" index="2"]
-frame = 4
+frame = 0
 
 [node name="Balloon4" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 2624, 944 )
@@ -1228,12 +1221,12 @@ position = Vector2( 2624, 944 )
 position = Vector2( 2256, 288 )
 
 [node name="Balloon" parent="Enemies/Balloon8" index="0"]
-position = Vector2( -31.2945, -0.996519 )
+position = Vector2( -39.5405, 0.241814 )
 x_mov = 50.0
 move_multi = 0.8
 
 [node name="Sprite" parent="Enemies/Balloon8/Balloon" index="2"]
-frame = 4
+frame = 0
 
 [node name="Balloon5" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 2832, 1024 )
@@ -1493,7 +1486,8 @@ region_rect = Rect2( 0, 0, 1280, 360 )
 position = Vector2( 2176, 1488 )
 
 [node name="CollisionShape2D" parent="VergilTrap/Trigger" index="0"]
-position = Vector2( 0, 30.5 )
+position = Vector2( 0, 32 )
+shape = SubResource( 22 )
 
 [node name="MusicPlayer" parent="." instance=ExtResource( 28 )]
 position = Vector2( 736, 256 )

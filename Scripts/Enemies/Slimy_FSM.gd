@@ -13,7 +13,7 @@ func _enter_state(new_state: State, old_state: State):
 		states.walk:
 			condition = "_stuck"
 			parent.anim.play("walk")
-			parent.speed.x = parent.init_spd.x
+			parent.speed.x = parent.init_spd.x * parent.last_jump_dir
 			parent.get_node("JumpWait").stop()
 		states.jump:
 			condition = ""
@@ -35,6 +35,9 @@ func _on_ProximityCheck_body_entered(body: Player):
 	if (state != states.jump):
 		set_state(states.jump)
 		parent.track_player = body
+		parent.can_jump = true
+		if parent.is_on_floor():
+			parent.speed.y = parent.jump_force.y
 
 
 func _on_ProximityCheck_body_exited(body: Player):
