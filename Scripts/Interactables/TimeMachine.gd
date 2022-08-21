@@ -16,7 +16,7 @@ func _ready():
 #	is_active = true
 
 func _input(event: InputEvent):
-	if not can_interact:
+	if not can_interact or not is_active:
 		return
 	if event.is_action_pressed("up") and cur_selector == null:
 		cur_selector = age_selector.instance()

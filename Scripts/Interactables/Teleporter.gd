@@ -12,6 +12,7 @@ func _input(event: InputEvent):
 		var time_machine = get_tree().current_scene.find_node("TimeMachine")
 		player.global_position = Vector2(time_machine.global_position.x, time_machine.global_position.y - 16)
 		player._revert_state()
+		can_interact = false
 
 func _on_Area2D_body_entered(body: Player):
 	player = body

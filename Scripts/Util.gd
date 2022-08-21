@@ -60,7 +60,8 @@ func change_scene(scene: String) -> void:
 
 func change_scene_transition(scene: String, trans_speed: float = 0.7) -> void:
 	var trans = WorldController.do_transition(trans_speed)
-	trans.connect("transition_finished", Util, "change_scene", [scene])
+	if (trans != null):
+		trans.connect("transition_finished", Util, "change_scene", [scene])
 
 # Integer version of abs since we use static typing abs only works with floats
 func absi(a: int) -> int:

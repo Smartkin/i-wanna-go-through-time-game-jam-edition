@@ -187,9 +187,10 @@ func free_transition() -> void:
 
 func do_transition(dur: float = 0.7, ramp: float = 0.1, trans_color: Color = Color.black, halo_color: Color = Color.aqua) -> Node:
 	if _cur_transition != null:
-		if not _cur_transition.is_queued_for_deletion():
-			_cur_transition.queue_free()
-		free_transition()
+		return null
+#		if not _cur_transition.is_queued_for_deletion():
+#			_cur_transition.queue_free()
+#		free_transition()
 	_cur_transition = _transition.instance()
 	_cur_transition.dur = dur
 	_cur_transition.ramp = ramp
