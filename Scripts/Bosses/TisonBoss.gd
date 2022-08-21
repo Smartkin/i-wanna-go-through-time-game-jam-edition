@@ -89,7 +89,7 @@ func damaged(bul: Bullet):
 		return
 	stats.hp -= bul.stats.damage
 	var hp_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT)
-	hp_tween.parallel().tween_property($"%HealthBar", "value", float(stats.hp) / stats.total_hp, 1)
+	hp_tween.parallel().tween_property($"%HealthBar", "value", float(stats.hp) / stats.total_hp, 0.2)
 	var mod_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT)
 	mod_tween.tween_property(self, "modulate:g", 0.0, 0.2)
 	mod_tween.parallel().tween_property(self, "modulate:b", 0.0, 0.2)
@@ -162,7 +162,6 @@ func _on_BossTrigger_body_entered(body):
 	animations.play("Appear")
 	(yield(animations, "animation_finished"))
 	WorldController.play_music("tyson")
-	$CanvasLayer.visible = true
 	# Wait a little before starting to own the player
 	(yield(get_tree().create_timer(2.0), "timeout"))
 	$AttackStateMachine.start()
