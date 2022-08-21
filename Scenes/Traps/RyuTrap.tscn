@@ -216,6 +216,7 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="KillerBase"]
 scale = Vector2( 0.25, 0.25 )
 frames = SubResource( 5 )
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillerBase"]
@@ -224,6 +225,7 @@ shape = SubResource( 6 )
 
 [node name="KickSfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+volume_db = -10.338
 bus = "Sfx"
 
 [node name="Trap" type="AnimationPlayer" parent="."]

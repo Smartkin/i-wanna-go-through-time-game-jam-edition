@@ -16,11 +16,15 @@ func _physics_process(delta: float):
 	for i in range(col_amt):
 		var col = get_slide_collision(i)
 		if (col != null and not col.collider is KinematicBody2D):
-			var par = get_parent()
 			$Hit.play()
-			for j in range(180, 361, 10):
+			for j in range(180, 361, 20):
 				var bul = split.instance()
 				bul.global_position = global_position
 				bul.get_node("Hitbox").speed = Vector2(-100, 0).rotated(deg2rad(j))
 				get_tree().current_scene.add_child(bul)
-			par.queue_free()
+			visible = false
+			$CollisionShape2D.disabled = true
+
+
+func _on_Hit_finished() -> void:
+	get_parent().queue_free()
