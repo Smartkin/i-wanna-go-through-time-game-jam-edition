@@ -85,7 +85,7 @@ extents = Vector2( 5, 7 )
 [node name="Balloon" type="Position2D"]
 
 [node name="Balloon" type="KinematicBody2D" parent="."]
-position = Vector2( 0, -1.41165 )
+position = Vector2( 0, 1.88786 )
 collision_layer = 128
 collision_mask = 6
 moving_platform_apply_velocity_on_leave = 2
@@ -109,7 +109,7 @@ shape = SubResource( 1 )
 [node name="Sprite" type="AnimatedSprite" parent="Balloon"]
 position = Vector2( 16, 16 )
 frames = SubResource( 10 )
-frame = 1
+frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true
