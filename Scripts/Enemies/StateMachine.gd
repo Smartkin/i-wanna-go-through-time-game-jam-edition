@@ -5,8 +5,12 @@ var states := {} # Map of states
 var state: State = null setget set_state
 var prev_state: State = null
 var condition: String = "" # Predicate for state switching
+var starting_state: State = null
 
 onready var parent := get_parent()
+
+func start():
+	set_state(starting_state)
 
 func _physics_process(delta):
 	if state != null:

@@ -3,6 +3,7 @@ extends Node2D
 onready var anim := $Machine
 onready var anim_player := $AnimationPlayer
 var rand := RandomNumberGenerator.new()
+var can_resave := false
 
 func _ready():
 	if (WorldController.cur_save_data.save_id == get_id()):
@@ -31,9 +32,14 @@ func _on_Sprite_animation_finished():
 
 
 func _on_Area2D_activate():
-	if (anim.animation != "active"):
+	if (anim.animation != "active" or can_resave):
 		anim_player.play("display_text")
 		anim.play("activation")
 		WorldController.cur_save_data.save_id = get_id()
 		WorldController.save_game($SavePosition.global_position)
 		$SavedGame.play()
+		can_resave = false
+
+func _on_Area2D2_body_exited(body: Player):
+	can_resave = true
+

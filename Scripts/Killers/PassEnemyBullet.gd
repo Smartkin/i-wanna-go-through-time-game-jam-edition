@@ -3,11 +3,13 @@ extends EnemyBulletBase
 signal destroyed
 
 var speed := Vector2.ZERO
+var gravity := 0.0
 
 func _physics_process(delta: float):
 	if ($Sprite.animation == "destroy"):
 		return
 	position += speed * delta
+	speed.y += gravity
 
 func _on_Sprite_animation_finished():
 	if ($Sprite.animation == "destroy"):

@@ -494,9 +494,10 @@ func _load_music_recursively(cur_dir: Directory) -> void:
 
 func _load_ui_sfx() -> void:
 	var sfx_dir := Directory.new()
-	sfx_dir.open("res://Sounds/UI")
-	sfx_dir.list_dir_begin(true)
-	_load_ui_sfx_recursively(sfx_dir)
+	if sfx_dir.open("res://Sounds/UI") == OK:
+		sfx_dir.list_dir_begin(true)
+		_load_ui_sfx_recursively(sfx_dir)
+		print(_ui_sfx)
 
 
 func _load_ui_sfx_recursively(cur_dir: Directory) -> void:
