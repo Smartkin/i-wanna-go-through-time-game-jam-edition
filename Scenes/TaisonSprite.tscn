@@ -4,7 +4,7 @@
 [ext_resource path="res://Sprites/Traps/taison_punch-sheet.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Traps/taison_walk-sheet.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Traps/taison_flex-sheet.png" type="Texture" id=4]
-[ext_resource path="res://Scripts/Killers/KillerBase.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/Enemies/DamageSource.gd" type="Script" id=5]
 [ext_resource path="res://Sprites/Traps/tyson_knockout_sheet.png" type="Texture" id=6]
 
 [sub_resource type="AtlasTexture" id=1]
@@ -116,7 +116,7 @@ playing = true
 [node name="Punch1" type="KinematicBody2D" parent="."]
 visible = false
 scale = Vector2( 2.5, 2.5 )
-collision_layer = 8
+collision_layer = 2048
 collision_mask = 0
 script = ExtResource( 5 )
 
@@ -128,7 +128,7 @@ disabled = true
 [node name="Punch2" type="KinematicBody2D" parent="."]
 visible = false
 scale = Vector2( 2.5, 2.5 )
-collision_layer = 8
+collision_layer = 2048
 collision_mask = 0
 script = ExtResource( 5 )
 
@@ -139,7 +139,7 @@ disabled = true
 
 [node name="MuscleFlex" type="KinematicBody2D" parent="."]
 visible = false
-collision_layer = 8
+collision_layer = 2048
 collision_mask = 0
 script = ExtResource( 5 )
 
@@ -150,7 +150,7 @@ disabled = true
 
 [node name="Uppercut" type="KinematicBody2D" parent="."]
 visible = false
-collision_layer = 8
+collision_layer = 2048
 collision_mask = 0
 script = ExtResource( 5 )
 

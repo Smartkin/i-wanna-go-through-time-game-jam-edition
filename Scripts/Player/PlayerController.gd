@@ -125,9 +125,14 @@ func _on_Player_dashed():
 	shake_camera(Tween.EASE_OUT, 0.1, 20)
 
 func shake_camera(ease_type: int, duration: float, strength: float):
-	$CameraTween.interpolate_property($Camera, "offset", Vector2(-strength, -strength), \
-		Vector2(0, 0), 0.1, Tween.TRANS_SINE, ease_type)
-	$CameraTween.start()
+	var time := 0.0
+	while time < duration:
+		time += 0.1
+		var cam_tween = create_tween().set_ease(ease_type).set_trans(Tween.TRANS_SINE)
+		cam_tween.tween_property($Camera, "offset", Vector2(rand_range(-strength, strength), rand_range(-strength, strength)), 0.1)
+		yield(cam_tween, "finished")
+	var cam_tween = create_tween().set_ease(ease_type).set_trans(Tween.TRANS_SINE)
+	cam_tween.tween_property($Camera, "offset", Vector2(0, 0), 0.1)
 
 func zoom_camera(amount: float, smooth: bool = true, time: float = 1.0):
 	if (not smooth):
