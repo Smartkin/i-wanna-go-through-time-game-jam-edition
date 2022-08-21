@@ -11,7 +11,7 @@ onready var parent := get_parent()
 func _physics_process(delta):
 	if state != null:
 		# Switch state if the condition is met
-		if condition != "" and parent.call(condition, delta):
+		if condition != "" and parent.has_method(condition) and parent.call(condition, delta):
 			set_state(_get_transition_state())
 		
 		# Run the callback that's attached to the state
@@ -26,6 +26,8 @@ func set_state(new_state: State):
 	state = new_state
 	if state != null:
 		_enter_state(new_state, prev_state)
+		if parent.has_method(state.init):
+			parent.call(state.init)
 
 
 func _enter_state(new_state: State, old_state: State):
@@ -40,10 +42,11 @@ func _get_transition_state() -> State:
 	return null
 
 
-func _add_state(state_name: String, callback: String, binds: Array = []):
+func _add_state(state_name: String, callback: String = "", init: String = "", binds: Array = []):
 	states[state_name] = State.new()
 	states[state_name].callback = callback
 	states[state_name].binds = binds
+	states[state_name].init = init
 
 func reset():
 	states.clear()
@@ -54,4 +57,5 @@ func reset():
 
 class State:
 	var callback := ""
+	var init := ""
 	var binds := []
