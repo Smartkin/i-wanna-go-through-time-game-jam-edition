@@ -20,10 +20,10 @@ func goto_next_path_node() -> void:
 	if mirror_path:
 		current_node += node_increment
 		if current_node == point_count:
-			current_node = point_count - 2 if point_count > 2 else point_count - 1
+			current_node = point_count - 2
 			node_increment *= -1
 		elif current_node < 0:
-			current_node = 1 if point_count > 2 else 0
+			current_node = 1
 			node_increment *= -1
 	else:
 		if point_count > 2:

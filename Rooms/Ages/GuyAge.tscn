@@ -561,6 +561,9 @@ position = Vector2( 2880, 1984 )
 [node name="AnimatedSprite" parent="Boss/TissonBoss/TaisonBoss" index="3"]
 frame = 2
 
+[node name="AnimatedSprite" parent="Boss/TissonBoss/TaisonBoss" index="3"]
+frame = 2
+
 [node name="BossTrigger" type="Area2D" parent="Boss"]
 position = Vector2( -208, -411 )
 __meta__ = {
@@ -1300,7 +1303,7 @@ position = Vector2( 952, 1584 )
 position = Vector2( 1056, 1728 )
 
 [node name="Balloon" parent="Enemies/Balloon15" index="0"]
-position = Vector2( -14.372, 0.351593 )
+position = Vector2( -14.777, 0.306764 )
 x_mov = 40.0
 move_multi = 0.4
 
@@ -1311,7 +1314,7 @@ frame = 5
 position = Vector2( 912, 1680 )
 
 [node name="Balloon" parent="Enemies/Balloon16" index="0"]
-position = Vector2( 14.2645, 0.362371 )
+position = Vector2( 10.3726, 0.60821 )
 x_mov = -40.0
 move_multi = 0.4
 
@@ -1322,7 +1325,7 @@ frame = 5
 position = Vector2( 2688, 896 )
 
 [node name="Balloon" parent="Enemies/Balloon3" index="0"]
-position = Vector2( 0, 41.8063 )
+position = Vector2( 0, 47.111 )
 y_mov = 70.0
 move_multi = 0.7
 
@@ -1336,7 +1339,7 @@ position = Vector2( 2624, 944 )
 position = Vector2( 2256, 288 )
 
 [node name="Balloon" parent="Enemies/Balloon8" index="0"]
-position = Vector2( -8.69512, 1.56174 )
+position = Vector2( -4.43732, 1.59012 )
 x_mov = 50.0
 move_multi = 0.8
 

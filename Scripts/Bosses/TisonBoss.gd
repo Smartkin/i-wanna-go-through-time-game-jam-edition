@@ -1,6 +1,7 @@
 extends EnemyInterface
 
-const PROJ := preload("res://Scenes/Hazards/PassEnemyBullet.tscn")
+const PROJ := preload("res://Scenes/Hazards/TysonOrb.tscn")
+const ROCK := preload("res://Scenes/Hazards/TysonRock.tscn")
 const AFTER_IMAGE := preload("res://Scenes/AfterImage.tscn")
 
 var do_trail := false
@@ -28,17 +29,18 @@ func _enable():
 	pass
 
 func spawn_circle():
-	for i in range(0, 361, 20):
+	for i in range(0, 361, 40):
 		var proj := PROJ.instance()
 		proj.get_node("Hitbox").speed = Vector2(200, 0).rotated(deg2rad(i))
 		get_tree().current_scene.add_child(proj)
 		proj.global_position = $AnimatedSprite/Punch1.global_position
 
 func hit_ceiling():
-	for i in range(20, 640, 40):
-		var proj := PROJ.instance()
-		proj.get_node("Hitbox").speed = Vector2(0, rand_range(50, 200))
-		proj.get_node("Hitbox").gravity = 10
+	var rand_offset = rand_range(-30, 30)
+	for i in range(70+rand_offset, 570+rand_offset, 60):
+		var proj := ROCK.instance()
+		proj.get_node("Hitbox").speed = Vector2(0, rand_range(50.0, 150.0))
+		proj.get_node("Hitbox").gravity = rand_range(2.0, 10.0)
 		get_tree().current_scene.add_child(proj)
 		var offset = Vector2(i, 0)
 		proj.global_position = Util.get_view_position() + offset
@@ -85,6 +87,7 @@ func damaged(bul: Bullet):
 		$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 		animations.stop()
 		animations.play("Die")
+		$Death.play()
 		WorldController.fade_music()
 		_die()
 
@@ -113,6 +116,7 @@ func create_after_image():
 	while do_trail:
 		var trail: Sprite = AFTER_IMAGE.instance()
 		trail.scale = anim.scale
+		trail.target_scale = anim.scale
 		trail.texture = anim.frames.get_frame(anim.animation, anim.frame)
 		trail.global_position = anim.global_position
 		get_tree().current_scene.add_child(trail)
