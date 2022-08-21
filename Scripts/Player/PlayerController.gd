@@ -80,6 +80,11 @@ func restore_health():
 		player_health_draw.push_front(heart)
 		health_container.add_child(heart)
 
+func get_player() -> Player:
+	if player_dead:
+		return null
+	return $Player as Player
+
 # Callback when player shoots
 func _on_Player_shoot(direction: int) -> void:
 	$Sounds/Shoot.play()
