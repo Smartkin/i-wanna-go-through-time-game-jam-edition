@@ -20,13 +20,16 @@ func goto_next_path_node() -> void:
 	if mirror_path:
 		current_node += node_increment
 		if current_node == point_count:
-			current_node = point_count - 1
+			current_node = point_count - 2 if point_count > 2 else point_count - 1
 			node_increment *= -1
 		elif current_node < 0:
-			current_node = 0
+			current_node = 1 if point_count > 2 else 0
 			node_increment *= -1
 	else:
-		current_node = (current_node+1) % point_count
+		if point_count > 2:
+			current_node = (current_node+1) % (point_count-1)
+		else:
+			current_node = (current_node+1) % point_count
 	
 	var point_pos : Vector2 = n_FollowPath.curve.get_point_position(current_node)
 	var tween := create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)

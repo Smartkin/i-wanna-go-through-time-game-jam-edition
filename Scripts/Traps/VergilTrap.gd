@@ -150,8 +150,7 @@ func _blade_has_touched_player(body: Node) -> void:
 	n_SwordSlashesSfx.stop()
 	n_KidSlashedSfx.play()
 	if target_player != null:
-		target_player.run_speed = 0
-		target_player.gravity = 0
+		target_player._switch_state(target_player.STATE.CUTSCENE)
 
 
 func _on_YouShallDieSfx_finished() -> void:

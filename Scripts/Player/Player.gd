@@ -306,6 +306,7 @@ func kill() -> void:
 		_switch_state(STATE.DEAD)
 	visible = false
 
+
 func _get_animation(name: String) -> String:
 	if not WorldController.check_item(Ability.ABILITIES.SHOOT) and not WorldController.check_item(Ability.ABILITIES.DOUBLE_JUMP):
 		return name + "NoCape"
