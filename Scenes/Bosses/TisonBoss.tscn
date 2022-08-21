@@ -52,7 +52,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 5.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, -576 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, -164 ) ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -389,32 +389,27 @@ tracks/6/keys = {
 } ]
 }
 
-[node name="Node2D" type="Node2D"]
-
-[node name="TaisonBoss" type="KinematicBody2D" parent="."]
-collision_layer = 256
-collision_mask = 32
+[node name="TaisonBoss" type="KinematicBody2D"]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource( 7 )
-__meta__ = {
-"_edit_group_": true
-}
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TaisonBoss"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -8, -96 )
 shape = SubResource( 4 )
 disabled = true
 
-[node name="PhaseMachine" type="Node" parent="TaisonBoss"]
+[node name="PhaseMachine" type="Node" parent="."]
 script = ExtResource( 8 )
 
-[node name="AttackStateMachine" type="Node" parent="TaisonBoss"]
+[node name="AttackStateMachine" type="Node" parent="."]
 script = ExtResource( 1 )
 
-[node name="AnimatedSprite" parent="TaisonBoss" instance=ExtResource( 2 )]
+[node name="AnimatedSprite" parent="." instance=ExtResource( 2 )]
 animation = "default"
-frame = 0
+frame = 3
 
-[node name="Animations" type="AnimationPlayer" parent="TaisonBoss"]
+[node name="Animations" type="AnimationPlayer" parent="."]
 playback_process_mode = 0
 anims/Appear = SubResource( 3 )
 anims/Lunge = SubResource( 6 )
@@ -422,28 +417,31 @@ anims/Punch = SubResource( 1 )
 anims/RESET = SubResource( 2 )
 anims/Uppercut = SubResource( 5 )
 
-[node name="PunchSfx" type="AudioStreamPlayer2D" parent="TaisonBoss"]
-stream = ExtResource( 4 )
+[node name="PunchSfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
 bus = "Sfx"
 
-[node name="Camera2D" type="Camera2D" parent="TaisonBoss"]
-current = true
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 32
 
-[node name="Hitbox" type="Area2D" parent="TaisonBoss"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TaisonBoss/Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( -8, -96 )
 shape = SubResource( 4 )
 disabled = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
+visible = false
 
 [node name="Control" type="Control" parent="CanvasLayer"]
-margin_left = 55.0
-margin_top = 13.0
-margin_right = 199.0
-margin_bottom = 53.0
+margin_left = 480.0
+margin_top = 312.0
+margin_right = 624.0
+margin_bottom = 352.0
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="HealthBar" type="ProgressBar" parent="CanvasLayer/Control"]
 unique_name_in_owner = true
@@ -455,11 +453,11 @@ max_value = 1.0
 value = 1.0
 
 [node name="Sprite" type="Sprite" parent="CanvasLayer"]
-position = Vector2( 31, 33 )
+position = Vector2( 448, 336 )
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 6 )
 
-[connection signal="animation_finished" from="TaisonBoss/Animations" to="TaisonBoss" method="_on_Animations_animation_finished"]
-[connection signal="animation_started" from="TaisonBoss/Animations" to="TaisonBoss" method="_on_Animations_animation_started"]
+[connection signal="animation_finished" from="Animations" to="." method="_on_Animations_animation_finished"]
+[connection signal="animation_started" from="Animations" to="." method="_on_Animations_animation_started"]
 
-[editable path="TaisonBoss/AnimatedSprite"]
+[editable path="AnimatedSprite"]
