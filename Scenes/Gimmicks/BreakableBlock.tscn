@@ -1,8 +1,8 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Gimmicks/BreakableBlock.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Gimmicks/breakable_block.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Gimmicks/breakable_block_smoke.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/FX/SmokeParticles.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sprites/Gimmicks/breakable_block_chunks.png" type="Texture" id=4]
 [ext_resource path="res://Sounds/Interactables/breakable_block.wav" type="AudioStream" id=5]
 
@@ -28,24 +28,6 @@ animations = [ {
 "name": "break",
 "speed": 30.0
 } ]
-
-[sub_resource type="CanvasItemMaterial" id=8]
-particles_animation = true
-particles_anim_h_frames = 6
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="ParticlesMaterial" id=7]
-flag_disable_z = true
-spread = 180.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 102.36
-initial_velocity_random = 0.88
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-angle = 374.2
-angle_random = 1.0
-anim_speed = 1.0
 
 [sub_resource type="Animation" id=9]
 length = 0.001
@@ -224,16 +206,8 @@ frames = SubResource( 5 )
 animation = "break"
 centered = false
 
-[node name="SmokeParticles" type="Particles2D" parent="."]
-material = SubResource( 8 )
+[node name="SmokeParticles" parent="." instance=ExtResource( 3 )]
 position = Vector2( 16, 16 )
-emitting = false
-amount = 6
-lifetime = 0.4
-one_shot = true
-explosiveness = 1.0
-process_material = SubResource( 7 )
-texture = ExtResource( 3 )
 
 [node name="Chunks" type="Node2D" parent="."]
 visible = false
