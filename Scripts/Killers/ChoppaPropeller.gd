@@ -14,6 +14,7 @@ func _physics_process(delta: float):
 		if (col != null and not col.collider is KinematicBody2D):
 			var par = get_parent()
 			var bul = split.instance()
+			bul.global_position = global_position
 			bul.get_node("Hitbox").speed = Vector2(0, 100)
 			par.add_child(bul)
 			bul.get_node("Hitbox").connect("destroyed", par, "queue_free")

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/guy_age.ogg-13911780e34a741762f8be7139de05db.oggstr"
+
+[deps]
+
+source_file="res://Music/guy_age.ogg"
+dest_files=[ "res://.import/guy_age.ogg-13911780e34a741762f8be7139de05db.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

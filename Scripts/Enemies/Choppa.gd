@@ -46,10 +46,14 @@ func _when_chase(delta: float, binds: Array):
 		has_target = false
 
 func _when_fly(delta: float, binds: Array):
+	if (dead):
+		return
 	_do_movement(delta)
 	search_player()
 
 func _when_return(delta: float, binds: Array):
+	if (dead):
+		return
 	search_player()
 	var cur_pos = global_position
 	var next = nav_agent.get_next_location()
@@ -76,7 +80,7 @@ func navigate(path: Array) -> void:
 		nav_agent.set_target_location(path[0])
 
 func fly(sp: float):
-	if (target_player != null):
+	if (target_player != null and not dead):
 		var dir := global_position.direction_to(target_player.global_position)
 		var res_sp := dir * sp
 		move_and_slide(res_sp, Vector2.UP)
@@ -111,5 +115,6 @@ func _on_Sprite_animation_finished():
 		par.add_child(prop)
 		prop.global_position = global_position
 		anim.stop()
+		timer.stop()
 		_disable()
 

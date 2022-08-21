@@ -60,6 +60,7 @@ func _disable():
 	set_physics_process(false)
 	$Hitbox.set_deferred("monitoring", false)
 	$Hurtbox.set_deferred("monitoring", false)
+	visible = false
 	for c in get_children():
 		c.set_process(false)
 		c.set_process_input(false)

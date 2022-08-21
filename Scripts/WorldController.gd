@@ -217,7 +217,7 @@ func play_ui_sfx(fileName: String) -> void:
 func play_music(fileName := "") -> void:
 	if (cur_config.music): # Check that music is currently turned on
 		_fade_engine.fading = false
-		Util.set_volume("Master", cur_config.volume_master)
+		Util.set_volume("Music", cur_config.volume_music)
 		var music_player := $MusicPlayer as AudioStreamPlayer
 		if (_cur_song != fileName && fileName != ""):
 			# Make sure we will play a loaded song
@@ -245,14 +245,14 @@ func _fade_music(delta: float) -> void:
 	match _fade_engine.mode:
 		FADE_MODE.OUT:
 			if _fade_engine.value > _fade_engine.end_value:
-				Util.set_volume("Master", _fade_engine.value * cur_config.volume_master)
+				Util.set_volume("Music", _fade_engine.value * cur_config.volume_music)
 				_fade_engine.value += _calc_fade(delta)
 			else:
 				_fade_engine.value = _fade_engine.end_value
 				_fade_engine.fading = false
 		FADE_MODE.IN:
 			if _fade_engine.value < _fade_engine.end_value:
-				Util.set_volume("Master", _fade_engine.value * cur_config.volume_master)
+				Util.set_volume("Music", _fade_engine.value * cur_config.volume_music)
 				_fade_engine.value += _calc_fade(delta)
 			else:
 				_fade_engine.value = _fade_engine.end_value

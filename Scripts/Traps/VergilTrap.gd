@@ -80,7 +80,7 @@ func _on_Trigger_body_entered(body: Player) -> void:
 	n_SwordSlashes.visible = true
 	enable_fx()
 	spawn_blades()
-#	WorldController.fade_music()  #TODO: make it only fade the music!
+	WorldController.fade_music()  #TODO: make it only fade the music!
 	n_YouShallDie.play()
 
 
@@ -108,6 +108,7 @@ func disable_fx() -> void:
 	tween.parallel().tween_property(self, "green", 1.0, fx_fade_dur/2.0)
 	tween.parallel().tween_property(self, "blue", 1.0, fx_fade_dur/2.0)
 	tween.parallel().tween_property(self, "fisheye", 0.0, fx_fade_dur/2.0)
+	WorldController.fade_music(WorldController.FADE_MODE.IN, fx_fade_dur/2.0, 1.0)
 	yield(tween, "finished")
 	# Trap passed, delete to conserve memory
 	queue_free()
