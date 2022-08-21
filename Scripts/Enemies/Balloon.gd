@@ -65,4 +65,6 @@ func _on_Sprite_animation_finished():
 	elif anim.animation == "pop":
 		anim.stop()
 		._die()
+		$Pop.pitch_scale = rand_range(0.8, 1.2)
+		$Pop.play()
 #		queue_free()

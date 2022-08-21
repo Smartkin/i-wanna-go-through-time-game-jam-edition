@@ -56,6 +56,7 @@ func _on_Jumpbox_body_entered(body: Player):
 	anim.play("bounced")
 	anim.frame = 0
 	$StunTimer.stop()
+	$Boing.play()
 
 func _on_Jumpbox_body_exited(body: Player):
 	if body == null:

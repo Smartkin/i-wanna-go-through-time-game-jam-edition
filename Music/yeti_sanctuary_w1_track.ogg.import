@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/yeti_sanctuary_w1_track.ogg-100e8c7a0b424ba3d1e9bc27dfbfac8c.oggstr"
+
+[deps]
+
+source_file="res://Music/yeti_sanctuary_w1_track.ogg"
+dest_files=[ "res://.import/yeti_sanctuary_w1_track.ogg-100e8c7a0b424ba3d1e9bc27dfbfac8c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=27.76

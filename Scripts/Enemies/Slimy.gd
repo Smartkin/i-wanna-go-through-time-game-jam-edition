@@ -2,7 +2,7 @@ extends EnemyInterface
 
 export var speed := Vector2(30, 0)
 export var jump_force := Vector2(80, -300)
-export var jump_force_hrand := 1.5
+export var jump_force_hrand := 100
 var _player_above := false
 var _on_land := false
 var gravity := 10
@@ -31,13 +31,18 @@ func _when_jump(delta: float, binds: Array):
 	move_and_slide(speed, Vector2.UP)
 	if (not _on_land or can_jump):
 		if (can_jump):
-			var hor_jump_force = jump_force.x * rand_range(1.0, jump_force_hrand)
-			speed.x = clamp((track_player.global_position.x - 10) - global_position.x, -hor_jump_force, hor_jump_force)
+			var rand_force = jump_force_hrand * randf() * sign(track_player.global_position.x - 10 - global_position.x)
+			var hor_jump_force = jump_force.x
+			speed.x = clamp((track_player.global_position.x - 10) + rand_force - global_position.x, -hor_jump_force, hor_jump_force)
+			$Jump.pitch_scale = rand_range(0.9, 1.3)
+			$Jump.play()
 		# Floor check
 		can_jump = false
 		_on_land = is_on_floor()
 		if (_on_land):
 			$JumpWait.start()
+			$Land.pitch_scale = rand_range(0.7, 1.3)
+			$Land.play()
 		speed.y += gravity
 		$Sprite.flip_h = speed.x < 0
 	if (_on_land):

@@ -36,3 +36,4 @@ func _on_Area2D_activate():
 		anim.play("activation")
 		WorldController.cur_save_data.save_id = get_id()
 		WorldController.save_game($SavePosition.global_position)
+		$SavedGame.play()

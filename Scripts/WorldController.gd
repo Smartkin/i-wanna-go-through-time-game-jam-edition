@@ -47,8 +47,8 @@ const EMPTY_SAVE := { # Default save data when no save is present
 const DEFAULT_CONFIG := { # Default config when user starts the game
 	"music": true,
 	"volume_master": 1.0,
-	"volume_music": 0.5,
-	"volume_sfx": 0.5,
+	"volume_music": 0.7,
+	"volume_sfx": 1.0,
 	"fullscreen": false,
 	"borderless": false,
 	"vsync": false,
@@ -130,6 +130,7 @@ func _ready() -> void:
 	var music_node := AudioStreamPlayer.new()
 	music_node.name = "MusicPlayer"
 	music_node.bus = "Music"
+	music_node.volume_db = -5
 	add_child(music_node)
 	assert(SAVE_FILES > 0) # Make sure that we have more than 0 save slots
 	_scene_tree.connect("tree_changed", self, "_on_tree_changed") # Tracks when scene finishes building

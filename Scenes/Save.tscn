@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Sprites/Interactables/checkpoint_idle.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Save/Save.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Sprites/Interactables/checkpoint_active.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/Interactables/checkpoint_activated.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/Interactables/saved_text.png" type="Texture" id=6]
+[ext_resource path="res://Sounds/Interactables/save_station_saved.wav" type="AudioStream" id=7]
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 5 )
@@ -196,6 +197,9 @@ position = Vector2( 8, 8 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 20 )
 anims/display_text = SubResource( 21 )
+
+[node name="SavedGame" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
 
 [connection signal="animation_finished" from="Machine" to="." method="_on_Sprite_animation_finished"]
 [connection signal="activate" from="Area2D" to="." method="_on_Area2D_activate"]
