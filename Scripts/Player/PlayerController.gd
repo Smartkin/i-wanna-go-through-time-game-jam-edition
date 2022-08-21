@@ -28,6 +28,7 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	if (not player_dead and not _cam_manip):
 		$Camera.position = $Player.position
+		$Light2D.position = $Player.position
 		$CameraVisibility.global_position = $Camera.get_camera_screen_center()
 
 
@@ -58,13 +59,13 @@ func _on_scene_built() -> void:
 	if (WorldController.loading_save):
 		position.x = WorldController.cur_save_data.playerPosX
 		position.y = WorldController.cur_save_data.playerPosY
-		$Player.health = WorldController.cur_save_data.health
-		health_container.columns = $Player.health
-		for i in range(1, $Player.health):
-			var heart = PlayerHeart.instance()
-			player_health_draw.push_front(heart)
-			health_container.add_child(heart)
 		respawn_player = true
+	$Player.health = WorldController.cur_save_data.health
+	health_container.columns = $Player.health
+	for i in range(1, $Player.health):
+		var heart = PlayerHeart.instance()
+		player_health_draw.push_front(heart)
+		health_container.add_child(heart)
 	$Camera.current = true
 	$Camera.position = position
 	$Camera.reset_smoothing()

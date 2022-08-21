@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/UI/InGame/AgeSelector.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/UI/InGame/AgeButton.gd" type="Script" id=2]
 [ext_resource path="res://Fonts/ABeeZee-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Themes/default_theme.tres" type="Theme" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -14,6 +15,7 @@ default_font = SubResource( 1 )
 [node name="AgeSelector" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 4 )
 script = ExtResource( 1 )
 
 [node name="VFlowContainer" type="HFlowContainer" parent="."]
@@ -26,7 +28,7 @@ margin_bottom = 22.5
 [node name="GuyAge" type="Button" parent="VFlowContainer"]
 unique_name_in_owner = true
 margin_right = 326.0
-margin_bottom = 45.0
+margin_bottom = 47.0
 size_flags_horizontal = 3
 theme = SubResource( 2 )
 text = "Guy age"
@@ -37,7 +39,7 @@ age_scene = "res://Rooms/Ages/GuyAge.tscn"
 unique_name_in_owner = true
 margin_left = 330.0
 margin_right = 639.0
-margin_bottom = 45.0
+margin_bottom = 47.0
 size_flags_horizontal = 3
 theme = SubResource( 2 )
 text = "Ice age"
@@ -45,5 +47,5 @@ script = ExtResource( 2 )
 age_scene = "res://Rooms/Ages/IceAge.tscn"
 required_chip = 1
 
-[connection signal="pressed" from="VFlowContainer/GuyAge" to="." method="_on_IceAge_pressed"]
+[connection signal="pressed" from="VFlowContainer/GuyAge" to="." method="_on_GuyAge_pressed"]
 [connection signal="pressed" from="VFlowContainer/IceAge" to="." method="_on_IceAge_pressed"]

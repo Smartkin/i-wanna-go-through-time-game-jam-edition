@@ -105,6 +105,9 @@ func damaged(bul: Bullet):
 		WorldController.fade_music()
 		_die()
 
+func _respawn():
+	pass
+
 func _die():
 	yield(animations, "animation_finished")
 	get_tree().current_scene.find_node("MusicPlayer").play()

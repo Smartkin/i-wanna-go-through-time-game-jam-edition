@@ -22,5 +22,6 @@ func show_arrow() -> void:
 
 
 func hide_arrow() -> void:
-	var tween := create_tween()
-	tween.tween_property(self, "self_modulate:a", 0.0, 0.15).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+	if (is_inside_tree()):
+		var tween := create_tween()
+		tween.tween_property(self, "self_modulate:a", 0.0, 0.15).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)

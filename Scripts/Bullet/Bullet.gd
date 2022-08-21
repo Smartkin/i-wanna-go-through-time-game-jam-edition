@@ -22,6 +22,10 @@ func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 			$EnemyCheck.get_collider().get_parent().damaged(self)
 		if ($BreakableBlockCheck.is_colliding()):
 			$BreakableBlockCheck.get_collider().break_block()
+		for i in range(state.get_contact_count()):
+			var col = state.get_contact_collider_object(i)
+			if (col is Node2D and col.is_in_group("Breakable")):
+				col.break_block()
 		destroy()
 
 func destroy():

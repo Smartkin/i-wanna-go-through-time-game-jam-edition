@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/Gimmicks/BreakableBlock.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Gimmicks/breakable_block.png" type="Texture" id=2]
@@ -192,7 +192,11 @@ tracks/5/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[node name="BreakableBlock" type="StaticBody2D" groups=["Solids"]]
+[sub_resource type="OccluderPolygon2D" id=11]
+polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[node name="BreakableBlock" type="StaticBody2D" groups=["Breakable", "Solids"]]
+light_mask = 2
 collision_layer = 1028
 collision_mask = 0
 script = ExtResource( 1 )
@@ -241,5 +245,10 @@ anims/chunks_scatter = SubResource( 10 )
 
 [node name="Break" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+light_mask = 3
+occluder = SubResource( 11 )
+light_mask = 3
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

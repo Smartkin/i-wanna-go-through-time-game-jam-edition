@@ -44,6 +44,7 @@ func _on_Area2D_body_entered(body):
 func _on_Area2D_body_exited(body):
 	can_interact = false
 	if is_active:
-		n_InteractArrow.hide_arrow()
+		if (not n_InteractArrow.is_queued_for_deletion()):
+			n_InteractArrow.hide_arrow()
 	else:
 		n_AnimationPlayer.play_backwards("show_needs_chip")
