@@ -12,8 +12,7 @@ onready var animations := $Animations
 func __ready():
 	stats.hp = 20
 	stats.total_hp = stats.hp
-	yield(get_tree().create_timer(2.0), "timeout")
-	$AttackStateMachine.start()
+	
 
 func _disable():
 	pass
@@ -35,8 +34,7 @@ func hit_ceiling():
 		proj.get_node("Hitbox").gravity = 10
 		get_tree().current_scene.add_child(proj)
 		var offset = Vector2(i, 0)
-		var cam := $Camera2D
-		proj.global_position = Util.get_view_position(cam) + offset
+		proj.global_position = Util.get_view_position() + offset
 
 func punch():
 	animations.play("Punch")
@@ -95,3 +93,11 @@ func _on_Animations_animation_finished(anim_name):
 
 func _on_Animations_animation_started(anim_name):
 	finished_attack = false
+
+
+func _on_BossTrigger_body_entered(body):
+	WorldController.fade_music()
+	animations.play("Appear")
+	yield(animations, "animation_finished")
+	$AttackStateMachine.start()
+	$CanvasLayer.visible = true

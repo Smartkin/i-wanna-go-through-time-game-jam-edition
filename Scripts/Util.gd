@@ -44,8 +44,12 @@ func call_group(groupName: String, funcName: String) -> void:
 	var tree := get_tree()
 	tree.call_group_flags(tree.GROUP_CALL_REALTIME, groupName, funcName)
 
-func get_view_position(cam: Camera2D) -> Vector2:
-	return cam.get_camera_screen_center() - get_viewport().get_visible_rect().size / 2
+func get_camera() -> Camera2D:
+	var tree := get_tree()
+	return tree.current_scene.find_node("PlayerController").get_node("Camera") as Camera2D
+
+func get_view_position() -> Vector2:
+	return get_camera().get_camera_screen_center() - get_viewport().get_visible_rect().size / 2
 
 # Sets volume on a certain channel, value should range from 0 to 1
 func set_volume(channel: String, value: float) -> void:

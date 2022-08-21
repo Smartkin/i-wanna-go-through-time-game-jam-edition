@@ -702,7 +702,7 @@ version_control_plugin_name="GitAPI"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/SmoothScroll/plugin.cfg" )
+enabled=PoolStringArray(  )
 
 [global]
 
