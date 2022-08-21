@@ -320,7 +320,7 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" parent="Spikies/Spiky" index="0"]
-frame = 0
+frame = 4
 
 [node name="FollowPath" parent="Spikies/Spiky" index="2"]
 curve = SubResource( 14 )
@@ -333,7 +333,7 @@ __meta__ = {
 ease_dur = 2.0
 
 [node name="AnimatedSprite" parent="Spikies/Spiky5" index="0"]
-frame = 1
+frame = 5
 
 [node name="FollowPath" parent="Spikies/Spiky5" index="2"]
 curve = SubResource( 17 )
@@ -345,7 +345,7 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" parent="Spikies/Spiky2" index="0"]
-frame = 1
+frame = 5
 
 [node name="FollowPath" parent="Spikies/Spiky2" index="2"]
 curve = SubResource( 15 )
@@ -358,7 +358,7 @@ __meta__ = {
 
 [node name="AnimatedSprite" parent="Spikies/Spiky3" index="0"]
 position = Vector2( 64, 0 )
-frame = 1
+frame = 5
 
 [node name="CollisionShape2D" parent="Spikies/Spiky3" index="1"]
 position = Vector2( 64, 0 )
@@ -372,6 +372,7 @@ position = Vector2( 1984, 496 )
 
 [node name="AnimatedSprite" parent="Spikies/Spiky4" index="0"]
 position = Vector2( 0.5, 63.5 )
+frame = 2
 
 [node name="CollisionShape2D" parent="Spikies/Spiky4" index="1"]
 position = Vector2( 0.5, 63.5 )
@@ -390,7 +391,7 @@ mirror_path = true
 
 [node name="AnimatedSprite" parent="Spikies/Spiky9" index="0"]
 position = Vector2( 0, 16 )
-frame = 4
+frame = 0
 
 [node name="CollisionShape2D" parent="Spikies/Spiky9" index="1"]
 position = Vector2( 0, 16 )
@@ -405,7 +406,7 @@ position = Vector2( 1232, 1680 )
 position = Vector2( 1472, 1536 )
 
 [node name="AnimatedSprite" parent="Spikies/Spiky8" index="0"]
-frame = 1
+frame = 5
 
 [node name="FollowPath" parent="Spikies/Spiky8" index="2"]
 curve = SubResource( 20 )
@@ -420,7 +421,7 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" parent="Spikies/Spiky10" index="0"]
-frame = 4
+frame = 0
 
 [node name="FollowPath" parent="Spikies/Spiky10" index="2"]
 curve = SubResource( 21 )
@@ -432,7 +433,7 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" parent="Spikies/Spiky11" index="0"]
-frame = 3
+frame = 7
 
 [node name="FollowPath" parent="Spikies/Spiky11" index="2"]
 curve = SubResource( 21 )
@@ -1174,7 +1175,7 @@ position = Vector2( 952, 1584 )
 position = Vector2( 1056, 1728 )
 
 [node name="Balloon" parent="Enemies/Balloon15" index="0"]
-position = Vector2( -4.36237, 0.769691 )
+position = Vector2( -7.49055, -0.706915 )
 x_mov = 40.0
 move_multi = 0.4
 
@@ -1185,7 +1186,7 @@ frame = 4
 position = Vector2( 912, 1680 )
 
 [node name="Balloon" parent="Enemies/Balloon16" index="0"]
-position = Vector2( -11.8358, 0.538318 )
+position = Vector2( 1.20662, -0.797722 )
 x_mov = -40.0
 move_multi = 0.4
 
@@ -1196,7 +1197,7 @@ frame = 0
 position = Vector2( 2688, 896 )
 
 [node name="Balloon" parent="Enemies/Balloon3" index="0"]
-position = Vector2( 0, 47.4463 )
+position = Vector2( 0, -45.9276 )
 y_mov = 70.0
 move_multi = 0.7
 
@@ -1210,7 +1211,7 @@ position = Vector2( 2624, 944 )
 position = Vector2( 2256, 288 )
 
 [node name="Balloon" parent="Enemies/Balloon8" index="0"]
-position = Vector2( 10.1283, 1.54786 )
+position = Vector2( -24.9266, -1.25134 )
 x_mov = 50.0
 move_multi = 0.8
 
