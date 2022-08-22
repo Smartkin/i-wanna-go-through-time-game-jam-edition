@@ -576,11 +576,8 @@ position = Vector2( 2880, 1984 )
 [node name="AnimatedSprite" parent="Boss/TissonBoss/TaisonBoss" index="3"]
 frame = 0
 
-[node name="HealthBar" parent="Boss/TissonBoss/TaisonBoss/CanvasLayer/Control" index="0"]
-self_modulate = Color( 1, 1, 1, 0 )
-
 [node name="LungeWarningZone" parent="Boss/TissonBoss/TaisonBoss" index="9"]
-frame = 1
+frame = 2
 
 [node name="BossTrigger" type="Area2D" parent="Boss"]
 position = Vector2( -208, -411 )
@@ -1324,28 +1321,31 @@ position = Vector2( 952, 1584 )
 position = Vector2( 1056, 1728 )
 
 [node name="Balloon" parent="Enemies/Balloon15" index="0"]
-position = Vector2( 14.1669, -0.371814 )
+position = Vector2( -6.88402, 0.722167 )
 x_mov = 40.0
 move_multi = 0.4
+
+[node name="Sprite" parent="Enemies/Balloon15/Balloon" index="2"]
+frame = 4
 
 [node name="Balloon16" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 912, 1680 )
 
 [node name="Balloon" parent="Enemies/Balloon16" index="0"]
-position = Vector2( -15.9817, -0.0382042 )
+position = Vector2( 2.77467, 0.787879 )
 x_mov = -40.0
 move_multi = 0.4
+
+[node name="Sprite" parent="Enemies/Balloon16/Balloon" index="2"]
+frame = 4
 
 [node name="Balloon3" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 2688, 896 )
 
 [node name="Balloon" parent="Enemies/Balloon3" index="0"]
-position = Vector2( 0, -22.4919 )
+position = Vector2( 0, 47.8128 )
 y_mov = 70.0
 move_multi = 0.7
-
-[node name="Sprite" parent="Enemies/Balloon3/Balloon" index="2"]
-frame = 2
 
 [node name="Balloon4" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 2624, 944 )
@@ -1354,12 +1354,9 @@ position = Vector2( 2624, 944 )
 position = Vector2( 2256, 288 )
 
 [node name="Balloon" parent="Enemies/Balloon8" index="0"]
-position = Vector2( 32.8887, -0.910678 )
+position = Vector2( -27.8402, 1.14886 )
 x_mov = 50.0
 move_multi = 0.8
-
-[node name="Sprite" parent="Enemies/Balloon8/Balloon" index="2"]
-frame = 2
 
 [node name="Balloon5" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 2832, 1024 )

@@ -23,7 +23,7 @@ enum ABILITIES {
 export(ABILITIES) var id = ABILITIES.INVALID
 export var description := "No description."
 
-var ability_description_scene := preload("res://Scenes/Items/AbilityGrabbed.tscn")
+const ability_description_scene := preload("res://Scenes/Items/AbilityGrabbed.tscn")
 
 func _ready():
 	if id == ABILITIES.INVALID:
