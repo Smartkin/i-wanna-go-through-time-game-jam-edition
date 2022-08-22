@@ -669,7 +669,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Tralkin Jam"
-run/main_scene="res://Rooms/Title.tscn"
+run/main_scene="res://Rooms/IntroNew.tscn"
 boot_splash/show_image=false
 boot_splash/image="res://icon.png"
 boot_splash/fullsize=false
