@@ -7,6 +7,7 @@ const AFTER_IMAGE := preload("res://Scenes/AfterImage.tscn")
 var do_trail := false
 var finished_attack := false
 var pos_index := -1
+var circle_offset := 1.0
 export var fx_zoom := 0.0
 
 onready var anim := $AnimatedSprite
@@ -14,7 +15,7 @@ onready var animations := $Animations
 onready var shift_positions := $"%ShiftPositions".get_children()
 
 func __ready():
-	stats.hp = 50
+	stats.hp = 80
 	stats.total_hp = stats.hp
 
 
@@ -29,9 +30,11 @@ func _enable():
 	pass
 
 func spawn_circle():
+	circle_offset *= -1
+	var offset = 90 * circle_offset
 	for i in range(0, 361, 40):
 		var proj := PROJ.instance()
-		proj.get_node("Hitbox").speed = Vector2(200, 0).rotated(deg2rad(i))
+		proj.get_node("Hitbox").speed = Vector2(200, 0).rotated(deg2rad(i + offset))
 		get_tree().current_scene.add_child(proj)
 		proj.global_position = $AnimatedSprite/Punch1.global_position
 
@@ -88,6 +91,8 @@ func damaged(bul: Bullet):
 	if bul == null:
 		return
 	stats.hp -= bul.stats.damage
+	$Hit.pitch_scale = rand_range(0.8, 1.2)
+	$Hit.play()
 	var hp_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT)
 	hp_tween.parallel().tween_property($"%HealthBar", "value", float(stats.hp) / stats.total_hp, 0.2)
 	var mod_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT)

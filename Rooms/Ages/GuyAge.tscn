@@ -389,7 +389,7 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" parent="Spikies/Spiky" index="0"]
-frame = 1
+frame = 0
 
 [node name="FollowPath" parent="Spikies/Spiky" index="2"]
 curve = SubResource( 14 )
@@ -403,7 +403,7 @@ ease_dur = 0.5
 mirror_path = true
 
 [node name="AnimatedSprite" parent="Spikies/Spiky16" index="0"]
-frame = 1
+frame = 0
 
 [node name="FollowPath" parent="Spikies/Spiky16" index="2"]
 curve = SubResource( 29 )
@@ -417,7 +417,7 @@ ease_dur = 0.5
 mirror_path = true
 
 [node name="AnimatedSprite" parent="Spikies/Spiky17" index="0"]
-frame = 0
+frame = 7
 
 [node name="FollowPath" parent="Spikies/Spiky17" index="2"]
 curve = SubResource( 30 )
@@ -431,7 +431,7 @@ ease_dur = 0.5
 mirror_path = true
 
 [node name="AnimatedSprite" parent="Spikies/Spiky18" index="0"]
-frame = 0
+frame = 7
 
 [node name="FollowPath" parent="Spikies/Spiky18" index="2"]
 curve = SubResource( 30 )
@@ -444,7 +444,7 @@ __meta__ = {
 ease_dur = 2.0
 
 [node name="AnimatedSprite" parent="Spikies/Spiky5" index="0"]
-frame = 0
+frame = 7
 
 [node name="FollowPath" parent="Spikies/Spiky5" index="2"]
 curve = SubResource( 17 )
@@ -456,7 +456,7 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" parent="Spikies/Spiky2" index="0"]
-frame = 0
+frame = 7
 
 [node name="FollowPath" parent="Spikies/Spiky2" index="2"]
 curve = SubResource( 15 )
@@ -469,7 +469,7 @@ __meta__ = {
 
 [node name="AnimatedSprite" parent="Spikies/Spiky3" index="0"]
 position = Vector2( 0.5, 0.5 )
-frame = 0
+frame = 7
 
 [node name="CollisionShape2D" parent="Spikies/Spiky3" index="1"]
 position = Vector2( 0.5, 0.5 )
@@ -485,7 +485,7 @@ __meta__ = {
 
 [node name="AnimatedSprite" parent="Spikies/Spiky14" index="0"]
 position = Vector2( 0.5, 0.5 )
-frame = 0
+frame = 7
 
 [node name="CollisionShape2D" parent="Spikies/Spiky14" index="1"]
 position = Vector2( 0.5, 0.5 )
@@ -501,7 +501,6 @@ __meta__ = {
 
 [node name="AnimatedSprite" parent="Spikies/Spiky4" index="0"]
 position = Vector2( -0.5, -0.5 )
-frame = 3
 
 [node name="CollisionShape2D" parent="Spikies/Spiky4" index="1"]
 position = Vector2( -0.5, -0.5 )
@@ -518,7 +517,7 @@ ease_dur = 0.5
 mirror_path = true
 
 [node name="AnimatedSprite" parent="Spikies/Spiky9" index="0"]
-frame = 1
+frame = 0
 
 [node name="FollowPath" parent="Spikies/Spiky9" index="2"]
 curve = SubResource( 19 )
@@ -530,7 +529,7 @@ position = Vector2( 1248, 1696 )
 position = Vector2( 1472, 1536 )
 
 [node name="AnimatedSprite" parent="Spikies/Spiky8" index="0"]
-frame = 0
+frame = 7
 
 [node name="FollowPath" parent="Spikies/Spiky8" index="2"]
 curve = SubResource( 20 )
@@ -551,7 +550,7 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" parent="Spikies/Spiky10" index="0"]
-frame = 1
+frame = 0
 
 [node name="FollowPath" parent="Spikies/Spiky10" index="2"]
 curve = SubResource( 21 )
@@ -562,9 +561,6 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="AnimatedSprite" parent="Spikies/Spiky11" index="0"]
-frame = 3
-
 [node name="FollowPath" parent="Spikies/Spiky11" index="2"]
 curve = SubResource( 21 )
 
@@ -573,11 +569,8 @@ position = Vector2( 2880, 1984 )
 
 [node name="TissonBoss" parent="Boss" instance=ExtResource( 33 )]
 
-[node name="AnimatedSprite" parent="Boss/TissonBoss/TaisonBoss" index="3"]
-frame = 0
-
 [node name="LungeWarningZone" parent="Boss/TissonBoss/TaisonBoss" index="9"]
-frame = 7
+frame = 5
 
 [node name="BossTrigger" type="Area2D" parent="Boss"]
 position = Vector2( -208, -411 )
@@ -1321,28 +1314,34 @@ position = Vector2( 952, 1584 )
 position = Vector2( 1056, 1728 )
 
 [node name="Balloon" parent="Enemies/Balloon15" index="0"]
-position = Vector2( -13.3336, 0.442197 )
+position = Vector2( 5.72437, 0.747047 )
 x_mov = 40.0
 move_multi = 0.4
+
+[node name="Sprite" parent="Enemies/Balloon15/Balloon" index="2"]
+frame = 1
 
 [node name="Balloon16" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 912, 1680 )
 
 [node name="Balloon" parent="Enemies/Balloon16" index="0"]
-position = Vector2( 14.5877, 0.328633 )
+position = Vector2( 1.64176, 0.795777 )
 x_mov = -40.0
 move_multi = 0.4
+
+[node name="Sprite" parent="Enemies/Balloon16/Balloon" index="2"]
+frame = 1
 
 [node name="Balloon3" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 2688, 896 )
 
 [node name="Balloon" parent="Enemies/Balloon3" index="0"]
-position = Vector2( 0, 6.37723 )
+position = Vector2( 0, 27.1625 )
 y_mov = 70.0
 move_multi = 0.7
 
 [node name="Sprite" parent="Enemies/Balloon3/Balloon" index="2"]
-frame = 2
+frame = 3
 
 [node name="Balloon4" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 2624, 944 )
@@ -1351,12 +1350,12 @@ position = Vector2( 2624, 944 )
 position = Vector2( 2256, 288 )
 
 [node name="Balloon" parent="Enemies/Balloon8" index="0"]
-position = Vector2( -30.6748, 1.02688 )
+position = Vector2( -31.5766, 0.982174 )
 x_mov = 50.0
 move_multi = 0.8
 
 [node name="Sprite" parent="Enemies/Balloon8/Balloon" index="2"]
-frame = 2
+frame = 3
 
 [node name="Balloon5" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 2832, 1024 )
@@ -1648,7 +1647,7 @@ position = Vector2( 3168, 1664 )
 
 [node name="Sprite" parent="." instance=ExtResource( 35 )]
 position = Vector2( 3434, 1651 )
-frame = 5
+frame = 4
 id = 1
 
 [connection signal="body_entered" from="TisonTrap/Area2D" to="TisonTrap" method="_on_Area2D_body_entered" flags=6]

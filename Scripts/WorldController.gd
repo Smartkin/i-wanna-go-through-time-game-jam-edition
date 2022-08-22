@@ -24,7 +24,7 @@ const CONFIG_FILE_NAME := "config.cfg" # Config's file name
 const ENCRYPT_SAVES := false # Whether saves should be encrypted
 const TIME_FORMAT := "%02d.%02d.%02d" # Time format of 00:00:00.000
 const SANDBOXED_SAVES := true # Whether saves are stored in user's APPDATA or along with exe file
-const DEBUG_MODE := true # Whether debug mode is turned on
+const DEBUG_MODE := false # Whether debug mode is turned on
 const EMPTY_SAVE := { # Default save data when no save is present
 	"playerPosX": 0, # JSON doesn't support Vector2
 	"playerPosY": 0,
