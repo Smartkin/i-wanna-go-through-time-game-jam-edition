@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Tiles/ice_age_autotiles/tileset_ice_age_autotiles.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Player/PlayerController.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Scenes/Items/Ability.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Themes/default_theme.tres" type="Theme" id=5]
 [ext_resource path="res://Scenes/Items/Chip.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Interactables/TimeMachine.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/CameraArea.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Rooms/Ages/IceAge.gd" type="Script" id=9]
 
@@ -61,7 +60,5 @@ align = 1
 
 [node name="Sprite" parent="." instance=ExtResource( 6 )]
 position = Vector2( 200, 520 )
+frame = 5
 id = 0
-
-[node name="TimeMachine" parent="." instance=ExtResource( 7 )]
-position = Vector2( 56, 384 )
