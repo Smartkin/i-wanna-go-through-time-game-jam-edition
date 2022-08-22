@@ -810,7 +810,6 @@ dash={
 2d_physics/layer_9="EnemyHitbox"
 2d_physics/layer_10="VisibilityArea"
 2d_physics/layer_11="Breakable"
-2d_physics/layer_12="DamageSource"
 
 [rendering]
 

@@ -37,7 +37,7 @@ func spawn_circle():
 
 func hit_ceiling():
 	var rand_offset = rand_range(-30, 30)
-	WorldController.shake_camera(Tween.EASE_OUT, 3.0, 20.0)
+	WorldController.shake_camera(Tween.EASE_OUT, 0.3, 10.0)
 	for i in range(70+rand_offset, 570+rand_offset, 60):
 		var proj := ROCK.instance()
 		proj.get_node("Hitbox").speed = Vector2(0, rand_range(50.0, 150.0))
@@ -53,7 +53,7 @@ func punch():
 
 
 func punch_shake() -> void:
-	WorldController.shake_camera(Tween.EASE_OUT, 1.0, 5.0)
+	WorldController.shake_camera(Tween.EASE_OUT, 0.1, 5.0)
 
 
 func uppercut():
@@ -71,7 +71,7 @@ func lunge():
 
 
 func lunge_shake() -> void:
-	WorldController.shake_camera(Tween.EASE_OUT, 1.5, 10.0)
+	WorldController.shake_camera(Tween.EASE_OUT, 0.2, 10.0)
 
 
 func attack_finished(delta: float) -> bool:
