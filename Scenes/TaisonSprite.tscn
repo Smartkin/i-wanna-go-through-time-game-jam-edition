@@ -110,7 +110,7 @@ radius = 55.2268
 [node name="AnimatedSprite" type="AnimatedSprite"]
 scale = Vector2( 0.4, 0.4 )
 frames = SubResource( 11 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="Punch1" type="KinematicBody2D" parent="."]

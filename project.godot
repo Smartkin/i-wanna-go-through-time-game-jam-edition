@@ -74,6 +74,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/UI/StyledButtonCheckbox.gd"
 }, {
+"base": "Node2D",
+"class": "Transition",
+"language": "GDScript",
+"path": "res://Scripts/Transition/Transition.gd"
+}, {
 "base": "VisualShaderNodeCustom",
 "class": "VisualShaderNodeNoiseGeneric2d",
 "language": "GDScript",
@@ -563,6 +568,7 @@ _global_script_class_icons={
 "Player": "",
 "StateMachine": "",
 "StyledButtonCheckbox": "",
+"Transition": "",
 "VisualShaderNodeNoiseGeneric2d": "",
 "VisualShaderNodeNoiseGeneric2dFractal": "",
 "VisualShaderNodeNoisePerlin2d": "",
@@ -663,7 +669,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Tralkin Jam"
-run/main_scene="res://Rooms/Intro.tscn"
+run/main_scene="res://Rooms/Title.tscn"
 boot_splash/show_image=false
 boot_splash/image="res://icon.png"
 boot_splash/fullsize=false

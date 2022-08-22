@@ -15,13 +15,19 @@ func _ready():
 	is_active = WorldController.cur_save_data.chips.size() > 0
 #	is_active = true
 
+func _process(delta):
+	if (not is_active and WorldController.cur_save_data.chips.size() > 0):
+		play("Working")
+	is_active = WorldController.cur_save_data.chips.size() > 0
+
 func _input(event: InputEvent):
 	if not can_interact or not is_active:
 		return
 	if event.is_action_pressed("up") and cur_selector == null:
-		cur_selector = age_selector.instance()
-		get_node("%SelectorLayer").add_child(cur_selector)
-		WorldController.pause_physics()
+		Util.change_scene_transition("res://Rooms/Ages/IceAge.tscn")
+#		cur_selector = age_selector.instance()
+#		get_node("%SelectorLayer").add_child(cur_selector)
+#		WorldController.pause_physics()
 	elif event.is_action_pressed("shoot") and cur_selector != null:
 		cur_selector.queue_free()
 		cur_selector = null
